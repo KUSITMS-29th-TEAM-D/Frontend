@@ -1,10 +1,21 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { ThemeProvider } from 'styled-components';
 
-import { Router } from './router';
+import { Router } from '@/router';
+import { GlobalFont } from '@/styles/GlobalFont';
+import { GlobalStyle } from '@/styles/GlobalStyle';
+import { theme } from '@/styles/theme';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <Router />
-  </BrowserRouter>
+  <RecoilRoot>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <GlobalFont />
+        <GlobalStyle />
+        <Router />
+      </BrowserRouter>
+    </ThemeProvider>
+  </RecoilRoot>
 );
