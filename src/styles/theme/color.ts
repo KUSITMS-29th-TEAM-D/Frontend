@@ -39,4 +39,7 @@ export const color = {
   gray150: '#efefef',
   gray100: '#f7f7f7',
   gray50: '#fbfbfb',
+
+  // etc
+  bgModal: 'rgba(18, 18, 18, 0.36)',
 } as const;
