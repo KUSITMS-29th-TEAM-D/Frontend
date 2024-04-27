@@ -16,7 +16,7 @@ export const color = {
 
   // Secondary
   secondary900: '#66273b',
-  secondary800: '86334e#',
+  secondary800: '#86334e',
   secondary700: '#ad4164',
   secondary600: '#de5480',
   secondary500: '#f45c8d',
