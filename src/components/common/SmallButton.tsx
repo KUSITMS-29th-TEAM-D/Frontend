@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components';
-
 interface SmallButtonProps {
   children: React.ReactNode;
   filled?: boolean;
   width?: string | null;
   onClick?: () => void;
+}
+
+interface StyledButtonProps {
+  $filled: boolean;
+  $width: string | null;
 }
 
 export const SmallButton = ({
@@ -20,7 +24,7 @@ export const SmallButton = ({
   );
 };
 
-const StyledButton = styled.button<{ $filled: boolean; $width: string | null }>`
+const StyledButton = styled.button<StyledButtonProps>`
   ${({ theme }) => theme.font.desktop.body2m};
 
   width: ${({ $width }) => $width};
