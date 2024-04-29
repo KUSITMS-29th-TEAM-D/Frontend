@@ -1,31 +1,57 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+type PlainButtonVariant = 'primary' | 'gray';
 
 interface PlainButtonProps {
   children: React.ReactNode;
-  primary?: boolean;
+  variant: PlainButtonVariant;
   width?: string | null;
   height?: string | null;
   onClick?: () => void;
 }
 
 interface StyledButtonProps {
-  $primary: boolean;
+  $variant: PlainButtonVariant;
   $width: string | null;
   $height: string | null;
 }
 
 export const PlainButton = ({
   children,
-  primary = false,
+  variant,
   width = null,
   height = null,
   onClick,
 }: PlainButtonProps) => {
   return (
-    <StyledButton $primary={primary} $width={width} $height={height} onClick={onClick}>
+    <StyledButton $variant={variant} $width={width} $height={height} onClick={onClick}>
       {children}
     </StyledButton>
   );
+};
+
+const getVariantStyle = ($variant: PlainButtonVariant) => {
+  switch ($variant) {
+    case 'gray':
+      return css`
+        color: ${(props) => props.theme.color.white};
+        background: ${(props) => props.theme.color.gray800};
+
+        &:hover {
+          background: ${(props) => props.theme.color.gray700};
+        }
+      `;
+
+    case 'primary':
+      return css`
+        color: ${(props) => props.theme.color.primary700};
+        background: ${(props) => props.theme.color.primary50};
+
+        &:hover {
+          background: ${(props) => props.theme.color.primary100};
+        }
+      `;
+  }
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -34,9 +60,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
   padding: 8px 24px;
-
-  color: ${(props) => (props.$primary ? props.theme.color.primary700 : props.theme.color.white)};
-  background: ${(props) =>
-    props.$primary ? props.theme.color.primary50 : props.theme.color.gray800};
   border-radius: 8px;
+
+  ${({ $variant }) => getVariantStyle($variant)}
 `;
