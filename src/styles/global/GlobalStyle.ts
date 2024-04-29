@@ -56,7 +56,7 @@ a{
   text-decoration: none;
   color: inherit;
 }
-image {
+svg, image {
 	display: block;
 }
 `;
