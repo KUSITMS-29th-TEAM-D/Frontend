@@ -1,10 +1,9 @@
-import KakaoLoginButton from '@/components/KakaoButton';
+import FirstView from './LoginviewPage';
 
 export const LoginPage = () => {
   return (
     <div>
-      <div>로그인페이지</div>
-      <KakaoLoginButton />
+      <FirstView />
     </div>
   );
 };

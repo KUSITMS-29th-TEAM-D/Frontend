@@ -4,9 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
 import { Router } from '@/router';
-import { GlobalFont } from '@/styles/GlobalFont';
-import { GlobalStyle } from '@/styles/GlobalStyle';
-import { theme } from '@/styles/theme';
+import { GlobalFont, GlobalStyle, theme } from '@/styles';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RecoilRoot>
