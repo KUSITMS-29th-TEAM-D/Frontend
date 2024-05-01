@@ -9,10 +9,10 @@ import NaverLoginButton from '@/components/Button/NaverButton';
 import { ReactComponent as SIcon } from '../assets/3d.svg';
 import backgroundimg from '../assets/bg.svg';
 
-export const FirstView = () => (
+export const MobileView = () => (
   <ViewContainer>
-    <HorizontalLayout>
-      <MainContainer>
+    <MainContainer>
+      <InnerContainer>
         <TextContainer>
           <div className="content">
             <div>
@@ -25,66 +25,77 @@ export const FirstView = () => (
           </div>
         </TextContainer>
 
-        <ButtonContainer>
-          <NaverLoginButton />
-          <KakaoLoginButton />
-          <GoogleLoginButton />
-        </ButtonContainer>
-      </MainContainer>
-      <IconContainer>
-        <SIcon />
-      </IconContainer>
-    </HorizontalLayout>
+        <IconContainer
+          style={{
+            width: '100px',
+            height: '100px',
+            transform: 'rotate(15deg)',
+            transformOrigin: '0 0',
+          }}
+        >
+          <SIcon />
+        </IconContainer>
+      </InnerContainer>
+
+      <ButtonContainer>
+        <NaverLoginButton />
+        <KakaoLoginButton />
+        <GoogleLoginButton />
+      </ButtonContainer>
+    </MainContainer>
   </ViewContainer>
 );
-
-export default FirstView;
-
 export const ViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url(${backgroundimg});
   background-size: cover;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   z-index: -1;
 `;
-
-export const MainContainer = styled.div`
-  padding: 76px 0;
-  display: flex;
+const MainContainer = styled.div`
+  width: 100%;
+  padding: 45px 24px;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  width: 477px;
-
-  @media (max-width: 600px) {
-    width: auto;
-    padding: 8px;
-  }
+  align-items: center;
+  gap: 46px;
+  display: flex;
+`;
+const InnerContainer = styled.div`
+  align-self: stretch;
+  min-height: 0;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  display: flex;
+  overflow: auto;
 `;
 
-export const TextContainer = styled.div`
-  margin-bottom: 92px;
+const TextContainer = styled.div`
   .content {
     align-self: stretch;
-    height: 148px;
-    display: flex;
+    height: 96px;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: center;
+    gap: 8px;
+    display: flex;
+    margin-bottom: 92px;
 
     span {
       color: ${(props) => props.theme.color.gray800};
       text-align: center;
-      font-size: 40px;
-      font-weight: 700;
-      line-height: 50px;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 32px;
 
       .highlight {
         color: ${(props) => props.theme.color.primary500};
@@ -92,39 +103,29 @@ export const TextContainer = styled.div`
     }
     p {
       color: ${(props) => props.theme.color.gray600};
-      font-size: 25px;
+      font-size: 16px;
       font-weight: 500;
-      line-height: 32px;
+      line-height: 24px;
       margin-top: 20px;
     }
   }
 `;
 
-export const ButtonContainer = styled.div`
+const IconContainer = styled.div`
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  z-index: 1;
+`;
+
+const ButtonContainer = styled.div`
   align-self: stretch;
-  display: flex;
+  height: 168px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
-`;
-
-export const IconContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const HorizontalLayout = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  gap: 50px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
 `;
