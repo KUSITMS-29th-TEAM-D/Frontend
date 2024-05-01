@@ -2,7 +2,7 @@ name: Synchronize to forked repo
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   sync:
@@ -10,22 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main
+      - name: Checkout master
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.FORKED_REPO_TOKEN }}
           fetch-depth: 0
-          ref: main
+          ref: master
 
       - name: Add remote-url
         run: |
           git remote add forked-repo https://AAminha:${{ secrets.FORKED_REPO_TOKEN }}@github.com/AAminha/KUSITMS-29th-TEAM-D-Frontend
-          git config AAminha
-          git config dks4857@gmail.com
+          git config user.name AAminha
+          git config user.email dks4857@gmail.com
 
       - name: Push changes to forked-repo
         run: |
-          git push -f forked-repo main
+          git push -f forked-repo master
 
       - name: Clean up
         run: |
