@@ -86,7 +86,6 @@ const StyledInnerContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  max-width: 1280px;
   padding: 20px 42px;
   margin: 0 auto;
 
