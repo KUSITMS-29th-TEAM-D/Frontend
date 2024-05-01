@@ -36,6 +36,10 @@ const GoogleBtn = styled.button`
   cursor: pointer;
   border: 1px solid #dfdfdf;
   background: white;
+  &:hover {
+    background: white;
+    filter: brightness(80%);
+  }
 `;
 
 const IconContainer = styled.div`

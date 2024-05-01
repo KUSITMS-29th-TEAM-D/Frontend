@@ -35,6 +35,11 @@ const NaverBtn = styled.button`
   border-radius: 8px;
   cursor: pointer;
   background: #03c75a;
+
+  &:hover {
+    background: #03c75a;
+    filter: brightness(80%);
+  }
 `;
 
 const IconContainer = styled.div`

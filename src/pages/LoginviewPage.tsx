@@ -6,14 +6,12 @@ import GoogleLoginButton from '@/components/Button/GoogleButton';
 import KakaoLoginButton from '@/components/Button/KakaoButton';
 import NaverLoginButton from '@/components/Button/NaverButton';
 
+import { ReactComponent as SIcon } from '../assets/3d.svg';
 import backgroundimg from '../assets/bg.svg';
-//import { ReactComponent as GoogleIcon } from '../assets/icons/googleIcon.svg';
-//import { ReactComponent as KakaoIcon } from '../assets/icons/kakaoIcon.svg';
-//import { ReactComponent as Navericon } from '../assets/icons/naverIcon.svg';
 
-export const FirstView = () => {
-  return (
-    <ViewContainer>
+export const FirstView = () => (
+  <ViewContainer>
+    <HorizontalLayout>
       <MainContainer>
         <TextContainer>
           <div className="content">
@@ -33,13 +31,19 @@ export const FirstView = () => {
           <GoogleLoginButton />
         </ButtonContainer>
       </MainContainer>
-    </ViewContainer>
-  );
-};
+      <IconContainer>
+        <SIcon />
+      </IconContainer>
+    </HorizontalLayout>
+  </ViewContainer>
+);
 
 export default FirstView;
 
 export const ViewContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   background-image: url(${backgroundimg});
@@ -47,20 +51,25 @@ export const ViewContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  //z-index: -1;
+  z-index: -1;
 `;
 
 export const MainContainer = styled.div`
-  padding-top: 76px;
+  padding: 76px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 460px;
+  width: 477px;
+
+  @media (max-width: 600px) {
+    width: auto;
+    padding: 8px;
+  }
 `;
 
 export const TextContainer = styled.div`
-  margin-bottom: 72px;
+  margin-bottom: 92px;
   .content {
     align-self: stretch;
     height: 148px;
@@ -86,6 +95,7 @@ export const TextContainer = styled.div`
       font-size: 25px;
       font-weight: 500;
       line-height: 32px;
+      margin-top: 20px;
     }
   }
 `;
@@ -97,4 +107,24 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 12px;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const HorizontalLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 50px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
