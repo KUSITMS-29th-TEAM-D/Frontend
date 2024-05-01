@@ -46,10 +46,17 @@ table {
 *{
   box-sizing: border-box;
 }
-
-body{}
+button {
+	border: none;
+	background: none;
+	padding: 0;
+	cursor: pointer;
+}
 a{
   text-decoration: none;
   color: inherit;
+}
+svg, image {
+	display: block;
 }
 `;
