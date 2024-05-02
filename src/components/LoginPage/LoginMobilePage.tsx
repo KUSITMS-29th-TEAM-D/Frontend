@@ -2,14 +2,13 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import GoogleLoginButton from '@/components/Button/GoogleButton';
-import KakaoLoginButton from '@/components/Button/KakaoButton';
-import NaverLoginButton from '@/components/Button/NaverButton';
+import SIcon from '@/assets/3d.svg';
+import backgroundimg from '@/assets/bg.svg';
+import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
+import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
+import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
 
-import SIcon from '../assets/3d.svg';
-import backgroundimg from '../assets/bg.svg';
-
-export const MobileView = () => (
+export const LoginMobilePage = () => (
   <ViewContainer>
     <MainContainer>
       <InnerContainer>
@@ -119,7 +118,6 @@ const IconContainer = styled.div`
   width: 100%;
   height: 380px;
   overflow: hidden;
-  //background-color: rgba(255, 0, 0, 0.5);
 `;
 
 const ButtonContainer = styled.div`

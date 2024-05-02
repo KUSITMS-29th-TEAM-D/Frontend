@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 import { TopNavigation } from '@/components/common/TopNavigation';
 
-import { DesktopView } from './LoginDesktopPage';
-import { MobileView } from './LoginMobilePage';
+import { LoginDesktopPage } from '../components/LoginPage/LoginDesktopPage';
+import { LoginMobilePage } from '../components/LoginPage/LoginMobilePage';
 
 export const LoginPage = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -25,7 +25,7 @@ export const LoginPage = () => {
   return (
     <div>
       <TopNavigation />
-      {isMobile ? <MobileView /> : <DesktopView />}
+      {isMobile ? <LoginMobilePage /> : <LoginDesktopPage />}
     </div>
   );
 };

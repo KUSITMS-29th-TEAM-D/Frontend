@@ -1,16 +1,20 @@
 import React from 'react';
 
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { ReactComponent as NaverIcon } from '@/assets/icons/naverIcon.svg';
 
-const NaverLoginButton: React.FC = () => {
+interface ButtonTextProps {
+  $color: string;
+}
+export const NaverLoginButton = () => {
+  const theme = useTheme();
   const NaverButtonClick = () => {
     const redirectUrl = process.env.OAUTH_Naver_REDIRECT_URI;
     if (redirectUrl) {
       window.location.href = redirectUrl;
     } else {
-      console.error('찾을 수 없음');
+      //console.error('찾을 수 없음');
     }
   };
 
@@ -19,7 +23,7 @@ const NaverLoginButton: React.FC = () => {
       <IconContainer>
         <NaverIcon />
       </IconContainer>
-      <ButtonText color="white">Naver로 계속하기</ButtonText>
+      <ButtonText $color={theme.color.white}>Naver로 계속하기</ButtonText>
       <div style={{ width: 24, height: 24 }} />
     </NaverBtn>
   );
@@ -33,7 +37,6 @@ const NaverBtn = styled.button`
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
-  cursor: pointer;
   background: #03c75a;
 
   &:hover {
@@ -51,9 +54,9 @@ const IconContainer = styled.div`
   align-items: center;
 `;
 
-const ButtonText = styled.p`
+const ButtonText = styled.p<ButtonTextProps>`
   margin-left: 16px;
-  color: ${(props) => props.color};
+  color: ${(props) => props.$color};
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;

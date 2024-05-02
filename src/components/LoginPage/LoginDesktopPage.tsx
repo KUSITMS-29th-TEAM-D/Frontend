@@ -2,26 +2,23 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import GoogleLoginButton from '@/components/Button/GoogleButton';
-import KakaoLoginButton from '@/components/Button/KakaoButton';
-import NaverLoginButton from '@/components/Button/NaverButton';
+import { ReactComponent as SIcon } from '@/assets/3d.svg';
+import backgroundimg from '@/assets/bg.svg';
+import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
+import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
+import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
 
-import { ReactComponent as SIcon } from '../assets/3d.svg';
-import backgroundimg from '../assets/bg.svg';
-
-export const DesktopView = () => (
+export const LoginDesktopPage = () => (
   <ViewContainer>
     <HorizontalLayout>
       <MainContainer>
         <TextContainer>
           <div className="content">
-            <div>
-              <span>
-                <span className="highlight">셀피스</span>로 나의 새로운 <br />
-                경험 조각을 찾아보세요!
-              </span>
-              <p>3초면 회원가입이 가능해요</p>
-            </div>
+            <span>
+              <span className="highlight">셀피스</span>로 나의 새로운 <br />
+              경험 조각을 찾아보세요!
+            </span>
+            <p>3초면 회원가입이 가능해요</p>
           </div>
         </TextContainer>
 
@@ -59,12 +56,6 @@ export const MainContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 477px;
-
-  @media (max-width: 600px) {
-    width: auto;
-    padding: 8px;
-    align-items: center;
-  }
 `;
 
 export const TextContainer = styled.div`
@@ -123,8 +114,4 @@ export const HorizontalLayout = styled.div`
   width: 100%;
   max-width: 1200px;
   gap: 50px;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-  }
 `;
