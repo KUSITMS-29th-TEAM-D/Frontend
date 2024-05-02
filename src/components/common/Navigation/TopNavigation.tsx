@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { ReactComponent as MenuIcon } from '@/assets/icons/menu.svg';
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg';
 import { ReactComponent as MainLogo } from '@/assets/mainLogo.svg';
-import { SideNavigation } from '@/components/common/SideNavigation';
+import { SideNavigation } from '@/components/common/Navigation/SideNavigation';
 import { SmallButton } from '@/components/common/SmallButton';
 import { NAVIGATION_MENU } from '@/constants/navigation';
 
@@ -69,6 +69,7 @@ const StyledContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 
   width: 100%;
 
