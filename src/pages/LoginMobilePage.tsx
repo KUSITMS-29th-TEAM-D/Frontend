@@ -6,7 +6,7 @@ import GoogleLoginButton from '@/components/Button/GoogleButton';
 import KakaoLoginButton from '@/components/Button/KakaoButton';
 import NaverLoginButton from '@/components/Button/NaverButton';
 
-import { ReactComponent as SIcon } from '../assets/3d.svg';
+import SIcon from '../assets/3d.svg';
 import backgroundimg from '../assets/bg.svg';
 
 export const MobileView = () => (
@@ -24,19 +24,10 @@ export const MobileView = () => (
             </div>
           </div>
         </TextContainer>
-
-        <IconContainer
-          style={{
-            width: '100px',
-            height: '100px',
-            transform: 'rotate(15deg)',
-            transformOrigin: '0 0',
-          }}
-        >
-          <SIcon />
-        </IconContainer>
       </InnerContainer>
-
+      <IconContainer>
+        <StyledIcon src={SIcon} alt="3D Icon" />
+      </IconContainer>
       <ButtonContainer>
         <NaverLoginButton />
         <KakaoLoginButton />
@@ -45,7 +36,8 @@ export const MobileView = () => (
     </MainContainer>
   </ViewContainer>
 );
-export const ViewContainer = styled.div`
+
+const ViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,6 +50,7 @@ export const ViewContainer = styled.div`
   left: 0;
   z-index: -1;
 `;
+
 const MainContainer = styled.div`
   width: 100%;
   padding: 45px 24px;
@@ -67,9 +60,11 @@ const MainContainer = styled.div`
   gap: 46px;
   display: flex;
 `;
+
 const InnerContainer = styled.div`
   align-self: stretch;
-  min-height: 0;
+  height: fit-content;
+  min-height: 100%;
   flex-grow: 1;
   flex-direction: column;
   justify-content: center;
@@ -77,18 +72,19 @@ const InnerContainer = styled.div`
   gap: 16px;
   display: flex;
   overflow: auto;
+  text-align: center;
 `;
 
 const TextContainer = styled.div`
+  margin-top: 69px;
   .content {
     align-self: stretch;
-    height: 96px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
     display: flex;
-    margin-bottom: 92px;
+    text-align: center;
 
     span {
       color: ${(props) => props.theme.color.gray800};
@@ -106,18 +102,24 @@ const TextContainer = styled.div`
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
-      margin-top: 20px;
+      margin-top: 10px;
+      text-align: center;
     }
   }
 `;
-
+const StyledIcon = styled.img`
+  width: 100%;
+  height: 100%;
+  transform: rotate(-15deg);
+`;
 const IconContainer = styled.div`
-  width: 200px;
-  height: 200px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: inline-flex;
-  z-index: 1;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  //background-color: rgba(255, 0, 0, 0.5);
 `;
 
 const ButtonContainer = styled.div`

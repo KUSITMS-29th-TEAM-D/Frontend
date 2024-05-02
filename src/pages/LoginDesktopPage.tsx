@@ -50,10 +50,6 @@ export const ViewContainer = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
-
-  @media (max-width: 768px) {
-    position: relative;
-  }
 `;
 
 export const MainContainer = styled.div`
