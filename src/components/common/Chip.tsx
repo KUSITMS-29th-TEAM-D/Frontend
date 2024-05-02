@@ -18,6 +18,7 @@ const StyledContainer = styled.div<{ $primary: boolean }>`
 
   display: flex;
   align-items: center;
+  white-space: nowrap;
 
   cursor: default;
 
