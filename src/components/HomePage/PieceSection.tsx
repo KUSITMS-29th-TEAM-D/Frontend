@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
-import { Chips } from '@/components/common/Chips';
+import { Chip } from '@/components/common/Chip';
 import { CARD_IMAGE } from '@/constants/card';
 import { SectionContainer } from '@/styles';
 
@@ -42,9 +42,9 @@ export const PieceSection = () => {
         <StyledContents>
           <StyledChipsContainer>
             {Dummy.chips.map((chip) => (
-              <Chips key={chip.content} primary>
+              <Chip key={chip.content} primary>
                 {chip.content}
-              </Chips>
+              </Chip>
             ))}
           </StyledChipsContainer>
           <div>
