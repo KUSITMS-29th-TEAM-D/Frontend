@@ -10,7 +10,7 @@ interface ButtonTextProps {
 export const KakaoLoginButton = () => {
   const theme = useTheme();
   const KakaoButtonClick = () => {
-    const redirectUrl = process.env.OAUTH_KAKAO_REDIRECT_URI;
+    const redirectUrl = import.meta.env.OAUTH_KAKAO_REDIRECT_URI;
     if (redirectUrl) {
       window.location.href = redirectUrl;
     } else {
