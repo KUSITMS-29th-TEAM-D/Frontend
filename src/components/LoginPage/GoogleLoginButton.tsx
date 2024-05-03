@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { ReactComponent as GoogleIcon } from '@/assets/icons/googleIcon.svg';
-
+import LoginToken from '@/components/LoginPage/LoginToken';
 interface ButtonTextProps {
   $color: string;
 }
@@ -15,19 +15,20 @@ export const GoogleLoginButton = () => {
     const redirectUrl = process.env.OAUTH_Google_REDIRECT_URI;
     if (redirectUrl) {
       window.location.href = redirectUrl;
-    } else {
-      console.error('찾을 수 없음');
     }
   };
 
   return (
-    <GoogleBtn onClick={GoogleButtonClick}>
-      <IconContainer>
-        <GoogleIcon />
-      </IconContainer>
-      <ButtonText $color={theme.color.gray800}>Google로 계속하기</ButtonText>
-      <div style={{ width: 24, height: 24 }} />
-    </GoogleBtn>
+    <>
+      <LoginToken /> {/*우선 구글버튼에만 일단 배치했습니다*/}
+      <GoogleBtn onClick={GoogleButtonClick}>
+        <IconContainer>
+          <GoogleIcon />
+        </IconContainer>
+        <ButtonText $color={theme.color.gray800}>Google로 계속하기</ButtonText>
+        <div style={{ width: 24, height: 24 }} />
+      </GoogleBtn>
+    </>
   );
 };
 
