@@ -2,7 +2,6 @@ import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
 import { Chip } from '@/components/common/Chip';
-import { CARD_IMAGE } from '@/constants/card';
 import { SectionContainer } from '@/styles';
 
 const Dummy = {
@@ -32,7 +31,7 @@ export const PieceSection = () => {
           <div className="intro">셀피스와 함께 나를 브랜딩해봐요.</div>
         </StyledTitle>
         <StyledCardContainer>
-          <StyledCard src={CARD_IMAGE[Dummy.brand]} alt="card" />
+          <StyledCard src={`/src/assets/cards/${Dummy.brand}.svg`} alt="card" />
           {Dummy.chips.map((chip, index) => (
             <StyledBubble key={chip.content} className={`b${index}`} $weight={chip.weight}>
               <span>{chip.content}</span>
@@ -153,8 +152,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     left: 15%;
 
     animation:
-      ${movedown} 2s ease-in-out infinite,
-      ${moveleft} 3s ease-in-out infinite;
+      ${movedown} 1100ms ease-in-out infinite,
+      ${moveleft} 1500ms ease-in-out infinite;
   }
 
   &.b1 {
@@ -162,8 +161,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 13%;
 
     animation:
-      ${movedown} 2s ease-in-out infinite,
-      ${moveright} 2.5s ease-in-out infinite;
+      ${movedown} 1400ms ease-in-out infinite,
+      ${moveright} 1200ms ease-in-out infinite;
   }
 
   &.b2 {
@@ -171,8 +170,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     left: 3%;
 
     animation:
-      ${movedown} 3s ease-in-out infinite,
-      ${moveleft} 2s ease-in-out infinite;
+      ${movedown} 1400ms ease-in-out infinite,
+      ${moveleft} 1000ms ease-in-out infinite;
   }
 
   &.b3 {
@@ -180,8 +179,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 3%;
 
     animation:
-      ${moveup} 1.8s ease-in-out infinite,
-      ${moveright} 3s ease-in-out infinite;
+      ${moveup} 1000ms ease-in-out infinite,
+      ${moveleft} 1200ms ease-in-out infinite;
   }
 
   &.b4 {
@@ -189,8 +188,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 0%;
 
     animation:
-      ${moveup} 2s ease-in-out infinite,
-      ${moveleft} 3s ease-in-out infinite;
+      ${movedown} 1400ms ease-in-out infinite,
+      ${moveright} 1500ms ease-in-out infinite;
   }
 
   &.b5 {
@@ -198,8 +197,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     left: 0%;
 
     animation:
-      ${moveup} 3s ease-in-out infinite,
-      ${moveright} 2.3s ease-in-out infinite;
+      ${moveup} 1300ms ease-in-out infinite,
+      ${moveright} 1100ms ease-in-out infinite;
   }
 
   &.b6 {
@@ -207,8 +206,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 24%;
 
     animation:
-      ${movedown} 3s ease-in-out infinite,
-      ${moveright} 4s ease-in-out infinite;
+      ${movedown} 1100ms ease-in-out infinite,
+      ${moveright} 1400ms ease-in-out infinite;
   }
 `;
 
