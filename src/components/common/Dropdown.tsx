@@ -12,7 +12,12 @@ interface DropdownProps {
   setSelectedContents: (selected: string[]) => void;
 }
 
-export const Dropdown = ({ title, contents, selectedContents }: DropdownProps) => {
+export const Dropdown = ({
+  title,
+  contents,
+  selectedContents,
+  setSelectedContents,
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +57,9 @@ export const Dropdown = ({ title, contents, selectedContents }: DropdownProps) =
               key={content}
               className={`content ${selectedContents.includes(content) && 'active'}`}
               onClick={() => {
-                // TODO: 항목 추가 로직 구현 (유의: 중복 추가, 순서 정렬)
+                // TODO: 순서정렬 로직 필요?
+                if (!selectedContents.includes(content))
+                  setSelectedContents([...selectedContents, content]);
               }}
             >
               {content}
