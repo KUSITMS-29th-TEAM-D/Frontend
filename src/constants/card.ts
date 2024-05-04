@@ -1,11 +1,11 @@
-import CreatorCard from '@/assets/cards/01_creator.svg';
-import InsighterCard from '@/assets/cards/02_insighter.svg';
-import InnovatorCard from '@/assets/cards/03_innovator.svg';
-import InventorCard from '@/assets/cards/04_inventor.svg';
-import ProjectorCard from '@/assets/cards/05_projector.svg';
-import ConnectorCard from '@/assets/cards/06_connector.svg';
-import EncouragerCard from '@/assets/cards/07_encourager.svg';
-import OrganizerCard from '@/assets/cards/08_organizer.svg';
+import ConnectorCard from '@/assets/cards/connector.svg';
+import CreatorCard from '@/assets/cards/creator.svg';
+import EncouragerCard from '@/assets/cards/encourager.svg';
+import InnovatorCard from '@/assets/cards/innovator.svg';
+import InsighterCard from '@/assets/cards/insighter.svg';
+import InventorCard from '@/assets/cards/inventor.svg';
+import OrganizerCard from '@/assets/cards/organizer.svg';
+import ProjectorCard from '@/assets/cards/projector.svg';
 
 export const CARD_IMAGE: { [key: string]: string } = {
   creator: CreatorCard,
