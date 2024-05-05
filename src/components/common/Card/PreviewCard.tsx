@@ -37,7 +37,6 @@ const StyledContainer = styled.div`
 
   width: 337px;
   height: 347px;
-  margin-top: 50px;
 
   border-radius: 16px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);

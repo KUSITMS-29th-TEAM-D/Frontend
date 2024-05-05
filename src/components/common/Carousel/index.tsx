@@ -7,6 +7,7 @@ import { CarouselButton } from '@/components/common/Button/CarouselButton';
 const settings = {
   infinite: false,
   speed: 500,
+  slidesToShow: 3,
   slidesToScroll: 1,
   nextArrow: <CarouselButton direction="next" />,
   prevArrow: <CarouselButton direction="prev" />,
