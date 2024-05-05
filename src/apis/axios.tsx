@@ -1,27 +1,34 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
 interface RefreshToken {
-  getCookie: (name: string) => string | undefined;
+  getCookie: () => string | undefined;
   refreshToken: () => Promise<void>;
 }
 
-export const Axios = axios.create({
+const Axios: AxiosInstance = axios.create({
   baseURL: 'http://url',
 });
 
-export const axiosInterceptor = (tokenRefresher: RefreshToken) => {
-  Axios.interceptors.request.use(
-    async (config) => {
-      const accessToken = tokenRefresher.getCookie('accessToken');
-      if (!accessToken) {
-        console.info('액세스 토큰 없음');
-        await tokenRefresher.refreshToken();
-        config.headers.Authorization = `Bearer ${tokenRefresher.getCookie('accessToken')}`;
-      } else {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
+const tokenRefresher: RefreshToken = {
+  getCookie() {
+    return '';
+  },
+  async refreshToken() {},
 };
+
+Axios.interceptors.request.use(
+  async (config) => {
+    const accessToken = tokenRefresher.getCookie();
+    if (!accessToken) {
+      console.info('액세스 토큰 없음');
+      await tokenRefresher.refreshToken();
+      config.headers.Authorization = `Bearer ${tokenRefresher.getCookie()}`;
+    } else {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+export default Axios;

@@ -11,7 +11,7 @@ export const GoogleLoginButton = () => {
   const theme = useTheme();
 
   const GoogleButtonClick = () => {
-    const redirectUrl = import.meta.env.OAUTH_Google_REDIRECT_URI;
+    const redirectUrl = import.meta.env.OAUTH_GOOGLE_REDIRECT_URI;
     if (redirectUrl) {
       window.location.href = redirectUrl;
     }
