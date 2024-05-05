@@ -12,7 +12,8 @@ const RedirectPage = () => {
     const accessToken = params.get('access_token');
 
     if (accessToken) {
-      setCookie('access_token', accessToken, { expires: new Date(Date.now() + 360000) });
+      const expireTime = new Date(Date.now() + import.meta.env.VITE_ACCESS_TOKEN_EXPIRATION_TIME);
+      setCookie('access_token', accessToken, { expires: expireTime });
       window.location.href = '/';
     }
   }, [location.search, setCookie, cookies]);

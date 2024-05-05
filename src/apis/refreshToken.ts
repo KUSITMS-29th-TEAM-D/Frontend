@@ -1,34 +1,19 @@
 import { useCookies } from 'react-cookie';
 
-import Axios from './axios';
-
-interface Cookie {
-  accessToken?: string;
-  refreshToken?: string;
-}
+import Axios from '@/apis/axios';
 
 export const useRefreshTokens = () => {
-  const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
+  const [cookies, setCookie] = useCookies(['accessToken']);
 
-  const tokenExpire = (token: string | undefined): boolean => {
-    if (!token) return true;
-    const tokenExp = 360000;
-    const currentTime = Date.now();
-    return tokenExp < currentTime;
-  };
-
-  const refreshToken = async () => {
+  const getAcessToken = async () => {
     try {
-      const refreshToken = cookies.refreshToken;
-      if (tokenExpire(refreshToken)) {
-        window.location.href = '/login';
+      const accessToken = cookies.accessToken;
+      if (accessToken) {
         return;
       }
-
-      const response = await Axios.post('/api/v1/reissue/access-token', {
-        refreshToken,
-      });
-      setCookie('accessToken', response.data.accessToken, { path: '/' });
+      const response = await Axios.post('/api/v1/reissue/access-token');
+      const expireTime = new Date(Date.now() + import.meta.env.VITE_ACCESS_TOKEN_EXPIRATION_TIME);
+      setCookie('accessToken', response.data.accessToken, { path: '/', expires: expireTime });
     } catch (error) {
       console.error(error);
       window.location.href = '/login';
@@ -36,7 +21,6 @@ export const useRefreshTokens = () => {
   };
 
   return {
-    getCookie: (name: keyof Cookie) => cookies[name],
-    refreshToken,
+    getAcessToken,
   };
 };

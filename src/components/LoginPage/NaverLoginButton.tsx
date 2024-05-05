@@ -10,7 +10,7 @@ interface ButtonTextProps {
 export const NaverLoginButton = () => {
   const theme = useTheme();
   const NaverButtonClick = () => {
-    const redirectUrl = import.meta.env.OAUTH_NAVER_REDIRECT_URI;
+    const redirectUrl = import.meta.env.VITE_OAUTH_NAVER_REDIRECT_URI;
     if (redirectUrl) {
       window.location.href = redirectUrl;
     } else {

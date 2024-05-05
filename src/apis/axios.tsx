@@ -1,30 +1,22 @@
 import axios, { AxiosInstance } from 'axios';
+import { useCookies } from 'react-cookie';
 
-interface RefreshToken {
-  getCookie: () => string | undefined;
-  refreshToken: () => Promise<void>;
-}
+import { useRefreshTokens } from '@/apis/refreshToken';
 
 const Axios: AxiosInstance = axios.create({
   baseURL: 'http://url',
 });
 
-const tokenRefresher: RefreshToken = {
-  getCookie() {
-    return '';
-  },
-  async refreshToken() {},
-};
-
 Axios.interceptors.request.use(
   async (config) => {
-    const accessToken = tokenRefresher.getCookie();
-    if (!accessToken) {
-      console.info('액세스 토큰 없음');
-      await tokenRefresher.refreshToken();
-      config.headers.Authorization = `Bearer ${tokenRefresher.getCookie()}`;
-    } else {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    const { getAcessToken } = useRefreshTokens();
+    await getAcessToken();
+    const [cookies] = useCookies(['token']);
+
+    const token = cookies.token;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
