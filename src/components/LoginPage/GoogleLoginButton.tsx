@@ -3,7 +3,6 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { ReactComponent as GoogleIcon } from '@/assets/icons/googleIcon.svg';
-import LoginToken from '@/components/LoginPage/LoginToken';
 interface ButtonTextProps {
   $color: string;
 }
@@ -20,7 +19,6 @@ export const GoogleLoginButton = () => {
 
   return (
     <>
-      <LoginToken /> {/*우선 구글버튼에만 일단 배치했습니다*/}
       <GoogleBtn onClick={GoogleButtonClick}>
         <IconContainer>
           <GoogleIcon />
