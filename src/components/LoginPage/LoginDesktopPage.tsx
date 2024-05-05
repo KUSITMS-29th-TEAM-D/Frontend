@@ -55,7 +55,6 @@ export const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 477px;
 `;
 
 export const TextContainer = styled.div`
@@ -71,7 +70,7 @@ export const TextContainer = styled.div`
 
     span {
       color: ${(props) => props.theme.color.gray800};
-      text-align: center;
+      text-align: left;
       font-size: 40px;
       font-weight: 700;
       line-height: 50px;
@@ -103,7 +102,6 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 `;
 
 export const HorizontalLayout = styled.div`
