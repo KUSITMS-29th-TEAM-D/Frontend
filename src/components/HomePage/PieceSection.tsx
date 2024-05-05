@@ -105,20 +105,20 @@ const StyledCard = styled.img`
   margin: 56px 0;
 `;
 
-const movedown = keyframes`50% {
-    transform: translateY(-7px);
+const moveDown = keyframes`50% {
+    transform: translateY(-20px);
   }`;
 
-const moveup = keyframes`50% {
-    transform: translateY(7px);
+const moveUp = keyframes`50% {
+    transform: translateY(20px);
   }`;
 
-const moveright = keyframes`50% {
-    transform: translateX(7px);
+const moveRight = keyframes`50% {
+    transform: translateX(20px);
   }`;
 
-const moveleft = keyframes`50% {
-    transform: translateX(-7px);
+const moveLeft = keyframes`50% {
+    transform: translateX(-20px);
   }`;
 
 const StyledBubble = styled.div<{ $weight: number }>`
@@ -152,8 +152,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     left: 15%;
 
     animation:
-      ${movedown} 1100ms ease-in-out infinite,
-      ${moveleft} 1500ms ease-in-out infinite;
+      ${moveDown} 2000ms ease-in-out infinite,
+      ${moveLeft} 3000ms ease-in-out infinite;
   }
 
   &.b1 {
@@ -161,8 +161,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 13%;
 
     animation:
-      ${movedown} 1400ms ease-in-out infinite,
-      ${moveright} 1200ms ease-in-out infinite;
+      ${moveDown} 3000ms ease-in-out infinite,
+      ${moveRight} 2000ms ease-in-out infinite;
   }
 
   &.b2 {
@@ -170,8 +170,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     left: 3%;
 
     animation:
-      ${movedown} 1400ms ease-in-out infinite,
-      ${moveleft} 1000ms ease-in-out infinite;
+      ${moveDown} 2500ms ease-in-out infinite,
+      ${moveLeft} 3000ms ease-in-out infinite;
   }
 
   &.b3 {
@@ -179,8 +179,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 3%;
 
     animation:
-      ${moveup} 1000ms ease-in-out infinite,
-      ${moveleft} 1200ms ease-in-out infinite;
+      ${moveUp} 2300ms ease-in-out infinite,
+      ${moveLeft} 2700ms ease-in-out infinite;
   }
 
   &.b4 {
@@ -188,8 +188,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 0%;
 
     animation:
-      ${movedown} 1400ms ease-in-out infinite,
-      ${moveright} 1500ms ease-in-out infinite;
+      ${moveDown} 2500ms ease-in-out infinite,
+      ${moveRight} 2300ms ease-in-out infinite;
   }
 
   &.b5 {
@@ -197,8 +197,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     left: 0%;
 
     animation:
-      ${moveup} 1300ms ease-in-out infinite,
-      ${moveright} 1100ms ease-in-out infinite;
+      ${moveUp} 2600ms ease-in-out infinite,
+      ${moveRight} 3000ms ease-in-out infinite;
   }
 
   &.b6 {
@@ -206,8 +206,8 @@ const StyledBubble = styled.div<{ $weight: number }>`
     right: 24%;
 
     animation:
-      ${movedown} 1100ms ease-in-out infinite,
-      ${moveright} 1400ms ease-in-out infinite;
+      ${moveDown} 3000ms ease-in-out infinite,
+      ${moveRight} 2800ms ease-in-out infinite;
   }
 `;
 
