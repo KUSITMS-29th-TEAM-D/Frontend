@@ -1,9 +1,7 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 import { ReactComponent as SIcon } from '@/assets/3d.svg';
-import backgroundimg from '@/assets/loginBackground1.svg';
+import backgroundImg from '@/assets/backgrounds/loginBackground.png';
 import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
 import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
 import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
@@ -40,7 +38,7 @@ export const ViewContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-image: url(${backgroundimg});
+  background-image: url(${backgroundImg});
   background-size: cover;
   position: fixed;
   top: 0;
