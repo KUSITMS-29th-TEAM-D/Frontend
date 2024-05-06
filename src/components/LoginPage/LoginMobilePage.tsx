@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import SIcon from '@/assets/3d.svg';
 import backgroundImg from '@/assets/backgrounds/loginBackground.png';
+import SIcon from '@/assets/logos/logo3d.svg';
 import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
 import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
 import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
