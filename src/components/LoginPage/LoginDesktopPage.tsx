@@ -21,7 +21,6 @@ export const LoginDesktopPage = () => (
             <p>3초면 회원가입이 가능해요</p>
           </div>
         </TextContainer>
-
         <ButtonContainer>
           <NaverLoginButton />
           <KakaoLoginButton />
@@ -55,17 +54,17 @@ export const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  gap: 72px;
 `;
 
 export const TextContainer = styled.div`
-  margin-bottom: 92px;
   .content {
-    align-self: stretch;
-    height: 148px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 16px;
 
     span {
@@ -81,16 +80,14 @@ export const TextContainer = styled.div`
     }
     p {
       color: ${(props) => props.theme.color.gray600};
-      font-size: 25px;
-      font-weight: 500;
-      line-height: 32px;
-      margin-top: 20px;
+      ${({ theme }) => theme.font.desktop.title2};
     }
   }
 `;
 
 export const ButtonContainer = styled.div`
   align-self: stretch;
+  height: 168px;
   display: flex;
   flex-direction: column;
   justify-content: center;

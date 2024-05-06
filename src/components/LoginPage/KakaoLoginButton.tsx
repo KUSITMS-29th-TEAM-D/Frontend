@@ -31,7 +31,7 @@ export const KakaoLoginButton = () => {
 
 const KakaoBtn = styled.button`
   width: 100%;
-  height: 56px;
+  height: 100%;
   padding: 0 24px;
   display: inline-flex;
   justify-content: space-between;
@@ -55,11 +55,13 @@ const IconContainer = styled.div`
 
 const ButtonText = styled.p<ButtonTextProps>`
   margin-left: 16px;
-  color: ${(props) => props.$color};
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
   word-wrap: break-word;
+  color: ${(props) => props.$color};
+  ${({ theme }) => theme.font.desktop.body2m};
+
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body2m};
+  }
 `;
 
 export default KakaoLoginButton;

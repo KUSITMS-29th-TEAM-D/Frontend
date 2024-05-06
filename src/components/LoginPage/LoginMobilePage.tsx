@@ -56,8 +56,10 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 46px;
+  gap: 20px;
   display: flex;
+  margin-top: 45px;
+  margin-bottom: 45px;
 `;
 
 const InnerContainer = styled.div`
@@ -75,22 +77,19 @@ const InnerContainer = styled.div`
 `;
 
 const TextContainer = styled.div`
-  margin-top: 69px;
   .content {
-    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
-    display: flex;
-    text-align: center;
 
     span {
       color: ${(props) => props.theme.color.gray800};
+      ${({ theme }) => theme.font.mobile.h2};
       text-align: center;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 32px;
 
       .highlight {
         color: ${(props) => props.theme.color.primary500};
@@ -98,26 +97,24 @@ const TextContainer = styled.div`
     }
     p {
       color: ${(props) => props.theme.color.gray600};
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 24px;
+      ${({ theme }) => theme.font.mobile.title2};
       margin-top: 10px;
       text-align: center;
     }
   }
 `;
 const StyledIcon = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 220px;
+  height: 220px;
   transform: rotate(-15deg);
 `;
 const IconContainer = styled.div`
-  display: flex;
+  width: 173px;
+  height: 173px;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 380px;
-  overflow: hidden;
+  margin-bottom: 40px;
 `;
 
 const ButtonContainer = styled.div`
