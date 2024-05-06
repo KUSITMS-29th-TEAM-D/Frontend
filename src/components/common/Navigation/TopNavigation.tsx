@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 import { ReactComponent as MenuIcon } from '@/assets/icons/menu.svg';
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg';
-import { ReactComponent as MainLogo } from '@/assets/mainLogo.svg';
+import { ReactComponent as MainLogo } from '@/assets/logos/mainLogo.svg';
 import { SideNavigation } from '@/components/common/Navigation/SideNavigation';
 import { NAVIGATION_MENU } from '@/constants/navigation';
 
