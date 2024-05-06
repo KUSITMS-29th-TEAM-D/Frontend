@@ -22,7 +22,7 @@ export const DiagnoseSection = () => {
         </StyledTitle>
         <MenuCardContainer>
           {DIAGNOSE_CARD.map((card) => (
-            <MenuCard>
+            <MenuCard key={card.title}>
               <div className="content-title">
                 <div className="title">{card.title}</div>
                 <div className="subtitle">{card.subtitle}</div>
