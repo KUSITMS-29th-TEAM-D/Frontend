@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import SIcon from '@/assets/3d.svg';
-import backgroundimg from '@/assets/bg.svg';
+import backgroundimg from '@/assets/loginBackground2.svg';
 import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
 import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
 import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
