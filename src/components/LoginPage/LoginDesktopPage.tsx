@@ -66,11 +66,9 @@ export const TextContainer = styled.div`
     gap: 16px;
 
     span {
+      ${(props) => props.theme.font.mobile.h2};
       color: ${(props) => props.theme.color.gray800};
       text-align: left;
-      font-size: 40px;
-      font-weight: 700;
-      line-height: 50px;
 
       .highlight {
         color: ${(props) => props.theme.color.primary500};
