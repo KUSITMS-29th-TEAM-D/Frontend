@@ -6,7 +6,7 @@ import { HomePage } from '@/pages/HomePage';
 export const Router = () => {
   return (
     <Routes>
-      <Route path="" element={<MainLayout />}>
+      <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
       </Route>
     </Routes>
