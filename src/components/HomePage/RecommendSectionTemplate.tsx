@@ -23,7 +23,7 @@ export const RecommendSectionTemplate = ({
 }: RecommendSectionTemplateProps) => {
   return (
     <StyledContainer $backgroundColor={backgroundColor}>
-      <SectionContainer>
+      <StyledSectionContainer>
         <StyledTitle>
           <div className="user-info">{title}</div>
           <div className="intro">{subTitle}</div>
@@ -61,19 +61,22 @@ export const RecommendSectionTemplate = ({
             />
           ))}
         </Carousel>
-      </SectionContainer>
+      </StyledSectionContainer>
     </StyledContainer>
   );
 };
 
-export const StyledContainer = styled.div<{ $backgroundColor: string }>`
+const StyledContainer = styled.div<{ $backgroundColor: string }>`
   min-width: 1280px;
-  padding: 80px 64px;
 
   background: ${({ $backgroundColor }) => $backgroundColor};
 `;
 
-export const StyledTitle = styled.div`
+const StyledSectionContainer = styled(SectionContainer)`
+  padding: 80px 64px;
+`;
+
+const StyledTitle = styled.div`
   margin-bottom: 48px;
   .user-info {
     margin-bottom: 10px;
@@ -92,7 +95,7 @@ export const StyledTitle = styled.div`
   }
 `;
 
-export const StyledFilterContainer = styled.div`
+const StyledFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -104,7 +107,7 @@ export const StyledFilterContainer = styled.div`
   }
 `;
 
-export const StyledDropdownContainer = styled.div`
+const StyledDropdownContainer = styled.div`
   display: flex;
   gap: 12px;
 `;
