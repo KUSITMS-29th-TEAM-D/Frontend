@@ -4,3 +4,7 @@ export interface UserInformation {
   brand: string;
   chips: { content: string; weight: number }[];
 }
+
+export interface User {
+  nickname: string;
+}
