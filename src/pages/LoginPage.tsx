@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { TopNavigation } from '@/components/common/TopNavigation';
+import { TopNavigation } from '@/components/common/Navigation/TopNavigation';
 
 import { LoginDesktopPage } from '../components/LoginPage/LoginDesktopPage';
 import { LoginMobilePage } from '../components/LoginPage/LoginMobilePage';
