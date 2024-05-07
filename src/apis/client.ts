@@ -17,6 +17,7 @@ authClient.interceptors.request.use((config) => {
   if (!authClient.defaults.headers.common['Authorization']) {
     if (userService.getUser() === '') {
       // register token이 만료된 상황
+      userService.removeUser();
       window.location.href = '/auth';
     } else if (userService.getUser()) {
       // access token이 만료된 상황
