@@ -52,6 +52,12 @@ export const font = {
       size: 25,
       lineHeight: 32,
     }),
+    body1b: FONT({
+      font: 'Spoqa Han Sans Neo',
+      weight: 700,
+      size: 20,
+      lineHeight: 28,
+    }),
     body1m: FONT({
       font: 'Spoqa Han Sans Neo',
       weight: 500,
@@ -129,6 +135,12 @@ export const font = {
     title2: FONT({
       font: 'Spoqa Han Sans Neo',
       weight: 500,
+      size: 16,
+      lineHeight: 24,
+    }),
+    body1b: FONT({
+      font: 'Spoqa Han Sans Neo',
+      weight: 700,
       size: 16,
       lineHeight: 24,
     }),
