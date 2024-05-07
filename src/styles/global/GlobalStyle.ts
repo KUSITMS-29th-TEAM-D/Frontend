@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
@@ -59,4 +59,9 @@ a{
 svg, image {
 	display: block;
 }
+`;
+
+export const SectionContainer = styled.div`
+  width: 1280px;
+  margin: 0 auto;
 `;

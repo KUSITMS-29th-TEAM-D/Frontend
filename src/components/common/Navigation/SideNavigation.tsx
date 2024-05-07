@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg';
-import { PlainButton } from '@/components/common/PlainButton';
+import { PlainButton } from '@/components/common/Button/PlainButton';
 import { NAVIGATION_MENU } from '@/constants/navigation';
 
 interface SideNavigationProps {
