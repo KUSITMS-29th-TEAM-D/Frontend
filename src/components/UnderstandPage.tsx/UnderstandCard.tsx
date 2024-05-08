@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import Card from '@/assets/backgrounds/understandCard.svg';
 import { theme } from '@/styles';
 
 interface OutlineProps {
@@ -14,10 +15,18 @@ interface OutlineProps {
   titleColor: string;
   subtitleColor: string;
   footerTextColor: string;
-  backgroundColor: string;
+  backgroundColor?: string;
+  background?: string;
+  width?: string;
+  height?: string;
 }
 
-const Container = styled.div<{ backgroundColor: string; width?: string; height?: string }>`
+const Container = styled.div<{
+  background?: string;
+  width?: string;
+  height?: string;
+}>`
+  position: relative;
   width: ${(props) => props.width || '100%'};
   height: ${(props) => props.height || '100%'};
   padding: 24px;
@@ -27,7 +36,7 @@ const Container = styled.div<{ backgroundColor: string; width?: string; height?:
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  background: ${(props) => props.backgroundColor};
+  background: ${(props) => props.background || 'transparent'};
 `;
 
 const Header = styled.div`
@@ -38,6 +47,8 @@ const Header = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 4px;
+  position: relative;
+  z-index: 1;
 `;
 
 const Title = styled.div<{ $color: string; $titleTextSize?: boolean }>`
@@ -58,6 +69,15 @@ const FooterText = styled.div<{ $color: string; $footerTextSize?: boolean }>`
     $footerTextSize ? theme.font.desktop.label1m : theme.font.desktop.label1m};
 `;
 
+const BackgroundImage = styled.div<{ background: string; width: string; height: string }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props) => props.background});
+  background-size: cover;
+  z-index: 2;
+`;
+
 const Outline = ({
   title,
   titleTextSize,
@@ -68,11 +88,11 @@ const Outline = ({
   titleColor,
   subtitleColor,
   footerTextColor,
-  backgroundColor,
+  background,
   width,
   height,
-}: OutlineProps & { width?: string; height?: string }) => (
-  <Container backgroundColor={backgroundColor} width={width} height={height}>
+}: OutlineProps) => (
+  <Container background={background} width={width} height={height}>
     <Header>
       <Title $color={titleColor} $titleTextSize={titleTextSize}>
         {title}
@@ -84,6 +104,9 @@ const Outline = ({
     <FooterText $color={footerTextColor} $footerTextSize={footerTextSize}>
       {footerText}
     </FooterText>
+    {background && (
+      <BackgroundImage background={background} width={width || ''} height={height || ''} />
+    )}
   </Container>
 );
 
@@ -92,10 +115,10 @@ const DesignComponent = () => (
     title="Design"
     subtitle="설계하기"
     footerText="앞으로의 나를 브랜딩하고 싶다면?"
-    titleColor={theme.color.white}
-    subtitleColor={theme.color.white}
-    footerTextColor={theme.color.white}
-    backgroundColor="#915AFB"
+    titleColor={theme.color.primary500}
+    subtitleColor={theme.color.gray800}
+    footerTextColor={theme.color.primary800}
+    background={'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.20) 10%, white 84%)'}
     titleTextSize={false}
     subtitleTextSize={false}
     footerTextSize={false}
@@ -109,10 +132,10 @@ const DefineComponent = () => (
     title="Define"
     subtitle="정의하기"
     footerText="현재의 나를 파악하고 싶다면?"
-    titleColor={theme.color.primary500}
-    subtitleColor={theme.color.gray800}
-    footerTextColor={theme.color.primary800}
-    backgroundColor="#FFFFF"
+    titleColor={theme.color.white}
+    subtitleColor={theme.color.white}
+    footerTextColor={theme.color.white}
+    background={theme.color.primary500}
     titleTextSize={false}
     subtitleTextSize={false}
     footerTextSize={false}
@@ -129,12 +152,11 @@ const DiscoverComponent = () => (
     titleColor={theme.color.primary500}
     subtitleColor={theme.color.gray800}
     footerTextColor={theme.color.primary800}
-    backgroundColor="#FFFFF"
+    background={`url(${Card})`}
+    width="680px"
+    height="246px"
     titleTextSize={true}
     subtitleTextSize={true}
-    footerTextSize={true}
-    width="683px"
-    height="246px"
   />
 );
 

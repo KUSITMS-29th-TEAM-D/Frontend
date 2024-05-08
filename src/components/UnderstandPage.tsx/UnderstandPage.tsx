@@ -37,7 +37,7 @@ const StyledContainer = styled.section`
   background: ${({ theme }) => `linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 27%,
-      rgba(232, 221, 254, 0.45) 65%,
+      rgba(232, 221, 254, 0.45) 40%,
       ${theme.color.secondary100} 100%
     ),
     ${theme.color.white}`};
