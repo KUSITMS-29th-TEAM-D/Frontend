@@ -109,7 +109,7 @@ export const HomePage = () => {
         <RecommendSectionTemplate
           title="아직 나를 더 알아가고 싶다면?"
           subTitle="자기이해를 도와주는 프로그램을 추천해드릴게요."
-          backgroundColor={theme.color.gray100}
+          backgroundColor={theme.color.gray50}
           recommendItems={Dummy4}
           filters={filters}
         />
