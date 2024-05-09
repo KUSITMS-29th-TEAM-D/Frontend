@@ -12,10 +12,10 @@ export const Router = () => {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/understand" element={<SelfUnderstandPage />} />
       </Route>
       <Route element={<ResponsiveLayout />}>
         <Route path="/auth" element={<LoginPage />} />
-        <Route path="/understand" element={<SelfUnderstandPage />} />
       </Route>
       <Route path="/login" element={<RedirectPage />} />
     </Routes>
