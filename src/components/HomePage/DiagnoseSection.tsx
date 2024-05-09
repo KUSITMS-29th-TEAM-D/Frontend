@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 import backgroundIcon from '@/assets/backgrounds/backgroundIcon3D.svg';
+import DefineImg from '@/assets/icons/define.png';
+import DesignImg from '@/assets/icons/design.png';
+import DiscoverImg from '@/assets/icons/discover.png';
 import { SectionContainer } from '@/styles';
 
 const DIAGNOSE_CARD = [
-  { title: '탐색', subtitle: '과거의 나와 대화하기' },
-  { title: '이해', subtitle: '성격/진단 테스트' },
-  { title: '정의', subtitle: '차별점 도출하기' },
+  { title: 'Discover 이해', subtitle: '과거의 나와 대화하기', img: DiscoverImg },
+  { title: 'Define 정의', subtitle: '성격/진단 테스트', img: DefineImg },
+  { title: 'Design 설계', subtitle: '차별점 도출하기', img: DesignImg },
 ];
 
 export const DiagnoseSection = () => {
@@ -15,9 +18,9 @@ export const DiagnoseSection = () => {
       <StyledBackgroundIcon className="icon" />
       <StyledSectionContainer>
         <StyledTitle>
-          <div className="title">나의 차별점을 알고싶다면 ?</div>
+          <div className="title">나를 더 잘 이해하고 싶다면 ?</div>
           <div className="subtitle">
-            셀피스에서 <span className="highlight">[진단하기]</span>를 통해 나를 더 알아가요
+            셀피스에서 <span className="highlight">[자기이해]</span>를 통해 나를 더 알아가요
           </div>
         </StyledTitle>
         <MenuCardContainer>
@@ -27,6 +30,7 @@ export const DiagnoseSection = () => {
                 <div className="title">{card.title}</div>
                 <div className="subtitle">{card.subtitle}</div>
               </div>
+              <img src={card.img} alt="icon" />
             </MenuCard>
           ))}
         </MenuCardContainer>
@@ -95,7 +99,7 @@ const MenuCardContainer = styled.div`
 
 const MenuCard = styled.div`
   width: 363px;
-  height: 410px;
+  height: 430px;
 
   display: flex;
   flex-direction: column;
@@ -121,6 +125,18 @@ const MenuCard = styled.div`
 
     .subtitle {
       ${({ theme }) => theme.font.desktop.body1m};
+    }
+  }
+
+  img {
+    width: 205px;
+    height: 205px;
+  }
+
+  &:hover {
+    img {
+      width: 255px;
+      height: 255px;
     }
   }
 `;
