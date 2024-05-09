@@ -67,7 +67,7 @@ const StyledGradient = styled.div`
     rgba(204, 179, 253, 0) 100%
   );
 
-  animation: ${gradientAnimation} 2s ease-in-out infinite alternate;
+  animation: ${gradientAnimation} 1.5s linear infinite alternate;
 `;
 
 const StyledContent = styled.div`
