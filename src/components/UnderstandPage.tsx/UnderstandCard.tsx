@@ -119,7 +119,7 @@ const DesignComponent = () => (
     titleColor={theme.color.primary500}
     subtitleColor={theme.color.gray800}
     footerTextColor={theme.color.primary800}
-    background={'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.40) 15%, white 64%)'}
+    background={'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.60) 15%, white 54%)'}
     titleTextSize={false}
     subtitleTextSize={false}
     footerTextSize={false}
@@ -165,11 +165,11 @@ const DiscoverComponent = () => (
 );
 const StyledIcon = styled.img`
   position: absolute;
-  top: -20px;
+  top: -35px;
   right: 0px;
-  width: 324.3px;
-  height: 324.3px;
-  transform: rotate(-5.21deg);
+  width: 334.3px;
+  height: 334.3px;
+  transform: rotate(-7.21deg);
 `;
 
 export { DesignComponent, DefineComponent, DiscoverComponent };
