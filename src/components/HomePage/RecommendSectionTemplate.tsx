@@ -67,8 +67,6 @@ export const RecommendSectionTemplate = ({
 };
 
 const StyledContainer = styled.div<{ $backgroundColor: string }>`
-  min-width: 1280px;
-
   background: ${({ $backgroundColor }) => $backgroundColor};
 `;
 

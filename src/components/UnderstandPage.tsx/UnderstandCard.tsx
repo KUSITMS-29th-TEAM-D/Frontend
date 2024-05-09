@@ -2,7 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import Card from '@/assets/backgrounds/understandCard.svg';
+import Card from '@/assets/backgrounds/understandCard.png';
+import SIcon from '@/assets/logos/logo3d.svg';
 import { theme } from '@/styles';
 
 interface OutlineProps {
@@ -30,7 +31,7 @@ const Container = styled.div<{
   width: ${(props) => props.width || '100%'};
   height: ${(props) => props.height || '100%'};
   padding: 24px;
-  box-shadow: 0px 0px 10px rgba(87, 11, 255, 0.15);
+  filter: drop-shadow(0px 4px 10px rgba(87, 11, 255, 0.15));
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -74,7 +75,7 @@ const BackgroundImage = styled.div<{ background: string; width: string; height: 
   width: 100%;
   height: 100%;
   background-image: url(${(props) => props.background});
-  background-size: cover;
+  background-size: contain;
   z-index: 2;
 `;
 
@@ -118,7 +119,7 @@ const DesignComponent = () => (
     titleColor={theme.color.primary500}
     subtitleColor={theme.color.gray800}
     footerTextColor={theme.color.primary800}
-    background={'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.20) 10%, white 84%)'}
+    background={'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.40) 15%, white 64%)'}
     titleTextSize={false}
     subtitleTextSize={false}
     footerTextSize={false}
@@ -145,19 +146,30 @@ const DefineComponent = () => (
 );
 
 const DiscoverComponent = () => (
-  <Outline
-    title="Discover"
-    subtitle="돌아보기"
-    footerText="셀피스를 만나기 전의 나를 알고 싶다면?"
-    titleColor={theme.color.primary500}
-    subtitleColor={theme.color.gray800}
-    footerTextColor={theme.color.primary800}
-    background={`url(${Card})`}
-    width="680px"
-    height="246px"
-    titleTextSize={true}
-    subtitleTextSize={true}
-  />
+  <div style={{ position: 'relative' }}>
+    <Outline
+      title="Discover"
+      subtitle="돌아보기"
+      footerText="셀피스를 만나기 전의 나를 알고 싶다면?"
+      titleColor={theme.color.primary500}
+      subtitleColor={theme.color.gray800}
+      footerTextColor={theme.color.primary800}
+      background={`url(${Card})`}
+      width="680px"
+      height="246px"
+      titleTextSize={true}
+      subtitleTextSize={true}
+    />
+    <StyledIcon src={SIcon} alt="3D Icon" />
+  </div>
 );
+const StyledIcon = styled.img`
+  position: absolute;
+  top: -20px;
+  right: 0px;
+  width: 324.3px;
+  height: 324.3px;
+  transform: rotate(-5.21deg);
+`;
 
 export { DesignComponent, DefineComponent, DiscoverComponent };

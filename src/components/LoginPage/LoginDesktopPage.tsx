@@ -1,12 +1,8 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
-import { ReactComponent as SIcon } from '@/assets/3d.svg';
-import backgroundimg from '@/assets/loginBackground1.svg';
-import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
-import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
-import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
+import backgroundImg from '@/assets/backgrounds/loginBackground.png';
+import { ReactComponent as SIcon } from '@/assets/logos/logo3d.svg';
+import { SocialLoginButton } from '@/components/LoginPage/SocialLoginButton';
 
 export const LoginDesktopPage = () => (
   <ViewContainer>
@@ -22,9 +18,9 @@ export const LoginDesktopPage = () => (
           </div>
         </TextContainer>
         <ButtonContainer>
-          <NaverLoginButton />
-          <KakaoLoginButton />
-          <GoogleLoginButton />
+          <SocialLoginButton provider="NAVER" />
+          <SocialLoginButton provider="KAKAO" />
+          <SocialLoginButton provider="GOOGLE" />
         </ButtonContainer>
       </MainContainer>
       <IconContainer>
@@ -39,13 +35,10 @@ export const ViewContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
-  background-image: url(${backgroundimg});
+  height: 100vh;
+  min-height: 720px;
+  background-image: url(${backgroundImg});
   background-size: cover;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
 `;
 
 export const MainContainer = styled.div`
@@ -68,11 +61,9 @@ export const TextContainer = styled.div`
     gap: 16px;
 
     span {
+      ${(props) => props.theme.font.desktop.h2};
       color: ${(props) => props.theme.color.gray800};
       text-align: left;
-      font-size: 40px;
-      font-weight: 700;
-      line-height: 50px;
 
       .highlight {
         color: ${(props) => props.theme.color.primary500};
