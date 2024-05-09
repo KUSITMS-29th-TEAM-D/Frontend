@@ -68,11 +68,11 @@ const FooterText = styled.div<{ $color: string; $footerTextSize?: boolean }>`
     props.$footerTextSize ? props.theme.font.desktop.label1m : props.theme.font.desktop.label1m};
 `;
 
-const BackgroundImage = styled.div<{ background: string; width: string; height: string }>`
+const BackgroundImage = styled.div<{ $background: string; $width: string; $height: string }>`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url(${(props) => props.background});
+  width: ${(props) => props.$width};
+  height: ${(props) => props.$height};
+  background-image: url(${(props) => props.$background});
   background-size: contain;
   z-index: 2;
 `;
@@ -104,7 +104,7 @@ const Outline = ({
       {footerText}
     </FooterText>
     {background && (
-      <BackgroundImage background={background} width={width || ''} height={height || ''} />
+      <BackgroundImage $background={background} $width={width || ''} $height={height || ''} />
     )}
   </Container>
 );
@@ -117,7 +117,7 @@ const DesignComponent = () => (
     titleColor={theme.color.primary500}
     subtitleColor={theme.color.gray800}
     footerTextColor={theme.color.primary800}
-    background={'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.60) 15%, white 54%)'}
+    background={'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.20) 0%, #FFF 84%)'}
     titleTextSize={false}
     subtitleTextSize={false}
     footerTextSize={false}
