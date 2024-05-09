@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 import Card from '@/assets/backgrounds/understandCard.png';
@@ -54,20 +52,20 @@ const Header = styled.div`
 
 const Title = styled.div<{ $color: string; $titleTextSize?: boolean }>`
   color: ${(props) => props.$color};
-  ${({ theme, $titleTextSize }) =>
-    $titleTextSize ? theme.font.desktop.h2 : theme.font.desktop.title1};
+  ${(props) =>
+    props.$titleTextSize ? props.theme.font.desktop.h2 : props.theme.font.desktop.title1};
 `;
 
 const Subtitle = styled.div<{ $color: string; $subtitleTextSize?: boolean }>`
   color: ${(props) => props.$color};
-  ${({ theme, $subtitleTextSize }) =>
-    $subtitleTextSize ? theme.font.desktop.title2 : theme.font.desktop.body1m};
+  ${(props) =>
+    props.$subtitleTextSize ? props.theme.font.desktop.title2 : props.theme.font.desktop.body1m};
 `;
 
 const FooterText = styled.div<{ $color: string; $footerTextSize?: boolean }>`
   color: ${(props) => props.$color};
-  ${({ theme, $footerTextSize }) =>
-    $footerTextSize ? theme.font.desktop.label1m : theme.font.desktop.label1m};
+  ${(props) =>
+    props.$footerTextSize ? props.theme.font.desktop.label1m : props.theme.font.desktop.label1m};
 `;
 
 const BackgroundImage = styled.div<{ background: string; width: string; height: string }>`

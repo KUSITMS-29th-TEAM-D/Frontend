@@ -5,8 +5,7 @@ import { ResponsiveLayout } from '@/components/common/Layout/ResponsiveLayout';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { RedirectPage } from '@/pages/RedirectPage';
-
-import { SelfUnderstandPage } from './pages/SelfUnderstandPage';
+import { SelfUnderstandPage } from '@/pages/SelfUnderstandPage';
 
 export const Router = () => {
   return (

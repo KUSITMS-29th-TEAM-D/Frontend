@@ -1,10 +1,8 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 import { SectionContainer } from '@/styles';
 
-import { DefineComponent, DesignComponent, DiscoverComponent } from './UnderstandCard';
+import { DefineComponent, DesignComponent, DiscoverComponent } from './SelfUnderstandCard';
 
 const CardContainer = styled.div`
   width: 680px;
@@ -15,7 +13,7 @@ const CardContainer = styled.div`
   gap: 20px;
   display: inline-flex;
 `;
-const CardInerContainer = styled.div`
+const CardInContainer = styled.div`
   box-shadow: 0px 0px 10px rgba(87, 11, 255, 0.15);
   border-radius: 16px;
   overflow: hidden;
@@ -90,7 +88,7 @@ const TextDetail = styled.div`
   ${({ theme }) => theme.font.desktop.title2};
 `;
 
-const UnderstandView = () => {
+const SelfUnderstandView = () => {
   return (
     <StyledContainer>
       <StyledSectionContainer>
@@ -107,9 +105,9 @@ const UnderstandView = () => {
             <TextDetail>셀피스에서 찾은 나의 조각을 새롭게 발전시키고 싶다면?</TextDetail>
           </TextContainer>
           <CardContainer>
-            <CardInerContainer>
+            <CardInContainer>
               <DiscoverComponent />
-            </CardInerContainer>
+            </CardInContainer>
             <CardInnerContainer>
               <DefineComponent />
               <DesignComponent />
@@ -121,4 +119,4 @@ const UnderstandView = () => {
   );
 };
 
-export default UnderstandView;
+export default SelfUnderstandView;

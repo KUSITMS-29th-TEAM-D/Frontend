@@ -1,9 +1,9 @@
-import UnderstandView from '@/components/UnderstandPage.tsx/UnderstandPage';
+import SelfUnderstandView from '@/components/SelfUnderstandPage/SelfUnderstandView';
 
 export const SelfUnderstandPage = () => {
   return (
     <div>
-      <UnderstandView />
+      <SelfUnderstandView />
     </div>
   );
 };
