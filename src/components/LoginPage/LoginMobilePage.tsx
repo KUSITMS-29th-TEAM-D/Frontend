@@ -1,12 +1,8 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
-import SIcon from '@/assets/3d.svg';
-import backgroundimg from '@/assets/loginBackground2.svg';
-import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
-import KakaoLoginButton from '@/components/LoginPage/KakaoLoginButton';
-import NaverLoginButton from '@/components/LoginPage/NaverLoginButton';
+import backgroundImg from '@/assets/backgrounds/loginBackground.png';
+import SIcon from '@/assets/logos/logo3d.svg';
+import { SocialLoginButton } from '@/components/LoginPage/SocialLoginButton';
 
 export const LoginMobilePage = () => (
   <ViewContainer>
@@ -28,9 +24,9 @@ export const LoginMobilePage = () => (
         <StyledIcon src={SIcon} alt="3D Icon" />
       </IconContainer>
       <ButtonContainer>
-        <NaverLoginButton />
-        <KakaoLoginButton />
-        <GoogleLoginButton />
+        <SocialLoginButton provider="NAVER" />
+        <SocialLoginButton provider="KAKAO" />
+        <SocialLoginButton provider="GOOGLE" />
       </ButtonContainer>
     </MainContainer>
   </ViewContainer>
@@ -42,12 +38,10 @@ const ViewContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-image: url(${backgroundimg});
+  min-height: 700px;
+  background-image: url(${backgroundImg});
   background-size: cover;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: -1;
+  background-position: calc(50% + 70px) center;
 `;
 
 const MainContainer = styled.div`

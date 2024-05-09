@@ -18,7 +18,7 @@ export const font = {
   desktop: {
     d1: FONT({
       font: 'Spoqa Han Sans Neo',
-      weight: 700,
+      weight: 500,
       size: 82,
       lineHeight: 100,
     }),
@@ -36,7 +36,7 @@ export const font = {
     }),
     h2: FONT({
       font: 'Spoqa Han Sans Neo',
-      weight: 400,
+      weight: 700,
       size: 40,
       lineHeight: 50,
     }),

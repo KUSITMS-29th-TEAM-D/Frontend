@@ -8,9 +8,10 @@ import { ReactComponent as UserIcon } from '@/assets/icons/user.svg';
 import { ReactComponent as MainLogo } from '@/assets/logos/mainLogo.svg';
 import { SideNavigation } from '@/components/common/Navigation/SideNavigation';
 import { NAVIGATION_MENU } from '@/constants/navigation';
+import { userService } from '@/services/UserService';
 
 export const TopNavigation = () => {
-  const [loggedIn, setLoggedIn] = useState(false); // 로그인 여부를 확인하기 위한 임시 코드
+  const loggedIn = !!userService.getUser();
   const [showSideNav, setShowSideNav] = useState(false);
   const navigate = useNavigate();
 
@@ -39,8 +40,7 @@ export const TopNavigation = () => {
             $filled
             $width="100px"
             onClick={() => {
-              // TODO: 로그인 페이지로 이동하도록 수정
-              setLoggedIn((prev) => !prev);
+              navigate('auth');
             }}
           >
             로그인
