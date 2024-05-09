@@ -78,7 +78,7 @@ const StyledTitle = styled.div`
   }
 
   .subtitle {
-    ${({ theme }) => theme.font.desktop.title1};
+    ${({ theme }) => theme.font.desktop.title2};
     color: ${({ theme }) => theme.color.gray600};
   }
 `;
@@ -209,17 +209,17 @@ const StyledContents = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
 
   padding-top: 30px;
 
-  ${({ theme }) => theme.font.desktop.title1};
+  ${({ theme }) => theme.font.desktop.body1b};
   color: ${({ theme }) => theme.color.gray800};
 
   .chips {
     display: flex;
     gap: 16px;
 
-    padding-bottom: 38px;
+    padding-bottom: 30px;
   }
 `;
