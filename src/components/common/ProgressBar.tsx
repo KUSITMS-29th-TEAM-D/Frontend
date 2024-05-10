@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-interface ProgressProp {
-  width: number;
+interface ProgressBarProps {
+  currentStep: number;
+  totalSteps: number;
 }
 
 const ProgressLongBar = styled.div`
@@ -14,20 +15,17 @@ const ProgressLongBar = styled.div`
   overflow: hidden;
 `;
 
-const Progress = styled.div<ProgressProp>`
-  width: ${(props) => props.width}%;
+const Progress = styled.div<ProgressBarProps>`
+  width: ${(props) => (props.currentStep / props.totalSteps) * 100}%;
   height: 9px;
   padding: 0;
   background-color: ${(props) => props.theme.color.primary500};
 `;
 
-const ProgressBar = () => {
-  const maxLength = 5;
-  const availableLength = 4;
-
+const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
   return (
     <ProgressLongBar>
-      <Progress width={(availableLength * 100) / maxLength} />
+      <Progress currentStep={currentStep} totalSteps={totalSteps} />
     </ProgressLongBar>
   );
 };
