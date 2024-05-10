@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Card from '@/assets/backgrounds/understandCard.png';
-import SIcon from '@/assets/logos/logo3d.svg';
+import { ReactComponent as SIcon } from '@/assets/logos/logo3d.svg';
 import { theme } from '@/styles';
 
 interface OutlineProps {
@@ -158,16 +158,17 @@ const DiscoverComponent = () => (
       titleTextSize={true}
       subtitleTextSize={true}
     />
-    <StyledIcon src={SIcon} alt="3D Icon" />
+    <StyledIcon />
   </div>
 );
-const StyledIcon = styled.img`
+const StyledIcon = styled(SIcon)`
   position: absolute;
-  top: -35px;
-  right: 0px;
-  width: 334.3px;
-  height: 334.3px;
-  transform: rotate(-7.21deg);
+  top: -10px;
+  right: -10px;
+
+  width: 294.326px;
+  height: 294.326px;
+  transform: rotate(24.208deg);
 `;
 
 export { DesignComponent, DefineComponent, DiscoverComponent };

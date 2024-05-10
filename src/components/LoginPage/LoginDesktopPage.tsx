@@ -24,7 +24,7 @@ export const LoginDesktopPage = () => (
         </ButtonContainer>
       </MainContainer>
       <IconContainer>
-        <SIcon />
+        <SIcon className="icon" />
       </IconContainer>
     </HorizontalLayout>
   </ViewContainer>
@@ -90,6 +90,12 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .icon {
+    transform: rotate(29.626deg);
+    width: 610.2px;
+    height: 610.2px;
+  }
 `;
 
 export const HorizontalLayout = styled.div`
