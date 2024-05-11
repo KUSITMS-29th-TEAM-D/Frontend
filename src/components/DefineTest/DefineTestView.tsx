@@ -22,14 +22,24 @@ const StyledContainer = styled.section`
   background: ${({ theme }) => `${theme.color.primary50}`};
 `;
 
-const Container = styled.div`
+const StyledInnerContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 702px;
+  padding-top: 42px;
+  padding-bottom: 48px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  display: inline-flex;
+`;
+
+const Container = styled.div`
+  height: 376px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 102px;
-  display: inline-flex;
+  gap: 52px;
+  display: flex;
 `;
 
 export const DefineTestView1 = () => {
@@ -37,11 +47,13 @@ export const DefineTestView1 = () => {
     <>
       <StyledContainer>
         <StyledSectionContainer>
-          <Container>
-            <DefineTextView1 />
-            <DefineChips1 />
+          <StyledInnerContainer>
+            <Container>
+              <DefineTextView1 />
+              <DefineChips1 />
+            </Container>
             <DefineButtonView1 />
-          </Container>
+          </StyledInnerContainer>
         </StyledSectionContainer>
       </StyledContainer>
     </>
@@ -53,11 +65,13 @@ export const DefineTestView2 = () => {
     <>
       <StyledContainer>
         <StyledSectionContainer>
-          <Container>
-            <DefineTextView2 />
-            <DefineChips1 />
+          <StyledInnerContainer>
+            <Container>
+              <DefineTextView2 />
+              <DefineChips1 />
+            </Container>
             <DefineButtonView2 />
-          </Container>
+          </StyledInnerContainer>
         </StyledSectionContainer>
       </StyledContainer>
     </>
@@ -69,11 +83,13 @@ export const DefineTestView3 = () => {
     <>
       <StyledContainer>
         <StyledSectionContainer>
-          <Container>
-            <DefineTextView3 />
-            <DefineChips1 />
+          <StyledInnerContainer>
+            <Container>
+              <DefineTextView3 />
+              <DefineChips1 />
+            </Container>
             <DefineButtonView3 />
-          </Container>
+          </StyledInnerContainer>
         </StyledSectionContainer>
       </StyledContainer>
     </>

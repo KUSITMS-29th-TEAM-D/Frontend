@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import ProgressBar from '../common/ProgressBar';
 
 const TextContainer = styled.div`
+  align-self: stretch;
   width: 100%;
-  height: 100%;
+  height: 137px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -13,21 +14,22 @@ const TextContainer = styled.div`
 `;
 const InnerContainer = styled.div`
   align-self: stretch;
-  height: 82px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 32px;
-  display: flex;
-`;
-const KeywordContainer = styled.div`
-  align-self: stretch;
   height: 45px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
   display: flex;
+`;
+const KeywordContainer = styled.div`
+  height: 60px;
+  width: 100%;
+  margin-top: 25px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
 `;
 
 const KeywordTitle = styled.div`
@@ -56,6 +58,7 @@ const ProgressWrapper = styled.div`
   gap: 4px;
   display: inline-flex;
 `;
+
 const ProgressText = styled.div`
   ${({ theme }) => theme.font.desktop.body1b};
   word-wrap: break-word;
@@ -70,16 +73,8 @@ const ProgressNumber2 = styled(ProgressText)`
 
 const ProgressBarWrapper = styled.div`
   align-self: stretch;
+  height: 9px;
   position: relative;
-`;
-const ProgressContainer = styled.div`
-  align-self: stretch;
-  height: 45px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
-  display: flex;
 `;
 
 export const DefineTextView1 = () => {
@@ -90,15 +85,13 @@ export const DefineTextView1 = () => {
     <>
       <TextContainer>
         <InnerContainer>
-          <ProgressContainer>
-            <ProgressWrapper>
-              <ProgressNumber1>{currentStep} </ProgressNumber1>
-              <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
-            </ProgressWrapper>
-            <ProgressBarWrapper>
-              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-            </ProgressBarWrapper>
-          </ProgressContainer>
+          <ProgressWrapper>
+            <ProgressNumber1>{currentStep} </ProgressNumber1>
+            <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
+          </ProgressWrapper>
+          <ProgressBarWrapper>
+            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+          </ProgressBarWrapper>
         </InnerContainer>
         <KeywordContainer>
           <KeywordTitle>나에게 해당되는 키워드는 무엇인가요?</KeywordTitle>
@@ -119,15 +112,13 @@ export const DefineTextView2 = () => {
     <>
       <TextContainer>
         <InnerContainer>
-          <ProgressContainer>
-            <ProgressWrapper>
-              <ProgressNumber1>{currentStep} </ProgressNumber1>
-              <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
-            </ProgressWrapper>
-            <ProgressBarWrapper>
-              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-            </ProgressBarWrapper>
-          </ProgressContainer>
+          <ProgressWrapper>
+            <ProgressNumber1>{currentStep} </ProgressNumber1>
+            <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
+          </ProgressWrapper>
+          <ProgressBarWrapper>
+            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+          </ProgressBarWrapper>
         </InnerContainer>
         <KeywordContainer>
           <KeywordTitle>나에게 해당되는 키워드는 무엇인가요?</KeywordTitle>
@@ -148,15 +139,13 @@ export const DefineTextView3 = () => {
     <>
       <TextContainer>
         <InnerContainer>
-          <ProgressContainer>
-            <ProgressWrapper>
-              <ProgressNumber1>{currentStep} </ProgressNumber1>
-              <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
-            </ProgressWrapper>
-            <ProgressBarWrapper>
-              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-            </ProgressBarWrapper>
-          </ProgressContainer>
+          <ProgressWrapper>
+            <ProgressNumber1>{currentStep} </ProgressNumber1>
+            <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
+          </ProgressWrapper>
+          <ProgressBarWrapper>
+            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+          </ProgressBarWrapper>
         </InnerContainer>
         <KeywordContainer>
           <KeywordTitle>나에게 해당되는 키워드는 무엇인가요?</KeywordTitle>

@@ -27,12 +27,11 @@ const IconInnerContainer = styled.div`
 `;
 
 const StyledContainer = styled.div<StyledDivProps>`
-  height: 100%;
   padding: 7px 16px;
   border-radius: 8px;
   overflow: hidden;
   display: inline-flex;
-
+  justify-content: flex-start;
   align-items: center;
   gap: 8px;
   cursor: pointer;

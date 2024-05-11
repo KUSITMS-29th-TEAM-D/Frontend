@@ -24,14 +24,14 @@ const chipData1 = [
 ];
 
 const KeywordContainer = styled.div`
-  width: 100%;
+  width: 632px;
   height: 100%;
-  align-self: stretch;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  display: flex;
+  column-gap: 12px;
+  display: inline-flex;
   flex-wrap: wrap;
+  margin-top: 25px;
 `;
 
 export const DefineChips1 = () => {
