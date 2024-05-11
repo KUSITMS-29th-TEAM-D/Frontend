@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
 
 import { ReactComponent as CloseIcon } from '@/assets/icons/closeWhite.svg';
@@ -9,7 +7,10 @@ interface StyledDivProps {
 
 interface TestChipProps {
   chipText: string;
+  state: number;
+  onToggle: () => void;
 }
+
 const IconContainer = styled.div`
   width: 16px;
   height: 16;
@@ -47,15 +48,9 @@ const InnerContainer = styled.div`
   ${({ theme }) => theme.font.desktop.label1m};
 `;
 
-const TestChip = ({ chipText }: TestChipProps) => {
-  const [state, setState] = useState<number>(1);
-
-  const handleStateChange = () => {
-    setState(state === 1 ? 2 : 1);
-  };
-
+const TestChip = ({ chipText, state, onToggle }: TestChipProps) => {
   return (
-    <StyledContainer state={state} onClick={handleStateChange}>
+    <StyledContainer state={state} onClick={onToggle}>
       <InnerContainer>{chipText}</InnerContainer>
       {state === 2 && (
         <IconContainer>
