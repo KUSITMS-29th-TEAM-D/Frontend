@@ -3,78 +3,21 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import TestChip from '@/components/common/Chip/TestChip';
+import { CHIP_DATA1, CHIP_DATA2, CHIP_DATA3 } from '@/constants/defineChip';
 
 import { DefineButtonView1, DefineButtonView2, DefineButtonView3 } from './DefineButtonView';
 
-const chipData1 = [
-  '남성적임',
-  '솔직함',
-  '검소함',
-  '소박함',
-  '말이적음',
-  '어울리기 좋아함',
-  '단순함',
-  '이상주의적',
-  '분석적',
-  '이해심 많음',
-  '잘도와줌',
-  '봉사적',
-  '감정적',
-  '사람 좋아함',
-  '친절함',
-  '신체적으로 건강함',
-];
-
-const chipData2 = [
-  '남성적임',
-  '솔직함',
-  '검소함',
-  '소박함',
-  '말이적음',
-  '어울리기 좋아함',
-  '단순함',
-  '이상주의적',
-  '분석적',
-  '이해심 많음',
-  '잘도와줌',
-  '봉사적',
-  '감정적',
-  '사람 좋아함',
-  '친절함',
-  '신체적으로 건강함',
-];
-
-const chipData3 = [
-  '남성적임',
-  '솔직함',
-  '검소함',
-  '소박함',
-  '말이적음',
-  '어울리기 좋아함',
-  '단순함',
-  '이상주의적',
-  '분석적',
-  '이해심 많음',
-  '잘도와줌',
-  '봉사적',
-  '감정적',
-  '사람 좋아함',
-  '친절함',
-  '신체적으로 건강함',
-];
-
 const KeywordContainer = styled.div`
-  width: 632px;
-  height: 100%;
+  align-self: stretch;
   justify-content: center;
   align-items: center;
-  column-gap: 12px;
+  gap: 16px;
   display: inline-flex;
   flex-wrap: wrap;
-  margin-top: 25px;
+  margin-top: 30px;
 `;
 export const DefineChips1 = () => {
-  const [chipStates, setChipStates] = useState(Array(chipData1.length).fill(1));
+  const [chipStates, setChipStates] = useState(Array(CHIP_DATA1.length).fill(1));
   const [warning, setWarning] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
 
@@ -100,7 +43,7 @@ export const DefineChips1 = () => {
   return (
     <>
       <KeywordContainer>
-        {chipData1.map((text, index) => (
+        {CHIP_DATA1.map((text, index) => (
           <TestChip
             key={index}
             chipText={text}
@@ -116,7 +59,7 @@ export const DefineChips1 = () => {
 };
 
 export const DefineChips2 = () => {
-  const [chipStates, setChipStates] = useState(Array(chipData2.length).fill(1));
+  const [chipStates, setChipStates] = useState(Array(CHIP_DATA2.length).fill(1));
   const [warning, setWarning] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
 
@@ -142,7 +85,7 @@ export const DefineChips2 = () => {
   return (
     <>
       <KeywordContainer>
-        {chipData2.map((text, index) => (
+        {CHIP_DATA2.map((text, index) => (
           <TestChip
             key={index}
             chipText={text}
@@ -157,7 +100,7 @@ export const DefineChips2 = () => {
 };
 
 export const DefineChips3 = () => {
-  const [chipStates, setChipStates] = useState(Array(chipData3.length).fill(1));
+  const [chipStates, setChipStates] = useState(Array(CHIP_DATA3.length).fill(1));
   const [warning, setWarning] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
 
@@ -183,7 +126,7 @@ export const DefineChips3 = () => {
   return (
     <>
       <KeywordContainer>
-        {chipData3.map((text, index) => (
+        {CHIP_DATA3.map((text, index) => (
           <TestChip
             key={index}
             chipText={text}
