@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-type PlainButtonVariant = 'primary' | 'gray';
+type PlainButtonVariant = 'primary' | 'gray' | 'primary2';
 
 interface PlainButtonProps {
   children: React.ReactNode;
@@ -57,6 +57,16 @@ const getVariantStyle = ($variant: PlainButtonVariant) => {
 
         &:hover {
           background: ${(props) => props.theme.color.primary100};
+        }
+      `;
+
+    case 'primary2':
+      return css`
+        color: ${(props) => props.theme.color.primary50};
+        background: ${(props) => props.theme.color.primary600};
+
+        &:hover {
+          background: ${(props) => props.theme.color.primary700};
         }
       `;
   }
