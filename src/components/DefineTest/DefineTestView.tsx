@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 import { SectionContainer } from '@/styles';
 
-import { DefineButtonView2, DefineButtonView3 } from './DefineButtonView';
-import { DefineChips1 } from './DefineChip';
+import { DefineChips1, DefineChips2, DefineChips3 } from './DefineChip';
 import { DefineTextView1, DefineTextView2, DefineTextView3 } from './DefineTextView';
 
 const StyledSectionContainer = styled(SectionContainer)`
@@ -67,9 +66,8 @@ export const DefineTestView2 = () => {
           <StyledInnerContainer>
             <Container>
               <DefineTextView2 />
-              <DefineChips1 />
+              <DefineChips2 />
             </Container>
-            <DefineButtonView2 />
           </StyledInnerContainer>
         </StyledSectionContainer>
       </StyledContainer>
@@ -85,8 +83,7 @@ export const DefineTestView3 = () => {
           <StyledInnerContainer>
             <Container>
               <DefineTextView3 />
-              <DefineChips1 />
-              <DefineButtonView3 />
+              <DefineChips3 />
             </Container>
           </StyledInnerContainer>
         </StyledSectionContainer>

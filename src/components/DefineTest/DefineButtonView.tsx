@@ -6,6 +6,7 @@ import { Chip } from '../common/Chip/Chip';
 
 interface Props {
   warning?: boolean;
+  warningMessage?: boolean;
 }
 
 const Container = styled.div`
@@ -31,7 +32,7 @@ const Text = styled.div`
   word-wrap: break-word;
 `;
 
-export const DefineButtonView1 = ({ warning }: Props) => {
+export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -40,6 +41,7 @@ export const DefineButtonView1 = ({ warning }: Props) => {
 
   return (
     <Container>
+      {warningMessage && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
       <ButtonContainer>
         <PlainButton
           variant="gray"
@@ -51,13 +53,13 @@ export const DefineButtonView1 = ({ warning }: Props) => {
           다음으로
         </PlainButton>
       </ButtonContainer>
+
       <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
-      {warning && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
     </Container>
   );
 };
 
-export const DefineButtonView2 = () => {
+export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const handleButton1Click = () => {
     navigate('/test/define/1');
@@ -67,11 +69,18 @@ export const DefineButtonView2 = () => {
   };
   return (
     <Container>
+      {warningMessage && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
       <ButtonContainer>
         <PlainButton variant="gray" height="48px" width="232px" onClick={handleButton1Click}>
           이전으로
         </PlainButton>
-        <PlainButton variant="gray" height="48px" width="232px" onClick={handleButton2Click}>
+        <PlainButton
+          variant="gray"
+          height="48px"
+          width="232px"
+          onClick={handleButton2Click}
+          disabled={warning}
+        >
           다음으로
         </PlainButton>
       </ButtonContainer>
@@ -80,7 +89,7 @@ export const DefineButtonView2 = () => {
   );
 };
 
-export const DefineButtonView3 = () => {
+export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const handleButton1Click = () => {
     navigate('/test/define/2');
@@ -90,11 +99,18 @@ export const DefineButtonView3 = () => {
   };
   return (
     <Container>
+      {warningMessage && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
       <ButtonContainer>
         <PlainButton variant="gray" height="48px" width="232px" onClick={handleButton1Click}>
           이전으로
         </PlainButton>
-        <PlainButton variant="gray" height="48px" width="232px" onClick={handleButton2Click}>
+        <PlainButton
+          variant="gray"
+          height="48px"
+          width="232px"
+          onClick={handleButton2Click}
+          disabled={warning}
+        >
           결과 확인하기
         </PlainButton>
       </ButtonContainer>
