@@ -2,18 +2,23 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PlainButton } from '../common/Button/PlainButton';
+import { Chip } from '../common/Chip/Chip';
+
+interface Props {
+  warning?: boolean;
+}
 
 const Container = styled.div`
-  height: 83px;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
-  display: flex;
+  display: inline-flex;
 `;
 
 const ButtonContainer = styled.div`
-  width: 582px;
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
@@ -26,19 +31,28 @@ const Text = styled.div`
   word-wrap: break-word;
 `;
 
-export const DefineButtonView1 = () => {
+export const DefineButtonView1 = ({ warning }: Props) => {
   const navigate = useNavigate();
+
   const handleButtonClick = () => {
     navigate('/test/define/2');
   };
+
   return (
     <Container>
       <ButtonContainer>
-        <PlainButton variant="gray" height="48px" width="582px" onClick={handleButtonClick}>
+        <PlainButton
+          variant="gray"
+          height="48px"
+          width="582px"
+          onClick={handleButtonClick}
+          disabled={warning}
+        >
           다음으로
         </PlainButton>
       </ButtonContainer>
       <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
+      {warning && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
     </Container>
   );
 };

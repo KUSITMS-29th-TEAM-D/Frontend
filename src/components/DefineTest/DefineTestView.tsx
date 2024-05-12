@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { SectionContainer } from '@/styles';
 
-import { DefineButtonView1, DefineButtonView2, DefineButtonView3 } from './DefineButtonView';
+import { DefineButtonView2, DefineButtonView3 } from './DefineButtonView';
 import { DefineChips1 } from './DefineChip';
 import { DefineTextView1, DefineTextView2, DefineTextView3 } from './DefineTextView';
 
@@ -20,6 +20,7 @@ const StyledSectionContainer = styled(SectionContainer)`
 
 const StyledContainer = styled.section`
   background: ${({ theme }) => `${theme.color.primary50}`};
+  width: 100%;
 `;
 
 const StyledInnerContainer = styled.div`
@@ -34,6 +35,7 @@ const StyledInnerContainer = styled.div`
 `;
 
 const Container = styled.div`
+  width: 100%;
   height: 376px;
   flex-direction: column;
   justify-content: flex-start;
@@ -46,15 +48,12 @@ export const DefineTestView1 = () => {
   return (
     <>
       <StyledContainer>
-        <StyledSectionContainer>
-          <StyledInnerContainer>
-            <Container>
-              <DefineTextView1 />
-              <DefineChips1 />
-            </Container>
-            <DefineButtonView1 />
-          </StyledInnerContainer>
-        </StyledSectionContainer>
+        <StyledInnerContainer>
+          <Container>
+            <DefineTextView1 />
+            <DefineChips1 />
+          </Container>
+        </StyledInnerContainer>
       </StyledContainer>
     </>
   );
@@ -87,8 +86,8 @@ export const DefineTestView3 = () => {
             <Container>
               <DefineTextView3 />
               <DefineChips1 />
+              <DefineButtonView3 />
             </Container>
-            <DefineButtonView3 />
           </StyledInnerContainer>
         </StyledSectionContainer>
       </StyledContainer>

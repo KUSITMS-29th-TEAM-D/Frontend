@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import TestChip from '@/components/common/Chip/TestChip';
 
+import { DefineButtonView1 } from './DefineButtonView';
+
 const chipData1 = [
   '남성적임',
   '솔직함',
@@ -39,39 +41,37 @@ export const DefineChips1 = () => {
   const [warning, setWarning] = useState(false);
 
   useEffect(() => {
-    if (warning) {
-      const timer = setTimeout(() => {
-        setWarning(false);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [warning]);
+    const activeCount = chipStates.filter((state) => state === 2).length;
+    setWarning(activeCount > 5);
+  }, [chipStates]);
 
   const handleToggle = (index: number) => {
     const newChipStates = [...chipStates];
-    const activeCount = newChipStates.filter((state) => state === 2).length;
+    const currentCount = newChipStates.filter((state) => state === 2).length;
 
-    if (newChipStates[index] === 1 && activeCount > 4) {
-      setWarning(true);
-      return;
+    if (newChipStates[index] === 2) {
+      newChipStates[index] = 1;
+    } else if (currentCount < 6) {
+      newChipStates[index] = 2;
     }
 
-    newChipStates[index] = newChipStates[index] === 1 ? 2 : 1;
     setChipStates(newChipStates);
   };
 
   return (
-    <KeywordContainer>
-      {chipData1.map((text, index) => (
-        <TestChip
-          key={index}
-          chipText={text}
-          state={chipStates[index]}
-          onToggle={() => handleToggle(index)}
-        />
-      ))}
-      {warning && <div>키워드를 5개만 선택해 주세요!</div>}
-    </KeywordContainer>
+    <>
+      <KeywordContainer>
+        {chipData1.map((text, index) => (
+          <TestChip
+            key={index}
+            chipText={text}
+            state={chipStates[index]}
+            onToggle={() => handleToggle(index)}
+          />
+        ))}
+      </KeywordContainer>
+
+      <DefineButtonView1 warning={warning} />
+    </>
   );
 };
