@@ -22,37 +22,26 @@ const StyledContainer = styled.section`
   width: 100%;
 `;
 
-const StyledInnerContainer = styled.div`
-  width: 100%;
-  height: 702px;
-  padding-top: 42px;
-  padding-bottom: 48px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  display: inline-flex;
-`;
-
 const Container = styled.div`
-  width: 100%;
-  height: 376px;
+  width: 750px;
+  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 52px;
-  display: flex;
+  display: inline-flex;
 `;
 
 export const DefineTestView1 = () => {
   return (
     <>
       <StyledContainer>
-        <StyledInnerContainer>
+        <StyledSectionContainer>
           <Container>
             <DefineTextView1 />
             <DefineChips1 />
           </Container>
-        </StyledInnerContainer>
+        </StyledSectionContainer>
       </StyledContainer>
     </>
   );
@@ -63,12 +52,10 @@ export const DefineTestView2 = () => {
     <>
       <StyledContainer>
         <StyledSectionContainer>
-          <StyledInnerContainer>
-            <Container>
-              <DefineTextView2 />
-              <DefineChips2 />
-            </Container>
-          </StyledInnerContainer>
+          <Container>
+            <DefineTextView2 />
+            <DefineChips2 />
+          </Container>
         </StyledSectionContainer>
       </StyledContainer>
     </>
@@ -80,12 +67,10 @@ export const DefineTestView3 = () => {
     <>
       <StyledContainer>
         <StyledSectionContainer>
-          <StyledInnerContainer>
-            <Container>
-              <DefineTextView3 />
-              <DefineChips3 />
-            </Container>
-          </StyledInnerContainer>
+          <Container>
+            <DefineTextView3 />
+            <DefineChips3 />
+          </Container>
         </StyledSectionContainer>
       </StyledContainer>
     </>

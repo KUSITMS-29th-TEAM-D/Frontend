@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ProgressBar from '../common/ProgressBar';
 
 const TextContainer = styled.div`
-  align-self: stretch;
   width: 100%;
   height: 137px;
   flex-direction: column;
@@ -22,14 +21,14 @@ const InnerContainer = styled.div`
   display: flex;
 `;
 const KeywordContainer = styled.div`
+  align-self: stretch;
   height: 60px;
-  width: 100%;
-  margin-top: 25px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
-  display: inline-flex;
+  display: flex;
+  margin-top: 30px;
 `;
 
 const KeywordTitle = styled.div`
