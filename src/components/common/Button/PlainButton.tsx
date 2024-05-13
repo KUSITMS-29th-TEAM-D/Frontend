@@ -1,13 +1,12 @@
 import styled, { css } from 'styled-components';
 
-type PlainButtonVariant = 'primary' | 'gray';
+type PlainButtonVariant = 'primary' | 'primary2' | 'gray';
 
-interface PlainButtonProps {
+interface PlainButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant: PlainButtonVariant;
+  variant?: PlainButtonVariant;
   width?: string | null;
   height?: string | null;
-  onClick?: () => void;
 }
 
 interface StyledButtonProps {
@@ -18,13 +17,13 @@ interface StyledButtonProps {
 
 export const PlainButton = ({
   children,
-  variant,
+  variant = 'gray',
   width = null,
   height = null,
-  onClick,
+  ...props
 }: PlainButtonProps) => {
   return (
-    <StyledButton $variant={variant} $width={width} $height={height} onClick={onClick}>
+    <StyledButton $variant={variant} $width={width} $height={height} {...props}>
       {children}
     </StyledButton>
   );
@@ -51,16 +50,35 @@ const getVariantStyle = ($variant: PlainButtonVariant) => {
           background: ${(props) => props.theme.color.primary100};
         }
       `;
+
+    case 'primary2':
+      return css`
+        color: ${(props) => props.theme.color.primary50};
+        background: ${(props) => props.theme.color.primary600};
+
+        &:hover {
+          background: ${(props) => props.theme.color.primary700};
+        }
+      `;
   }
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   ${({ theme }) => theme.font.desktop.label1m};
 
-  width: ${({ $width }) => $width};
+  width: ${({ $width }) => ($width ? $width : '100%')};
   height: ${({ $height }) => $height};
   padding: 8px 24px;
   border-radius: 8px;
 
   ${({ $variant }) => getVariantStyle($variant)}
+
+  &:disabled {
+    color: ${(props) => props.theme.color.gray700};
+    background: ${(props) => props.theme.color.gray200};
+  }
 `;
