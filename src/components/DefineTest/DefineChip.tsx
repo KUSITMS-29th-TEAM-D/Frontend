@@ -38,6 +38,14 @@ export const DefineChips1 = () => {
     }
 
     setChipStates(newChipStates);
+
+    const selectedChips1 = newChipStates.reduce((selected, state, i) => {
+      if (state === 2) {
+        selected.push(CHIP_DATA1[i]);
+      }
+      return selected;
+    }, []);
+    sessionStorage.setItem('selectedChips1', JSON.stringify(selectedChips1));
   };
 
   return (
@@ -57,7 +65,6 @@ export const DefineChips1 = () => {
     </>
   );
 };
-
 export const DefineChips2 = () => {
   const [chipStates, setChipStates] = useState(Array(CHIP_DATA2.length).fill(1));
   const [warning, setWarning] = useState(false);
@@ -80,6 +87,15 @@ export const DefineChips2 = () => {
     }
 
     setChipStates(newChipStates);
+
+    const selectedChips = newChipStates.reduce((selected, state, i) => {
+      if (state === 2) {
+        selected.push(CHIP_DATA2[i]);
+      }
+      return selected;
+    }, []);
+
+    sessionStorage.setItem('selectedChips2', JSON.stringify(selectedChips));
   };
 
   return (
@@ -121,6 +137,15 @@ export const DefineChips3 = () => {
     }
 
     setChipStates(newChipStates);
+
+    const selectedChips = newChipStates.reduce((selected, state, i) => {
+      if (state === 2) {
+        selected.push(CHIP_DATA3[i]);
+      }
+      return selected;
+    }, []);
+
+    sessionStorage.setItem('selectedChips3', JSON.stringify(selectedChips));
   };
 
   return (

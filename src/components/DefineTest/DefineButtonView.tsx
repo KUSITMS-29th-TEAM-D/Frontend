@@ -132,6 +132,11 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
     navigate('/test/define/2');
   };
   const handleButton2Click = () => {
+    const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
+    const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
+    const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
+    console.log(selectedChips1, selectedChips2, selectedChips3);
+
     navigate('/'); //TODO 임시로 넣은 경로라서 나중에 수정해야 함
   };
   useEffect(() => {
@@ -142,8 +147,6 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       }, 5000);
 
       return () => clearTimeout(timer);
-    } else {
-      setShowWarn(false);
     }
   }, [warningMessage]);
   return (

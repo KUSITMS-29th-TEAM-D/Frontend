@@ -15,11 +15,13 @@ const StyledSectionContainer = styled(SectionContainer)`
 
   text-align: center;
   overflow: hidden;
+
+  width: 100vw;
 `;
 
 const StyledContainer = styled.section`
   background: ${({ theme }) => `${theme.color.primary50}`};
-  width: 100%;
+  width: 100vw;
 `;
 
 const Container = styled.div`
