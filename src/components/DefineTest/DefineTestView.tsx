@@ -25,13 +25,20 @@ const StyledContainer = styled.section`
 `;
 
 const Container = styled.div`
-  width: 750px;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 52px;
   display: inline-flex;
+  width: 632px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 552px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
 `;
 
 export const DefineTestView1 = () => {

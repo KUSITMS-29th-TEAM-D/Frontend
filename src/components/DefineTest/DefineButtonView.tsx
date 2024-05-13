@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+//import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -13,7 +14,6 @@ interface Props {
 
 const Container = styled.div`
   width: 100%;
-
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -33,6 +33,28 @@ const ButtonInnerContainer = styled.div`
   align-items: flex-start;
   gap: 15px;
   display: inline-flex;
+`;
+
+const ButtonWidthBigContainer = styled.div`
+  width: 582px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 552px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
+`;
+
+const ButtonWidthSmallContainer = styled.div`
+  width: 291px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 272px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
 `;
 
 const Text = styled.div`
@@ -64,15 +86,17 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
     <Container>
       {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
       <ButtonContainer>
-        <PlainButton
-          variant="gray"
-          height="48px"
-          width="582px"
-          onClick={handleButtonClick}
-          disabled={warning}
-        >
-          다음으로
-        </PlainButton>
+        <ButtonWidthBigContainer>
+          <PlainButton
+            variant="gray"
+            height="48px"
+            width="100%"
+            onClick={handleButtonClick}
+            disabled={warning}
+          >
+            다음으로
+          </PlainButton>
+        </ButtonWidthBigContainer>
       </ButtonContainer>
 
       <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
@@ -106,18 +130,22 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
       {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
       <ButtonContainer>
         <ButtonInnerContainer>
-          <PlainButton variant="gray" height="48px" width="232px" onClick={handleButton1Click}>
-            이전으로
-          </PlainButton>
-          <PlainButton
-            variant="gray"
-            height="48px"
-            width="232px"
-            onClick={handleButton2Click}
-            disabled={warning}
-          >
-            다음으로
-          </PlainButton>
+          <ButtonWidthSmallContainer>
+            <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
+              이전으로
+            </PlainButton>
+          </ButtonWidthSmallContainer>
+          <ButtonWidthSmallContainer>
+            <PlainButton
+              variant="gray"
+              height="48px"
+              width="100%"
+              onClick={handleButton2Click}
+              disabled={warning}
+            >
+              다음으로
+            </PlainButton>
+          </ButtonWidthSmallContainer>
         </ButtonInnerContainer>
       </ButtonContainer>
       <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
@@ -136,7 +164,18 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
     console.log(selectedChips1, selectedChips2, selectedChips3);
-
+    /*axios
+      .post('/api', {
+        selectedChips1,
+        selectedChips2,
+        selectedChips3,
+      })
+      .then((response) => {
+        console.log('보내짐', response.data);
+      })
+      .catch((error) => {
+        console.error('실패', error);
+      });*/
     navigate('/'); //TODO 임시로 넣은 경로라서 나중에 수정해야 함
   };
   useEffect(() => {
@@ -154,18 +193,22 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
       <ButtonContainer>
         <ButtonInnerContainer>
-          <PlainButton variant="gray" height="48px" width="232px" onClick={handleButton1Click}>
-            이전으로
-          </PlainButton>
-          <PlainButton
-            variant="primary2"
-            height="48px"
-            width="232px"
-            onClick={handleButton2Click}
-            disabled={warning}
-          >
-            결과 확인하기
-          </PlainButton>
+          <ButtonWidthSmallContainer>
+            <PlainButton variant="gray" height="48px" width="291px" onClick={handleButton1Click}>
+              이전으로
+            </PlainButton>
+          </ButtonWidthSmallContainer>
+          <ButtonWidthSmallContainer>
+            <PlainButton
+              variant="primary2"
+              height="48px"
+              width="291px"
+              onClick={handleButton2Click}
+              disabled={warning}
+            >
+              결과 확인하기
+            </PlainButton>
+          </ButtonWidthSmallContainer>
         </ButtonInnerContainer>
       </ButtonContainer>
     </Container>
