@@ -23,7 +23,7 @@ export const DefineChips1 = () => {
 
   useEffect(() => {
     const activeCount = chipStates.filter((state) => state === 2).length;
-    setWarning(activeCount < 1 || activeCount > 5);
+    setWarning(activeCount < 5 || activeCount > 5);
     setWarningMessage(activeCount > 5);
   }, [chipStates]);
 
@@ -72,7 +72,7 @@ export const DefineChips2 = () => {
 
   useEffect(() => {
     const activeCount = chipStates.filter((state) => state === 2).length;
-    setWarning(activeCount < 1 || activeCount > 5);
+    setWarning(activeCount < 5 || activeCount > 5);
     setWarningMessage(activeCount > 5);
   }, [chipStates]);
 
@@ -122,7 +122,7 @@ export const DefineChips3 = () => {
 
   useEffect(() => {
     const activeCount = chipStates.filter((state) => state === 2).length;
-    setWarning(activeCount < 1 || activeCount > 5);
+    setWarning(activeCount < 5 || activeCount > 5);
     setWarningMessage(activeCount > 5);
   }, [chipStates]);
 
