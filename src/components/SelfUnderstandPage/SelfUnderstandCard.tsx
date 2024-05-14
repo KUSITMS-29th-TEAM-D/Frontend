@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Card from '@/assets/backgrounds/understandCard.png';
-import SIcon from '@/assets/logos/logo3d.svg';
+import Card1 from '@/assets/backgrounds/understandCard1.png';
+import Card2 from '@/assets/backgrounds/understandCard2.png';
+import Card3 from '@/assets/backgrounds/understandCard3.png';
 import { theme } from '@/styles';
 
 interface OutlineProps {
@@ -127,7 +128,7 @@ const DesignComponent = () => {
       titleColor={theme.color.primary500}
       subtitleColor={theme.color.gray800}
       footerTextColor={theme.color.primary800}
-      background={'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.20) 0%, #FFF 84%)'}
+      background={`url(${Card3})`}
       titleTextSize={false}
       subtitleTextSize={false}
       footerTextSize={false}
@@ -150,10 +151,10 @@ const DefineComponent = () => {
       title="Define"
       subtitle="정의하기"
       footerText="현재의 나를 파악하고 싶다면?"
-      titleColor={theme.color.white}
-      subtitleColor={theme.color.white}
-      footerTextColor={theme.color.white}
-      background={theme.color.primary500}
+      titleColor={theme.color.primary500}
+      subtitleColor={theme.color.gray800}
+      footerTextColor={theme.color.primary800}
+      background={`url(${Card2})`}
       titleTextSize={false}
       subtitleTextSize={false}
       footerTextSize={false}
@@ -164,40 +165,30 @@ const DefineComponent = () => {
   );
 };
 const DiscoverComponent = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/'); //TODO: 나중에 올바른 위치로 수정해야 함
+    //navigate('/'); //TODO: 나중에 올바른 위치로 수정해야 함
   };
 
   return (
     <div style={{ position: 'relative' }}>
       <Outline
         title="Discover"
-        subtitle="돌아보기"
+        subtitle="이해하기"
         footerText="셀피스를 만나기 전의 나를 알고 싶다면?"
         titleColor={theme.color.primary500}
         subtitleColor={theme.color.gray800}
         footerTextColor={theme.color.primary800}
-        background={`url(${Card})`}
+        background={`url(${Card1})`}
         width="680px"
         height="246px"
         titleTextSize={true}
         subtitleTextSize={true}
         onClick={handleClick}
       />
-      <StyledIcon src={SIcon} alt="3D Icon" />
     </div>
   );
 };
-
-const StyledIcon = styled.img`
-  position: absolute;
-  top: -35px;
-  right: 0px;
-  width: 334.3px;
-  height: 334.3px;
-  transform: rotate(-7.21deg);
-`;
 
 export { DesignComponent, DefineComponent, DiscoverComponent };
