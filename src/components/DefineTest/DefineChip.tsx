@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
+import {
+  DefineButtonView1,
+  DefineButtonView2,
+  DefineButtonView3,
+} from '@/components/DefineTest/DefineButtonView';
 import TestChip from '@/components/common/Chip/TestChip';
 import { CHIP_DATA1, CHIP_DATA2, CHIP_DATA3 } from '@/constants/defineChip';
-
-import { DefineButtonView1, DefineButtonView2, DefineButtonView3 } from './DefineButtonView';
 
 const KeywordContainer = styled.div`
   align-self: stretch;

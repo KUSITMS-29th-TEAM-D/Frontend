@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { PlainButton } from '../common/Button/PlainButton';
-import { Chip } from '../common/Chip/Chip';
+import { PlainButton } from '@/components/common/Button/PlainButton';
+import { Chip } from '@/components/common/Chip/Chip';
 
 interface Props {
   warning?: boolean;
@@ -58,7 +58,7 @@ const ButtonWidthBigContainer = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
+    width: 90vw;
   }
 `;
 
@@ -69,7 +69,7 @@ const ButtonWidthSmallContainer = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
+    width: 90vw;
   }
 `;
 

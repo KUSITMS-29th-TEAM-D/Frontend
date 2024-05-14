@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
+import { DefineChips1, DefineChips2, DefineChips3 } from '@/components/DefineTest/DefineChip';
+import {
+  DefineTextView1,
+  DefineTextView2,
+  DefineTextView3,
+} from '@/components/DefineTest/DefineTextView';
 import { SectionContainer } from '@/styles';
-
-import { DefineChips1, DefineChips2, DefineChips3 } from './DefineChip';
-import { DefineTextView1, DefineTextView2, DefineTextView3 } from './DefineTextView';
 
 const StyledSectionContainer = styled(SectionContainer)`
   padding: 64px;
@@ -16,12 +19,13 @@ const StyledSectionContainer = styled(SectionContainer)`
   text-align: center;
   overflow: hidden;
 
-  width: 100vw;
+  width: 100%;
 `;
 
 const StyledContainer = styled.section`
   background: ${({ theme }) => `${theme.color.primary50}`};
-  width: 100vw;
+
+  min-height: 100vh;
 `;
 
 const Container = styled.div`
