@@ -4,20 +4,24 @@ import { DefaultInput } from '@/components/common/Input/DefaultInput';
 
 interface ButtonInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   warning?: boolean;
-  disabled?: boolean;
+  buttonDisabled?: boolean;
+  inputDisabled?: boolean;
+  buttonText: string;
   buttonClickHandler?: () => void;
 }
 
 export const ButtonInput = ({
   warning = false,
-  disabled = false,
+  buttonDisabled = false,
+  inputDisabled = false,
+  buttonText,
   buttonClickHandler,
   ...props
 }: ButtonInputProps) => {
   return (
-    <DefaultInput warning={warning} {...props}>
-      <StyledButton disabled={disabled} onClick={buttonClickHandler}>
-        버튼
+    <DefaultInput warning={warning} disabled={inputDisabled} {...props}>
+      <StyledButton disabled={buttonDisabled} onClick={buttonClickHandler}>
+        {buttonText}
       </StyledButton>
     </DefaultInput>
   );
