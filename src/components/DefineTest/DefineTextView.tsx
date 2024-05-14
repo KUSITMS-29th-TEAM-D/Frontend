@@ -35,6 +35,10 @@ const KeywordTitle = styled.div`
   text-align: center;
   color: ${({ theme }) => `${theme.color.gray900}`};
   ${({ theme }) => theme.font.desktop.body1b};
+
+  @media ${({ theme }) => theme.device.tablet && theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
   word-wrap: break-word;
 `;
 
@@ -42,12 +46,20 @@ const KeywordDescription = styled.div`
   text-align: center;
   color: ${({ theme }) => `${theme.color.gray600}`};
   ${({ theme }) => theme.font.desktop.body1m};
+
+  @media ${({ theme }) => theme.device.tablet && theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body2m};
+  }
   word-wrap: break-word;
 `;
 
 const KeywordCount = styled.span`
   color: ${({ theme }) => `${theme.color.primary500}`};
   ${({ theme }) => theme.font.desktop.body1m};
+
+  @media ${({ theme }) => theme.device.tablet && theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body2m};
+  }
   word-wrap: break-word;
 `;
 
@@ -60,6 +72,9 @@ const ProgressWrapper = styled.div`
 
 const ProgressText = styled.div`
   ${({ theme }) => theme.font.desktop.body1b};
+  @media ${({ theme }) => theme.device.tablet && theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
   word-wrap: break-word;
 `;
 

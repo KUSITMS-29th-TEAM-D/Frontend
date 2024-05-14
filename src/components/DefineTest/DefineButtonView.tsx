@@ -19,6 +19,9 @@ const Container = styled.div`
   gap: 15px;
   display: flex;
   margin: 102px;
+  @media ${({ theme }) => theme.device.tablet} {
+    margin: 52px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -70,7 +73,7 @@ const ButtonWidthSmallContainer = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    width: 90vw;
+    width: 45vw;
   }
 `;
 
