@@ -9,7 +9,7 @@ const TextContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 32px;
-  display: inline-flex;
+  display: flex;
 `;
 const InnerContainer = styled.div`
   align-self: stretch;
@@ -55,7 +55,7 @@ const ProgressWrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 4px;
-  display: inline-flex;
+  display: flex;
 `;
 
 const ProgressText = styled.div`

@@ -15,7 +15,7 @@ const KeywordContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   margin-top: 30px;
 `;

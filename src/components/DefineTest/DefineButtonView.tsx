@@ -17,7 +17,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
-  display: inline-flex;
+  display: flex;
   margin: 102px;
 `;
 
@@ -25,13 +25,13 @@ const ButtonContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
-  display: inline-flex;
+  display: flex;
 `;
 const ButtonInnerContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
-  display: inline-flex;
+  display: flex;
 `;
 const ChipContainer = styled.div`
   position: absolute;
@@ -45,7 +45,7 @@ const ChipContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  display: inline-flex;
+  display: flex;
 `;
 const ChipText = styled.div`
   text-align: center;

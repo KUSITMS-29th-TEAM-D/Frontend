@@ -23,8 +23,14 @@ const StyledContainer = styled.header`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 44px;
-  padding-right: 44px;
+  padding: 0 44px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    padding: 0 4px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0 4px;
+  }
   background: ${({ theme }) => theme.color.white};
   justify-content: space-between;
   align-items: center;
@@ -41,6 +47,13 @@ const TestTitle = styled.div`
 const Title = styled.div`
   color: ${({ theme }) => theme.color.gray700};
   ${({ theme }) => theme.font.desktop.body1b};
+
+  @media ${({ theme }) => theme.device.tablet} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
   word-wrap: break-word;
 `;
 
@@ -58,6 +71,13 @@ const ButtonText = styled.div`
   text-align: center;
   color: ${({ theme }) => theme.color.primary700};
   ${({ theme }) => theme.font.desktop.label1m};
+
+  @media ${({ theme }) => theme.device.tablet} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
   word-wrap: break-word;
 `;
 

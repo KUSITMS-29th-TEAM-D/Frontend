@@ -9,9 +9,19 @@ import {
 import { SectionContainer } from '@/styles';
 
 const StyledSectionContainer = styled(SectionContainer)`
-  padding: 64px;
-  padding-top: 140px;
+  padding: 42px;
+  padding-top: 124px;
+  padding-bottom: 48px;
+  @media ${({ theme }) => theme.device.tablet} {
+    padding: 24px;
+    padding-top: 100px;
+  }
 
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 20px;
+    padding-top: 100px;
+    padding-bottom: 24px;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +35,6 @@ const StyledSectionContainer = styled(SectionContainer)`
 const StyledContainer = styled.section`
   background: ${({ theme }) => `${theme.color.primary50}`};
   min-height: 100vh;
-  //height: calc(var(--vh, 1vh) * 100);
 `;
 
 const Container = styled.div`
@@ -34,7 +43,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 52px;
-  display: inline-flex;
+  display: flex;
   width: 632px;
   @media ${({ theme }) => theme.device.tablet} {
     width: 552px;
