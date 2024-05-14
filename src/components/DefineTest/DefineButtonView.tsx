@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { noAuthClient } from '@/apis/client';
+import { authClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 interface Props {
@@ -196,7 +196,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       stage_three_keywords: selectedChips3,
     };
 
-    noAuthClient
+    authClient
       .post('/api/personas/define', requestData)
       .then((response) => {
         const { code, message } = response.data;
@@ -233,7 +233,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       <ButtonContainer>
         <ButtonInnerContainer>
           <ButtonWidthSmallContainer>
-            <PlainButton variant="gray" height="48px" width="291px" onClick={handleButton1Click}>
+            <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
               이전으로
             </PlainButton>
           </ButtonWidthSmallContainer>
@@ -241,7 +241,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
             <PlainButton
               variant="primary2"
               height="48px"
-              width="291px"
+              width="100%"
               onClick={handleButton2Click}
               disabled={warning}
             >
