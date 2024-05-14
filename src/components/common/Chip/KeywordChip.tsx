@@ -5,14 +5,25 @@ import { ReactComponent as DeleteIcon } from '@/assets/icons/close.svg';
 interface KeywordChipProps {
   selected?: boolean;
   children: string;
-  deleteHandler?: () => void;
+  selectHandler?: (selectedKeyword: string) => void;
+  deleteHandler?: (selectedKeyword: string) => void;
 }
 
-export const KeywordChip = ({ selected = false, children, deleteHandler }: KeywordChipProps) => {
+export const KeywordChip = ({
+  selected = false,
+  children,
+  selectHandler,
+  deleteHandler,
+}: KeywordChipProps) => {
   return (
-    <StyledKeywordChip $selected={selected}>
+    <StyledKeywordChip
+      $selected={selected}
+      onClick={() => {
+        if (!selected) selectHandler && selectHandler(children);
+      }}
+    >
       {children}
-      {selected && <StyledDeleteIcon onClick={deleteHandler} />}
+      {selected && <StyledDeleteIcon onClick={() => deleteHandler && deleteHandler(children)} />}
     </StyledKeywordChip>
   );
 };
