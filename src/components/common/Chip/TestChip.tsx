@@ -13,7 +13,7 @@ interface TestChipProps {
 
 const IconContainer = styled.div`
   width: 16px;
-  height: 16;
+  height: 16px;
   align-items: center;
   display: flex;
   z-index: 1;
@@ -39,6 +39,12 @@ const StyledContainer = styled.div<StyledDivProps>`
   background: ${(props) =>
     props.state === 1 ? props.theme.color.white : props.theme.color.primary500};
   color: ${(props) => (props.state === 1 ? props.theme.color.primary500 : props.theme.color.white)};
+  &:hover {
+    background: ${(props) =>
+      props.state === 1 ? props.theme.color.white : props.theme.color.primary600};
+    color: ${(props) =>
+      props.state === 1 ? props.theme.color.primary700 : props.theme.color.primary50};
+  }
 `;
 
 const InnerContainer = styled.div`
