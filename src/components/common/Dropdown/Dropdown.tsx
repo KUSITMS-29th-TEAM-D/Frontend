@@ -12,6 +12,7 @@ interface DropdownProps {
   selected: string[];
   multiple?: boolean;
   clickContentHandler?: (content: string) => void;
+  contentMaxHeight?: number;
 }
 
 export const Dropdown = ({
@@ -21,8 +22,9 @@ export const Dropdown = ({
   selected,
   multiple = false,
   clickContentHandler,
+  contentMaxHeight,
 }: DropdownProps) => {
-  const [isOpen, setIsOpen] = useState(!false);
+  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,7 +55,11 @@ export const Dropdown = ({
           contents={contents}
           selected={selected}
           multiple={multiple}
-          clickHandler={clickContentHandler}
+          clickHandler={(...args) => {
+            clickContentHandler && clickContentHandler(...args);
+            if (!multiple) setIsOpen(false);
+          }}
+          {...(contentMaxHeight ? { maxHeight: contentMaxHeight } : {})}
         />
       )}
     </StyledContainer>

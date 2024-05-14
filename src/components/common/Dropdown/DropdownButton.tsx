@@ -36,7 +36,7 @@ export const DropdownButton = ({
     );
 
   return (
-    <StyledContainer>
+    <StyledContainer onClick={clickHandler}>
       {selected.length === 0 ? (
         <span className="title-placeholder">{placeholder}</span>
       ) : (
