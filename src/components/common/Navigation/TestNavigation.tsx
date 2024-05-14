@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 const StyledContainer = styled.header`
   display: flex;
@@ -61,13 +62,18 @@ const ButtonText = styled.div`
 `;
 
 const TestNavigation = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/');
+  };
   return (
     <StyledContainer>
       <Container>
         <TestTitle>
           <Title>Define 정의하기</Title>
         </TestTitle>
-        <ButtonContainer>
+        <ButtonContainer onClick={handleButtonClick}>
           <ButtonText>종료하기</ButtonText>
         </ButtonContainer>
       </Container>
