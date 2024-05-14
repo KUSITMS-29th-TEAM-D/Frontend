@@ -24,8 +24,8 @@ const StyledSectionContainer = styled(SectionContainer)`
 
 const StyledContainer = styled.section`
   background: ${({ theme }) => `${theme.color.primary50}`};
-
   min-height: 100vh;
+  //height: calc(var(--vh, 1vh) * 100);
 `;
 
 const Container = styled.div`

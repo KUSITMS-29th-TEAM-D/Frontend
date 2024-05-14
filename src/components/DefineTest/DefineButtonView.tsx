@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { Chip } from '@/components/common/Chip/Chip';
 
 interface Props {
   warning?: boolean;
@@ -35,6 +34,8 @@ const ButtonInnerContainer = styled.div`
   display: inline-flex;
 `;
 const ChipContainer = styled.div`
+  position: absolute;
+  margin-top: -50px;
   width: 220px;
   height: 36px;
   padding: 0 20px;
@@ -147,7 +148,11 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
   }, [warningMessage]);
   return (
     <Container>
-      {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
+      {showWarn && (
+        <ChipContainer>
+          <ChipText>키워드를 5개만 선택해 주세요!</ChipText>
+        </ChipContainer>
+      )}
       <ButtonContainer>
         <ButtonInnerContainer>
           <ButtonWidthSmallContainer>
@@ -213,7 +218,11 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
 
   return (
     <Container>
-      {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
+      {showWarn && (
+        <ChipContainer>
+          <ChipText>키워드를 5개만 선택해 주세요!</ChipText>
+        </ChipContainer>
+      )}
       <ButtonContainer>
         <ButtonInnerContainer>
           <ButtonWidthSmallContainer>
