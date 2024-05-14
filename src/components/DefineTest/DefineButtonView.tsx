@@ -34,7 +34,23 @@ const ButtonInnerContainer = styled.div`
   gap: 15px;
   display: inline-flex;
 `;
-
+const ChipContainer = styled.div`
+  width: 220px;
+  height: 36px;
+  padding: 0 20px;
+  background: ${({ theme }) => `${theme.color.secondary50}`};
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => `${theme.color.secondary600}`};
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+`;
+const ChipText = styled.div`
+  text-align: center;
+  color: ${({ theme }) => `${theme.color.secondary600}`};
+  ${({ theme }) => theme.font.desktop.label1m};
+`;
 const ButtonWidthBigContainer = styled.div`
   width: 582px;
   @media ${({ theme }) => theme.device.tablet} {
@@ -84,7 +100,11 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
   }, [warningMessage]);
   return (
     <Container>
-      {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
+      {showWarn && (
+        <ChipContainer>
+          <ChipText>키워드를 5개만 선택해 주세요!</ChipText>
+        </ChipContainer>
+      )}
       <ButtonContainer>
         <ButtonWidthBigContainer>
           <PlainButton
@@ -152,13 +172,14 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
     </Container>
   );
 };
-
 export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
+
   const handleButton1Click = () => {
     navigate('/test/define/2');
   };
+
   const handleButton2Click = () => {
     const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
@@ -178,6 +199,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       });*/
     navigate('/'); //TODO 임시로 넣은 경로라서 나중에 수정해야 함
   };
+
   useEffect(() => {
     if (warningMessage) {
       setShowWarn(true);
@@ -188,6 +210,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       return () => clearTimeout(timer);
     }
   }, [warningMessage]);
+
   return (
     <Container>
       {showWarn && <Chip>키워드를 5개만 선택해 주세요!</Chip>}
