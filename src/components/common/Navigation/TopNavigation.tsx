@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { ReactComponent as MenuIcon } from '@/assets/icons/menu.svg';
@@ -14,39 +14,42 @@ export const TopNavigation = () => {
   const loggedIn = !!userService.getUser();
   const [showSideNav, setShowSideNav] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <StyledContainer>
       <Link to="/">
         <MainLogo height="36px" />
       </Link>
-      <StyledMenuContainer>
-        {NAVIGATION_MENU.map((item) => (
-          <StyledMenuButton
-            key={item.menu}
-            onClick={() => {
-              navigate(item.path);
-            }}
-          >
-            {item.menu}
-          </StyledMenuButton>
-        ))}
-        {loggedIn ? (
-          <StyledUserButton>
-            <UserIcon />
-          </StyledUserButton>
-        ) : (
-          <StyledMenuButton
-            $filled
-            $width="100px"
-            onClick={() => {
-              navigate('auth');
-            }}
-          >
-            로그인
-          </StyledMenuButton>
-        )}
-      </StyledMenuContainer>
+      {location.pathname !== '/onboarding' && (
+        <StyledMenuContainer>
+          {NAVIGATION_MENU.map((item) => (
+            <StyledMenuButton
+              key={item.menu}
+              onClick={() => {
+                navigate(item.path);
+              }}
+            >
+              {item.menu}
+            </StyledMenuButton>
+          ))}
+          {loggedIn ? (
+            <StyledUserButton>
+              <UserIcon />
+            </StyledUserButton>
+          ) : (
+            <StyledMenuButton
+              $filled
+              $width="100px"
+              onClick={() => {
+                navigate('auth');
+              }}
+            >
+              로그인
+            </StyledMenuButton>
+          )}
+        </StyledMenuContainer>
+      )}
       <StyledSideNavButton
         onClick={() => {
           //TODO: 마이페이지로 이동하도록 수정

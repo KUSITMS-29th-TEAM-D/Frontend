@@ -18,5 +18,6 @@ export const MainLayout = () => {
 };
 
 const OutletContainer = styled.div`
-  min-width: 1280px;
+  width: 100%;
+  height: 100vh;
 `;
