@@ -233,7 +233,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       <ButtonContainer>
         <ButtonInnerContainer>
           <ButtonWidthSmallContainer>
-            <PlainButton variant="gray" height="48px" width="291px" onClick={handleButton1Click}>
+            <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
               이전으로
             </PlainButton>
           </ButtonWidthSmallContainer>
@@ -241,7 +241,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
             <PlainButton
               variant="primary2"
               height="48px"
-              width="291px"
+              width="100%"
               onClick={handleButton2Click}
               disabled={warning}
             >
