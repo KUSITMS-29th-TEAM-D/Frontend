@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-//import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { noAuthClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 interface Props {
@@ -189,20 +189,27 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
     const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
-    console.log(selectedChips1, selectedChips2, selectedChips3);
-    /*axios
-      .post('/api', {
-        selectedChips1,
-        selectedChips2,
-        selectedChips3,
-      })
+
+    const requestData = {
+      stage_one_keywords: selectedChips1,
+      stage_two_keywords: selectedChips2,
+      stage_three_keywords: selectedChips3,
+    };
+
+    noAuthClient
+      .post('/api/personas/define', requestData)
       .then((response) => {
-        console.log('보내짐', response.data);
+        const { code, message } = response.data;
+        if (code === '201') {
+          console.log('페르소나 생성 성공');
+          navigate('/'); //TODO 임시로 넣은 경로라서 나중에 수정해야 함
+        } else {
+          console.error('페르소나 생성 실패:', message);
+        }
       })
       .catch((error) => {
-        console.error('실패', error);
-      });*/
-    navigate('/'); //TODO 임시로 넣은 경로라서 나중에 수정해야 함
+        console.error('페르소나 생성 요청 실패:', error);
+      });
   };
 
   useEffect(() => {
