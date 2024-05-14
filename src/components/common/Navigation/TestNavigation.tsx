@@ -22,8 +22,8 @@ const StyledContainer = styled.header`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 64px;
-  padding-right: 64px;
+  padding-left: 44px;
+  padding-right: 44px;
   background: ${({ theme }) => theme.color.white};
   justify-content: space-between;
   align-items: center;
