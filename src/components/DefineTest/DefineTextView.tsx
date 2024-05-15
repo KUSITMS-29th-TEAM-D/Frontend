@@ -104,7 +104,7 @@ export const DefineTextView1 = () => {
             <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
           </ProgressWrapper>
           <ProgressBarWrapper>
-            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+            <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
           </ProgressBarWrapper>
         </InnerContainer>
         <KeywordContainer>
@@ -131,7 +131,7 @@ export const DefineTextView2 = () => {
             <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
           </ProgressWrapper>
           <ProgressBarWrapper>
-            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+            <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
           </ProgressBarWrapper>
         </InnerContainer>
         <KeywordContainer>
@@ -158,7 +158,7 @@ export const DefineTextView3 = () => {
             <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
           </ProgressWrapper>
           <ProgressBarWrapper>
-            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+            <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
           </ProgressBarWrapper>
         </InnerContainer>
         <KeywordContainer>
