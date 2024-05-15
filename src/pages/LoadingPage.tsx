@@ -9,7 +9,7 @@ import { loadingState } from '@/recoil/loadingState';
 export const LoadingPage = () => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useRecoilState(loadingState);
-  const interval = 100;
+  const interval = 50;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,13 +55,15 @@ const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
 
+  width: 100%;
   height: 100vh;
   padding: 20px;
+  padding-top: 96px;
 
   position: relative;
 `;
 
-const gradientAnimation = keyframes`
+const gradientDesktopAnimation = keyframes`
   0% {
     width: 400px;
     height: 400px;
@@ -72,6 +74,28 @@ const gradientAnimation = keyframes`
   }
 `;
 
+const gradientTabletAnimation = keyframes`
+  0% {
+    width: 400px;
+    height: 400px;
+  }
+  100% {
+    width: 550px;
+    height: 550px;
+  }
+`;
+
+const gradientMobileAnimation = keyframes`
+  0% {
+    width: 250px;
+    height: 250px;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+  }
+`;
+
 const StyledGradient = styled.div`
   background: radial-gradient(
     50% 50% at 50% 50%,
@@ -79,7 +103,15 @@ const StyledGradient = styled.div`
     rgba(204, 179, 253, 0) 100%
   );
 
-  animation: ${gradientAnimation} 1.5s linear infinite alternate;
+  animation: ${gradientDesktopAnimation} 1.5s linear infinite alternate;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    animation: ${gradientTabletAnimation} 1.5s linear infinite alternate;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    animation: ${gradientMobileAnimation} 1.5s linear infinite alternate;
+  }
 `;
 
 const StyledContent = styled.div`
@@ -92,6 +124,16 @@ const StyledContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
+  width: 474px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 300px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 300px;
+  }
+
   .logo {
     width: 278.57px;
     height: 278.57px;
@@ -101,11 +143,19 @@ const StyledContent = styled.div`
   p {
     color: ${({ theme }) => theme.color.gray600};
     ${({ theme }) => theme.font.desktop.title2};
+
+    @media ${({ theme }) => theme.device.tablet} {
+      ${({ theme }) => theme.font.mobile.title2};
+    }
+
+    @media ${({ theme }) => theme.device.mobile} {
+      ${({ theme }) => theme.font.mobile.title2};
+    }
   }
 `;
 
 const ProgressBarContainer = styled.div`
-  width: 474px;
+  width: 100%;
   height: 8px;
   background: ${({ theme }) => theme.color.gray150};
   border-radius: 50px;
@@ -121,7 +171,7 @@ const ProgressBar = styled.div<{ $progress: number }>`
   background: ${({ theme }) => theme.color.primary500};
   border-radius: inherit;
   text-align: right;
-  transition: width 0.3s ease-in-out;
+  transition: width 50ms ease-in-out;
 
   position: absolute;
   top: 0;
