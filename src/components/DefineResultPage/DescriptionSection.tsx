@@ -1,21 +1,11 @@
 import styled from 'styled-components';
 
 import Scrollbar from '@/components/Scrollbar';
-import { Chip } from '@/components/common/Chip';
+import { Chip } from '@/components/common/Chip/Chip';
+import { DefineResult } from '@/types/test.type';
 
 interface DescriptionSectionProps {
-  // TODO: 타입 재정의 필요
-  result: {
-    keyword: string;
-    piece: string;
-    piece2: string;
-    ability: string;
-    value: string[];
-    pros: string;
-    prefer: string;
-    type: string[];
-    selected: string[];
-  };
+  result: DefineResult;
 }
 
 export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
@@ -38,27 +28,27 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
         <StyledDescriptionSection>
           <div className="title">가치</div>
           <div className="chips">
-            {result.value.map((item) => (
-              <Chip key={item} primary>
-                {item}
+            {result.values.map((value) => (
+              <Chip key={value} primary>
+                {value}
               </Chip>
             ))}
           </div>
         </StyledDescriptionSection>
         <StyledDescriptionSection>
           <div className="title">이런 부분에서 강점을 보여요!</div>
-          <p className="DescriptionSection">{result.pros}</p>
+          <p className="DescriptionSection">{result.strength}</p>
         </StyledDescriptionSection>
         <StyledDescriptionSection>
           <div className="title">이러한 특성의 직업을 선호하는 경향이 있어요!</div>
-          <p className="DescriptionSection">{result.prefer}</p>
+          <p className="DescriptionSection">{result.preference}</p>
         </StyledDescriptionSection>
         <StyledDescriptionSection>
           <div className="title">나의 유형 키워드</div>
           <div className="chips">
-            {result.type.map((item) => (
-              <Chip key={item} primary>
-                {item}
+            {result.types.map((type) => (
+              <Chip key={type} primary>
+                {type}
               </Chip>
             ))}
           </div>
@@ -66,9 +56,9 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
         <StyledDescriptionSection>
           <div className="title">내가 선택한 유형 키워드</div>
           <div className="chips">
-            {result.selected.map((item) => (
-              <Chip key={item} primary>
-                {item}
+            {result.define_persona_keywords.map((keyword) => (
+              <Chip key={keyword} primary>
+                {keyword}
               </Chip>
             ))}
           </div>

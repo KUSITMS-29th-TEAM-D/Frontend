@@ -56,7 +56,7 @@ export const CardSection = ({ piece }: CardSectionProps) => {
         onClick={handleClickImage}
       >
         <img
-          src={`/src/assets/cards/${isFront ? 'front' : 'back'}/${piece}.png`}
+          src={`/src/assets/cards/${isFront ? 'front' : 'back'}/${piece.toLowerCase()}.png`}
           alt="card"
           ref={captureRef}
         />

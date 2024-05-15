@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { authClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
+import { defineState } from '@/recoil/defineState';
+import { loadingState } from '@/recoil/loadingState';
 
 interface Props {
   warning?: boolean;
@@ -183,6 +186,8 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
 export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
+  const [loading, setLoading] = useRecoilState(loadingState);
+  const setDefineResult = useSetRecoilState(defineState);
 
   const handleButton1Click = () => {
     navigate('/test/define/2');
@@ -199,19 +204,29 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       stage_three_keywords: selectedChips3,
     };
 
+    setLoading({
+      ...loading,
+      showLoading: true,
+      handleCompleted: () => {
+        navigate('/test/define/result');
+      },
+    });
+
     authClient
       .post('/api/personas/define', requestData)
       .then((response) => {
         const { code, message } = response.data;
         if (code === '201') {
           console.log('페르소나 생성 성공');
-          navigate('/'); //TODO 임시로 넣은 경로라서 나중에 수정해야 함
+          setDefineResult(response.data.payload);
         } else {
           console.error('페르소나 생성 실패:', message);
         }
       })
       .catch((error) => {
         console.error('페르소나 생성 요청 실패:', error);
+        window.alert('페르소나 생성 요청 실패');
+        navigate('/test/define/1');
       });
   };
 

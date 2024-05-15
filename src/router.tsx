@@ -1,8 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { MainLayout } from '@/components/common/Layout/MainLayout';
 import { ResponsiveLayout } from '@/components/common/Layout/ResponsiveLayout';
 import { TestLayout } from '@/components/common/Layout/TestLayout';
+import { DefineResultPage } from '@/pages/DefineResultPage';
 import { DefineTestPage1, DefineTestPage2, DefineTestPage3 } from '@/pages/DefineTestPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
@@ -29,10 +30,12 @@ export const Router = () => {
       </Route>
       <Route path="/login" element={<RedirectPage />} />
       <Route element={<TestLayout />}>
-        <Route path="test" element={<TestLayout />}>
+        <Route path="/test" element={<TestLayout />}>
+          <Route index element={<Navigate to="define/1" replace />}></Route>
           <Route path="define/1" element={<DefineTestPage1 />} />
           <Route path="define/2" element={<DefineTestPage2 />} />
           <Route path="define/3" element={<DefineTestPage3 />} />
+          <Route path="define/result" element={<DefineResultPage />} />
           <Route path="design/1" element={<DesignTestPage1 />} />
           <Route path="design/2" element={<DesignTestPage2 />} />
           <Route path="design/3" element={<DesignTestPage3 />} />
