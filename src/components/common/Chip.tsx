@@ -32,4 +32,12 @@ const StyledContainer = styled.div<{ $primary: boolean }>`
           color: ${({ theme }) => theme.color.secondary700};
           background: ${({ theme }) => theme.color.secondary50};
         `}
+
+  @media ${({ theme }) => theme.device.tablet} {
+    ${({ theme }) => theme.font.mobile.body1m};
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.body1m};
+  }
 `;
