@@ -15,69 +15,44 @@ interface Props {
 }
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
+
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   gap: 15px;
-  display: flex;
-  margin: 102px;
-  @media ${({ theme }) => theme.device.tablet} {
-    margin: 52px;
-  }
 `;
 
 const ButtonContainer = styled.div`
-  justify-content: center;
-  align-items: flex-start;
-  gap: 15px;
+  width: 100%;
   display: flex;
-`;
-const ButtonInnerContainer = styled.div`
-  justify-content: center;
-  align-items: flex-start;
   gap: 15px;
-  display: flex;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    gap: 8px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    gap: 8px;
+  }
 `;
+
 const ChipContainer = styled.div`
   position: absolute;
-  margin-top: -50px;
-  width: 220px;
-  height: 36px;
-  padding: 0 20px;
-  background: ${({ theme }) => `${theme.color.secondary50}`};
+
+  top: -16px;
+  left: 50%;
+
+  transform: translate(-50%, -100%);
+
+  padding: 8px 20px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => `${theme.color.secondary600}`};
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  display: flex;
-`;
-const ChipText = styled.div`
-  text-align: center;
+  background: ${({ theme }) => `${theme.color.secondary50}`};
+
   color: ${({ theme }) => `${theme.color.secondary600}`};
   ${({ theme }) => theme.font.desktop.label1m};
-`;
-const ButtonWidthBigContainer = styled.div`
-  width: 582px;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 552px;
-  }
-
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 90vw;
-  }
-`;
-
-const ButtonWidthSmallContainer = styled.div`
-  width: 291px;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 272px;
-  }
-
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 45vw;
-  }
 `;
 
 const Text = styled.div`
@@ -93,6 +68,7 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
   const handleButtonClick = () => {
     navigate('/test/define/2');
   };
+
   useEffect(() => {
     if (warningMessage) {
       setShowWarn(true);
@@ -105,27 +81,19 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
       setShowWarn(false);
     }
   }, [warningMessage]);
+
   return (
     <Container>
-      {showWarn && (
-        <ChipContainer>
-          <ChipText>키워드를 5개만 선택해 주세요!</ChipText>
-        </ChipContainer>
-      )}
-      <ButtonContainer>
-        <ButtonWidthBigContainer>
-          <PlainButton
-            variant="gray"
-            height="48px"
-            width="100%"
-            onClick={handleButtonClick}
-            disabled={warning}
-          >
-            다음으로
-          </PlainButton>
-        </ButtonWidthBigContainer>
-      </ButtonContainer>
-
+      {showWarn && <ChipContainer>키워드를 5개만 선택해 주세요!</ChipContainer>}
+      <PlainButton
+        variant="gray"
+        height="48px"
+        width="100%"
+        onClick={handleButtonClick}
+        disabled={warning}
+      >
+        다음으로
+      </PlainButton>
       <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
     </Container>
   );
@@ -134,12 +102,15 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
 export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
+
   const handleButton1Click = () => {
     navigate('/test/define/1');
   };
+
   const handleButton2Click = () => {
     navigate('/test/define/3');
   };
+
   useEffect(() => {
     if (warningMessage) {
       setShowWarn(true);
@@ -152,37 +123,29 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
       setShowWarn(false);
     }
   }, [warningMessage]);
+
   return (
     <Container>
-      {showWarn && (
-        <ChipContainer>
-          <ChipText>키워드를 5개만 선택해 주세요!</ChipText>
-        </ChipContainer>
-      )}
+      {showWarn && <ChipContainer>키워드를 5개만 선택해 주세요!</ChipContainer>}
       <ButtonContainer>
-        <ButtonInnerContainer>
-          <ButtonWidthSmallContainer>
-            <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
-              이전으로
-            </PlainButton>
-          </ButtonWidthSmallContainer>
-          <ButtonWidthSmallContainer>
-            <PlainButton
-              variant="gray"
-              height="48px"
-              width="100%"
-              onClick={handleButton2Click}
-              disabled={warning}
-            >
-              다음으로
-            </PlainButton>
-          </ButtonWidthSmallContainer>
-        </ButtonInnerContainer>
+        <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
+          이전으로
+        </PlainButton>
+        <PlainButton
+          variant="gray"
+          height="48px"
+          width="100%"
+          onClick={handleButton2Click}
+          disabled={warning}
+        >
+          다음으로
+        </PlainButton>
       </ButtonContainer>
       <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
     </Container>
   );
 };
+
 export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
@@ -243,31 +206,22 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
 
   return (
     <Container>
-      {showWarn && (
-        <ChipContainer>
-          <ChipText>키워드를 5개만 선택해 주세요!</ChipText>
-        </ChipContainer>
-      )}
+      {showWarn && <ChipContainer>키워드를 5개만 선택해 주세요!</ChipContainer>}
       <ButtonContainer>
-        <ButtonInnerContainer>
-          <ButtonWidthSmallContainer>
-            <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
-              이전으로
-            </PlainButton>
-          </ButtonWidthSmallContainer>
-          <ButtonWidthSmallContainer>
-            <PlainButton
-              variant="primary2"
-              height="48px"
-              width="100%"
-              onClick={handleButton2Click}
-              disabled={warning}
-            >
-              결과 확인하기
-            </PlainButton>
-          </ButtonWidthSmallContainer>
-        </ButtonInnerContainer>
+        <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
+          이전으로
+        </PlainButton>
+        <PlainButton
+          variant="primary2"
+          height="48px"
+          width="100%"
+          onClick={handleButton2Click}
+          disabled={warning}
+        >
+          결과 확인하기
+        </PlainButton>
       </ButtonContainer>
+      <Text>종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!</Text>
     </Container>
   );
 };
