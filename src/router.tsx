@@ -29,14 +29,16 @@ export const Router = () => {
       </Route>
       <Route path="/login" element={<RedirectPage />} />
       <Route element={<TestLayout />}>
-        <Route path="/test/define/1" element={<DefineTestPage1 />} />
-        <Route path="/test/define/2" element={<DefineTestPage2 />} />
-        <Route path="/test/define/3" element={<DefineTestPage3 />} />
-        <Route path="/test/design/1" element={<DesignTestPage1 />} />
-        <Route path="/test/design/2" element={<DesignTestPage2 />} />
-        <Route path="/test/design/3" element={<DesignTestPage3 />} />
-        <Route path="/test/design/4" element={<DesignTestPage4 />} />
-        <Route path="/test/design/5" element={<DesignTestPage5 />} />
+        <Route path="test" element={<TestLayout />}>
+          <Route path="define/1" element={<DefineTestPage1 />} />
+          <Route path="define/2" element={<DefineTestPage2 />} />
+          <Route path="define/3" element={<DefineTestPage3 />} />
+          <Route path="design/1" element={<DesignTestPage1 />} />
+          <Route path="design/2" element={<DesignTestPage2 />} />
+          <Route path="design/3" element={<DesignTestPage3 />} />
+          <Route path="design/4" element={<DesignTestPage4 />} />
+          <Route path="design/5" element={<DesignTestPage5 />} />
+        </Route>
       </Route>
     </Routes>
   );
