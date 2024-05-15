@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-type PlainButtonVariant = 'primary' | 'gray';
+type PlainButtonVariant = 'primary' | 'gray' | 'primary2';
 
 interface PlainButtonProps {
   children: React.ReactNode;
@@ -8,6 +8,7 @@ interface PlainButtonProps {
   width?: string | null;
   height?: string | null;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 interface StyledButtonProps {
@@ -22,9 +23,16 @@ export const PlainButton = ({
   width = null,
   height = null,
   onClick,
+  disabled = false,
 }: PlainButtonProps) => {
   return (
-    <StyledButton $variant={variant} $width={width} $height={height} onClick={onClick}>
+    <StyledButton
+      $variant={variant}
+      $width={width}
+      $height={height}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </StyledButton>
   );
@@ -51,6 +59,16 @@ const getVariantStyle = ($variant: PlainButtonVariant) => {
           background: ${(props) => props.theme.color.primary100};
         }
       `;
+
+    case 'primary2':
+      return css`
+        color: ${(props) => props.theme.color.primary50};
+        background: ${(props) => props.theme.color.primary600};
+
+        &:hover {
+          background: ${(props) => props.theme.color.primary700};
+        }
+      `;
   }
 };
 
@@ -63,4 +81,10 @@ const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 8px;
 
   ${({ $variant }) => getVariantStyle($variant)}
+
+  &:disabled {
+    color: ${(props) => props.theme.color.gray700};
+    background: ${(props) => props.theme.color.gray200};
+    cursor: not-allowed;
+  }
 `;

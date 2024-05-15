@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Chip } from '@/components/common/Chip';
+import { Chip } from '@/components/common/Chip/Chip';
 
 interface PreviewCardProps {
   imageUrl: string;

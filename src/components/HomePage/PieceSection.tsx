@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
-import { Chip } from '@/components/common/Chip';
+import { Chip } from '@/components/common/Chip/Chip';
 import { SectionContainer } from '@/styles';
 import { UserInformation } from '@/types/user.type';
 
