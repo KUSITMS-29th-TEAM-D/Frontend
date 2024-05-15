@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import html2canvas from 'html2canvas';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ReactComponent as ChangeIcon } from '@/assets/icons/change.svg';
 import { ReactComponent as DownloadIcon } from '@/assets/icons/download.svg';
 import { ReactComponent as KakaoIcon } from '@/assets/icons/kakaoIcon.svg';
+import { deviceSizes } from '@/styles/theme/device';
 
 interface CardSectionProps {
   piece: string;
@@ -13,7 +14,20 @@ interface CardSectionProps {
 
 export const CardSection = ({ piece }: CardSectionProps) => {
   const [isFront, setIsFront] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isHover, setIsHover] = useState(false);
   const captureRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleSaveImage = () => {
     if (!captureRef.current) return;
@@ -29,39 +43,79 @@ export const CardSection = ({ piece }: CardSectionProps) => {
     });
   };
 
+  const handleClickImage = () => {
+    if (windowWidth < deviceSizes.desktop) {
+      setIsHover((prev) => !prev);
+    }
+  };
+
   return (
     <StyledCardSection>
-      <StyledImageContainer>
+      <StyledImageContainer
+        $desktop={windowWidth >= deviceSizes.desktop}
+        onClick={handleClickImage}
+      >
         <img
           src={`/src/assets/cards/${isFront ? 'front' : 'back'}/${piece}.png`}
           alt="card"
           ref={captureRef}
         />
-        <div className="hover-view">
-          <StyledChangeButton type="button" onClick={() => setIsFront((prev) => !prev)}>
-            <ChangeIcon />
-          </StyledChangeButton>
-          <StyleButtonContainer>
-            <button type="button" className="download-button" onClick={handleSaveImage}>
-              <DownloadIcon />
-              <span>이미지로 저장</span>
-              <div />
-            </button>
-            <button
-              type="button"
-              className="share-button"
-              onClick={() => {
-                // TODO: 공유 기능 구현
-              }}
-            >
-              <KakaoIcon />
-              <span>카카오로 공유</span>
-              <div />
-            </button>
-          </StyleButtonContainer>
-        </div>
+        {windowWidth < deviceSizes.desktop && isHover && (
+          <div className="hover-view">
+            <StyledChangeButton type="button" onClick={() => setIsFront((prev) => !prev)}>
+              <ChangeIcon />
+            </StyledChangeButton>
+            <StyleButtonContainer>
+              <button type="button" className="download-button" onClick={handleSaveImage}>
+                <DownloadIcon />
+                <span>이미지로 저장</span>
+                <div />
+              </button>
+              <button
+                type="button"
+                className="share-button"
+                onClick={() => {
+                  // TODO: 공유 기능 구현
+                }}
+              >
+                <KakaoIcon />
+                <span>카카오로 공유</span>
+                <div />
+              </button>
+            </StyleButtonContainer>
+          </div>
+        )}
+        {windowWidth >= deviceSizes.desktop && (
+          <div className="hover-view">
+            <StyledChangeButton type="button" onClick={() => setIsFront((prev) => !prev)}>
+              <ChangeIcon />
+            </StyledChangeButton>
+            <StyleButtonContainer>
+              <button type="button" className="download-button" onClick={handleSaveImage}>
+                <DownloadIcon />
+                <span>이미지로 저장</span>
+                <div />
+              </button>
+              <button
+                type="button"
+                className="share-button"
+                onClick={() => {
+                  // TODO: 공유 기능 구현
+                }}
+              >
+                <KakaoIcon />
+                <span>카카오로 공유</span>
+                <div />
+              </button>
+            </StyleButtonContainer>
+          </div>
+        )}
       </StyledImageContainer>
-      <div className="notice">카드에 마우스를 가져가 보세요!</div>
+      <div className="notice">
+        {windowWidth >= deviceSizes.desktop
+          ? '카드에 마우스를 가져가 보세요!'
+          : '카드를 클릭해 보세요!'}
+      </div>
     </StyledCardSection>
   );
 };
@@ -75,12 +129,21 @@ const StyledCardSection = styled.section`
     text-align: center;
     ${({ theme }) => theme.font.desktop.label1m};
     color: ${({ theme }) => theme.color.primary700};
+    margin-top: 12px;
+
+    @media ${({ theme }) => theme.device.tablet} {
+      ${({ theme }) => theme.font.mobile.label1m};
+    }
+
+    @media ${({ theme }) => theme.device.mobile} {
+      ${({ theme }) => theme.font.mobile.label1m};
+    }
   }
 `;
 
 // TODO: Change 버튼 클릭시 카드 앞뒤 돌아가는 애니메이션 추가
 
-const StyledImageContainer = styled.div`
+const StyledImageContainer = styled.div<{ $desktop: boolean }>`
   width: 264px;
   height: 426px;
 
@@ -93,8 +156,6 @@ const StyledImageContainer = styled.div`
   }
 
   .hover-view {
-    visibility: hidden;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -118,9 +179,17 @@ const StyledImageContainer = styled.div`
     }
   }
 
-  &:hover .hover-view {
-    visibility: visible;
-  }
+  ${({ $desktop }) =>
+    $desktop &&
+    css`
+      .hover-view {
+        visibility: hidden;
+      }
+
+      &:hover .hover-view {
+        visibility: visible;
+      }
+    `}
 `;
 
 const StyledChangeButton = styled.button`
@@ -166,6 +235,10 @@ const StyleButtonContainer = styled.div`
     span {
       color: ${({ theme }) => theme.color.primary700};
     }
+
+    &:hover {
+      background: ${({ theme }) => theme.color.primary100};
+    }
   }
 
   .share-button {
@@ -173,6 +246,10 @@ const StyleButtonContainer = styled.div`
 
     span {
       color: #191600;
+    }
+
+    &:hover {
+      filter: brightness(80%);
     }
   }
 
