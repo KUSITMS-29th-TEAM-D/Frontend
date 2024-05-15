@@ -92,6 +92,7 @@ const StyledCardContainer = styled.div`
   img {
     height: 440px;
     margin: 56px 0;
+    border-radius: 13px;
   }
 `;
 
