@@ -146,13 +146,14 @@ const StyledCardSection = styled.section`
 const StyledImageContainer = styled.div<{ $desktop: boolean }>`
   width: 264px;
   height: 426px;
+  border-radius: 13px;
+  overflow: hidden;
 
   position: relative;
 
   img {
     width: 100%;
     height: 100%;
-    border-radius: 13px;
   }
 
   .hover-view {
@@ -168,8 +169,6 @@ const StyledImageContainer = styled.div<{ $desktop: boolean }>`
     width: 100%;
     height: 100%;
     padding: 20px;
-
-    border-radius: 13px;
     background: ${({ theme }) => theme.color.bgModal};
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
     backdrop-filter: blur(4px);

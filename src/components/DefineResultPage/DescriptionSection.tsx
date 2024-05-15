@@ -74,7 +74,7 @@ const StyledContainer = styled.section`
 
   border-radius: 16px;
   border: 2px solid ${({ theme }) => theme.color.primary50};
-  background: rgba(255, 255, 255, 0.85);
+  background: ${({ theme }) => theme.color.white};
 
   filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.3));
 
