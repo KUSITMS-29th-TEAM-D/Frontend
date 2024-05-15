@@ -21,7 +21,7 @@ export const PieceSection = ({ userInformation }: PieceSectionProps) => {
           <div className="subtitle">셀피스와 함께 나를 브랜딩해봐요.</div>
         </StyledTitle>
         <StyledCardContainer>
-          <img src={`/src/assets/cards/${userInformation.brand}.svg`} alt="card" />
+          <img src={`/src/assets/cards/front/${userInformation.brand}.png`} alt="card" />
           {userInformation.chips.map((chip, index) => (
             <StyledBubble key={chip.content} className={`b${index}`} $weight={chip.weight}>
               <span>{chip.content}</span>
