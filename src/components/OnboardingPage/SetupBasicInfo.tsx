@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { userAPI } from '@/apis/userAPI';
@@ -12,22 +13,21 @@ import {
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { ButtonInput } from '@/components/common/Input/ButtonInput';
 import { INTEREST_LIST, JOB_LIST } from '@/constants/onboarding';
+import { onboardingState } from '@/recoil/onboardingState';
 
 interface SetupBasicInfoProps {
   onNext: () => void;
 }
 
 export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
-  const [selectedJob, setSelectedJob] = useState<string[]>([]);
-  const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
-  const [nickname, setNickname] = useState('');
   const [checkDuplicate, setCheckDuplicate] = useState(false);
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [isSpecialCharacter, setIsSpecialCharacter] = useState(false);
+  const [onboarding, setOnboarding] = useRecoilState(onboardingState);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setNickname(value);
+    setOnboarding({ ...onboarding, nickname: value });
 
     setIsDuplicate(false);
     setCheckDuplicate(false);
@@ -41,7 +41,7 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
 
   const handleCheckDuplicate = () => {
     userAPI
-      .duplicateCheck(nickname)
+      .duplicateCheck(onboarding.nickname)
       .then(() => {
         setIsDuplicate(false);
         setCheckDuplicate(true);
@@ -61,7 +61,7 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
             <ButtonInput
               placeholder="닉네임을 입력해주세요"
               buttonText={checkDuplicate ? '사용 가능' : '중복 확인'}
-              value={nickname}
+              value={onboarding.nickname}
               onChange={handleInputChange}
               buttonClickHandler={handleCheckDuplicate}
               warning={isDuplicate}
@@ -86,9 +86,11 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
           <Dropdown
             placeholder="직업을 선택해주세요"
             contents={JOB_LIST}
-            selected={selectedJob}
+            selected={onboarding.job}
             contentMaxHeight={172}
-            clickContentHandler={(newSelected: string) => setSelectedJob([newSelected])}
+            clickContentHandler={(newSelected: string) =>
+              setOnboarding({ ...onboarding, job: newSelected })
+            }
           />
         </StyledQuestionContainer>
         <StyledQuestionContainer>
@@ -99,20 +101,26 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
           <Dropdown
             placeholder="관심분야"
             contents={INTEREST_LIST}
-            selected={selectedInterest}
+            selected={onboarding.interest_list}
             contentMaxHeight={172}
             multiple
             clickContentHandler={(newSelected: string) => {
-              if (selectedInterest.includes(newSelected))
-                setSelectedInterest(selectedInterest.filter((item) => item !== newSelected));
-              else if (selectedInterest.length < 2)
-                setSelectedInterest([...selectedInterest, newSelected]);
+              if (onboarding.interest_list.includes(newSelected))
+                setOnboarding({
+                  ...onboarding,
+                  interest_list: onboarding.interest_list.filter((item) => item !== newSelected),
+                });
+              else if (onboarding.interest_list.length < 2)
+                setOnboarding({
+                  ...onboarding,
+                  interest_list: [...onboarding.interest_list, newSelected],
+                });
             }}
           />
         </StyledQuestionContainer>
       </div>
       <StyledPlainButton
-        disabled={selectedJob.length === 0 || selectedInterest.length === 0 || !checkDuplicate}
+        disabled={onboarding.job === '' || onboarding.interest_list.length === 0 || !checkDuplicate}
         onClick={onNext}
       >
         다음으로
