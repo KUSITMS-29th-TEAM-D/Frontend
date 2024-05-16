@@ -110,6 +110,7 @@ const StyledCard = styled.div`
   img {
     width: 100%;
     height: 100%;
+    border-radius: 13px;
 
     position: absolute;
     top: 0;
