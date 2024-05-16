@@ -14,7 +14,7 @@ export const authClient: AxiosInstance = axios.create({
 });
 
 authClient.interceptors.request.use((config) => {
-  if (!config.headers.common['Authorization']) {
+  if (!config.headers.common || !config.headers.common['Authorization']) {
     if (userService.getUser().nickname === '') {
       // register token이 없는 상황 (새로고침)
       authService.onSetRegisterToken();
