@@ -36,7 +36,7 @@ const StyledContainer = styled.div<{ $warning: boolean; $focused: boolean }>`
   border: 1px solid transparent;
   border-radius: 8px;
   background: ${({ theme }) => theme.color.white};
-  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.13));
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
 
   input {
     flex: 1 0 0;
