@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Chip } from '@/components/common/Chip/Chip';
+import { PlainChip } from '@/components/common/Chip/PlainChip';
 
 interface PreviewCardProps {
   imageUrl: string;
@@ -14,7 +14,7 @@ export const PreviewCard = ({ imageUrl, title, keywords, hot = false }: PreviewC
     <StyledContainer>
       {hot && (
         <div className="hot-item">
-          <Chip>요즘 핫한</Chip>
+          <PlainChip>요즘 핫한</PlainChip>
         </div>
       )}
       <StyledPreview $url={imageUrl} />
@@ -22,9 +22,9 @@ export const PreviewCard = ({ imageUrl, title, keywords, hot = false }: PreviewC
         <p className="title">{title}</p>
         <div className="keywords">
           {keywords.map((keyword) => (
-            <Chip key={keyword} primary>
+            <PlainChip key={keyword} primary>
               {keyword}
-            </Chip>
+            </PlainChip>
           ))}
         </div>
       </StyledInformation>
