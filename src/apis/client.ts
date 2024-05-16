@@ -14,14 +14,15 @@ export const authClient: AxiosInstance = axios.create({
 });
 
 authClient.interceptors.request.use((config) => {
-  if (!authClient.defaults.headers.common['Authorization']) {
-    if (userService.getUser() === '') {
-      // register token이 만료된 상황
-      userService.removeUser();
-      window.location.href = '/auth';
+  if (!config.headers.common['Authorization']) {
+    if (userService.getUser().nickname === '') {
+      // register token이 없는 상황 (새로고침)
+      authService.onSetRegisterToken();
+      config.headers['Authorization'] = authClient.defaults.headers.common['Authorization'];
     } else if (userService.getUser()) {
       // access token이 만료된 상황
       authService.onRefreshToken();
+      config.headers['Authorization'] = authClient.defaults.headers.common['Authorization'];
     }
   }
 
