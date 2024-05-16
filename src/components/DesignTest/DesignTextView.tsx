@@ -96,7 +96,7 @@ export const DesignTextView1 = () => {
               <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
             </ProgressWrapper>
             <ProgressBarWrapper>
-              <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
+              <ProgressBar $currentStep={currentStep} $totalSteps={totalSteps} />
             </ProgressBarWrapper>
           </ProgressContainer>
         </InnerContainer>
@@ -125,7 +125,7 @@ export const DesignTextView2 = () => {
               <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
             </ProgressWrapper>
             <ProgressBarWrapper>
-              <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
+              <ProgressBar $currentStep={currentStep} $totalSteps={totalSteps} />
             </ProgressBarWrapper>
           </ProgressContainer>
         </InnerContainer>
@@ -154,7 +154,7 @@ export const DesignTextView3 = () => {
               <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
             </ProgressWrapper>
             <ProgressBarWrapper>
-              <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
+              <ProgressBar $currentStep={currentStep} $totalSteps={totalSteps} />
             </ProgressBarWrapper>
           </ProgressContainer>
         </InnerContainer>
@@ -183,7 +183,7 @@ export const DesignTextView4 = () => {
               <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
             </ProgressWrapper>
             <ProgressBarWrapper>
-              <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
+              <ProgressBar $currentStep={currentStep} $totalSteps={totalSteps} />
             </ProgressBarWrapper>
           </ProgressContainer>
         </InnerContainer>
@@ -212,7 +212,7 @@ export const DesignTextView5 = () => {
               <ProgressNumber2>/ {totalSteps}</ProgressNumber2>
             </ProgressWrapper>
             <ProgressBarWrapper>
-              <ProgressBar $currentstep={currentStep} $totalsteps={totalSteps} />
+              <ProgressBar $currentStep={currentStep} $totalSteps={totalSteps} />
             </ProgressBarWrapper>
           </ProgressContainer>
         </InnerContainer>
