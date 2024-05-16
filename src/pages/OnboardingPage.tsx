@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import BackgroundImage from '@/assets/backgrounds/onboardingBackground.png';
 import { ProfileSetup } from '@/components/OnboardingPage/ProfileSetup';
 import { useFunnel } from '@/hooks/useFunnel';
+import { userService } from '@/services/UserService';
 
 const STEPS = [
   { step: '기본 정보 등록', description: '셀피스에서 진단을 통해,\n내가 어떤 사람인지 파악해요!' },
@@ -13,7 +17,15 @@ const STEPS = [
 ];
 
 export const OnboardingPage = () => {
-  const { Funnel, Step, setStep, currentStep } = useFunnel(STEPS[1].step);
+  const { Funnel, Step, setStep, currentStep } = useFunnel(STEPS[0].step);
+  const user = userService.getUserState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user !== 'PRE_MEMBER') {
+      navigate('/');
+    }
+  }, []);
 
   const nextClickHandler = (nextStep: string) => {
     setStep(nextStep);
@@ -42,7 +54,7 @@ export const OnboardingPage = () => {
 };
 
 const StyledContainer = styled.div`
-  height: 100%;
+  min-height: 100vh;
   background-image: url(${BackgroundImage});
   background-size: cover;
   display: flex;
