@@ -224,6 +224,7 @@ const StyledContents = styled.div`
   .chips {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap;
 
     padding-bottom: 38px;
   }

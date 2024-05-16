@@ -90,7 +90,7 @@ export const HomePage = () => {
 
   if (isLoggedIn)
     return (
-      <>
+      <div style={{ minWidth: '1280px' }}>
         <PieceSection userInformation={Dummy} />
         <RecommendSectionTemplate
           title={
@@ -113,11 +113,11 @@ export const HomePage = () => {
           recommendItems={Dummy4}
           filters={filters}
         />
-      </>
+      </div>
     );
 
   return (
-    <>
+    <div style={{ minWidth: '1280px' }}>
       <BrandingSection />
       <DiagnoseSection />
       <RecommendSectionTemplate
@@ -127,6 +127,6 @@ export const HomePage = () => {
         recommendItems={Dummy4}
         filters={filters}
       />
-    </>
+    </div>
   );
 };
