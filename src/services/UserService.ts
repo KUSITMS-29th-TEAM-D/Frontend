@@ -16,6 +16,17 @@ class UserService {
   removeUser() {
     this.cookies.remove('user');
   }
+
+  getUserState() {
+    const user = this.getUser();
+    if (!user) {
+      return 'NON_MEMBER';
+    } else if (user.nickname === '') {
+      return 'PRE_MEMBER';
+    } else {
+      return 'MEMBER';
+    }
+  }
 }
 
 export const userService = new UserService();
