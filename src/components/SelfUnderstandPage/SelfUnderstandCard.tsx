@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Card from '@/assets/backgrounds/understandCard.png';
-import { ReactComponent as SIcon } from '@/assets/logos/logo3d.svg';
+import Card1 from '@/assets/backgrounds/understandCard1.png';
+import Card2 from '@/assets/backgrounds/understandCard2.png';
+import Card3 from '@/assets/backgrounds/understandCard3.png';
 import { theme } from '@/styles';
 
 interface OutlineProps {
@@ -18,9 +20,10 @@ interface OutlineProps {
   background?: string;
   width?: string;
   height?: string;
+  onClick?: () => void;
 }
 
-const Container = styled.div<{
+const Container = styled.button<{
   background?: string;
   width?: string;
   height?: string;
@@ -90,8 +93,9 @@ const Outline = ({
   background,
   width,
   height,
+  onClick,
 }: OutlineProps) => (
-  <Container background={background} width={width} height={height}>
+  <Container background={background} width={width} height={height} onClick={onClick} type="button">
     <Header>
       <Title $color={titleColor} $titleTextSize={titleTextSize}>
         {title}
@@ -109,66 +113,82 @@ const Outline = ({
   </Container>
 );
 
-const DesignComponent = () => (
-  <Outline
-    title="Design"
-    subtitle="설계하기"
-    footerText="앞으로의 나를 브랜딩하고 싶다면?"
-    titleColor={theme.color.primary500}
-    subtitleColor={theme.color.gray800}
-    footerTextColor={theme.color.primary800}
-    background={'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.20) 0%, #FFF 84%)'}
-    titleTextSize={false}
-    subtitleTextSize={false}
-    footerTextSize={false}
-    width="331.5px"
-    height="210px"
-  />
-);
+const DesignComponent = () => {
+  const navigate = useNavigate();
 
-const DefineComponent = () => (
-  <Outline
-    title="Define"
-    subtitle="정의하기"
-    footerText="현재의 나를 파악하고 싶다면?"
-    titleColor={theme.color.white}
-    subtitleColor={theme.color.white}
-    footerTextColor={theme.color.white}
-    background={theme.color.primary500}
-    titleTextSize={false}
-    subtitleTextSize={false}
-    footerTextSize={false}
-    width="331.5px"
-    height="210px"
-  />
-);
+  const handleClick = () => {
+    navigate('/test/design/1');
+  };
 
-const DiscoverComponent = () => (
-  <div style={{ position: 'relative' }}>
+  return (
     <Outline
-      title="Discover"
-      subtitle="돌아보기"
-      footerText="셀피스를 만나기 전의 나를 알고 싶다면?"
+      title="Design"
+      subtitle="설계하기"
+      footerText="앞으로의 나를 브랜딩하고 싶다면?"
       titleColor={theme.color.primary500}
       subtitleColor={theme.color.gray800}
       footerTextColor={theme.color.primary800}
-      background={`url(${Card})`}
-      width="680px"
-      height="246px"
-      titleTextSize={true}
-      subtitleTextSize={true}
+      background={`url(${Card3})`}
+      titleTextSize={false}
+      subtitleTextSize={false}
+      footerTextSize={false}
+      width="331.5px"
+      height="210px"
+      onClick={handleClick}
     />
-    <StyledIcon />
-  </div>
-);
-const StyledIcon = styled(SIcon)`
-  position: absolute;
-  top: -10px;
-  right: -10px;
+  );
+};
 
-  width: 294.326px;
-  height: 294.326px;
-  transform: rotate(24.208deg);
-`;
+const DefineComponent = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/test/define/1');
+  };
+
+  return (
+    <Outline
+      title="Define"
+      subtitle="정의하기"
+      footerText="현재의 나를 파악하고 싶다면?"
+      titleColor={theme.color.primary500}
+      subtitleColor={theme.color.gray800}
+      footerTextColor={theme.color.primary800}
+      background={`url(${Card2})`}
+      titleTextSize={false}
+      subtitleTextSize={false}
+      footerTextSize={false}
+      width="331.5px"
+      height="210px"
+      onClick={handleClick}
+    />
+  );
+};
+const DiscoverComponent = () => {
+  //const navigate = useNavigate();
+
+  const handleClick = () => {
+    //navigate('/'); //TODO: 나중에 올바른 위치로 수정해야 함
+  };
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <Outline
+        title="Discover"
+        subtitle="이해하기"
+        footerText="셀피스를 만나기 전의 나를 알고 싶다면?"
+        titleColor={theme.color.primary500}
+        subtitleColor={theme.color.gray800}
+        footerTextColor={theme.color.primary800}
+        background={`url(${Card1})`}
+        width="680px"
+        height="246px"
+        titleTextSize={true}
+        subtitleTextSize={true}
+        onClick={handleClick}
+      />
+    </div>
+  );
+};
 
 export { DesignComponent, DefineComponent, DiscoverComponent };

@@ -1,20 +1,28 @@
-import ConnectorCard from '@/assets/cards/connector.svg';
-import CreatorCard from '@/assets/cards/creator.svg';
-import EncouragerCard from '@/assets/cards/encourager.svg';
-import InnovatorCard from '@/assets/cards/innovator.svg';
-import InsighterCard from '@/assets/cards/insighter.svg';
-import InventorCard from '@/assets/cards/inventor.svg';
-import OrganizerCard from '@/assets/cards/organizer.svg';
-import ProjectorCard from '@/assets/cards/projector.svg';
+import BackConnector from '@/assets/cards/back/connector.png';
+import BackCreator from '@/assets/cards/back/creator.png';
+import BackEncourager from '@/assets/cards/back/encourager.png';
+import BackInnovator from '@/assets/cards/back/innovator.png';
+import BackInsighter from '@/assets/cards/back/insighter.png';
+import BackInventor from '@/assets/cards/back/inventor.png';
+import BackOrganizer from '@/assets/cards/back/organizer.png';
+import BackProjector from '@/assets/cards/back/projector.png';
+import FrontConnector from '@/assets/cards/front/connector.png';
+import FrontCreator from '@/assets/cards/front/creator.png';
+import FrontEncourager from '@/assets/cards/front/encourager.png';
+import FrontInnovator from '@/assets/cards/front/innovator.png';
+import FrontInsighter from '@/assets/cards/front/insighter.png';
+import FrontInventor from '@/assets/cards/front/inventor.png';
+import FrontOrganizer from '@/assets/cards/front/organizer.png';
+import FrontProjector from '@/assets/cards/front/projector.png';
 
 // TODO: 뒷면 이미지 추가
 export const CARD_IMAGE = [
-  { front: CreatorCard, back: ProjectorCard },
-  { front: InsighterCard, back: ProjectorCard },
-  { front: InnovatorCard, back: ProjectorCard },
-  { front: InventorCard, back: ProjectorCard },
-  { front: ProjectorCard, back: ProjectorCard },
-  { front: ConnectorCard, back: ProjectorCard },
-  { front: EncouragerCard, back: ProjectorCard },
-  { front: OrganizerCard, back: ProjectorCard },
+  { name: 'creator', front: FrontCreator, back: BackCreator },
+  { name: 'insighter', front: FrontInsighter, back: BackInsighter },
+  { name: 'innovator', front: FrontInnovator, back: BackInnovator },
+  { name: 'inventor', front: FrontInventor, back: BackInventor },
+  { name: 'projector', front: FrontProjector, back: BackProjector },
+  { name: 'connector', front: FrontConnector, back: BackConnector },
+  { name: 'encourager', front: FrontEncourager, back: BackEncourager },
+  { name: 'organizer', front: FrontOrganizer, back: BackOrganizer },
 ];
