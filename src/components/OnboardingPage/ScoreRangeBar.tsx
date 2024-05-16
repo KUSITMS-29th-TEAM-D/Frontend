@@ -1,11 +1,15 @@
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+
+import { onboardingState } from '@/recoil/onboardingState';
 
 interface RangeBarProps {
   score: number;
-  setScore: (newScore: number) => void;
 }
 
-export const ScoreRangeBar = ({ score, setScore }: RangeBarProps) => {
+export const ScoreRangeBar = ({ score }: RangeBarProps) => {
+  const [onboarding, setOnboarding] = useRecoilState(onboardingState);
+
   return (
     <StyledContainer>
       <div
@@ -26,7 +30,9 @@ export const ScoreRangeBar = ({ score, setScore }: RangeBarProps) => {
         max={100}
         value={score}
         step={1}
-        onChange={(event) => setScore(event.target.valueAsNumber)}
+        onChange={(event) =>
+          setOnboarding({ ...onboarding, understanding_score: event.target.valueAsNumber })
+        }
       />
     </StyledContainer>
   );
