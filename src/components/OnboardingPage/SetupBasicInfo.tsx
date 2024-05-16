@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
+import { userAPI } from '@/apis/userAPI';
 import {
   StyledContainer,
   StyledPlainButton,
@@ -39,11 +40,16 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
   };
 
   const handleCheckDuplicate = () => {
-    // TODO: 특수문자 입력이 없을 때 버튼이 동작하도록
-    // TODO: 중복 확인 API 호출 -> 중복 확인 결과에 따라 setCheckDuplicate, setIsDuplicate
-    // 임시
-    //setIsDuplicate(true);
-    setCheckDuplicate(true);
+    userAPI
+      .duplicateCheck(nickname)
+      .then(() => {
+        setIsDuplicate(false);
+        setCheckDuplicate(true);
+      })
+      .catch(() => {
+        setIsDuplicate(true);
+        setCheckDuplicate(false);
+      });
   };
 
   return (
