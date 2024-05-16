@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 import { ReactComponent as CheckIcon } from '@/assets/icons/check.svg';
+import Scrollbar from '@/components/Scrollbar';
 
 interface DropdownContentProps {
   contents: string[];
-  selected: string[];
+  selected: string[] | string;
   multiple?: boolean;
   clickHandler?: (content: string) => void;
   maxHeight?: number;
@@ -17,13 +18,15 @@ export const DropdownContent = ({
   clickHandler,
   maxHeight,
 }: DropdownContentProps) => {
+  const selectedArray = Array.isArray(selected) ? selected : selected === '' ? [] : [selected];
+
   return (
     <StyledContainer $maxHeight={maxHeight}>
       {contents.map((content) => (
         <li
           key={content}
           onClick={() => clickHandler && clickHandler(content)}
-          className={selected.includes(content) && multiple ? 'active' : ''}
+          className={selectedArray.includes(content) && multiple ? 'active' : ''}
         >
           {multiple && <CheckIcon />}
           <span>{content}</span>
@@ -41,12 +44,14 @@ const StyledContainer = styled.ul<{ $maxHeight?: number }>`
   z-index: 2;
 
   width: 100%;
+  height: ${({ $maxHeight }) => $maxHeight}px;
+
   border-radius: 8px;
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
 
   overflow-y: scroll;
-  height: ${({ $maxHeight }) => $maxHeight}px;
+  ${Scrollbar}
 
   li {
     display: flex;

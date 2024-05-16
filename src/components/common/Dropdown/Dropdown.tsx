@@ -9,7 +9,7 @@ interface DropdownProps {
   title?: string;
   placeholder: string;
   contents: string[];
-  selected: string[];
+  selected: string[] | string;
   multiple?: boolean;
   clickContentHandler?: (content: string) => void;
   contentMaxHeight?: number;

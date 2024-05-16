@@ -6,7 +6,7 @@ import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrowUp.svg';
 interface DropdownButtonProps {
   title?: string;
   placeholder: string;
-  selected: string[];
+  selected: string[] | string;
   active: boolean;
   clickHandler?: () => void;
 }
@@ -18,16 +18,18 @@ export const DropdownButton = ({
   active,
   clickHandler,
 }: DropdownButtonProps) => {
+  const selectedArray = Array.isArray(selected) ? selected : selected === '' ? [] : [selected];
+
   if (title)
     return (
       <StyledContainer onClick={clickHandler}>
         <StyledTitle>{title}</StyledTitle>
         <StyledContent>
-          {selected.length === 0 ? (
+          {selectedArray.length === 0 ? (
             <span className="content-placeholder">{placeholder}</span>
           ) : (
             <span className="content-selected">
-              {`${selected[0]}${selected.length > 1 ? ` 외 ${selected.length - 1}` : ''}`}
+              {`${selectedArray[0]}${selectedArray.length > 1 ? ` 외 ${selectedArray.length - 1}` : ''}`}
             </span>
           )}
           {active ? <ArrowUpIcon className="icon" /> : <ArrowDownIcon className="icon" />}
@@ -37,10 +39,10 @@ export const DropdownButton = ({
 
   return (
     <StyledContainer onClick={clickHandler}>
-      {selected.length === 0 ? (
+      {selectedArray.length === 0 ? (
         <span className="title-placeholder">{placeholder}</span>
       ) : (
-        <span className="title-selected">{selected.join(', ')}</span>
+        <span className="title-selected">{selectedArray.join(', ')}</span>
       )}
       {active ? <ArrowUpIcon className="icon" /> : <ArrowDownIcon className="icon" />}
     </StyledContainer>
