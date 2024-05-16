@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 interface StyledDivProps {
   state: number;
 }
@@ -23,6 +22,7 @@ const StyledContainer = styled.div<StyledDivProps>`
   background: ${(props) =>
     props.state === 1 ? props.theme.color.white : props.theme.color.primary500};
   color: ${(props) => (props.state === 1 ? props.theme.color.primary500 : props.theme.color.white)};
+
   &:hover {
     background: ${(props) =>
       props.state === 1 ? props.theme.color.white : props.theme.color.primary600};
@@ -41,7 +41,6 @@ const TestChip = ({ chipText, state, onToggle }: TestChipProps) => {
   return (
     <StyledContainer state={state} onClick={onToggle}>
       <InnerContainer>{chipText}</InnerContainer>
-      {state === 2}
     </StyledContainer>
   );
 };

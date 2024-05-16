@@ -23,7 +23,7 @@ interface OutlineProps {
   onClick?: () => void;
 }
 
-const Container = styled.div<{
+const Container = styled.button<{
   background?: string;
   width?: string;
   height?: string;
@@ -95,7 +95,7 @@ const Outline = ({
   height,
   onClick,
 }: OutlineProps) => (
-  <Container background={background} width={width} height={height} onClick={onClick}>
+  <Container background={background} width={width} height={height} onClick={onClick} type="button">
     <Header>
       <Title $color={titleColor} $titleTextSize={titleTextSize}>
         {title}

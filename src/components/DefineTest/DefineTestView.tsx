@@ -6,12 +6,16 @@ import {
   DefineTextView2,
   DefineTextView3,
 } from '@/components/DefineTest/DefineTextView';
-import { SectionContainer } from '@/styles';
 
-const StyledSectionContainer = styled(SectionContainer)`
-  padding: 42px;
-  padding-top: 124px;
-  padding-bottom: 48px;
+const StyledContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  background: ${({ theme }) => `${theme.color.primary50}`};
+  min-height: 100vh;
+
+  padding: 118px 0 48px 0;
+
   @media ${({ theme }) => theme.device.tablet} {
     padding: 24px;
     padding-top: 100px;
@@ -19,32 +23,20 @@ const StyledSectionContainer = styled(SectionContainer)`
 
   @media ${({ theme }) => theme.device.mobile} {
     padding: 20px;
-    padding-top: 100px;
-    padding-bottom: 24px;
+    padding-top: 96px;
   }
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-  overflow: hidden;
-
-  width: 100%;
 `;
 
-const StyledContainer = styled.section`
-  background: ${({ theme }) => `${theme.color.primary50}`};
-  min-height: 100vh;
-`;
-
-const Container = styled.div`
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 52px;
-  display: flex;
+const StyledContentContainer = styled.div`
   width: 632px;
+  height: 100%;
+
+  margin: 0 auto;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+
   @media ${({ theme }) => theme.device.tablet} {
     width: 552px;
   }
@@ -56,45 +48,33 @@ const Container = styled.div`
 
 export const DefineTestView1 = () => {
   return (
-    <>
-      <StyledContainer>
-        <StyledSectionContainer>
-          <Container>
-            <DefineTextView1 />
-            <DefineChips1 />
-          </Container>
-        </StyledSectionContainer>
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      <StyledContentContainer>
+        <DefineTextView1 />
+        <DefineChips1 />
+      </StyledContentContainer>
+    </StyledContainer>
   );
 };
 
 export const DefineTestView2 = () => {
   return (
-    <>
-      <StyledContainer>
-        <StyledSectionContainer>
-          <Container>
-            <DefineTextView2 />
-            <DefineChips2 />
-          </Container>
-        </StyledSectionContainer>
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      <StyledContentContainer>
+        <DefineTextView2 />
+        <DefineChips2 />
+      </StyledContentContainer>
+    </StyledContainer>
   );
 };
 
 export const DefineTestView3 = () => {
   return (
-    <>
-      <StyledContainer>
-        <StyledSectionContainer>
-          <Container>
-            <DefineTextView3 />
-            <DefineChips3 />
-          </Container>
-        </StyledSectionContainer>
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      <StyledContentContainer>
+        <DefineTextView3 />
+        <DefineChips3 />
+      </StyledContentContainer>
+    </StyledContainer>
   );
 };

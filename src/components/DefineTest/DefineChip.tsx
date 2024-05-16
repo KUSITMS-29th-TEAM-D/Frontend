@@ -10,15 +10,6 @@ import {
 import TestChip from '@/components/common/Chip/TestChip';
 import { CHIP_DATA1, CHIP_DATA2, CHIP_DATA3 } from '@/constants/defineChip';
 
-const KeywordContainer = styled.div`
-  align-self: stretch;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 30px;
-`;
 export const DefineChips1 = () => {
   const [chipStates, setChipStates] = useState(Array(CHIP_DATA1.length).fill(1));
   const [warning, setWarning] = useState(false);
@@ -52,7 +43,7 @@ export const DefineChips1 = () => {
   };
 
   return (
-    <>
+    <StyledContainer>
       <KeywordContainer>
         {CHIP_DATA1.map((text, index) => (
           <TestChip
@@ -63,9 +54,8 @@ export const DefineChips1 = () => {
           />
         ))}
       </KeywordContainer>
-
       <DefineButtonView1 warning={warning} warningMessage={warningMessage} />
-    </>
+    </StyledContainer>
   );
 };
 export const DefineChips2 = () => {
@@ -102,7 +92,7 @@ export const DefineChips2 = () => {
   };
 
   return (
-    <>
+    <StyledContainer>
       <KeywordContainer>
         {CHIP_DATA2.map((text, index) => (
           <TestChip
@@ -114,7 +104,7 @@ export const DefineChips2 = () => {
         ))}
       </KeywordContainer>
       <DefineButtonView2 warning={warning} warningMessage={warningMessage} />
-    </>
+    </StyledContainer>
   );
 };
 
@@ -152,7 +142,7 @@ export const DefineChips3 = () => {
   };
 
   return (
-    <>
+    <StyledContainer>
       <KeywordContainer>
         {CHIP_DATA3.map((text, index) => (
           <TestChip
@@ -164,6 +154,33 @@ export const DefineChips3 = () => {
         ))}
       </KeywordContainer>
       <DefineButtonView3 warning={warning} warningMessage={warningMessage} />
-    </>
+    </StyledContainer>
   );
 };
+
+const StyledContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 95px;
+  justify-content: space-between;
+`;
+
+const KeywordContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  margin-top: 52px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    margin-top: 32px;
+    gap: 8px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 32px;
+    gap: 8px;
+  }
+`;
