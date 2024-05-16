@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { authClient } from '@/apis/client';
+import { authClient, noAuthClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { defineState } from '@/recoil/defineState';
 import { loadingState } from '@/recoil/loadingState';
+import { userService } from '@/services/UserService';
 
 interface Props {
   warning?: boolean;
@@ -157,6 +158,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   };
 
   const handleButton2Click = () => {
+    let client;
     const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
@@ -175,7 +177,13 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       },
     });
 
-    authClient
+    if (userService.getUserState() === 'NON_MEMBER') {
+      client = noAuthClient;
+    } else {
+      client = authClient;
+    }
+
+    client
       .post('/api/personas/define', requestData)
       .then((response) => {
         const { code, message } = response.data;
