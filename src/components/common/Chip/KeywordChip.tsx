@@ -5,6 +5,7 @@ interface KeywordChipProps {
   children: string;
   selectHandler?: (selectedKeyword: string) => void;
   deleteHandler?: (selectedKeyword: string) => void;
+  toggleHandler?: () => void;
 }
 
 export const KeywordChip = ({
@@ -12,11 +13,13 @@ export const KeywordChip = ({
   children,
   selectHandler,
   deleteHandler,
+  toggleHandler,
 }: KeywordChipProps) => {
   return (
     <StyledKeywordChip
       $selected={selected}
       onClick={() => {
+        toggleHandler && toggleHandler();
         if (!selected) selectHandler && selectHandler(children);
         else deleteHandler && deleteHandler(children);
       }}
@@ -54,7 +57,7 @@ const StyledKeywordChip = styled.button<{ $selected: boolean }>`
           color: ${({ theme }) => theme.color.primary700};
 
           &:hover {
-            background: ${({ theme }) => theme.color.primary50};
+            background: ${({ theme }) => theme.color.primary100};
           }
         `};
 `;
