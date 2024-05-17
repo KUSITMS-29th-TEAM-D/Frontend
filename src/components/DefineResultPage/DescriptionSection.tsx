@@ -21,7 +21,7 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
       </StyledHollandExplanation>
       <StyledDescriptionSection>
         <div className="title">주요 능력</div>
-        <p className="DescriptionSection">{result.ability}</p>
+        <p className="description">{result.ability}</p>
       </StyledDescriptionSection>
       <StyledDescriptionSection>
         <div className="title">가치</div>
@@ -35,11 +35,11 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
       </StyledDescriptionSection>
       <StyledDescriptionSection>
         <div className="title">이런 부분에서 강점을 보여요!</div>
-        <p className="DescriptionSection">{result.strength}</p>
+        <p className="description">{result.strength}</p>
       </StyledDescriptionSection>
       <StyledDescriptionSection>
         <div className="title">이러한 특성의 직업을 선호하는 경향이 있어요!</div>
-        <p className="DescriptionSection">{result.preference}</p>
+        <p className="description">{result.preference}</p>
       </StyledDescriptionSection>
       <StyledDescriptionSection>
         <div className="title">나의 유형 키워드</div>
@@ -101,7 +101,7 @@ const StyledHollandExplanation = styled.div`
   color: ${({ theme }) => theme.color.gray700};
 
   .selpiece {
-    ${({ theme }) => theme.font.desktop.label1m};
+    ${({ theme }) => theme.font.desktop.body1m};
     margin-bottom: 4px;
 
     .highlight {
@@ -110,7 +110,7 @@ const StyledHollandExplanation = styled.div`
   }
 
   .holland {
-    ${({ theme }) => theme.font.desktop.label2};
+    ${({ theme }) => theme.font.desktop.label1r};
   }
 
   @media ${({ theme }) => theme.device.tablet} {
@@ -141,8 +141,8 @@ const StyledDescriptionSection = styled.div`
     margin-bottom: 8px;
   }
 
-  .DescriptionSection {
-    ${({ theme }) => theme.font.desktop.label1r};
+  .description {
+    ${({ theme }) => theme.font.desktop.body2m};
     color: ${({ theme }) => theme.color.gray700};
     white-space: pre-wrap;
     word-break: break-all;
