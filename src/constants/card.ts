@@ -17,12 +17,12 @@ import FrontProjector from '@/assets/cards/front/projector.png';
 
 // TODO: 뒷면 이미지 추가
 export const CARD_IMAGE = [
-  { front: FrontCreator, back: BackCreator },
-  { front: FrontInsighter, back: BackInsighter },
-  { front: FrontInnovator, back: BackInnovator },
-  { front: FrontInventor, back: BackInventor },
-  { front: FrontProjector, back: BackProjector },
-  { front: FrontConnector, back: BackConnector },
-  { front: FrontEncourager, back: BackEncourager },
-  { front: FrontOrganizer, back: BackOrganizer },
+  { name: 'creator', front: FrontCreator, back: BackCreator },
+  { name: 'insighter', front: FrontInsighter, back: BackInsighter },
+  { name: 'innovator', front: FrontInnovator, back: BackInnovator },
+  { name: 'inventor', front: FrontInventor, back: BackInventor },
+  { name: 'projector', front: FrontProjector, back: BackProjector },
+  { name: 'connector', front: FrontConnector, back: BackConnector },
+  { name: 'encourager', front: FrontEncourager, back: BackEncourager },
+  { name: 'organizer', front: FrontOrganizer, back: BackOrganizer },
 ];

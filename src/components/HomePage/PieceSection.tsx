@@ -1,7 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
-import { Chip } from '@/components/common/Chip/Chip';
+import { PlainChip } from '@/components/common/Chip/PlainChip';
+import { CARD_IMAGE } from '@/constants/card';
 import { SectionContainer } from '@/styles';
 import { UserInformation } from '@/types/user.type';
 
@@ -21,7 +22,10 @@ export const PieceSection = ({ userInformation }: PieceSectionProps) => {
           <div className="subtitle">셀피스와 함께 나를 브랜딩해봐요.</div>
         </StyledTitle>
         <StyledCardContainer>
-          <img src={`/src/assets/cards/front/${userInformation.brand}.png`} alt="card" />
+          <img
+            src={CARD_IMAGE.find((card) => card.name === userInformation.brand)?.['front'] || ''}
+            alt="card"
+          />
           {userInformation.chips.map((chip, index) => (
             <StyledBubble key={chip.content} className={`b${index}`} $weight={chip.weight}>
               <span>{chip.content}</span>
@@ -31,9 +35,9 @@ export const PieceSection = ({ userInformation }: PieceSectionProps) => {
         <StyledContents>
           <div className="chips">
             {userInformation.chips.map((chip) => (
-              <Chip key={chip.content} primary>
+              <PlainChip key={chip.content} primary>
                 {chip.content}
-              </Chip>
+              </PlainChip>
             ))}
           </div>
           <div>
@@ -220,6 +224,7 @@ const StyledContents = styled.div`
   .chips {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap;
 
     padding-bottom: 38px;
   }

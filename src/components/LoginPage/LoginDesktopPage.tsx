@@ -34,9 +34,7 @@ export const ViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 100vh;
-  min-height: 720px;
   background-image: url(${backgroundImg});
   background-size: cover;
 `;
@@ -90,6 +88,7 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   .icon {
     transform: rotate(29.626deg);

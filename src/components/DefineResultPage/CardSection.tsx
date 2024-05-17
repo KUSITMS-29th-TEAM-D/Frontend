@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as ChangeIcon } from '@/assets/icons/change.svg';
 import { ReactComponent as DownloadIcon } from '@/assets/icons/download.svg';
 import { ReactComponent as KakaoIcon } from '@/assets/icons/kakaoIcon.svg';
+import { CARD_IMAGE } from '@/constants/card';
 import { deviceSizes } from '@/styles/theme/device';
 
 interface CardSectionProps {
@@ -56,7 +57,11 @@ export const CardSection = ({ piece }: CardSectionProps) => {
         onClick={handleClickImage}
       >
         <img
-          src={`/src/assets/cards/${isFront ? 'front' : 'back'}/${piece.toLowerCase()}.png`}
+          src={
+            CARD_IMAGE.find((card) => card.name === piece.toLowerCase())?.[
+              isFront ? 'front' : 'back'
+            ] || ''
+          }
           alt="card"
           ref={captureRef}
         />
@@ -150,6 +155,7 @@ const StyledImageContainer = styled.div<{ $desktop: boolean }>`
   overflow: hidden;
 
   position: relative;
+  cursor: pointer;
 
   img {
     width: 100%;
