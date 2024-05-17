@@ -73,7 +73,7 @@ const StyledTitle = styled.div`
 
 const StyledFilterContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   margin-bottom: 27px;
 
