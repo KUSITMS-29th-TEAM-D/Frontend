@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import backgroundIcon from '@/assets/backgrounds/backgroundIcon3D.svg';
@@ -6,13 +7,16 @@ import DesignImg from '@/assets/icons/design.png';
 import DiscoverImg from '@/assets/icons/discover.png';
 import { SectionContainer } from '@/styles';
 
+// TODO: 추후 페이지 경로 수정
 const DIAGNOSE_CARD = [
-  { title: 'Discover 이해', subtitle: '과거의 나와 대화하기', img: DiscoverImg },
-  { title: 'Define 정의', subtitle: '성격/진단 테스트', img: DefineImg },
-  { title: 'Design 설계', subtitle: '차별점 도출하기', img: DesignImg },
+  { title: 'Discover 이해', subtitle: '과거의 나와 대화하기', img: DiscoverImg, path: '/' },
+  { title: 'Define 정의', subtitle: '성격/진단 테스트', img: DefineImg, path: '/' },
+  { title: 'Design 설계', subtitle: '차별점 도출하기', img: DesignImg, path: '/' },
 ];
 
 export const DiagnoseSection = () => {
+  const navigate = useNavigate();
+
   return (
     <StyledContainer>
       <StyledBackgroundIcon className="icon" />
@@ -25,7 +29,7 @@ export const DiagnoseSection = () => {
         </StyledTitle>
         <MenuCardContainer>
           {DIAGNOSE_CARD.map((card) => (
-            <MenuCard key={card.title}>
+            <MenuCard key={card.title} onClick={() => navigate(card.path)}>
               <div className="content-title">
                 <div className="title">{card.title}</div>
                 <div className="subtitle">{card.subtitle}</div>
@@ -97,7 +101,7 @@ const MenuCardContainer = styled.div`
   gap: 32px;
 `;
 
-const MenuCard = styled.div`
+const MenuCard = styled.button`
   width: 363px;
   height: 430px;
 
