@@ -36,7 +36,6 @@ const Tab = styled.div<{ isActive: boolean }>`
 `;
 
 const TabPanel = styled.div<{ hidden: boolean }>`
-  padding: 20px;
   padding-bottom: 0px;
   display: ${({ hidden }) => (hidden ? 'none' : 'block')};
 `;
