@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { PreviewCard } from '@/components/common/Card/PreviewCard';
 import { Carousel } from '@/components/common/Carousel';
-import { Dropdown } from '@/components/common/Dropdown';
+/* import { Dropdown } from '@/components/common/Dropdown/Dropdown'; */
 import { SectionContainer } from '@/styles';
 import { FilterItems, RecommendItems } from '@/types/recommend.type';
 
@@ -19,7 +19,6 @@ export const RecommendSectionTemplate = ({
   subTitle,
   backgroundColor,
   recommendItems,
-  filters,
 }: RecommendSectionTemplateProps) => {
   return (
     <StyledContainer $backgroundColor={backgroundColor}>
@@ -28,7 +27,7 @@ export const RecommendSectionTemplate = ({
           <div className="user-info">{title}</div>
           <div className="intro">{subTitle}</div>
         </StyledTitle>
-        <StyledFilterContainer>
+        {/* <StyledFilterContainer>
           <StyledDropdownContainer>
             {filters.map((filter) => (
               <Dropdown
@@ -49,7 +48,7 @@ export const RecommendSectionTemplate = ({
           >
             새로고침
           </button>
-        </StyledFilterContainer>
+        </StyledFilterContainer> */}
         <Carousel>
           {recommendItems.map((item) => (
             <PreviewCard
@@ -93,7 +92,7 @@ const StyledTitle = styled.div`
   }
 `;
 
-const StyledFilterContainer = styled.div`
+/* const StyledFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -108,4 +107,4 @@ const StyledFilterContainer = styled.div`
 const StyledDropdownContainer = styled.div`
   display: flex;
   gap: 12px;
-`;
+`; */

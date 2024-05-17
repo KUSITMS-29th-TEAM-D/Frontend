@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
-import { Router } from '@/router';
+import { Router } from '@/routers/router';
 import { GlobalStyle, theme } from '@/styles';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

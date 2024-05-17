@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import backgroundImg from '@/assets/backgrounds/loginBackground.png';
-import SIcon from '@/assets/logos/logo3d.svg';
+import { ReactComponent as SIcon } from '@/assets/logos/logo3d.svg';
 import { SocialLoginButton } from '@/components/LoginPage/SocialLoginButton';
 
 export const LoginMobilePage = () => (
@@ -21,7 +21,7 @@ export const LoginMobilePage = () => (
         </TextContainer>
       </InnerContainer>
       <IconContainer>
-        <StyledIcon src={SIcon} alt="3D Icon" />
+        <SIcon className="icon" />
       </IconContainer>
       <ButtonContainer>
         <SocialLoginButton provider="NAVER" />
@@ -97,11 +97,7 @@ const TextContainer = styled.div`
     }
   }
 `;
-const StyledIcon = styled.img`
-  width: 220px;
-  height: 220px;
-  transform: rotate(-15deg);
-`;
+
 const IconContainer = styled.div`
   width: 173px;
   height: 173px;
@@ -109,6 +105,12 @@ const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
+
+  .icon {
+    width: 201px;
+    height: 201px;
+    transform: rotate(15deg);
+  }
 `;
 
 const ButtonContainer = styled.div`

@@ -32,6 +32,7 @@ const CardInnerContainer = styled.div`
 `;
 
 const StyledContainer = styled.section`
+  min-width: 1280px;
   background: ${({ theme }) => `linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 27%,
