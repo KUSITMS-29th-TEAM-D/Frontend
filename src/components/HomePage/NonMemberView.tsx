@@ -61,6 +61,7 @@ export const NonMemberView = () => {
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const theme = useTheme();
+
   return (
     <>
       <BrandingSection />
