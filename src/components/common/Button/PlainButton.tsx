@@ -64,10 +64,6 @@ const getVariantStyle = ($variant: PlainButtonVariant) => {
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   ${({ theme }) => theme.font.desktop.label1m};
 
   width: ${({ $width }) => ($width ? $width : '100%')};
