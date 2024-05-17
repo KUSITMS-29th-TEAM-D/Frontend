@@ -1,22 +1,29 @@
 import styled from 'styled-components';
-
 const Container = styled.div`
   width: 368px;
   height: auto;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   gap: 20px;
   overflow: hidden;
   border-radius: 24px;
 `;
 
-const StyledImage = styled.img`
+const ImageContainer = styled.div`
   width: 368px;
   height: 230px;
-  position: relative;
+  overflow: hidden;
   border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 
@@ -59,7 +66,9 @@ interface ExperienceCardProps {
 export const ExperienceCard = ({ imageUrl, title, subtitle }: ExperienceCardProps) => {
   return (
     <Container>
-      <StyledImage src={imageUrl} alt="Card" />
+      <ImageContainer>
+        <StyledImage src={imageUrl} alt="Card" />
+      </ImageContainer>
       <TextContainer>
         <TopText>{title}</TopText>
         <BottomText>{subtitle}</BottomText>
