@@ -1,9 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import backgroundImg from '@/assets/backgrounds/defineBackground.png';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 export const DefineDesktopView = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/test/define/1');
+  };
   return (
     <div>
       <ViewContainer>
@@ -19,7 +25,7 @@ export const DefineDesktopView = () => {
                 <span className="highlight">결과 카드</span>를 받아보세요!
               </SubTitleContainer>
             </TitleTextContainer>
-            <PlainButton variant="gray" width="376px" height="48px">
+            <PlainButton variant="gray" width="376px" height="48px" onClick={handleClick}>
               테스트 시작하기
             </PlainButton>
           </TopContainer>

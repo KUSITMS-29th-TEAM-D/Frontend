@@ -1,9 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import backgroundImg from '@/assets/backgrounds/defineBackground.png';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 export const DefineMobileView = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/test/define/1');
+  };
   return (
     <div>
       <ViewContainer>
@@ -26,7 +32,7 @@ export const DefineMobileView = () => {
                 성격 유형과 커리어의 특성을 6개의 유형으로 분류하여 육각형으로 보여주는 검사로,
                 셀피스의 정의하기 테스트는 해당 이론에서 착안하여 고안되었습니다.
               </SubTextContainer>
-              <PlainButton variant="gray" width="100%" height="48px">
+              <PlainButton variant="gray" width="100%" height="48px" onClick={handleClick}>
                 테스트 시작하기
               </PlainButton>
             </BottomContainer>
