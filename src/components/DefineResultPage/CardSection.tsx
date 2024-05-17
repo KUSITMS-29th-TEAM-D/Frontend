@@ -8,6 +8,7 @@ import { ReactComponent as DownloadIcon } from '@/assets/icons/download.svg';
 import { ReactComponent as KakaoIcon } from '@/assets/icons/kakaoIcon.svg';
 import { CARD_IMAGE } from '@/constants/card';
 import { deviceSizes } from '@/styles/theme/device';
+import { kakoShare } from '@/utils/kakoShare';
 
 interface CardSectionProps {
   piece: string;
@@ -80,7 +81,8 @@ export const CardSection = ({ piece }: CardSectionProps) => {
                 type="button"
                 className="share-button"
                 onClick={() => {
-                  // TODO: 공유 기능 구현
+                  // TODO: 인자값 수정 필요
+                  kakoShare();
                 }}
               >
                 <KakaoIcon />
@@ -105,7 +107,8 @@ export const CardSection = ({ piece }: CardSectionProps) => {
                 type="button"
                 className="share-button"
                 onClick={() => {
-                  // TODO: 공유 기능 구현
+                  // TODO: 인자값 수정 필요
+                  kakoShare();
                 }}
               >
                 <KakaoIcon />
