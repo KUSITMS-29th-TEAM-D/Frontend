@@ -35,7 +35,7 @@ export const Router = () => {
       </Route>
       <Route path="/test" element={<TestLayout />}>
         <Route element={<ExceptPreMemberRoute />}>
-          <Route index element={<Navigate to="define/1" replace />}></Route>
+          <Route index element={<Navigate to="define/start" replace />}></Route>
           <Route path="define/start" element={<DefineStartPage />} />
           <Route path="define/1" element={<DefineTestPage1 />} />
           <Route path="define/2" element={<DefineTestPage2 />} />
