@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { ReactComponent as CheckIcon } from '@/assets/icons/check.svg';
 import Scrollbar from '@/components/Scrollbar';
+import { DropdownContentItem } from '@/components/common/Dropdown/DropdownContentItem';
 
 interface DropdownContentProps {
   contents: string[];
@@ -23,14 +23,14 @@ export const DropdownContent = ({
   return (
     <StyledContainer $maxHeight={maxHeight}>
       {contents.map((content) => (
-        <li
+        <DropdownContentItem
           key={content}
-          onClick={() => clickHandler && clickHandler(content)}
-          className={selectedArray.includes(content) && multiple ? 'active' : ''}
+          {...(clickHandler && { onClick: clickHandler })}
+          multiple={multiple}
+          active={selectedArray.includes(content) && multiple}
         >
-          {multiple && <CheckIcon />}
-          <span>{content}</span>
-        </li>
+          {content}
+        </DropdownContentItem>
       ))}
     </StyledContainer>
   );
@@ -52,27 +52,4 @@ const StyledContainer = styled.ul<{ $maxHeight?: string }>`
 
   overflow-y: scroll;
   ${Scrollbar}
-
-  li {
-    display: flex;
-    gap: 12px;
-
-    padding: 12px 24px;
-    background: ${({ theme }) => theme.color.white};
-    ${({ theme }) => theme.font.desktop.body2r};
-
-    cursor: pointer;
-
-    &:hover {
-      background: ${({ theme }) => theme.color.gray100};
-    }
-  }
-
-  .active {
-    color: ${({ theme }) => theme.color.primary500};
-
-    svg path {
-      fill: ${({ theme }) => theme.color.primary500};
-    }
-  }
 `;
