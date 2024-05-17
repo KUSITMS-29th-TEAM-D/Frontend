@@ -83,17 +83,23 @@ const StyledContainer = styled.section`
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
 
-    overflow-y: scroll;
-    ${Scrollbar}
+  @media ${({ theme }) => theme.device.desktop} {
+    .inner-container {
+      overflow-y: scroll;
+      ${Scrollbar}
+    }
   }
 
   @media ${({ theme }) => theme.device.tablet} {
     width: auto;
+    padding: 20px 24px;
   }
 
   @media ${({ theme }) => theme.device.mobile} {
     width: auto;
+    padding: 20px 24px;
   }
 `;
 
