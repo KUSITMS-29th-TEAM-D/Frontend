@@ -25,7 +25,7 @@ const StyledButton = styled.button<{ $direction: CarouselButton2Direction }>`
 
   position: absolute;
   top: 50%;
-  left: ${({ $direction }) => ($direction === 'prev' ? '40px' : 'calc(100% - 40px)')};
+  left: ${({ $direction }) => ($direction === 'prev' ? '60px' : 'calc(100% - 60px)')};
   z-index: 1;
   transform: translate(-50%, -50%);
 `;

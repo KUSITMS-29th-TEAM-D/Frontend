@@ -8,6 +8,8 @@ const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   gap: 20px;
+  overflow: hidden;
+  border-radius: 24px;
 `;
 
 const StyledImage = styled.img`
@@ -16,6 +18,11 @@ const StyledImage = styled.img`
   position: relative;
   border-radius: 24px;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const TextContainer = styled.div`
