@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Scrollbar from '@/components/Scrollbar';
-import { Chip } from '@/components/common/Chip/Chip';
+import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { DefineResult } from '@/types/test.type';
 
 interface DescriptionSectionProps {
@@ -29,9 +29,9 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
           <div className="title">가치</div>
           <div className="chips">
             {result.values.map((value) => (
-              <Chip key={value} primary>
+              <PlainChip key={value} primary>
                 {value}
-              </Chip>
+              </PlainChip>
             ))}
           </div>
         </StyledDescriptionSection>
@@ -47,9 +47,9 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
           <div className="title">나의 유형 키워드</div>
           <div className="chips">
             {result.types.map((type) => (
-              <Chip key={type} primary>
+              <PlainChip key={type} primary>
                 {type}
-              </Chip>
+              </PlainChip>
             ))}
           </div>
         </StyledDescriptionSection>
@@ -57,9 +57,9 @@ export const DescriptionSection = ({ result }: DescriptionSectionProps) => {
           <div className="title">내가 선택한 유형 키워드</div>
           <div className="chips">
             {result.define_persona_keywords.map((keyword) => (
-              <Chip key={keyword} primary>
+              <PlainChip key={keyword} primary>
                 {keyword}
-              </Chip>
+              </PlainChip>
             ))}
           </div>
         </StyledDescriptionSection>

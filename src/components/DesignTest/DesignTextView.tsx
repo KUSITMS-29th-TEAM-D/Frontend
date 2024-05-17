@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import ProgressBar from '../common/ProgressBar';
+import ProgressBar from '@/components/common/ProgressBar';
 
 const TextContainer = styled.div`
   width: 100%;

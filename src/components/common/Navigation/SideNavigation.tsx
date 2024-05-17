@@ -33,7 +33,7 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
       <StyledContent>
         <StyledMenuButtonList>
           <button className="close-button" onClick={() => setOpen(false)}>
-            <CloseIcon />
+            <CloseIcon className="icon" />
           </button>
           {NAVIGATION_MENU.map((item) => (
             <Link to={item.path} className="menu-button" key={item.menu}>
@@ -95,6 +95,11 @@ const StyledMenuButtonList = styled.div`
 
   .close-button {
     margin: 16px 20px 16px auto;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .menu-button {

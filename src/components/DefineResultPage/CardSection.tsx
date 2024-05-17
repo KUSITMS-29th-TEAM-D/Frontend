@@ -155,6 +155,7 @@ const StyledImageContainer = styled.div<{ $desktop: boolean }>`
   overflow: hidden;
 
   position: relative;
+  cursor: pointer;
 
   img {
     width: 100%;

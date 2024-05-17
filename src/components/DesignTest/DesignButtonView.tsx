@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { PlainButton } from '../common/Button/PlainButton';
+import { PlainButton } from '@/components/common/Button/PlainButton';
 
 const Container = styled.div`
   width: 100%;

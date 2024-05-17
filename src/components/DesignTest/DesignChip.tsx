@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import TestChip from '@/components/common/Chip/TestChip';
+import { KeywordChip } from '@/components/common/Chip/KeywordChip';
 
 const chipData1 = [
   '남성적임',
@@ -64,12 +64,13 @@ export const DesignChips1 = () => {
   return (
     <KeywordContainer>
       {chipData1.map((text, index) => (
-        <TestChip
+        <KeywordChip
           key={index}
-          chipText={text}
-          state={chipStates[index]}
-          onToggle={() => handleToggle(index)}
-        />
+          selected={chipStates[index] !== 1}
+          toggleHandler={() => handleToggle(index)}
+        >
+          {text}
+        </KeywordChip>
       ))}
       {warning && <div>키워드를 5개만 선택해 주세요!</div>}
     </KeywordContainer>

@@ -7,7 +7,7 @@ import {
   DefineButtonView2,
   DefineButtonView3,
 } from '@/components/DefineTest/DefineButtonView';
-import TestChip from '@/components/common/Chip/TestChip';
+import { KeywordChip } from '@/components/common/Chip/KeywordChip';
 import { CHIP_DATA1, CHIP_DATA2, CHIP_DATA3 } from '@/constants/defineChip';
 
 export const DefineChips1 = () => {
@@ -46,12 +46,13 @@ export const DefineChips1 = () => {
     <StyledContainer>
       <KeywordContainer>
         {CHIP_DATA1.map((text, index) => (
-          <TestChip
+          <KeywordChip
             key={index}
-            chipText={text}
-            state={chipStates[index]}
-            onToggle={() => handleToggle(index)}
-          />
+            selected={chipStates[index] !== 1}
+            toggleHandler={() => handleToggle(index)}
+          >
+            {text}
+          </KeywordChip>
         ))}
       </KeywordContainer>
       <DefineButtonView1 warning={warning} warningMessage={warningMessage} />
@@ -95,12 +96,13 @@ export const DefineChips2 = () => {
     <StyledContainer>
       <KeywordContainer>
         {CHIP_DATA2.map((text, index) => (
-          <TestChip
+          <KeywordChip
             key={index}
-            chipText={text}
-            state={chipStates[index]}
-            onToggle={() => handleToggle(index)}
-          />
+            selected={chipStates[index] !== 1}
+            toggleHandler={() => handleToggle(index)}
+          >
+            {text}
+          </KeywordChip>
         ))}
       </KeywordContainer>
       <DefineButtonView2 warning={warning} warningMessage={warningMessage} />
@@ -145,12 +147,13 @@ export const DefineChips3 = () => {
     <StyledContainer>
       <KeywordContainer>
         {CHIP_DATA3.map((text, index) => (
-          <TestChip
+          <KeywordChip
             key={index}
-            chipText={text}
-            state={chipStates[index]}
-            onToggle={() => handleToggle(index)}
-          />
+            selected={chipStates[index] !== 1}
+            toggleHandler={() => handleToggle(index)}
+          >
+            {text}
+          </KeywordChip>
         ))}
       </KeywordContainer>
       <DefineButtonView3 warning={warning} warningMessage={warningMessage} />
