@@ -21,7 +21,7 @@ interface CarouselProps {
   children: React.ReactNode;
 }
 
-export const AdvertiseCarousel = ({ gap = '24px', children }: CarouselProps) => {
+export const AdvertiseCarousel = ({ gap = '10px', children }: CarouselProps) => {
   return (
     <SliderWrapper $gap={gap}>
       <Slider {...settings}>{children}</Slider>
