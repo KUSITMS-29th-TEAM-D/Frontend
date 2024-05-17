@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { WholeRecommendView } from '@/components/ExperienceRecommendPage/WholeRecommendView';
-import { Dropdown } from '@/components/common/Dropdown';
+import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { SectionContainer } from '@/styles';
 import { FilterItems, RecommendItems } from '@/types/recommend2.type';
 
@@ -63,6 +63,7 @@ const StyledContainer = styled.div<{ $backgroundColor: string }>`
 
 const StyledSectionContainer = styled(SectionContainer)`
   padding: 80px 64px;
+  width: 100%;
 `;
 
 const StyledTitle = styled.div`

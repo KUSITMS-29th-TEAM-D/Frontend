@@ -19,13 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  //gap: 24px;
-`;
-const OuterContainer = styled.div`
-  align-self: stretch;
-  justify-content: space-between;
-  align-items: flex-end;
-  display: inline-flex;
+  gap: 24px;
 `;
 
 const Dummy4 = [
@@ -177,7 +171,7 @@ const Dummy4 = [
 ];
 
 export const WholeRecommendView = () => {
-  const chunks = [];
+  /*const chunks = [];
   for (let i = 0; i < Dummy4.length; i += 3) {
     chunks.push(Dummy4.slice(i, i + 3));
   }
@@ -197,6 +191,20 @@ export const WholeRecommendView = () => {
               />
             ))}
           </div>
+        ))}
+      </Container>
+    </StyledSectionContainer>
+  );*/
+  return (
+    <StyledSectionContainer>
+      <Container>
+        {Dummy4.map((item) => (
+          <ExperienceCard
+            key={item.id}
+            imageUrl={item.img}
+            title={item.title}
+            subtitle={item.subtitle}
+          />
         ))}
       </Container>
     </StyledSectionContainer>

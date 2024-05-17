@@ -72,5 +72,5 @@ svg, image {
 
 export const SectionContainer = styled.div`
   width: 1280px;
-  margin: 0 auto;
+  margin: 0 0;
 `;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const TabContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 128px;
+  padding-left: 64px;
   padding-right: 64px;
   background-color: ${({ theme }) => theme.color.white};
   border-bottom: 4px #f7f7f7 solid;

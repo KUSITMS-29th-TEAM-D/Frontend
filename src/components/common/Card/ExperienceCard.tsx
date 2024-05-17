@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 368px;
+  height: auto;
   display: inline-flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-around;
+  align-items: center;
   gap: 20px;
 `;
 
@@ -15,6 +15,7 @@ const StyledImage = styled.img`
   height: 230px;
   position: relative;
   border-radius: 24px;
+  object-fit: cover;
 `;
 
 const TextContainer = styled.div`

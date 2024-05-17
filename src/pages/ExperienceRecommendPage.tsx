@@ -36,8 +36,8 @@ const PageContainer = styled.div`
   padding: 28px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
 `;
 
