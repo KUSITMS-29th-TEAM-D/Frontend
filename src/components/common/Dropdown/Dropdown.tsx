@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { DropdownButton } from '@/components/common/Dropdown/DropdownButton';
 import { DropdownContent } from '@/components/common/Dropdown/DropdownContent';
@@ -12,7 +12,8 @@ interface DropdownProps {
   selected: string[] | string;
   multiple?: boolean;
   clickContentHandler?: (content: string) => void;
-  contentMaxHeight?: number;
+  width?: string;
+  contentMaxHeight?: string;
 }
 
 export const Dropdown = ({
@@ -22,6 +23,7 @@ export const Dropdown = ({
   selected,
   multiple = false,
   clickContentHandler,
+  width,
   contentMaxHeight,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +44,7 @@ export const Dropdown = ({
   }, []);
 
   return (
-    <StyledContainer ref={dropdownRef}>
+    <StyledContainer ref={dropdownRef} $width={width}>
       <DropdownButton
         title={title}
         placeholder={placeholder}
@@ -66,7 +68,11 @@ export const Dropdown = ({
   );
 };
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{ $width?: string }>`
   position: relative;
-  //width: fit-content;
+  ${({ $width }) =>
+    $width &&
+    css`
+      width: ${$width};
+    `}
 `;

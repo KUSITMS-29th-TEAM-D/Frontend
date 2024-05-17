@@ -8,7 +8,7 @@ interface DropdownContentProps {
   selected: string[] | string;
   multiple?: boolean;
   clickHandler?: (content: string) => void;
-  maxHeight?: number;
+  maxHeight?: string;
 }
 
 export const DropdownContent = ({
@@ -36,7 +36,7 @@ export const DropdownContent = ({
   );
 };
 
-const StyledContainer = styled.ul<{ $maxHeight?: number }>`
+const StyledContainer = styled.ul<{ $maxHeight?: string }>`
   position: absolute;
   bottom: -12px;
   left: 0;
@@ -44,7 +44,7 @@ const StyledContainer = styled.ul<{ $maxHeight?: number }>`
   z-index: 2;
 
   width: 100%;
-  height: ${({ $maxHeight }) => $maxHeight}px;
+  height: ${({ $maxHeight }) => $maxHeight};
 
   border-radius: 8px;
   background: ${({ theme }) => theme.color.white};

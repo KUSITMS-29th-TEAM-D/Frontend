@@ -2,16 +2,14 @@ import styled from 'styled-components';
 
 import { CardCarousel } from '@/components/HomePage/CardCarousel';
 import { PreviewCard } from '@/components/common/Card/PreviewCard';
-/* import { Dropdown } from '@/components/common/Dropdown/Dropdown'; */
 import { SectionContainer } from '@/styles';
-import { FilterItems, RecommendItems } from '@/types/recommend.type';
+import { RecommendItems } from '@/types/recommend.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
   recommendItems: RecommendItems[];
-  filters: FilterItems[];
   refreshHandler?: () => void;
   children?: React.ReactNode;
 }
@@ -33,7 +31,7 @@ export const RecommendSectionTemplate = ({
         </StyledTitle>
         {children && (
           <StyledFilterContainer>
-            {children}
+            <StyledChildrenContainer>{children}</StyledChildrenContainer>
             <button className="refresh-button" type="button" onClick={refreshHandler}>
               새로고침
             </button>
@@ -94,4 +92,10 @@ const StyledFilterContainer = styled.div`
     ${({ theme }) => theme.font.desktop.body1m};
     color: ${({ theme }) => theme.color.primary700};
   }
+`;
+
+const StyledChildrenContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
 `;

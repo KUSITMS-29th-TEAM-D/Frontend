@@ -42,8 +42,8 @@ export const BrandingSection = ({ isLoggedIn }: BrandingSectionProps) => {
         <AutoPlay>
           {CARD_IMAGE.concat(CARD_IMAGE)
             .concat(CARD_IMAGE)
-            .map((card) => (
-              <StyledCard key={card.name}>
+            .map((card, index) => (
+              <StyledCard key={`${card.name}-${index}`}>
                 <img src={card.front} className="front" alt="card" />
                 <img src={card.back} className="back" alt="card" />
               </StyledCard>
