@@ -47,6 +47,7 @@ const ChipContainer = styled.div`
 
   transform: translate(-50%, -100%);
 
+  width: max-content;
   padding: 8px 20px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => `${theme.color.secondary600}`};
