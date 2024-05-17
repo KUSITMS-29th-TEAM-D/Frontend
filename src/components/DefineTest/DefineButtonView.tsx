@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { authClient, noAuthClient } from '@/apis/client';
+import { personaAPI } from '@/apis/personaAPI';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { defineState } from '@/recoil/defineState';
+import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
 import { userService } from '@/services/UserService';
 
@@ -151,15 +151,14 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
 export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
-  const [loading, setLoading] = useRecoilState(loadingState);
-  const setDefineResult = useSetRecoilState(defineState);
+  const setLoading = useSetRecoilState(loadingState);
+  const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
     navigate('/test/define/2');
   };
 
   const handleButton2Click = () => {
-    let client;
     const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
@@ -170,27 +169,21 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       stage_three_keywords: selectedChips3,
     };
 
-    setLoading({
-      ...loading,
-      showLoading: true,
-      handleCompleted: () => {
-        navigate('/test/define/result');
-      },
-    });
+    setLoading(true);
 
-    if (userService.getUserState() === 'NON_MEMBER') {
-      client = noAuthClient;
-    } else {
-      client = authClient;
-    }
-
-    client
-      .post('/api/personas/define', requestData)
+    personaAPI
+      .register(userService.getUserState() === 'MEMBER', requestData)
       .then((response) => {
-        const { code, message } = response.data;
+        const { code, message, payload } = response;
+
         if (code === '201') {
           console.log('페르소나 생성 성공');
-          setDefineResult(response.data.payload);
+          setLoadingHandler({
+            ...loadingHandler,
+            handleCompleted: () => {
+              navigate(`/test/define/${payload.define_persona_id}`);
+            },
+          });
         } else {
           console.error('페르소나 생성 실패:', message);
         }
@@ -198,7 +191,6 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       .catch((error) => {
         console.error('페르소나 생성 요청 실패:', error);
         window.alert('페르소나 생성 요청 실패');
-        navigate('/test/define/1');
       });
   };
 

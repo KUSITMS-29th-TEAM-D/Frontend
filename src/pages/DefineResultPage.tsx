@@ -1,15 +1,31 @@
-import { Navigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
 import { CardSection } from '@/components/DefineResultPage/CardSection';
 import { DescriptionSection } from '@/components/DefineResultPage/DescriptionSection';
-import { defineState } from '@/recoil/defineState';
+import { DefineResult } from '@/types/test.type';
 
 export const DefineResultPage = () => {
-  const defineResult = useRecoilValue(defineState);
+  const { defineId } = useParams();
+  const [defineResult, setDefineResult] = useState<DefineResult | undefined>(undefined);
+  const navigate = useNavigate();
 
-  if (!defineResult) return <Navigate to="/" replace />;
+  useEffect(() => {
+    personaAPI
+      .getPersona(defineId || '')
+      .then((res) => {
+        setDefineResult(res.payload);
+      })
+      .catch(() => {
+        navigate('test/define');
+      });
+  }, []);
+
+  // TODO: 로딩 화면 만들기
+  if (!defineResult) return <StyledLoading>로딩 중</StyledLoading>;
 
   return (
     <StyledContainer>
@@ -29,6 +45,12 @@ export const DefineResultPage = () => {
     </StyledContainer>
   );
 };
+
+const StyledLoading = styled.div`
+  height: 100vh;
+  padding-top: 90px;
+  padding-left: 20px;
+`;
 
 const StyledContainer = styled.section`
   min-height: 100vh;

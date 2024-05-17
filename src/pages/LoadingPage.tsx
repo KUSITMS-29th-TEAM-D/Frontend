@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as Logo } from '@/assets/logos/logo3d.svg';
+import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
 
 export const LoadingPage = () => {
   const [progress, setProgress] = useState(0);
-  const [loading, setLoading] = useRecoilState(loadingState);
+  const setLoading = useSetRecoilState(loadingState);
+  const loadingHandler = useRecoilValue(loadingHandlerState);
   const interval = 50;
 
   useEffect(() => {
@@ -30,10 +32,10 @@ export const LoadingPage = () => {
 
   useEffect(() => {
     if (progress >= 100) {
-      loading.handleCompleted();
-      setLoading({ ...loading, showLoading: false });
+      loadingHandler.handleCompleted();
+      setLoading(false);
     }
-  }, [progress, loading, setLoading]);
+  }, [progress]);
 
   return (
     <StyledContainer>
