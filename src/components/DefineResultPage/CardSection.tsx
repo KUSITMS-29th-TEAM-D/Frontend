@@ -6,7 +6,7 @@ import { ReactComponent as ChangeIcon } from '@/assets/icons/change.svg';
 import { DownloadButton, KakaoShareButton } from '@/components/DefineResultPage/Button';
 import { deviceSizes } from '@/styles/theme/device';
 import { DefineResult } from '@/types/test.type';
-import { kakoShare } from '@/utils/kakoShare';
+import { kakaoShare } from '@/utils/kakaoShare';
 
 interface CardSectionProps {
   result: DefineResult;
@@ -33,7 +33,7 @@ export const CardSection = ({ result }: CardSectionProps) => {
   };
 
   const handleShareResult = () => {
-    kakoShare();
+    kakaoShare(result.name, result.define_persona_id);
   };
 
   const handleClickImage = () => {
