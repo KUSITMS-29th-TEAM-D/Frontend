@@ -125,10 +125,13 @@ const StyledContainer = styled.div`
 `;
 
 const ViewContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   min-height: 700px;
-  background-size: cover;
-  background-position: right;
   background-image: url(${backgroundImg});
+  background-size: cover;
+  background-position: calc(50% - 220px) center;
 `;

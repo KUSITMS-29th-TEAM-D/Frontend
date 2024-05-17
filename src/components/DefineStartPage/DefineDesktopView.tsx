@@ -112,9 +112,8 @@ const Styled2Container = styled.div`
 `;
 
 export const ViewContainer = styled.div`
-  padding-top: 20px;
-
   height: 100vh;
+
   background-image: url(${backgroundImg});
   background-size: cover;
   display: flex;
