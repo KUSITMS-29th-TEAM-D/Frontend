@@ -2,8 +2,9 @@ export interface RecommendItems {
   id: number;
   img: string;
   title: string;
-  keywords: string[];
-  hot: boolean;
+  subtitle: string;
+  keywords?: string[]; // 선택적으로 만들기
+  hot?: boolean; // 선택적으로 만들기
 }
 
 export interface FilterItems {
@@ -11,11 +12,4 @@ export interface FilterItems {
   contents: string[];
   selected: string[];
   setSelected: (newSelected: string[]) => void;
-}
-
-export interface ExperienceRecommendItems {
-  id: number;
-  img: string;
-  title: string;
-  subtitle: string;
 }
