@@ -204,6 +204,7 @@ export const WholeRecommendView = () => {
             imageUrl={item.img}
             title={item.title}
             subtitle={item.subtitle}
+            variant={'type1'}
           />
         ))}
       </Container>

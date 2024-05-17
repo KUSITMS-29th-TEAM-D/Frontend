@@ -27,10 +27,7 @@ const Tab = styled.div<{ isActive: boolean }>`
 
   & > div {
     color: ${({ isActive }) => (isActive ? '#915AFB' : '#8B8B8B')};
-    font-size: ${({ isActive }) => (isActive ? '20px' : '18px')};
-    font-family: 'Spoqa Han Sans Neo';
-    font-weight: ${({ isActive }) => (isActive ? 700 : 500)};
-    line-height: 28px;
+    ${({ theme }) => theme.font.desktop.body1m};
     word-wrap: break-word;
   }
 `;

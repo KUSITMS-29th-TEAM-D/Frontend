@@ -14,6 +14,11 @@ const FixedWidthContainer = styled.div`
   margin: 0 auto;
 `;
 
+const BackgroundWrapper = styled.div<{ backgroundColor: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  padding: 20px 0;
+`;
+
 export const ExperienceRecommendTab = () => {
   const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
   const filters: FilterItems[] = [
@@ -25,69 +30,85 @@ export const ExperienceRecommendTab = () => {
       label: '전체',
       content: (
         <>
-          <RecommendSectionTemplate3
-            title={
-              <div>
-                내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
-              </div>
-            }
-            subTitle=""
-            backgroundColor={theme.color.white}
-            recommendItems={Dummy5}
-            filters={filters}
-          />
-          <RecommendSectionTemplate3
-            title={
-              <div>
-                내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
-              </div>
-            }
-            subTitle=""
-            backgroundColor={theme.color.gray100}
-            recommendItems={Dummy5}
-            filters={filters}
-          />
+          <BackgroundWrapper backgroundColor={theme.color.white}>
+            <FixedWidthContainer>
+              <RecommendSectionTemplate3
+                title={
+                  <div>
+                    내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
+                  </div>
+                }
+                subTitle=""
+                recommendItems={Dummy5}
+                filters={filters}
+                backgroundColor={''}
+              />
+            </FixedWidthContainer>
+          </BackgroundWrapper>
+          <BackgroundWrapper backgroundColor={theme.color.gray100}>
+            <FixedWidthContainer>
+              <RecommendSectionTemplate3
+                title={
+                  <div>
+                    내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
+                  </div>
+                }
+                subTitle=""
+                recommendItems={Dummy5}
+                filters={filters}
+                backgroundColor={''}
+              />
+            </FixedWidthContainer>
+          </BackgroundWrapper>
         </>
       ),
     },
     {
       label: '자기이해',
       content: (
-        <RecommendSectionTemplate2
-          title={
-            <div>
-              내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
-            </div>
-          }
-          subTitle=""
-          backgroundColor={theme.color.white}
-          recommendItems={Dummy6}
-          filters={filters}
-        />
+        <BackgroundWrapper backgroundColor={theme.color.white}>
+          <FixedWidthContainer>
+            <RecommendSectionTemplate2
+              title={
+                <div>
+                  내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
+                </div>
+              }
+              subTitle=""
+              recommendItems={Dummy6}
+              filters={filters}
+              backgroundColor={''}
+            />
+          </FixedWidthContainer>
+        </BackgroundWrapper>
       ),
     },
     {
       label: '브랜딩',
       content: (
-        <RecommendSectionTemplate2
-          title={
-            <div>
-              내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
-            </div>
-          }
-          subTitle=""
-          backgroundColor={theme.color.white}
-          recommendItems={Dummy6}
-          filters={filters}
-        />
+        <BackgroundWrapper backgroundColor={theme.color.white}>
+          <FixedWidthContainer>
+            <RecommendSectionTemplate2
+              title={
+                <div>
+                  내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
+                </div>
+              }
+              subTitle=""
+              recommendItems={Dummy6}
+              filters={filters}
+              backgroundColor={''}
+            />
+          </FixedWidthContainer>
+        </BackgroundWrapper>
       ),
     },
   ];
 
   return (
-    <FixedWidthContainer>
+    <div>
       <Tabs tabs={tabs} />
-    </FixedWidthContainer>
+    </div>
   );
 };
 
