@@ -28,8 +28,29 @@ export const CardSection = ({ result }: CardSectionProps) => {
     };
   }, []);
 
-  const handleDownloadImage = () => {
-    // TODO: 이미지 다운로드 기능 구현
+  const handleDownloadImage = async () => {
+    const imageUrls = [result.front_img_url, result.back_img_url];
+    const fileNames = [`${result.name}-front`, `${result.name}-back`];
+
+    imageUrls.forEach((imageUrl, index) => {
+      fetch(imageUrl, { mode: 'cors' })
+        .then((res) => res.blob())
+        .then((blob) => {
+          const blobUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = fileNames[index];
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(() => {
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(link);
+          }, 1000);
+        })
+        .catch((err) => {
+          console.error('err', err);
+        });
+    });
   };
 
   const handleShareResult = () => {
