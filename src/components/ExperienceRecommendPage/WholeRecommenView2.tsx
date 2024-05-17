@@ -8,7 +8,7 @@ const StyledSectionContainer = styled.div`
   height: 100%;
 
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 24px;
   display: flex;
@@ -19,6 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 24px;
 `;
 
 const Dummy4 = [

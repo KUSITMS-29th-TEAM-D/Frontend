@@ -25,18 +25,18 @@ export const RecommendSectionTemplate3 = ({
         <StyledTitle>
           <div className="user-info">{title}</div>
           <div className="intro">{subTitle}</div>
+          <StyledFilterContainer>
+            <button
+              className="refresh-button"
+              type="button"
+              onClick={() => {
+                filters.map((filter) => filter.setSelected([]));
+              }}
+            >
+              더보기
+            </button>
+          </StyledFilterContainer>
         </StyledTitle>
-        <StyledFilterContainer>
-          <button
-            className="refresh-button"
-            type="button"
-            onClick={() => {
-              filters.map((filter) => filter.setSelected([]));
-            }}
-          >
-            더보기
-          </button>
-        </StyledFilterContainer>
 
         <WholeRecommendView2 />
       </StyledSectionContainer>

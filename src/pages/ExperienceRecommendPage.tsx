@@ -21,7 +21,7 @@ export const ExperienceRecommendPage = () => {
 
 const StyledSectionContainer = styled(SectionContainer)`
   width: 100%;
-  padding: 64px;
+
   padding-top: 80px;
 
   display: flex;
