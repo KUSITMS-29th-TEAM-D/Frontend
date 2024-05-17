@@ -37,6 +37,7 @@ const Dummy4 = [
       '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
     keywords: ['소통하는', '감성있는', '평화로운'],
     hot: true,
+    path: '',
   },
   {
     id: 2,
@@ -45,6 +46,7 @@ const Dummy4 = [
       '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
     keywords: ['소통하는', '감성있는', '평화로운'],
     hot: true,
+    path: '',
   },
   {
     id: 3,
@@ -53,6 +55,7 @@ const Dummy4 = [
       '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
     keywords: ['소통하는', '감성있는', '평화로운'],
     hot: false,
+    path: '',
   },
   {
     id: 4,
@@ -61,6 +64,7 @@ const Dummy4 = [
       '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
     keywords: ['소통하는', '감성있는', '평화로운'],
     hot: false,
+    path: '',
   },
   {
     id: 5,
@@ -69,6 +73,7 @@ const Dummy4 = [
       '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
     keywords: ['소통하는', '감성있는', '평화로운'],
     hot: false,
+    path: '',
   },
 ];
 
@@ -118,11 +123,11 @@ export const HomePage = () => {
 
   return (
     <div style={{ minWidth: '1280px' }}>
-      <BrandingSection />
+      <BrandingSection isLoggedIn={!false} />
       <DiagnoseSection />
       <RecommendSectionTemplate
-        title="자기이해에 대한 교육을 듣고 싶다면?"
-        subTitle="셀피스는 나를 더 잘 알기위한 프로그램을 추천해요"
+        title="나의 브랜딩을 위해"
+        subTitle="셀피스는 나를 더 잘 알기위한 프로그램을 추천해요."
         backgroundColor={theme.color.white}
         recommendItems={Dummy4}
         filters={filters}
