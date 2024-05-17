@@ -111,7 +111,7 @@ const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 24px;
-  padding-top: 140px;
+  padding-top: 100px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -120,7 +120,7 @@ const StyledContainer = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     padding: 20px;
-    padding-top: 140px;
+    padding-top: 96px;
   }
 `;
 

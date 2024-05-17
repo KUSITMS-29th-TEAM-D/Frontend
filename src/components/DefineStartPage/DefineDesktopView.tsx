@@ -16,7 +16,10 @@ export const DefineDesktopView = () => {
         <Styled1Container>
           <TopContainer>
             <TitleTextContainer>
-              <TitleContainer>현재 당신은 어떤 사람인가요?</TitleContainer>
+              <TitleContainer>
+                <br />
+                현재 당신은 어떤 사람인가요?
+              </TitleContainer>
               <SubTitleContainer>
                 문항은 <span className="highlight">총 3문항</span>으로, 홀랜드 검사 이론을 기반으로
                 구성되어 있어요.
@@ -97,7 +100,7 @@ const Styled1Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 64px;
-  padding-top: 140px;
+  padding-top: 118px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -109,7 +112,9 @@ const Styled2Container = styled.div`
 `;
 
 export const ViewContainer = styled.div`
-  min-height: 100vh;
+  padding-top: 20px;
+
+  height: 100vh;
   background-image: url(${backgroundImg});
   background-size: cover;
   display: flex;
