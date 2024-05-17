@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import TestImage from '@/assets/test2.png';
-import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate1';
-import { RecommendSectionTemplate3 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate2';
+import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate2';
+import { RecommendSectionTemplate3 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate3';
 import Tabs from '@/components/common/Tab/Tab';
 import { theme } from '@/styles';
 import { FilterItems } from '@/types/recommend2.type';
