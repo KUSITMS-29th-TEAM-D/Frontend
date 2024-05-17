@@ -1,11 +1,18 @@
 import { useState } from 'react';
 
+import styled from 'styled-components';
+
 import TestImage from '@/assets/test2.png';
 import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate2';
 import { RecommendSectionTemplate3 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate3';
 import Tabs from '@/components/common/Tab/Tab';
 import { theme } from '@/styles';
 import { FilterItems } from '@/types/recommend2.type';
+
+const FixedWidthContainer = styled.div`
+  width: 1280px;
+  margin: 0 auto;
+`;
 
 export const ExperienceRecommendTab = () => {
   const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
@@ -78,9 +85,9 @@ export const ExperienceRecommendTab = () => {
   ];
 
   return (
-    <div>
+    <FixedWidthContainer>
       <Tabs tabs={tabs} />
-    </div>
+    </FixedWidthContainer>
   );
 };
 
