@@ -3,7 +3,7 @@ import { useState, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const TabContainer = styled.div`
-  width: 100%;
+  width: 1280px;
   height: 100%;
   padding-left: 64px;
   padding-right: 64px;
@@ -54,21 +54,31 @@ const Tabs = ({ tabs }: TabsProps) => {
   };
 
   return (
-    <div>
-      <TabContainer>
+    <>
+      <Container>
+        <TabContainer>
+          {tabs.map((tab, index) => (
+            <Tab key={index} isActive={value === index} onClick={() => handleChange(index)}>
+              <div>{tab.label}</div>
+            </Tab>
+          ))}
+        </TabContainer>
+      </Container>
+      <div>
         {tabs.map((tab, index) => (
-          <Tab key={index} isActive={value === index} onClick={() => handleChange(index)}>
-            <div>{tab.label}</div>
-          </Tab>
+          <TabPanel key={index} hidden={value !== index}>
+            {tab.content}
+          </TabPanel>
         ))}
-      </TabContainer>
-      {tabs.map((tab, index) => (
-        <TabPanel key={index} hidden={value !== index}>
-          {tab.content}
-        </TabPanel>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 
 export default Tabs;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

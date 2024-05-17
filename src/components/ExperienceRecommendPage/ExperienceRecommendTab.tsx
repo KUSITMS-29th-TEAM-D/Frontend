@@ -12,6 +12,7 @@ import { FilterItems } from '@/types/recommend2.type';
 const FixedWidthContainer = styled.div`
   width: 1280px;
   margin: 0 auto;
+  //display: flex;
 `;
 
 const BackgroundWrapper = styled.div<{ backgroundColor: string }>`

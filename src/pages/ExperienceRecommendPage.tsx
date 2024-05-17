@@ -30,6 +30,7 @@ const StyledSectionContainer = styled(SectionContainer)`
 
   text-align: center;
 `;
+
 const PageContainer = styled.div`
   width: 100%;
   height: 100%;
