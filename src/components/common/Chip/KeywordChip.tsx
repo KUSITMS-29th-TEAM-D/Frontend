@@ -48,16 +48,20 @@ const StyledKeywordChip = styled.button<{ $selected: boolean }>`
           background: ${theme.color.primary500};
           color: ${theme.color.white};
 
-          &:hover {
-            background: ${theme.color.primary600};
+          @media ${({ theme }) => theme.device.desktop} {
+            &:hover {
+              background: ${theme.color.primary600};
+            }
           }
         `
       : css`
           background: ${({ theme }) => theme.color.white};
           color: ${({ theme }) => theme.color.primary700};
 
-          &:hover {
-            background: ${({ theme }) => theme.color.primary100};
+          @media ${({ theme }) => theme.device.desktop} {
+            &:hover {
+              background: ${({ theme }) => theme.color.primary100};
+            }
           }
         `};
 `;
