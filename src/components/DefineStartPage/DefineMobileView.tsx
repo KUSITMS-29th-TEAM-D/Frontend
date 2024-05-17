@@ -21,7 +21,7 @@ export const DefineMobileView = () => {
                 문항은 <span className="highlight">총 3문항</span>으로,
                 <br /> 홀랜드 검사 이론을 기반으로 구성되어 있어요.
                 <br />
-                정의하기 테스트를 통해 나의 조각 유형을 도출하고,
+                정의하기 테스트를 통해 나의 조각 유형을 도출하고,{' '}
                 <span className="highlight">결과 카드</span>를 받아보세요!
               </SubTitleContainer>
             </TitleTextContainer>

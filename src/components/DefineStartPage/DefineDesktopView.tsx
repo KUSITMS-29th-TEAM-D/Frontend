@@ -24,7 +24,7 @@ export const DefineDesktopView = () => {
                 문항은 <span className="highlight">총 3문항</span>으로, 홀랜드 검사 이론을 기반으로
                 구성되어 있어요.
                 <br />
-                정의하기 테스트를 통해 나의 조각 유형을 도출하고,
+                정의하기 테스트를 통해 나의 조각 유형을 도출하고,{' '}
                 <span className="highlight">결과 카드</span>를 받아보세요!
               </SubTitleContainer>
             </TitleTextContainer>
@@ -50,7 +50,6 @@ export const DefineDesktopView = () => {
 
 const TitleTextContainer = styled.div`
   align-self: stretch;
-  //height: 172px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -102,7 +101,7 @@ const Styled1Container = styled.div`
   padding: 64px;
   padding-top: 118px;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 24px;
   display: inline-flex;
@@ -116,6 +115,7 @@ export const ViewContainer = styled.div`
 
   background-image: url(${backgroundImg});
   background-size: cover;
+  background-position: right;
   display: flex;
   overflow-x: auto;
 `;
