@@ -1,23 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 
-import html2canvas from 'html2canvas';
 import styled, { css } from 'styled-components';
 
 import { ReactComponent as ChangeIcon } from '@/assets/icons/change.svg';
-import { ReactComponent as DownloadIcon } from '@/assets/icons/download.svg';
-import { ReactComponent as KakaoIcon } from '@/assets/icons/kakaoIcon.svg';
-import { CARD_IMAGE } from '@/constants/card';
+import { DownloadButton, KakaoShareButton } from '@/components/DefineResultPage/Button';
 import { deviceSizes } from '@/styles/theme/device';
+import { DefineResult } from '@/types/test.type';
 import { kakoShare } from '@/utils/kakoShare';
 
 interface CardSectionProps {
-  piece: string;
+  result: DefineResult;
 }
 
-export const CardSection = ({ piece }: CardSectionProps) => {
+export const CardSection = ({ result }: CardSectionProps) => {
   const [isFront, setIsFront] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [isHover, setIsHover] = useState(false);
   const captureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -31,99 +28,54 @@ export const CardSection = ({ piece }: CardSectionProps) => {
     };
   }, []);
 
-  const handleSaveImage = () => {
-    if (!captureRef.current) return;
+  const handleDownloadImage = () => {
+    // TODO: 이미지 다운로드 기능 구현
+  };
 
-    const capture = captureRef.current;
-
-    html2canvas(capture, { scrollY: -window.scrollY }).then((canvas) => {
-      const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-      const link = document.createElement('a');
-      link.href = image;
-      link.download = `define-result-${isFront ? 'front' : 'back'}.jpg`;
-      link.click();
-    });
+  const handleShareResult = () => {
+    kakoShare();
   };
 
   const handleClickImage = () => {
     if (windowWidth < deviceSizes.desktop) {
-      setIsHover((prev) => !prev);
+      setIsFront((prev) => !prev);
     }
   };
 
   return (
     <StyledCardSection>
+      <div className="notice">
+        {windowWidth >= deviceSizes.desktop
+          ? '카드에 마우스를 가져가 보세요!'
+          : '카드를 클릭해 보세요!'}
+      </div>
       <StyledImageContainer
         $desktop={windowWidth >= deviceSizes.desktop}
         onClick={handleClickImage}
       >
         <img
-          src={
-            CARD_IMAGE.find((card) => card.name === piece.toLowerCase())?.[
-              isFront ? 'front' : 'back'
-            ] || ''
-          }
+          src={isFront ? result.front_img_url : result.back_img_url}
           alt="card"
           ref={captureRef}
         />
-        {windowWidth < deviceSizes.desktop && isHover && (
-          <div className="hover-view">
-            <StyledChangeButton type="button" onClick={() => setIsFront((prev) => !prev)}>
-              <ChangeIcon />
-            </StyledChangeButton>
-            <StyleButtonContainer>
-              <button type="button" className="download-button" onClick={handleSaveImage}>
-                <DownloadIcon />
-                <span>이미지로 저장</span>
-                <div />
-              </button>
-              <button
-                type="button"
-                className="share-button"
-                onClick={() => {
-                  // TODO: 인자값 수정 필요
-                  kakoShare();
-                }}
-              >
-                <KakaoIcon />
-                <span>카카오로 공유</span>
-                <div />
-              </button>
-            </StyleButtonContainer>
-          </div>
-        )}
         {windowWidth >= deviceSizes.desktop && (
           <div className="hover-view">
             <StyledChangeButton type="button" onClick={() => setIsFront((prev) => !prev)}>
               <ChangeIcon />
             </StyledChangeButton>
             <StyleButtonContainer>
-              <button type="button" className="download-button" onClick={handleSaveImage}>
-                <DownloadIcon />
-                <span>이미지로 저장</span>
-                <div />
-              </button>
-              <button
-                type="button"
-                className="share-button"
-                onClick={() => {
-                  // TODO: 인자값 수정 필요
-                  kakoShare();
-                }}
-              >
-                <KakaoIcon />
-                <span>카카오로 공유</span>
-                <div />
-              </button>
+              <DownloadButton desktop onClick={handleDownloadImage} />
+              <KakaoShareButton onClick={handleShareResult} />
             </StyleButtonContainer>
           </div>
         )}
       </StyledImageContainer>
-      <div className="notice">
-        {windowWidth >= deviceSizes.desktop
-          ? '카드에 마우스를 가져가 보세요!'
-          : '카드를 클릭해 보세요!'}
-      </div>
+      {windowWidth < deviceSizes.desktop && (
+        <StyledMobileButtonContainer>
+          <KakaoShareButton onClick={handleShareResult} />
+          <DownloadButton onClick={handleDownloadImage} />
+        </StyledMobileButtonContainer>
+      )}
     </StyledCardSection>
   );
 };
@@ -131,20 +83,18 @@ export const CardSection = ({ piece }: CardSectionProps) => {
 const StyledCardSection = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
+  width: 100%;
 
   .notice {
     text-align: center;
-    ${({ theme }) => theme.font.desktop.label1m};
+    ${({ theme }) => theme.font.mobile.body1m};
     color: ${({ theme }) => theme.color.primary700};
-    margin-top: 12px;
 
-    @media ${({ theme }) => theme.device.tablet} {
-      ${({ theme }) => theme.font.mobile.label1m};
-    }
-
-    @media ${({ theme }) => theme.device.mobile} {
-      ${({ theme }) => theme.font.mobile.label1m};
+    @media ${({ theme }) => theme.device.desktop} {
+      ${({ theme }) => theme.font.mobile.title2};
     }
   }
 `;
@@ -222,46 +172,18 @@ const StyleButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+`;
 
-  button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+const StyledMobileButtonContainer = styled.div`
+  width: 100%;
+  max-width: 764px;
 
-    height: 48px;
-    padding: 8px 16px;
-    border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
 
-    span {
-      ${({ theme }) => theme.font.desktop.label1m};
-    }
-  }
-
-  .download-button {
-    background: ${({ theme }) => theme.color.primary50};
-
-    span {
-      color: ${({ theme }) => theme.color.primary700};
-    }
-
-    &:hover {
-      background: ${({ theme }) => theme.color.primary100};
-    }
-  }
-
-  .share-button {
-    background: #fee500;
-
-    span {
-      color: #191600;
-    }
-
-    &:hover {
-      filter: brightness(80%);
-    }
-  }
-
-  div {
-    width: 24px;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column-reverse;
+    gap: 8px;
   }
 `;
