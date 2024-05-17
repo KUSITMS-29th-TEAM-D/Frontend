@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { personaAPI } from '@/apis/personaAPI';
 import { CardSection } from '@/components/DefineResultPage/CardSection';
 import { DescriptionSection } from '@/components/DefineResultPage/DescriptionSection';
+import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefineResult } from '@/types/test.type';
 
 export const DefineResultPage = () => {
@@ -33,14 +34,22 @@ export const DefineResultPage = () => {
         <StyledTitle>
           <div className="description">정의하기 테스트의 결과에요!</div>
           <div className="result">
-            <span>{defineResult.comment.split(',')[0]}, </span>
-            <span className="highlight">{defineResult.comment.split(',')[1]}</span>
+            <div>{defineResult.comment.split(',')[0]}, </div>
+            <div className="highlight">{defineResult.comment.split(',')[1]}</div>
           </div>
         </StyledTitle>
         <StyledContent>
-          <CardSection piece={defineResult.comment.split(/\(|\)/)[1]} />
+          <CardSection result={defineResult} />
           <DescriptionSection result={defineResult} />
         </StyledContent>
+        <StyledPlainButton
+          variant="primary2"
+          onClick={() => {
+            navigate('/test/define/1');
+          }}
+        >
+          다시 테스트 하기
+        </StyledPlainButton>
       </StyledInnerContainer>
     </StyledContainer>
   );
@@ -71,17 +80,16 @@ const StyledContainer = styled.section`
 `;
 
 const StyledInnerContainer = styled.div`
-  width: fit-content;
   margin: 0 auto;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
 `;
 
 const StyledTitle = styled.div`
   text-align: center;
+  margin-bottom: 56px;
 
   .description {
     ${({ theme }) => theme.font.desktop.body1b};
@@ -96,9 +104,15 @@ const StyledTitle = styled.div`
     .highlight {
       color: ${({ theme }) => theme.color.primary500};
     }
+
+    @media ${({ theme }) => theme.device.desktop} {
+      display: flex;
+      gap: 7px;
+    }
   }
 
   @media ${({ theme }) => theme.device.tablet} {
+    margin-bottom: 28px;
     .description {
       ${({ theme }) => theme.font.mobile.body1b};
     }
@@ -111,6 +125,7 @@ const StyledTitle = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
+    margin-bottom: 28px;
     .description {
       ${({ theme }) => theme.font.mobile.body1b};
     }
@@ -125,19 +140,25 @@ const StyledTitle = styled.div`
 
 const StyledContent = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 36px;
-  height: 458px;
-  width: fit-content;
+  align-items: center;
+
+  width: 100%;
+  height: auto;
+`;
+
+const StyledPlainButton = styled(PlainButton)`
+  width: 376px;
+  height: 48px;
+  margin-top: 36px;
 
   @media ${({ theme }) => theme.device.tablet} {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
+    margin-top: 28px;
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
+    width: 100%;
+    margin-top: 28px;
   }
 `;
