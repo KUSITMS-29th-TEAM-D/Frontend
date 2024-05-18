@@ -186,6 +186,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
           });
         } else {
           console.error('페르소나 생성 실패:', message);
+          setLoading(false);
         }
       })
       .catch((error) => {
