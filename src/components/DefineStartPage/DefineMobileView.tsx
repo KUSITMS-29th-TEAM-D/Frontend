@@ -133,5 +133,5 @@ const ViewContainer = styled.div`
   min-height: 700px;
   background-image: url(${backgroundImg});
   background-size: cover;
-  background-position: calc(50% - 220px) center;
+  background-position: center;
 `;

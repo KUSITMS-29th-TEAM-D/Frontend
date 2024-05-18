@@ -33,22 +33,23 @@ export const Router = () => {
           </Route> */}
         </Route>
       </Route>
-      <Route path="/test" element={<TestLayout />}>
-        <Route element={<ExceptPreMemberRoute />}>
-          <Route index element={<Navigate to="define/start" replace />}></Route>
-          <Route path="define/start" element={<DefineStartPage />} />
-          <Route path="define/1" element={<DefineTestPage1 />} />
-          <Route path="define/2" element={<DefineTestPage2 />} />
-          <Route path="define/3" element={<DefineTestPage3 />} />
-          <Route path="define/result" element={<DefineResultPage />} />
-          <Route path="design/1" element={<DesignTestPage1 />} />
-          <Route path="design/2" element={<DesignTestPage2 />} />
-          <Route path="design/3" element={<DesignTestPage3 />} />
-          <Route path="design/4" element={<DesignTestPage4 />} />
-          <Route path="design/5" element={<DesignTestPage5 />} />
+      <Route path="test" element={<TestLayout />}>
+        <Route path="define">
+          <Route index element={<Navigate to="start" replace />}></Route>
+          <Route path="start" element={<DefineStartPage />} />
+          <Route path="1" element={<DefineTestPage1 />} />
+          <Route path="2" element={<DefineTestPage2 />} />
+          <Route path="3" element={<DefineTestPage3 />} />
+          <Route path=":defineId" element={<DefineResultPage />} />
         </Route>
+        <Route path="design/1" element={<DesignTestPage1 />} />
+        <Route path="design/2" element={<DesignTestPage2 />} />
+        <Route path="design/3" element={<DesignTestPage3 />} />
+        <Route path="design/4" element={<DesignTestPage4 />} />
+        <Route path="design/5" element={<DesignTestPage5 />} />
       </Route>
       <Route path="/login" element={<RedirectPage />} />
+      <Route path="/tt" element={<DefineResultPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
