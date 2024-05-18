@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-/* import { MainLayout } from '@/components/common/Layout/MainLayout'; */
+import { MainLayout } from '@/components/common/Layout/MainLayout';
 import { TestLayout } from '@/components/common/Layout/TestLayout';
 import { DefineResultPage } from '@/pages/DefineResultPage';
 import { DefineStartPage } from '@/pages/DefineStartPage';
@@ -11,28 +11,28 @@ import { DefineTestPage1, DefineTestPage2, DefineTestPage3 } from '@/pages/Defin
   DesignTestPage3,
   DesignTestPage4,
   DesignTestPage5,
-} from '@/pages/DesignTestPage';
+} from '@/pages/DesignTestPage'; */
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { OnboardingPage } from '@/pages/OnboardingPage';
-import { RedirectPage } from '@/pages/RedirectPage';
+/* import { RedirectPage } from '@/pages/RedirectPage'; */
 import { SelfUnderstandPage } from '@/pages/SelfUnderstandPage';
-import { ExceptPreMemberRoute } from '@/routers/ExceptPreMemberRoute'; */
+import { ExceptPreMemberRoute } from '@/routers/ExceptPreMemberRoute';
 
 export const Router = () => {
   return (
     <Routes>
-      {/* <Route element={<MainLayout />}>
+      <Route element={<MainLayout />}>
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route element={<ExceptPreMemberRoute />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<LoginPage />} />
           <Route path="/understand" element={<SelfUnderstandPage />} />
-          // <Route element={<MemberPrivateRoute />}>
+          {/* // <Route element={<MemberPrivateRoute />}>
             //<Route path="/mypage" element={<MyPage />} />
-          //</Route>
+          //</Route> */}
         </Route>
-      </Route> */}
+      </Route>
       <Route path="test" element={<TestLayout />}>
         <Route path="define">
           <Route index element={<Navigate to="1" replace />}></Route>
