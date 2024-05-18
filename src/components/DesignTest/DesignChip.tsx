@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as Instagram } from '@/assets/icons/instagram.svg';
-import { ReactComponent as LinkedIn } from '@/assets/icons/linkedin.svg';
+import { ReactComponent as LinkedIn } from '@/assets/icons/linkedIn.svg';
 import { ReactComponent as Medium } from '@/assets/icons/medium.svg';
-import { ReactComponent as NaverBlog } from '@/assets/icons/naverblog.svg';
+import { ReactComponent as NaverBlog } from '@/assets/icons/naverBlog.svg';
 import { ReactComponent as Pinterest } from '@/assets/icons/pinterest.svg';
 import { ReactComponent as YouTube } from '@/assets/icons/youtube.svg';
 import {
