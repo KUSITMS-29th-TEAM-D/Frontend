@@ -12,6 +12,7 @@ import { userService } from '@/services/UserService';
 
 const MENU_VISIBLE_PATHS = ['/auth', '/onboarding'];
 
+// TODO: 모바일 뷰 디자인 수정
 export const TopNavigation = () => {
   const loggedIn = !!userService.getUser();
   const [showSideNav, setShowSideNav] = useState(false);
@@ -52,14 +53,16 @@ export const TopNavigation = () => {
           )}
         </StyledMenuContainer>
       )}
-      <StyledSideNavButton
-        onClick={() => {
-          //TODO: 마이페이지로 이동하도록 수정
-          setShowSideNav((prev) => !prev);
-        }}
-      >
-        <MenuIcon />
-      </StyledSideNavButton>
+      {!MENU_VISIBLE_PATHS.includes(location.pathname) && (
+        <StyledSideNavButton
+          onClick={() => {
+            //TODO: 마이페이지로 이동하도록 수정
+            setShowSideNav((prev) => !prev);
+          }}
+        >
+          <MenuIcon />
+        </StyledSideNavButton>
+      )}
       {showSideNav && <SideNavigation isLoggedIn={loggedIn} setOpen={setShowSideNav} />}
     </StyledContainer>
   );
