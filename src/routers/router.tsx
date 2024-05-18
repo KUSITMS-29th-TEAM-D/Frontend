@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { MainLayout } from '@/components/common/Layout/MainLayout';
 import { TestLayout } from '@/components/common/Layout/TestLayout';
 import { DefineResultPage } from '@/pages/DefineResultPage';
+import { DefineStartPage } from '@/pages/DefineStartPage';
 import { DefineTestPage1, DefineTestPage2, DefineTestPage3 } from '@/pages/DefineTestPage';
 import {
   DesignTestPage1,
@@ -34,7 +35,8 @@ export const Router = () => {
       </Route>
       <Route path="/test" element={<TestLayout />}>
         <Route element={<ExceptPreMemberRoute />}>
-          <Route index element={<Navigate to="define/1" replace />}></Route>
+          <Route index element={<Navigate to="define/start" replace />}></Route>
+          <Route path="define/start" element={<DefineStartPage />} />
           <Route path="define/1" element={<DefineTestPage1 />} />
           <Route path="define/2" element={<DefineTestPage2 />} />
           <Route path="define/3" element={<DefineTestPage3 />} />
