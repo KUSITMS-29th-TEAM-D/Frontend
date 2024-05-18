@@ -34,7 +34,7 @@ export const INTEREST_LIST = [
   '기타',
 ];
 
-export const KEYWORD_LIST = [
+export const IMAGE_KEYWORD_LIST = [
   '긍정적인',
   '열정적인',
   '책임감있는',
