@@ -32,6 +32,7 @@ const StyledContainer = styled.div<PlatformProps>`
   align-items: center;
   gap: 16px;
   display: inline-flex;
+  cursor: pointer;
 
   border: 2px solid
     ${(props) => (props.state === 1 ? props.theme.color.gray200 : props.theme.color.primary600)};

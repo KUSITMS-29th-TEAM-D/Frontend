@@ -135,8 +135,8 @@ export const DesignChips3 = () => {
 
   useEffect(() => {
     const activeCount = chipStates.filter((state) => state === 2).length;
-    setWarning(activeCount < 1 || activeCount > 3);
-    setWarningMessage(activeCount > 3);
+    setWarning(activeCount < 1 || activeCount > 5);
+    setWarningMessage(activeCount > 5);
   }, [chipStates]);
 
   const handleToggle = (index: number) => {
