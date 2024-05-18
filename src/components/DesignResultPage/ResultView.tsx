@@ -1,25 +1,23 @@
 import styled from 'styled-components';
 
 import BackgroundImg from '@/assets/backgrounds/designResultBackground.png';
-
-const Dummy = {
-  name: '민선',
-  brand: '학교 생활 열심히 하며\n수익도 내는 20대 갓생 유튜버',
-};
+import { userService } from '@/services/UserService';
 
 interface ResultViewProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  definition: string;
 }
 
-export const ResultView = ({ children, ...props }: ResultViewProps) => {
+export const ResultView = ({ children, definition, ...props }: ResultViewProps) => {
   return (
     <StyledContainer {...props}>
       <StyledInnerContainer {...props}>
         <StyledContent>
           <div className="title">
-            <span className="highlight">{Dummy.name}</span>님은 이런 브랜드가 되고 싶군요!
+            <span className="highlight">{userService.getUserNickname()}</span>님은 이런 브랜드가
+            되고 싶군요!
           </div>
-          <div className="brand">“{Dummy.brand}”</div>
+          <div className="brand">“{definition}”</div>
           {children}
         </StyledContent>
       </StyledInnerContainer>
@@ -49,7 +47,7 @@ const StyledContent = styled.div`
   align-items: center;
   gap: 24px;
 
-  width: 933px;
+  width: 830px;
 
   .title {
     ${({ theme }) => theme.font.desktop.title2};
@@ -63,7 +61,7 @@ const StyledContent = styled.div`
   .brand {
     ${({ theme }) => theme.font.desktop.h2};
     color: ${({ theme }) => theme.color.primary600};
-    white-space: pre-line;
+    word-break: keep-all;
     text-align: center;
     margin-bottom: 32px;
   }

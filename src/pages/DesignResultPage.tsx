@@ -1,21 +1,35 @@
+import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
+import { personaAPI } from '@/apis/personaAPI';
 import { ResultView } from '@/components/DesignResultPage/ResultView';
 import { PlainButton } from '@/components/common/Button/PlainButton';
+import { DesignResult } from '@/types/test.type';
 
 export const DesignResultPage = () => {
   const navigate = useNavigate();
+  const [persona, setPersona] = useState<DesignResult | null>(null);
+  // API 호출
+  useEffect(() => {
+    personaAPI.getPersonaDesign().then((res) => {
+      setPersona(res.data.payload);
+    });
+  }, []);
 
-  return (
-    <ResultView style={{ minHeight: '100vh' }}>
-      <PlainButton
-        variant="gray"
-        width="597px"
-        height="48px"
-        onClick={() => navigate('/test/design/1')}
-      >
-        다시 설정하기
-      </PlainButton>
-    </ResultView>
-  );
+  if (!persona)
+    return (
+      <ResultView style={{ minHeight: '100vh' }} definition={persona.definition}>
+        <PlainButton
+          variant="gray"
+          width="597px"
+          height="48px"
+          onClick={() => navigate('/test/design/1')}
+        >
+          다시 설정하기
+        </PlainButton>
+      </ResultView>
+    );
+
+  return null;
 };

@@ -1,11 +1,20 @@
+import { useEffect, useState } from 'react';
+
+import { personaAPI } from '@/apis/personaAPI';
 import { ResultView } from '@/components/DesignResultPage/ResultView';
+import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplate';
+import { DesignResult } from '@/types/test.type';
 
 export const DesignResultView = () => {
-  // API 호출
+  const [persona, setPersona] = useState<DesignResult | null>(null);
 
-  // 결과가 있을 경우
-  return <ResultView style={{ height: '644px' }} />;
+  useEffect(() => {
+    personaAPI.getPersonaDesign().then((res) => {
+      setPersona(res.data.payload);
+    });
+  }, []);
 
-  // 결과가 없을 경우
-  //return <NoResultSection tab="Design" />;
+  if (persona) return <ResultView style={{ height: '644px' }} definition={persona.definition} />;
+
+  return <NoResultSection tab="Design" />;
 };

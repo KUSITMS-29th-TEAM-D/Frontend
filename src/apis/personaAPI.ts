@@ -24,4 +24,9 @@ export const personaAPI = {
     const response = await authClient.get('/api/personas/define');
     return response.data;
   },
+  // 설계하기 페르소나 조회
+  getPersonaDesign: async () => {
+    const response = await authClient.get('/api/personas/design');
+    return response.data;
+  },
 };
