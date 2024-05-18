@@ -8,7 +8,7 @@ export const DefineDesktopView = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/test/define/1');
+    navigate('/test/define/2');
   };
   return (
     <div>

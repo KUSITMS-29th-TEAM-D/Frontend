@@ -143,7 +143,7 @@ const DefineComponent = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/test/define/start');
+    navigate('/test/define/1');
   };
 
   return (

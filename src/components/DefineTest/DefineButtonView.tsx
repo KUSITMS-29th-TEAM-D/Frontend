@@ -68,7 +68,7 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButtonClick = () => {
-    navigate('/test/define/2');
+    navigate('/test/define/3');
   };
 
   useEffect(() => {
@@ -106,11 +106,11 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButton1Click = () => {
-    navigate('/test/define/1');
+    navigate('/test/define/2');
   };
 
   const handleButton2Click = () => {
-    navigate('/test/define/3');
+    navigate('/test/define/4');
   };
 
   useEffect(() => {
@@ -155,7 +155,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
-    navigate('/test/define/2');
+    navigate('/test/define/3');
   };
 
   const handleButton2Click = () => {
