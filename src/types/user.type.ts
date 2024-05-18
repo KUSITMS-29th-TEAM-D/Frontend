@@ -7,6 +7,7 @@ export interface UserInformation {
 
 export interface User {
   nickname: string;
+  is_test: boolean;
 }
 
 export interface OnboardingRequest {
