@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 
 import { ReactComponent as ChangeIcon } from '@/assets/icons/change.svg';
 import { DownloadButton, KakaoShareButton } from '@/components/DefineResultPage/Button';
+import { CARD_IMAGE } from '@/constants/card';
 import { deviceSizes } from '@/styles/theme/device';
 import { DefineResult } from '@/types/test.type';
 import { kakaoShare } from '@/utils/kakaoShare';
@@ -65,7 +66,11 @@ export const CardSection = ({ result }: CardSectionProps) => {
         onClick={handleClickImage}
       >
         <img
-          src={`/src/assets/cards/${isFront ? 'front' : 'back'}/${result.name.toLowerCase()}.png`}
+          src={
+            CARD_IMAGE.find((card) => card.name === result.name.toLowerCase())?.[
+              isFront ? 'front' : 'back'
+            ] || ''
+          }
           alt="card"
           ref={captureRef}
         />
