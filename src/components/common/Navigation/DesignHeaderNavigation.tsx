@@ -70,7 +70,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const TestNavigation = () => {
+const DesignHeaderNavigation = () => {
   //const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -80,11 +80,11 @@ const TestNavigation = () => {
   return (
     <StyledContainer>
       <Container>
-        <Title>Define 정의하기</Title>
+        <Title>Design 설계하기</Title>
         <StyledButton onClick={handleButtonClick}>종료하기</StyledButton>
       </Container>
     </StyledContainer>
   );
 };
 
-export default TestNavigation;
+export default DesignHeaderNavigation;
