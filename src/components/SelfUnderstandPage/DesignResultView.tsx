@@ -1,6 +1,11 @@
-import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplate';
+import { ResultView } from '@/components/DesignResultPage/ResultView';
 
 export const DesignResultView = () => {
-  // API 호출 결과 시, 검사 안했다면
-  return <NoResultSection tab="Design" />;
+  // API 호출
+
+  // 결과가 있을 경우
+  return <ResultView style={{ height: '644px' }} />;
+
+  // 결과가 없을 경우
+  //return <NoResultSection tab="Design" />;
 };
