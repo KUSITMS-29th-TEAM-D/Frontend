@@ -18,6 +18,7 @@ export const CardSection = ({ result }: CardSectionProps) => {
   const captureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    console.log(result);
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -31,6 +32,10 @@ export const CardSection = ({ result }: CardSectionProps) => {
   const handleDownloadImage = async () => {
     const imageUrls = [result.front_img_url, result.back_img_url];
     const fileNames = [`${result.name}-front`, `${result.name}-back`];
+    /* const imageUrls = [
+      'https://kr.object.ncloudstorage.com/coolpiece-bucket/Connector_front.png',
+      result.back_img_url,
+    ]; */
 
     imageUrls.forEach((imageUrl, index) => {
       fetch(imageUrl, { mode: 'cors' })
