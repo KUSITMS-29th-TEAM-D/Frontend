@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
+import { CardCarousel } from '@/components/HomePage/CardCarousel';
 import { PreviewCard } from '@/components/common/Card/PreviewCard';
-import { Carousel } from '@/components/common/Carousel';
-/* import { Dropdown } from '@/components/common/Dropdown/Dropdown'; */
 import { SectionContainer } from '@/styles';
-import { FilterItems, RecommendItems } from '@/types/recommend.type';
+import { RecommendItems } from '@/types/recommend.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
   recommendItems: RecommendItems[];
-  filters: FilterItems[];
+  refreshHandler?: () => void;
+  children?: React.ReactNode;
 }
 
 export const RecommendSectionTemplate = ({
@@ -19,47 +19,36 @@ export const RecommendSectionTemplate = ({
   subTitle,
   backgroundColor,
   recommendItems,
+  refreshHandler,
+  children,
 }: RecommendSectionTemplateProps) => {
   return (
     <StyledContainer $backgroundColor={backgroundColor}>
       <StyledSectionContainer>
         <StyledTitle>
-          <div className="user-info">{title}</div>
-          <div className="intro">{subTitle}</div>
+          <div className="title">{title}</div>
+          <div className="subtitle">{subTitle}</div>
         </StyledTitle>
-        {/* <StyledFilterContainer>
-          <StyledDropdownContainer>
-            {filters.map((filter) => (
-              <Dropdown
-                key={filter.title}
-                title={filter.title}
-                contents={filter.contents}
-                selectedContents={filter.selected}
-                setSelectedContents={filter.setSelected}
-              />
-            ))}
-          </StyledDropdownContainer>
-          <button
-            className="refresh-button"
-            type="button"
-            onClick={() => {
-              filters.map((filter) => filter.setSelected([]));
-            }}
-          >
-            새로고침
-          </button>
-        </StyledFilterContainer> */}
-        <Carousel>
+        {children && (
+          <StyledFilterContainer>
+            <StyledChildrenContainer>{children}</StyledChildrenContainer>
+            <button className="refresh-button" type="button" onClick={refreshHandler}>
+              새로고침
+            </button>
+          </StyledFilterContainer>
+        )}
+        <CardCarousel>
           {recommendItems.map((item) => (
             <PreviewCard
               key={item.id}
               imageUrl={item.img}
               title={item.title}
               keywords={item.keywords}
-              hot
+              hot={item.hot}
+              path={item.path}
             />
           ))}
-        </Carousel>
+        </CardCarousel>
       </StyledSectionContainer>
     </StyledContainer>
   );
@@ -75,10 +64,11 @@ const StyledSectionContainer = styled(SectionContainer)`
 
 const StyledTitle = styled.div`
   margin-bottom: 48px;
-  .user-info {
-    margin-bottom: 10px;
 
-    ${({ theme }) => theme.font.desktop.h1};
+  .title {
+    margin-bottom: 4px;
+
+    ${({ theme }) => theme.font.desktop.h2};
     color: ${({ theme }) => theme.color.gray800};
 
     .highlight {
@@ -86,17 +76,17 @@ const StyledTitle = styled.div`
     }
   }
 
-  .intro {
-    ${({ theme }) => theme.font.desktop.title2};
+  .subtitle {
+    ${({ theme }) => theme.font.desktop.body1m};
     color: ${({ theme }) => theme.color.gray700};
   }
 `;
 
-/* const StyledFilterContainer = styled.div`
+const StyledFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-bottom: 27px;
+  margin-bottom: 32px;
 
   .refresh-button {
     ${({ theme }) => theme.font.desktop.body1m};
@@ -104,7 +94,8 @@ const StyledTitle = styled.div`
   }
 `;
 
-const StyledDropdownContainer = styled.div`
+const StyledChildrenContainer = styled.div`
   display: flex;
   gap: 12px;
-`; */
+  align-items: center;
+`;

@@ -1,10 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
+import { PlainButton } from '@/components/common/Button/PlainButton';
 import { CARD_IMAGE } from '@/constants/card';
 import { SectionContainer } from '@/styles';
 
-export const BrandingSection = () => {
+interface BrandingSectionProps {
+  isLoggedIn?: boolean;
+}
+
+export const BrandingSection = ({ isLoggedIn }: BrandingSectionProps) => {
+  const navigate = useNavigate();
+
   return (
     <StyledContainer>
       <StyledSectionContainer>
@@ -17,22 +25,39 @@ export const BrandingSection = () => {
             <br />
             셀피스와 함께 알아갈 수 있어요.
           </div>
+          {isLoggedIn && (
+            <PlainButton
+              variant="primary"
+              width="376px"
+              height="48px"
+              style={{ marginTop: '24px' }}
+              onClick={() => {
+                navigate('test/design');
+              }}
+            >
+              자기이해 바로가기
+            </PlainButton>
+          )}
         </StyledTitle>
         <AutoPlay>
           {CARD_IMAGE.concat(CARD_IMAGE)
             .concat(CARD_IMAGE)
             .map((card, index) => (
-              <StyledCard key={`${card.front} - ${index}`}>
+              <StyledCard key={`${card.name}-${index}`}>
                 <img src={card.front} className="front" alt="card" />
                 <img src={card.back} className="back" alt="card" />
               </StyledCard>
             ))}
         </AutoPlay>
-        <StyledContents>
-          이런 조각들로, 스스로의 적성을 파악하고
-          <br />내 브랜드의 차별전략을 수립해요
-          <ArrowIcon width="48px" />
-        </StyledContents>
+        {!isLoggedIn && (
+          <StyledContents>
+            <span>
+              이런 조각들로, 스스로의 적성을 파악하고
+              <br />내 브랜드의 차별전략을 수립해요
+            </span>
+            <ArrowIcon width="48px" />
+          </StyledContents>
+        )}
       </StyledSectionContainer>
     </StyledContainer>
   );
@@ -61,6 +86,8 @@ const StyledSectionContainer = styled(SectionContainer)`
 `;
 
 const StyledTitle = styled.div`
+  text-align: center;
+
   .title {
     margin-bottom: 16px;
 
@@ -73,7 +100,7 @@ const StyledTitle = styled.div`
   }
 
   .subtitle {
-    ${({ theme }) => theme.font.desktop.title1};
+    ${({ theme }) => theme.font.desktop.title2};
     color: ${({ theme }) => theme.color.gray800};
   }
 `;
@@ -138,13 +165,13 @@ const StyledCard = styled.div`
 `;
 
 const StyledContents = styled.div`
-  ${({ theme }) => theme.font.desktop.title1};
+  ${({ theme }) => theme.font.desktop.body1b};
   color: ${({ theme }) => theme.color.gray800};
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
 
   padding-top: 30px;
 `;
