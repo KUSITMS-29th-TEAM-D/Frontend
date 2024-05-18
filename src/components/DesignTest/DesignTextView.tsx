@@ -59,7 +59,10 @@ const ProgressWrapper = styled.div`
 
 const ProgressText = styled.div`
   ${({ theme }) => theme.font.desktop.body1b};
-  @media ${({ theme }) => theme.device.tablet && theme.device.mobile} {
+  @media ${({ theme }) => theme.device.tablet} {
+    ${({ theme }) => theme.font.mobile.body1b};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
     ${({ theme }) => theme.font.mobile.body1b};
   }
   word-wrap: break-word;

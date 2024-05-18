@@ -11,22 +11,23 @@ interface InputChipProps {
 const InputChipContainer = styled.div`
   width: 102px;
   height: 34px;
-  padding: 7px 16px 7px 12px;
+  padding: 7px 12px;
   background: ${({ theme }) => `${theme.color.gray100}`};
   border-radius: 8px;
-  overflow: hidden;
   border: 1px ${({ theme }) => `${theme.color.gray250}`} solid;
-  justify-content: flex-start;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  display: inline-flex;
 `;
 
 const InputField = styled.input`
   ${({ theme }) => theme.font.desktop.label1m};
   color: ${({ theme }) => `${theme.color.gray500}`};
-  word-wrap: break-word;
   background-color: transparent;
+  border: none;
+  outline: none;
+  min-width: 50px;
+  flex-grow: 1;
   &::placeholder {
     background-color: transparent;
   }
@@ -35,8 +36,7 @@ const InputField = styled.input`
 const IconContainer = styled.div<{ $showIcon: boolean }>`
   width: 16px;
   height: 16px;
-  position: relative;
-  display: ${(props) => (props.$showIcon ? 'inline-flex' : 'none')};
+  display: ${(props) => (props.$showIcon ? 'flex' : 'none')};
 `;
 
 const InputChip = ({ onAdd }: InputChipProps) => {

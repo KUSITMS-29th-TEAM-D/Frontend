@@ -56,7 +56,7 @@ export const CHIP_DATA3 = [
   '설득력',
   '그로스 마인드셋',
 ];
-export const CHIP_DATA4 = ['Youtube', 'Instagram', 'Linkedin', 'Pinterest', 'Medium', 'Naverblog'];
+export const CHIP_DATA4 = ['Youtube', 'Instagram', 'LinkedIn', 'Pinterest', 'Medium', 'Naver Blog'];
 
 export const CHIP_DATA5 = [
   '마케터',

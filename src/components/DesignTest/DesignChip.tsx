@@ -348,8 +348,8 @@ const PlatformContainer = styled.div`
 
 const ICON_MAP: { [key: string]: React.ReactNode } = {
   Youtube: <YouTube />,
-  Linkedin: <LinkedIn />,
-  Naverblog: <NaverBlog />,
+  LinkedIn: <LinkedIn />,
+  'Naver Blog': <NaverBlog />,
   Pinterest: <Pinterest />,
   Instagram: <Instagram />,
   Medium: <Medium />,
