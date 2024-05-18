@@ -18,7 +18,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
 `;
 
@@ -89,13 +89,6 @@ const Dummy4: DummyItem[] = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     variant: 'type1',
   },
-  {
-    id: 9,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
-    variant: 'type1',
-  },
 ];
 
 export const WholeRecommendView2 = () => {
@@ -108,7 +101,7 @@ export const WholeRecommendView2 = () => {
             imageUrl={item.img}
             title={item.title}
             subtitle={item.subtitle}
-            variant={item.variant}
+            $variant={item.variant}
           />
         ))}
       </Container>

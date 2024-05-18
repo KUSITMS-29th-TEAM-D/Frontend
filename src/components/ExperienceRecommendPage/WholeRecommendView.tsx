@@ -18,7 +18,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
 `;
 
@@ -160,41 +160,9 @@ const Dummy4 = [
     keywords: ['keyword1', 'keyword2'],
     hot: true,
   },
-  {
-    id: 18,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
 ];
 
 export const WholeRecommendView = () => {
-  /*const chunks = [];
-  for (let i = 0; i < Dummy4.length; i += 3) {
-    chunks.push(Dummy4.slice(i, i + 3));
-  }
-
-  return (
-    <StyledSectionContainer>
-      <OuterContainer></OuterContainer>
-      <Container>
-        {chunks.map((chunk, index) => (
-          <div key={index} style={{ display: 'flex', marginBottom: '20px', width: '100%' }}>
-            {chunk.map((item) => (
-              <ExperienceCard
-                key={item.id}
-                imageUrl={item.img}
-                title={item.title}
-                subtitle={item.subtitle}
-              />
-            ))}
-          </div>
-        ))}
-      </Container>
-    </StyledSectionContainer>
-  );*/
   return (
     <StyledSectionContainer>
       <Container>
@@ -204,7 +172,7 @@ export const WholeRecommendView = () => {
             imageUrl={item.img}
             title={item.title}
             subtitle={item.subtitle}
-            variant={'type1'}
+            $variant={'type1'}
           />
         ))}
       </Container>

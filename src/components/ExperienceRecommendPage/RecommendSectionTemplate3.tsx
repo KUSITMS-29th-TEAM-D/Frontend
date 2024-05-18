@@ -2,22 +2,20 @@ import styled from 'styled-components';
 
 import { WholeRecommendView2 } from '@/components/ExperienceRecommendPage/WholeRecommenView2';
 import { SectionContainer } from '@/styles';
-import { FilterItems, RecommendItems } from '@/types/recommend2.type';
+import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: RecommendItems[];
-  filters: FilterItems[];
+  recommendItems: ExperienceRecommendCards[];
+  filters: ExperienceFilterCards[];
 }
 
 export const RecommendSectionTemplate3 = ({
   title,
   subTitle,
   backgroundColor,
-
-  filters,
 }: RecommendSectionTemplateProps) => {
   return (
     <StyledContainer $backgroundColor={backgroundColor}>
@@ -27,10 +25,9 @@ export const RecommendSectionTemplate3 = ({
           <div className="intro">{subTitle}</div>
           <StyledFilterContainer>
             <button
-              className="refresh-button"
               type="button"
               onClick={() => {
-                filters.map((filter) => filter.setSelected([]));
+                //더보기 페이지(?)
               }}
             >
               더보기

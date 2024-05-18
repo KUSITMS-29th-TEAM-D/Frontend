@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { WholeRecommendView } from '@/components/ExperienceRecommendPage/WholeRecommendView';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { SectionContainer } from '@/styles';
-import { FilterItems, RecommendItems } from '@/types/recommend2.type';
+import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: RecommendItems[];
-  filters: FilterItems[];
+  recommendItems: ExperienceRecommendCards[];
+  filters: ExperienceFilterCards[];
 }
 
 export const RecommendSectionTemplate2 = ({
@@ -34,8 +34,8 @@ export const RecommendSectionTemplate2 = ({
                 key={filter.title}
                 title={filter.title}
                 contents={filter.contents}
-                selectedContents={filter.selected}
-                setSelectedContents={filter.setSelected}
+                selected={filter.selected}
+                placeholder={''}
               />
             ))}
           </StyledDropdownContainer>

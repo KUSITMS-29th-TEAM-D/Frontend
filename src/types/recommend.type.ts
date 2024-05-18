@@ -19,3 +19,19 @@ export interface ExperienceRecommendItems {
   title: string;
   subtitle: string;
 }
+
+export interface ExperienceRecommendCards {
+  id: number;
+  img: string;
+  title: string;
+  subtitle: string;
+  keywords?: string[];
+  hot?: boolean;
+}
+
+export interface ExperienceFilterCards {
+  title: string;
+  contents: string[];
+  selected: string[];
+  setSelected: (newSelected: string[]) => void;
+}

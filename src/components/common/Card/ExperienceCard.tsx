@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface StyledImageProps {
-  variant: 'type1' | 'type2';
+  $variant: 'type1' | 'type2';
 }
 
 const Container = styled.div`
@@ -13,11 +13,10 @@ const Container = styled.div`
   align-items: center;
   gap: 20px;
   overflow: hidden;
+  cursor: pointer;
 `;
 
-const ImageContainer = styled.div.attrs<StyledImageProps>(({ variant }) => ({
-  variant: variant,
-}))<StyledImageProps>`
+const ImageContainer = styled.div<StyledImageProps>`
   width: 368px;
   height: 230px;
   overflow: hidden;
@@ -27,8 +26,8 @@ const ImageContainer = styled.div.attrs<StyledImageProps>(({ variant }) => ({
   align-items: center;
   position: relative;
 
-  ${({ variant }) =>
-    variant === 'type2' &&
+  ${({ $variant }) =>
+    $variant === 'type2' &&
     css`
       &:hover {
         &::before {
@@ -43,7 +42,7 @@ const ImageContainer = styled.div.attrs<StyledImageProps>(({ variant }) => ({
           z-index: 1;
         }
 
-        ${LinkButtonOverlay} {
+        ${Overlay} {
           display: flex;
         }
       }
@@ -57,8 +56,8 @@ const StyledImage = styled.img<StyledImageProps>`
   transition: transform 0.3s ease-in-out;
 
   &:hover {
-    ${({ variant }) =>
-      variant === 'type1' &&
+    ${({ $variant }) =>
+      $variant === 'type1' &&
       css`
         transform: scale(1.1);
       `}
@@ -82,7 +81,6 @@ const Overlay = styled.div`
 `;
 
 const LinkButtonOverlay = styled.div`
-  display: none;
   align-self: stretch;
   height: 48px;
   padding: 8px 24px;
@@ -114,8 +112,8 @@ const TextContainer = styled.div`
 
 const TopText = styled.div<StyledImageProps>`
   text-align: center;
-  color: ${({ theme, variant }) =>
-    variant === 'type1' ? theme.color.primary600 : theme.color.secondary600};
+  color: ${({ theme, $variant }) =>
+    $variant === 'type1' ? theme.color.primary600 : theme.color.secondary600};
   ${({ theme }) => theme.font.desktop.label1m};
   word-wrap: break-word;
 `;
@@ -134,12 +132,13 @@ interface ExperienceCardProps extends StyledImageProps {
   subtitle: string;
   linkUrl?: string;
 }
-export const ExperienceCard = ({ imageUrl, title, subtitle, variant }: ExperienceCardProps) => {
+
+export const ExperienceCard = ({ imageUrl, title, subtitle, $variant }: ExperienceCardProps) => {
   return (
     <Container>
-      <ImageContainer variant={variant}>
-        <StyledImage src={imageUrl} alt="Card" variant={variant} />
-        {variant === 'type2' && (
+      <ImageContainer $variant={$variant}>
+        <StyledImage src={imageUrl} alt="Card" $variant={$variant} />
+        {$variant === 'type2' && (
           <Overlay>
             <LinkButtonOverlay>
               <div>외부 링크로 이동</div>
@@ -148,7 +147,7 @@ export const ExperienceCard = ({ imageUrl, title, subtitle, variant }: Experienc
         )}
       </ImageContainer>
       <TextContainer>
-        <TopText variant={variant}>{title}</TopText>
+        <TopText $variant={$variant}>{title}</TopText>
         <BottomText>{subtitle}</BottomText>
       </TextContainer>
     </Container>

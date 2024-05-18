@@ -15,29 +15,30 @@ const TabContainer = styled.div`
   gap: 16px;
 `;
 
-const Tab = styled.div<{ isActive: boolean }>`
+const Tab = styled.div<{ $isActive: boolean }>`
   padding: 20px 32px;
   background-color: ${({ theme }) => theme.color.white};
   justify-content: center;
   align-items: center;
   gap: 8px;
   display: flex;
-  border-bottom: ${({ isActive }) => (isActive ? '4px #915AFB solid' : 'none')};
+  border-bottom: ${({ $isActive }) => ($isActive ? '4px #915AFB solid' : 'none')};
   cursor: pointer;
 
   & > div {
-    color: ${({ isActive }) => (isActive ? '#915AFB' : '#8B8B8B')};
+    color: ${({ $isActive }) => ($isActive ? '#915AFB' : '#8B8B8B')};
     ${({ theme }) => theme.font.desktop.body1m};
     word-wrap: break-word;
   }
 `;
 
-const TabPanel = styled.div<{ hidden: boolean }>`
+const TabPanel = styled.div<{ $hidden: boolean }>`
   padding-bottom: 0px;
-  display: ${({ hidden }) => (hidden ? 'none' : 'block')};
+  display: ${({ $hidden }) => ($hidden ? 'none' : 'block')};
 `;
 
 interface TabItem {
+  id: string;
   label: string;
   content: ReactNode;
 }
@@ -58,7 +59,7 @@ const Tabs = ({ tabs }: TabsProps) => {
       <Container>
         <TabContainer>
           {tabs.map((tab, index) => (
-            <Tab key={index} isActive={value === index} onClick={() => handleChange(index)}>
+            <Tab key={tab.id} $isActive={value === index} onClick={() => handleChange(index)}>
               <div>{tab.label}</div>
             </Tab>
           ))}
@@ -66,7 +67,7 @@ const Tabs = ({ tabs }: TabsProps) => {
       </Container>
       <div>
         {tabs.map((tab, index) => (
-          <TabPanel key={index} hidden={value !== index}>
+          <TabPanel key={tab.id} $hidden={value !== index}>
             {tab.content}
           </TabPanel>
         ))}

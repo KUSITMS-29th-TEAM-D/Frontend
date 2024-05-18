@@ -7,31 +7,32 @@ import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/
 import { RecommendSectionTemplate3 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate3';
 import Tabs from '@/components/common/Tab/Tab';
 import { theme } from '@/styles';
-import { FilterItems } from '@/types/recommend2.type';
+
+import { ExperienceFilterCards } from './../../types/recommend.type';
 
 const FixedWidthContainer = styled.div`
   width: 1280px;
   margin: 0 auto;
-  //display: flex;
 `;
 
-const BackgroundWrapper = styled.div<{ backgroundColor: string }>`
-  background-color: ${({ backgroundColor }) => backgroundColor};
+const BackgroundWrapper = styled.div<{ $backgroundColor: string }>`
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   padding: 20px 0;
 `;
 
 export const ExperienceRecommendTab = () => {
   const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
-  const filters: FilterItems[] = [
+  const filters: ExperienceFilterCards[] = [
     { title: '분야', contents: Dummy2, selected: selectedField, setSelected: setSelectedField },
   ];
 
   const tabs = [
     {
+      id: 'tab1',
       label: '전체',
       content: (
         <>
-          <BackgroundWrapper backgroundColor={theme.color.white}>
+          <BackgroundWrapper $backgroundColor={theme.color.white}>
             <FixedWidthContainer>
               <RecommendSectionTemplate3
                 title={
@@ -46,7 +47,7 @@ export const ExperienceRecommendTab = () => {
               />
             </FixedWidthContainer>
           </BackgroundWrapper>
-          <BackgroundWrapper backgroundColor={theme.color.gray100}>
+          <BackgroundWrapper $backgroundColor={theme.color.gray100}>
             <FixedWidthContainer>
               <RecommendSectionTemplate3
                 title={
@@ -65,9 +66,10 @@ export const ExperienceRecommendTab = () => {
       ),
     },
     {
+      id: 'tab2',
       label: '자기이해',
       content: (
-        <BackgroundWrapper backgroundColor={theme.color.white}>
+        <BackgroundWrapper $backgroundColor={theme.color.white}>
           <FixedWidthContainer>
             <RecommendSectionTemplate2
               title={
@@ -85,9 +87,10 @@ export const ExperienceRecommendTab = () => {
       ),
     },
     {
+      id: 'tab3',
       label: '브랜딩',
       content: (
-        <BackgroundWrapper backgroundColor={theme.color.white}>
+        <BackgroundWrapper $backgroundColor={theme.color.white}>
           <FixedWidthContainer>
             <RecommendSectionTemplate2
               title={
