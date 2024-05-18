@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
-import { Chip } from '@/components/common/Chip/Chip';
+import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { CARD_IMAGE } from '@/constants/card';
 import { SectionContainer } from '@/styles';
 import { UserInformation } from '@/types/user.type';
@@ -35,9 +35,9 @@ export const PieceSection = ({ userInformation }: PieceSectionProps) => {
         <StyledContents>
           <div className="chips">
             {userInformation.chips.map((chip) => (
-              <Chip key={chip.content} primary>
+              <PlainChip key={chip.content} primary>
                 {chip.content}
-              </Chip>
+              </PlainChip>
             ))}
           </div>
           <div>
@@ -224,6 +224,7 @@ const StyledContents = styled.div`
   .chips {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap;
 
     padding-bottom: 38px;
   }

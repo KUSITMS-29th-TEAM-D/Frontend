@@ -18,8 +18,9 @@ export const RedirectPage = () => {
 
     if (registerToken) {
       authService.onLoginSuccess(registerToken);
+      authService.onSaveRegisterToken(registerToken);
       userService.setUser({ nickname: '' });
-      navigate('/'); // TODO: 온보딩 화면으로 이동하도록 수정
+      navigate('/onboarding');
     }
 
     if (accessToken) {

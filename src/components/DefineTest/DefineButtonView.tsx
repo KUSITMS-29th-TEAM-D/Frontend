@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { authClient } from '@/apis/client';
+import { personaAPI } from '@/apis/personaAPI';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { defineState } from '@/recoil/defineState';
+import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
+import { userService } from '@/services/UserService';
 
 interface Props {
   warning?: boolean;
@@ -46,6 +47,7 @@ const ChipContainer = styled.div`
 
   transform: translate(-50%, -100%);
 
+  width: max-content;
   padding: 8px 20px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => `${theme.color.secondary600}`};
@@ -66,7 +68,7 @@ export const DefineButtonView1 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButtonClick = () => {
-    navigate('/test/define/2');
+    navigate('/test/define/3');
   };
 
   useEffect(() => {
@@ -104,11 +106,11 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButton1Click = () => {
-    navigate('/test/define/1');
+    navigate('/test/define/2');
   };
 
   const handleButton2Click = () => {
-    navigate('/test/define/3');
+    navigate('/test/define/4');
   };
 
   useEffect(() => {
@@ -149,11 +151,11 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
 export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
-  const [loading, setLoading] = useRecoilState(loadingState);
-  const setDefineResult = useSetRecoilState(defineState);
+  const setLoading = useSetRecoilState(loadingState);
+  const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
-    navigate('/test/define/2');
+    navigate('/test/define/3');
   };
 
   const handleButton2Click = () => {
@@ -167,21 +169,21 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       stage_three_keywords: selectedChips3,
     };
 
-    setLoading({
-      ...loading,
-      showLoading: true,
-      handleCompleted: () => {
-        navigate('/test/define/result');
-      },
-    });
+    setLoading(true);
 
-    authClient
-      .post('/api/personas/define', requestData)
+    personaAPI
+      .register(userService.getUserState() === 'MEMBER', requestData)
       .then((response) => {
-        const { code, message } = response.data;
+        const { code, message, payload } = response;
+
         if (code === '201') {
           console.log('페르소나 생성 성공');
-          setDefineResult(response.data.payload);
+          setLoadingHandler({
+            ...loadingHandler,
+            handleCompleted: () => {
+              navigate(`/test/define/${payload.define_persona_id}`);
+            },
+          });
         } else {
           console.error('페르소나 생성 실패:', message);
         }
@@ -189,7 +191,6 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       .catch((error) => {
         console.error('페르소나 생성 요청 실패:', error);
         window.alert('페르소나 생성 요청 실패');
-        navigate('/test/define/1');
       });
   };
 

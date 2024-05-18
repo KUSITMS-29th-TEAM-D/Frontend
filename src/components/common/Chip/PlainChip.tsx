@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
-interface ChipProps {
+interface PlainChipProps {
   primary?: boolean;
   children: React.ReactNode;
 }
 
-export const Chip = ({ primary = false, children }: ChipProps) => {
+export const PlainChip = ({ primary = false, children }: PlainChipProps) => {
   return <StyledContainer $primary={primary}>{children}</StyledContainer>;
 };
 

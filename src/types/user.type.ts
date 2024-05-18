@@ -8,3 +8,11 @@ export interface UserInformation {
 export interface User {
   nickname: string;
 }
+
+export interface OnboardingRequest {
+  nickname: string;
+  job: string;
+  understanding_score: number;
+  interest_list: string[];
+  keyword_list: string[];
+}
