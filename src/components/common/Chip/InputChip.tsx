@@ -64,7 +64,7 @@ const InputChip = ({ onAdd }: InputChipProps) => {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
         placeholder="추가하기"
       />
     </InputChipContainer>
