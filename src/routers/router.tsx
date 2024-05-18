@@ -42,11 +42,14 @@ export const Router = () => {
           <Route path="4" element={<DefineTestPage3 />} />
           <Route path=":defineId" element={<DefineResultPage />} />
         </Route>
-        <Route path="design/2" element={<DesignTestPage1 />} />
-        <Route path="design/3" element={<DesignTestPage2 />} />
-        <Route path="design/4" element={<DesignTestPage3 />} />
-        <Route path="design/5" element={<DesignTestPage4 />} />
-        <Route path="design/6" element={<DesignTestPage5 />} />
+        <Route path="design">
+          <Route index element={<Navigate to="1" replace />}></Route>
+          <Route path="1" element={<DesignTestPage1 />} />
+          <Route path="2" element={<DesignTestPage2 />} />
+          <Route path="3" element={<DesignTestPage3 />} />
+          <Route path="4" element={<DesignTestPage4 />} />
+          <Route path="5" element={<DesignTestPage5 />} />
+        </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
       <Route path="/tt" element={<DefineResultPage />} />
