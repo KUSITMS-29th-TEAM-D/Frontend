@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import html2canvas from 'html2canvas';
 import styled, { css } from 'styled-components';
 
 import { ReactComponent as ChangeIcon } from '@/assets/icons/change.svg';
@@ -18,7 +19,6 @@ export const CardSection = ({ result }: CardSectionProps) => {
   const captureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    console.log(result);
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -29,32 +29,17 @@ export const CardSection = ({ result }: CardSectionProps) => {
     };
   }, []);
 
-  const handleDownloadImage = async () => {
-    const imageUrls = [result.front_img_url, result.back_img_url];
-    const fileNames = [`${result.name}-front`, `${result.name}-back`];
-    /* const imageUrls = [
-      'https://kr.object.ncloudstorage.com/coolpiece-bucket/Connector_front.png',
-      result.back_img_url,
-    ]; */
+  const handleDownloadImage = () => {
+    if (!captureRef.current) return;
 
-    imageUrls.forEach((imageUrl, index) => {
-      fetch(imageUrl, { mode: 'cors' })
-        .then((res) => res.blob())
-        .then((blob) => {
-          const blobUrl = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = fileNames[index];
-          document.body.appendChild(link);
-          link.click();
-          setTimeout(() => {
-            window.URL.revokeObjectURL(blobUrl);
-            document.body.removeChild(link);
-          }, 1000);
-        })
-        .catch((err) => {
-          console.error('err', err);
-        });
+    const capture = captureRef.current;
+
+    html2canvas(capture, { scrollY: -window.scrollY }).then((canvas) => {
+      const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = `${result.name}-${isFront ? 'front' : 'back'}.png`;
+      link.click();
     });
   };
 
@@ -80,7 +65,7 @@ export const CardSection = ({ result }: CardSectionProps) => {
         onClick={handleClickImage}
       >
         <img
-          src={isFront ? result.front_img_url : result.back_img_url}
+          src={`/src/assets/cards/${isFront ? 'front' : 'back'}/${result.name.toLowerCase()}.png`}
           alt="card"
           ref={captureRef}
         />
