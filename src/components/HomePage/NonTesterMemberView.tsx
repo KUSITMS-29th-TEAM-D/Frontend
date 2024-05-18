@@ -191,6 +191,7 @@ const StyledFilterAmount = styled(StyledFilterButton)`
 
   div {
     display: flex;
+    align-items: center;
     gap: 4px;
 
     .amount {
