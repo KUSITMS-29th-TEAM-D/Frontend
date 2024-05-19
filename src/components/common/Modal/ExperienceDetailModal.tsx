@@ -7,13 +7,13 @@ interface ModalProps {
   onClose: () => void;
   onConfirm: () => void;
 }
-export const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
+export const ExperienceDetailModal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
     <ModalOverlay>
       <ModalContent>
-        <TitleContainer>금액 선택</TitleContainer>
+        <TitleContainer>프로그램 신청</TitleContainer>
         <ContentContainer>
           해당 프로그램을 <Highlight>신청</Highlight>하시겠습니까?
         </ContentContainer>

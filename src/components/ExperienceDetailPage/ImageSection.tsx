@@ -1,11 +1,15 @@
 import { styled } from 'styled-components';
 
+import { Dummy1 } from '@/pages/ExperienceDetailPage';
+
 export const ImageSection = () => {
   return (
     <StyledContainer>
       <TitleContainer>프로그램 소개</TitleContainer>
       <ImageBorderContainer>
-        <ImageContainer>기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ다란 이미지</ImageContainer>
+        <ImageContainer>
+          <img src={Dummy1.imageURL} alt="Detail" />
+        </ImageContainer>
       </ImageBorderContainer>
     </StyledContainer>
   );
@@ -42,5 +46,5 @@ const ImageBorderContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  align-self: stretch;
+  //연동하면서 수정 예정
 `;
