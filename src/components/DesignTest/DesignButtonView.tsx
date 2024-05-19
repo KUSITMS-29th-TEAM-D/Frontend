@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-//import { designPersonaAPI } from '@/apis/personaAPI';
-import { noAuthClient } from '@/apis/client';
+import { designPersonaAPI } from '@/apis/personaAPI';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-//import { userService } from '@/services/UserService';
+import { userService } from '@/services/UserService';
 
 interface Props {
   warning?: boolean;
@@ -252,27 +251,17 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
     const selectedChips4 = JSON.parse(sessionStorage.getItem('selectedChips4') || '[]');
-    const selectedChips5 = JSON.parse(sessionStorage.getItem('selectedChips5') || '[]');
+    const selectedChip5 = sessionStorage.getItem('selectedChip5') || '';
 
     const requestData = {
       fields: selectedChips1,
       distinctions: selectedChips2,
       abilities: selectedChips3,
       platforms: selectedChips4,
-      career: selectedChips5,
+      career: 'selectedChip5',
     };
+    console.log(selectedChip5);
 
-    noAuthClient.post('/api/personas/design', requestData).then(($response) => {
-      const { code, message, payload, is_success } = $response.data;
-      if (is_success && code === '201') {
-        console.log('페르소나 생성 성공');
-        console.log('페르소나 정보:', payload.definition);
-      } else {
-        console.error('페르소나 생성 실패:', message);
-      }
-    });
-
-    /*
     designPersonaAPI
       .register(userService.getUserState() === 'MEMBER', requestData)
       .then((response) => {
@@ -287,7 +276,7 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       .catch((error) => {
         console.error('페르소나 생성 요청 실패:', error);
         window.alert('페르소나 생성 요청 실패');
-      });*/
+      });
   };
 
   useEffect(() => {
