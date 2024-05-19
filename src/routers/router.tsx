@@ -6,6 +6,7 @@ import { MainLayout } from '@/components/common/Layout/MainLayout';
 import { DefineResultPage } from '@/pages/DefineResultPage';
 import { DefineStartPage } from '@/pages/DefineStartPage';
 import { DefineTestPage1, DefineTestPage2, DefineTestPage3 } from '@/pages/DefineTestPage';
+import { DesignResultPage } from '@/pages/DesignResultPage';
 import {
   DesignTestPage1,
   DesignTestPage2,
@@ -50,6 +51,7 @@ export const Router = () => {
           <Route path="4" element={<DesignTestPage3 />} />
           <Route path="5" element={<DesignTestPage4 />} />
           <Route path="6" element={<DesignTestPage5 />} />
+          <Route path="result" element={<DesignResultPage />} />
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />

@@ -18,3 +18,12 @@ export interface DefineResult {
   front_img_url: string;
   back_img_url: string;
 }
+
+export interface DesignResult {
+  definition: string;
+  fields: string[];
+  distinctions: string[];
+  abilities: string[];
+  platforms: string[];
+  career: string;
+}
