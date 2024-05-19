@@ -106,11 +106,11 @@ export const DesignButtonView2 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButton1Click = () => {
-    navigate('/test/design/1');
+    navigate('/test/design/2');
   };
 
   const handleButton2Click = () => {
-    navigate('/test/design/3');
+    navigate('/test/design/4');
   };
 
   useEffect(() => {
@@ -157,7 +157,7 @@ export const DesignButtonView3 = ({ warning, warningMessage }: Props) => {
   };
 
   const handleButton2Click = () => {
-    navigate('/test/design/4');
+    navigate('/test/design/5');
   };
 
   useEffect(() => {
@@ -199,11 +199,11 @@ export const DesignButtonView4 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButton1Click = () => {
-    navigate('/test/design/3');
+    navigate('/test/design/4');
   };
 
   const handleButton2Click = () => {
-    navigate('/test/design/5');
+    navigate('/test/design/6');
   };
 
   useEffect(() => {
@@ -248,7 +248,7 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
   const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
-    navigate('/test/design/4');
+    navigate('/test/design/5');
   };
 
   const handleButton2Click = () => {

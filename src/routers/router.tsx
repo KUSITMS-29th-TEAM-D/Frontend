@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-/* import { MainLayout } from '@/components/common/Layout/MainLayout'; */
 import { DefineLayout } from '@/components/common/Layout/DefineLayout';
 import { DesignLayout } from '@/components/common/Layout/DesignLayout';
+import { MainLayout } from '@/components/common/Layout/MainLayout';
 import { DefineResultPage } from '@/pages/DefineResultPage';
 import { DefineStartPage } from '@/pages/DefineStartPage';
 import { DefineTestPage1, DefineTestPage2, DefineTestPage3 } from '@/pages/DefineTestPage';
@@ -12,28 +12,28 @@ import {
   DesignTestPage3,
   DesignTestPage4,
   DesignTestPage5,
-} from '@/pages/DesignTestPage'; /*
+} from '@/pages/DesignTestPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
-import { OnboardingPage } from '@/pages/OnboardingPage';*/
-import { RedirectPage } from '@/pages/RedirectPage'; /*
+import { OnboardingPage } from '@/pages/OnboardingPage';
+import { RedirectPage } from '@/pages/RedirectPage';
 import { SelfUnderstandPage } from '@/pages/SelfUnderstandPage';
-import { ExceptPreMemberRoute } from '@/routers/ExceptPreMemberRoute'; */
+import { ExceptPreMemberRoute } from '@/routers/ExceptPreMemberRoute';
 
 export const Router = () => {
   return (
     <Routes>
-      {/* <Route element={<MainLayout />}>
+      <Route element={<MainLayout />}>
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route element={<ExceptPreMemberRoute />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<LoginPage />} />
           <Route path="/understand" element={<SelfUnderstandPage />} />
-          // <Route element={<MemberPrivateRoute />}>
+          {/* // <Route element={<MemberPrivateRoute />}>
             //<Route path="/mypage" element={<MyPage />} />
-          //</Route>
+          //</Route> */}
         </Route>
-      </Route> */}
+      </Route>
       <Route path="test">
         <Route path="define" element={<DefineLayout />}>
           <Route index element={<Navigate to="1" replace />}></Route>
@@ -45,11 +45,11 @@ export const Router = () => {
         </Route>
         <Route path="design" element={<DesignLayout />}>
           <Route index element={<Navigate to="1" replace />}></Route>
-          <Route path="1" element={<DesignTestPage1 />} />
-          <Route path="2" element={<DesignTestPage2 />} />
-          <Route path="3" element={<DesignTestPage3 />} />
-          <Route path="4" element={<DesignTestPage4 />} />
-          <Route path="5" element={<DesignTestPage5 />} />
+          <Route path="2" element={<DesignTestPage1 />} />
+          <Route path="3" element={<DesignTestPage2 />} />
+          <Route path="4" element={<DesignTestPage3 />} />
+          <Route path="5" element={<DesignTestPage4 />} />
+          <Route path="6" element={<DesignTestPage5 />} />
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />

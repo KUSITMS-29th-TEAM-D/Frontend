@@ -1,3 +1,5 @@
+import { useRecoilValue } from 'recoil';
+
 import {
   DesignTestView1,
   DesignTestView2,
@@ -5,43 +7,51 @@ import {
   DesignTestView4,
   DesignTestView5,
 } from '@/components/DesignTest/DesignTestView';
+import { LoadingPage } from '@/pages/LoadingPage';
+import { loadingState } from '@/recoil/loadingState';
 
 export const DesignTestPage1 = () => {
   return (
-    <div>
+    <>
       <DesignTestView1 />
-    </div>
+    </>
   );
 };
 
 export const DesignTestPage2 = () => {
   return (
-    <div>
+    <>
       <DesignTestView2 />
-    </div>
+    </>
   );
 };
 
 export const DesignTestPage3 = () => {
   return (
-    <div>
+    <>
       <DesignTestView3 />
-    </div>
+    </>
   );
 };
 
 export const DesignTestPage4 = () => {
   return (
-    <div>
+    <>
       <DesignTestView4 />
-    </div>
+    </>
   );
 };
 
 export const DesignTestPage5 = () => {
+  const loading = useRecoilValue(loadingState);
+
+  if (loading) {
+    return <LoadingPage />;
+  }
+
   return (
-    <div>
+    <>
       <DesignTestView5 />
-    </div>
+    </>
   );
 };

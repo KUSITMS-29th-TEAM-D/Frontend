@@ -117,7 +117,7 @@ const DesignComponent = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/test/design/1');
+    navigate('/test/design/2');
   };
 
   return (
