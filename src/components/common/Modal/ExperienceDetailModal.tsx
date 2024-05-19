@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import styled from 'styled-components';
 
 import { PlainButton } from '@/components/common/Button/PlainButton';
@@ -7,7 +9,18 @@ interface ModalProps {
   onClose: () => void;
   onConfirm: () => void;
 }
+
 export const ExperienceDetailModal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.setAttribute('style', 'overflow: hidden');
+    } else {
+      document.body.setAttribute('style', 'overflow: auto');
+    }
+    return () => {
+      document.body.setAttribute('style', 'overflow: auto');
+    };
+  }, [isOpen]);
   if (!isOpen) return null;
 
   return (
