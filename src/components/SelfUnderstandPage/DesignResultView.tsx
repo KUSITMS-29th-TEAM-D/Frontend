@@ -3,18 +3,22 @@ import { useEffect, useState } from 'react';
 import { personaAPI } from '@/apis/personaAPI';
 import { ResultView } from '@/components/DesignResultPage/ResultView';
 import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplate';
+import { userService } from '@/services/UserService';
 import { DesignResult } from '@/types/test.type';
 
 export const DesignResultView = () => {
-  const [persona, setPersona] = useState<DesignResult | null>(null);
+  const [designResult, setDesignResult] = useState<DesignResult | null>(null);
 
   useEffect(() => {
-    personaAPI.getPersonaDesign().then((res) => {
-      setPersona(res.data.payload);
-    });
+    if (userService.getUserState() === 'MEMBER') {
+      personaAPI.getPersonaDesign().then((res) => {
+        setDesignResult(res.payload);
+      });
+    }
   }, []);
 
-  if (persona) return <ResultView style={{ height: '644px' }} definition={persona.definition} />;
+  if (designResult)
+    return <ResultView style={{ height: '644px' }} definition={designResult.definition} />;
 
   return <NoResultSection tab="Design" />;
 };
