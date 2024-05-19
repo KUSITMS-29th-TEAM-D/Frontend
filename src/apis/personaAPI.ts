@@ -1,5 +1,5 @@
 import { authClient, noAuthClient } from '@/apis/client';
-import { DefineRequest } from '@/types/test.type';
+import { DefineRequest, DesignRequest } from '@/types/test.type';
 
 export const personaAPI = {
   // 페르소나 생성
@@ -22,6 +22,19 @@ export const personaAPI = {
   // 로그인 유저 페르소나 조회
   getPersonaMember: async () => {
     const response = await authClient.get('/api/personas/define');
+    return response.data;
+  },
+};
+
+export const designPersonaAPI = {
+  // 페르소나 생성
+  register: async (member: boolean, userInfo: DesignRequest) => {
+    if (member) {
+      const response = await authClient.post('/api/personas/design', userInfo);
+      return response.data;
+    }
+
+    const response = await noAuthClient.post('/api/personas/design', userInfo);
     return response.data;
   },
 };

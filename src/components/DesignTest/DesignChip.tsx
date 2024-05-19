@@ -236,7 +236,6 @@ export const DesignChips4 = () => {
     </StyledContainer>
   );
 };
-
 export const DesignChips5 = () => {
   const [chipStates, setChipStates] = useState(Array(CHIP_DATA5.length).fill(1));
   const [chips, setChips] = useState(CHIP_DATA5);
@@ -247,23 +246,18 @@ export const DesignChips5 = () => {
     const activeCount = chipStates.filter((state) => state === 2).length;
     setWarning(activeCount < 1 || activeCount > 1);
     setWarningMessage(activeCount > 1);
-  }, [chipStates]);
+
+    const selectedChipsString = sessionStorage.getItem('selectedChips5');
+    if (selectedChipsString) {
+      const newChipStates = chips.map((chip) => (selectedChipsString.includes(chip) ? 2 : 1));
+      setChipStates(newChipStates);
+    }
+  }, [chipStates, chips]);
 
   const handleToggle = (index: number) => {
     const newChipStates = [...chipStates];
-
     newChipStates[index] = newChipStates[index] === 2 ? 1 : 2;
-
     setChipStates(newChipStates);
-
-    const selectedChips5 = newChipStates.reduce((selected, state, i) => {
-      if (state === 2) {
-        selected.push(chips[i]);
-      }
-      return selected;
-    }, []);
-
-    sessionStorage.setItem('selectedChips5', JSON.stringify(selectedChips5));
   };
 
   const handleAddChip = (chip: string) => {
@@ -271,13 +265,6 @@ export const DesignChips5 = () => {
     const newChipStates = [...chipStates, 2];
     setChips(newChips);
     setChipStates(newChipStates);
-    const selectedChips5 = newChipStates.reduce((selected, state, i) => {
-      if (state === 2) {
-        selected.push(newChips[i]);
-      }
-      return selected;
-    }, []);
-    sessionStorage.setItem('selectedChips5', JSON.stringify(selectedChips5));
   };
 
   return (
