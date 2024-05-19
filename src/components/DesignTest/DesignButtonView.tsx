@@ -68,7 +68,7 @@ export const DesignButtonView1 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButtonClick = () => {
-    navigate('/test/design/2');
+    navigate('/test/design/3');
   };
 
   useEffect(() => {
@@ -272,14 +272,14 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
     personaAPI
       .register(userService.getUserState() === 'MEMBER', requestData)
       .then((response) => {
-        const { code, message, payload } = response;
+        const { code, message } = response;
 
         if (code === '201') {
           console.log('페르소나 생성 성공');
           setLoadingHandler({
             ...loadingHandler,
             handleCompleted: () => {
-              navigate(`/test/design/${payload.Design_persona_id}`);
+              navigate('/test/design/result');
             },
           });
         } else {
