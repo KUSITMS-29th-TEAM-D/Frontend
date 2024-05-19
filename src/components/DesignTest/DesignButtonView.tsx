@@ -300,12 +300,14 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       }, 5000);
 
       return () => clearTimeout(timer);
+    } else {
+      setShowWarn(false);
     }
   }, [warningMessage]);
 
   return (
     <Container>
-      {showWarn && <ChipContainer>키워드를 1개만 선택해 주세요!</ChipContainer>}
+      {showWarn && <ChipContainer>1가지만 선택가능해요</ChipContainer>}
       <ButtonContainer>
         <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
           이전으로
