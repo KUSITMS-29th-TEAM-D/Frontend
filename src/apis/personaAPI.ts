@@ -9,7 +9,7 @@ export const personaAPI = {
       return response.data;
     }
 
-    const response = await noAuthClient.post('/api/personas/define', userInfo);
+    const response = await noAuthClient.post('/api/personas/define/sharing', userInfo);
     return response.data;
   },
   // 비로그인 유저 페르소나 조회
