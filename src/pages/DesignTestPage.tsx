@@ -45,7 +45,7 @@ export const DesignTestPage4 = () => {
 export const DesignTestPage5 = () => {
   const loading = useRecoilValue(loadingState);
 
-  if (loading) {
+  if (loading.show) {
     return <LoadingPage />;
   }
 
