@@ -5,8 +5,9 @@ import { PlainButton } from '@/components/common/Button/PlainButton';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onConfirm: () => void;
 }
-export const Modal = ({ isOpen, onClose }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -20,7 +21,7 @@ export const Modal = ({ isOpen, onClose }: ModalProps) => {
           <StyledButton height="48px" onClick={onClose}>
             취소하기
           </StyledButton>
-          <PlainButton variant="gray" height="48px" onClick={onClose}>
+          <PlainButton variant="gray" height="48px" onClick={onConfirm}>
             신청하기
           </PlainButton>
         </ButtonContainer>

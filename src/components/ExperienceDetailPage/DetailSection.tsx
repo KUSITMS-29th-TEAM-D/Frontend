@@ -9,6 +9,8 @@ import { Modal } from '@/components/common/Modal/modal';
 
 export const DetailSection = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [participants, setParticipants] = useState(Dummy1.participants);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -18,14 +20,19 @@ export const DetailSection = () => {
     setModalOpen(false);
   };
 
+  const handleIncreaseParticipants = () => {
+    setParticipants((prevParticipants) => prevParticipants + 1);
+    setButtonDisabled(true);
+    setModalOpen(false);
+  };
   return (
     <StyledContainer>
       <ImageContainer>
-        <img src={Dummy1.imageURL} />
+        <img src={Dummy1.imageURL} alt="Detail" />
       </ImageContainer>
       <DetailContainer>
         <TextContainer>
-          <PlainChip>{Dummy1.participants}명 참여 중!</PlainChip>
+          <PlainChip>{participants}명 참여 중!</PlainChip>
           <TitleContainer>{Dummy1.title}</TitleContainer>
           <SubTitleContainer>{Dummy1.subtitle}</SubTitleContainer>
         </TextContainer>
@@ -38,11 +45,20 @@ export const DetailSection = () => {
             <ProfileSubTitleContainer>{Dummy1.profileSubtitle}</ProfileSubTitleContainer>
           </ProfileTextContainer>
         </ProfileContainer>
-        <PlainButton variant="gray" height="48px" onClick={handleOpenModal}>
+        <PlainButton
+          variant="gray"
+          height="48px"
+          onClick={handleOpenModal}
+          disabled={isButtonDisabled}
+        >
           신청하기
         </PlainButton>
       </DetailContainer>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleIncreaseParticipants}
+      />
     </StyledContainer>
   );
 };
