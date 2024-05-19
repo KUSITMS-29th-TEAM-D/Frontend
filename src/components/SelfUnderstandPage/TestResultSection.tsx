@@ -24,7 +24,11 @@ export const TestResultSection = () => {
     <StyledContainer>
       <StyledTabContainer>
         {TAB_LIST.map((item) => (
-          <StyledTab $active={item.tab === tabState} onClick={() => setTabState(item.tab)}>
+          <StyledTab
+            key={item.tab}
+            $active={item.tab === tabState}
+            onClick={() => setTabState(item.tab)}
+          >
             {item.tab}
           </StyledTab>
         ))}

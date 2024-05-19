@@ -13,11 +13,11 @@ export const DesignResultPage = () => {
   // API 호출
   useEffect(() => {
     personaAPI.getPersonaDesign().then((res) => {
-      setPersona(res.data.payload);
+      setPersona(res.payload);
     });
   }, []);
 
-  if (!persona)
+  if (persona)
     return (
       <ResultView style={{ minHeight: '100vh' }} definition={persona.definition}>
         <PlainButton
