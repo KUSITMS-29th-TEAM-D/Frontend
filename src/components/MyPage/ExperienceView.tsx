@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { ExperienceWholeView } from '@/components/MyPage/ExperienceWholeView';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
-import Tabs from '@/components/common/Tab/Tab';
+import { MyPageTab } from '@/components/common/Tab/MyPageTab';
 
 interface Filter {
   title: string;
@@ -84,7 +84,7 @@ export const ExperienceView = () => {
 
   return (
     <StyledContainer>
-      <Tabs tabs={tabs} />
+      <MyPageTab tabs={tabs} />
     </StyledContainer>
   );
 };

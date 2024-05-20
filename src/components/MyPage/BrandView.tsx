@@ -2,7 +2,9 @@ import { styled } from 'styled-components';
 
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
-import ExampleComponent2 from '@/components/MyPage/Card2';
+import Card from '@/components/MyPage/Card';
+import { PlainChip } from '@/components/common/Chip/PlainChip';
+
 export const BrandView = () => {
   return (
     <StyledContainer>
@@ -22,11 +24,47 @@ export const BrandView = () => {
         </HeaderRight>
       </BrandHeader>
       <ContentContainer>
-        <LeftContent></LeftContent>
-        <CenterContent></CenterContent>
-        <RightContent></RightContent>
+        <TopContent>
+          <BrandTextContainer>
+            <BrandText>브랜드 관리</BrandText>
+          </BrandTextContainer>
+          <BrandMenuContainer></BrandMenuContainer>
+        </TopContent>
+        <CenterContent>
+          <RecommendContainer>
+            <RecommendText>Ai 추천</RecommendText>
+          </RecommendContainer>
+          <RecommendCardContainer>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </RecommendCardContainer>
+        </CenterContent>
+        <BottomContent>
+          <BottomContainer>
+            <CardHeader>
+              <PlainChip>준비</PlainChip>
+            </CardHeader>
+            <Card />
+          </BottomContainer>
+          <BottomContainer>
+            <CardHeader>
+              <PlainChip>진행</PlainChip>
+            </CardHeader>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </BottomContainer>
+          <BottomContainer>
+            <CardHeader>
+              <PlainChip>완료</PlainChip>
+            </CardHeader>
+            <Card /> <Card /> <Card /> <Card />
+          </BottomContainer>
+        </BottomContent>
       </ContentContainer>
-      <ExampleComponent2 />
     </StyledContainer>
   );
 };
@@ -92,7 +130,7 @@ const RightIcon = styled.div`
 
 const ContentContainer = styled.div`
   align-self: stretch;
-  height: 996px;
+  //height: 996px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -100,18 +138,37 @@ const ContentContainer = styled.div`
   display: flex;
 `;
 
-const LeftContent = styled.div`
+const TopContent = styled.div`
   align-self: stretch;
   justify-content: space-between;
   align-items: flex-end;
   display: inline-flex;
 `;
-
+const BrandTextContainer = styled.div`
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  display: flex;
+`;
+const BrandText = styled.div`
+  text-align: center;
+  color: ${({ theme }) => `${theme.color.gray800}`};
+  ${({ theme }) => theme.font.desktop.title2};
+  word-wrap: break-word;
+`;
+const BrandMenuContainer = styled.div`
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px #efefef solid;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+`;
 const CenterContent = styled.div`
   align-self: stretch;
   height: 208px;
   padding: 24px;
-  background: #f7f7f7;
+  background: ${({ theme }) => `${theme.color.gray100}`};
   border-radius: 16px;
   border: 2px #efefef solid;
   flex-direction: column;
@@ -121,10 +178,49 @@ const CenterContent = styled.div`
   display: flex;
 `;
 
-const RightContent = styled.div`
+const RecommendContainer = styled.div`
+  align-self: stretch;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 16px;
+  display: inline-flex;
+`;
+const RecommendText = styled.div`
+  color: ${({ theme }) => `${theme.color.primary600}`};
+  ${({ theme }) => theme.font.desktop.body1b};
+  word-wrap: break-word;
+`;
+const RecommendCardContainer = styled.div`
+  align-self: stretch;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  display: inline-flex;
+`;
+const BottomContent = styled.div`
   align-self: stretch;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
+  display: inline-flex;
+`;
+
+const BottomContainer = styled.div`
+  flex: 1 1 0;
+  padding: 16px;
+  background: ${({ theme }) => `${theme.color.gray100}`};
+  border-radius: 16px;
+  border: 2px #efefef solid;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+`;
+
+const CardHeader = styled.div`
+  align-self: stretch;
+  justify-content: space-between;
+  align-items: center;
   display: inline-flex;
 `;

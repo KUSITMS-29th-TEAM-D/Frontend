@@ -1,12 +1,10 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 const Container = styled.div`
   width: 300px;
   height: auto;
   padding: 20px;
-  background: white;
+  background: ${({ theme }) => `${theme.color.white}`};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.13);
   border-radius: 8px;
   flex-direction: column;
@@ -28,21 +26,15 @@ const InnerContainer = styled.div`
 
 const Title = styled.div`
   align-self: stretch;
-  color: #242424;
-  font-size: 18px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 500;
-  line-height: 28px;
+  color: ${({ theme }) => `${theme.color.gray800}`};
+  ${({ theme }) => theme.font.desktop.body1r};
   word-wrap: break-word;
 `;
 
 const Description = styled.div`
   align-self: stretch;
-  color: #6f6f6f;
-  font-size: 12px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 500;
-  line-height: 20px;
+  color: ${({ theme }) => `${theme.color.gray500}`};
+  ${({ theme }) => theme.font.desktop.label2};
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -52,15 +44,12 @@ const Description = styled.div`
 
 const DateText = styled.div`
   align-self: stretch;
-  color: #a5a5a5;
-  font-size: 14px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 500;
-  line-height: 20px;
+  color: ${({ theme }) => `${theme.color.gray300}`};
+  ${({ theme }) => theme.font.desktop.label1m};
   word-wrap: break-word;
 `;
 
-const ExampleComponent2 = () => {
+const DateCard = () => {
   return (
     <Container>
       <InnerContainer>
@@ -79,4 +68,4 @@ const ExampleComponent2 = () => {
   );
 };
 
-export default ExampleComponent2;
+export default DateCard;

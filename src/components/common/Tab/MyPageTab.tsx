@@ -47,7 +47,7 @@ interface TabsProps {
   tabs: TabItem[];
 }
 
-const Tabs = ({ tabs }: TabsProps) => {
+export const MyPageTab = ({ tabs }: TabsProps) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (index: number) => {
@@ -75,8 +75,6 @@ const Tabs = ({ tabs }: TabsProps) => {
     </>
   );
 };
-
-export default Tabs;
 
 const Container = styled.div`
   display: flex;

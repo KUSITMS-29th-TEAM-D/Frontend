@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 
+import DiscoverImage from '@/assets/myPage/MypageDiscover.png';
 import Card from '@/components/MyPage/Card';
 
 export const PersonaView = () => {
@@ -10,13 +11,22 @@ export const PersonaView = () => {
           <StyledTopContainer>
             <TopContainer></TopContainer>
             <BottomContainer>
-              <BottomTitleContainer>Discover 나를 깊게 이해해요</BottomTitleContainer>
+              <BottomTitleContainer>
+                <BottomTitle>
+                  <Highlight>Discover </Highlight>나를 깊게 이해해요
+                </BottomTitle>
+              </BottomTitleContainer>
               <BottomCardContainer>
                 <Card />
                 <Card />
                 <Card />
               </BottomCardContainer>
-              <BottomImageContainer></BottomImageContainer>
+              <BottomImageContainer>
+                <img
+                  src={DiscoverImage}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </BottomImageContainer>
             </BottomContainer>
           </StyledTopContainer>
         </StyledInnerContainer>
@@ -87,21 +97,31 @@ const BottomTitleContainer = styled.div`
   gap: 16px;
   display: flex;
 `;
+const BottomTitle = styled.div`
+  color: ${({ theme }) => `${theme.color.gray700}`};
+  ${({ theme }) => theme.font.desktop.body1b};
+  word-wrap: break-word;
+`;
+const Highlight = styled.span`
+  color: ${({ theme }) => `${theme.color.primary600}`};
+`;
 
 const BottomCardContainer = styled.div`
-  align-self: stretch;
-  justify-content: flex-start;
-  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 12px;
-  display: inline-flex;
+  padding: 8px;
+  padding-right: 16px;
+
+  & > * {
+    flex: 0 0 240px;
+  }
 `;
 
 const BottomImageContainer = styled.div`
   width: 988px;
-  height: 391px;
+  height: 393px;
   position: relative;
-  background: white;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.13);
-  border-radius: 16px;
-  overflow: hidden;
+  display: flex;
 `;

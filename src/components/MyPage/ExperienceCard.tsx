@@ -33,10 +33,7 @@ const ImageContainer = styled.div<StyledImageProps>`
         &::before {
           content: '';
           position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          inset: 0;
           background: rgba(17, 17, 17, 0.36);
           border-radius: 24px;
           z-index: 1;
@@ -73,10 +70,7 @@ const Overlay = styled.div`
   justify-content: flex-end;
   align-items: center;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 2;
 `;
 
