@@ -152,7 +152,7 @@ export const DesignButtonView3 = ({ warning, warningMessage }: Props) => {
   const [showWarn, setShowWarn] = useState(false);
 
   const handleButton1Click = () => {
-    navigate('/test/design/2');
+    navigate('/test/design/3');
   };
 
   const handleButton2Click = () => {

@@ -117,8 +117,7 @@ const DesignComponent = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    //navigate('/test/design/1');로 수정하기
-    navigate('/test/design/2');
+    navigate('/test/design/1');
   };
 
   return (
