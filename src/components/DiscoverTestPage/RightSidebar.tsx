@@ -11,32 +11,32 @@ export const RightSidebar = () => {
     <StyledContainer>
       <StyledSummaryContainer>
         <SummaryCard
-          type="health"
+          category="health"
           title="질문 내용 질문 내용 질문 내용"
           description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
         />
         <SummaryCard
-          type="health"
+          category="career"
           title="질문 내용 질문 내용 질문 내용"
           description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
         />
         <SummaryCard
-          type="health"
+          category="love"
           title="질문 내용 질문 내용 질문 내용"
           description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
         />
         <SummaryCard
-          type="health"
+          category="leisure"
           title="질문 내용 질문 내용 질문 내용"
           description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
         />
         <SummaryCard
-          type="health"
+          category="health"
           title="질문 내용 질문 내용 질문 내용"
           description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
         />
         <SummaryCard
-          type="health"
+          category="health"
           title="질문 내용 질문 내용 질문 내용"
           description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
         />

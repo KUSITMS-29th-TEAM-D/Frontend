@@ -1,41 +1,21 @@
 import styled from 'styled-components';
 
-import { ReactComponent as CareerIcon } from '@/assets/icons/career.svg';
-import { ReactComponent as HealthIcon } from '@/assets/icons/health.svg';
-import { ReactComponent as LeisureIcon } from '@/assets/icons/leisure.svg';
-import { ReactComponent as LoveIcon } from '@/assets/icons/love.svg';
-
-const CARD_TYPE = {
-  health: {
-    title: '건강',
-    icon: <HealthIcon />,
-  },
-  career: {
-    title: '커리어',
-    icon: <CareerIcon />,
-  },
-  love: {
-    title: '사랑',
-    icon: <LoveIcon />,
-  },
-  leisure: {
-    title: '여가',
-    icon: <LeisureIcon />,
-  },
-};
+import { CATEGORY_TYPE } from '@/constants/discover';
 
 interface SummaryCardProps {
-  type: keyof typeof CARD_TYPE;
+  category: keyof typeof CATEGORY_TYPE;
   title: string;
   description: string;
 }
 
-export const SummaryCard = ({ type, title, description }: SummaryCardProps) => {
+export const SummaryCard = ({ category, title, description }: SummaryCardProps) => {
+  const Icon = CATEGORY_TYPE[category].icon;
+
   return (
     <StyledContainer>
       <StyledHeader>
-        {CARD_TYPE[type].icon}
-        <span>{CARD_TYPE[type].title}</span>
+        <Icon />
+        <span>{CATEGORY_TYPE[category].title}</span>
       </StyledHeader>
       <StyledContent>
         <div className="title">{title}</div>
@@ -64,9 +44,9 @@ const StyledHeader = styled.div`
   svg {
     width: 16px;
     height: 16px;
-
     path {
       fill: ${({ theme }) => theme.color.primary400};
+      stroke: ${({ theme }) => theme.color.primary400};
     }
   }
 
