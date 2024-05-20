@@ -8,8 +8,9 @@ import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DesignResult } from '@/types/test.type';
 
 export const DesignResultPage = () => {
-  const navigate = useNavigate();
   const [persona, setPersona] = useState<DesignResult | null>(null);
+  const navigate = useNavigate();
+
   // API 호출
   useEffect(() => {
     personaAPI.getPersonaDesign().then((res) => {

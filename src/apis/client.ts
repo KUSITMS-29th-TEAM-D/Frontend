@@ -14,17 +14,31 @@ export const authClient: AxiosInstance = axios.create({
 });
 
 authClient.interceptors.request.use((config) => {
-  if (!config.headers.common || !config.headers.common['Authorization']) {
-    if (userService.getUserNickname() === '') {
-      // register token이 없는 상황 (새로고침)
-      authService.onSetRegisterToken();
-      config.headers['Authorization'] = authClient.defaults.headers.common['Authorization'];
-    } else if (userService.getUser()) {
-      // access token이 만료된 상황
-      authService.onRefreshToken();
-      config.headers['Authorization'] = authClient.defaults.headers.common['Authorization'];
+  if (userService.getUser().nickname === '') {
+    const registerToken = authService.getRegisterToken();
+    if (registerToken !== null && registerToken !== undefined) {
+      config.headers['Authorization'] = `Bearer ${registerToken}`;
+    } else {
+      window.alert('로그인이 필요합니다.');
+      authService.onLogout();
     }
   }
 
   return config;
 });
+
+authClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const access_token = await authService.getRefreshToken();
+      authService.setAuthToken(access_token);
+      return authClient(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
