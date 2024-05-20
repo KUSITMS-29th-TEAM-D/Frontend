@@ -62,7 +62,7 @@ export const NonTesterMemberView = () => {
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [selectedFree, setSelectedFree] = useState<boolean>(false);
-  const [showAmountModal, setShowAmountModal] = useState<boolean>(false);
+  /* const [showAmountModal, setShowAmountModal] = useState<boolean>(false); */
   const [selectedAmount, setSelectedAmount] = useState<{ min: number; max: number }>({
     min: 0,
     max: 0,
@@ -139,7 +139,7 @@ export const NonTesterMemberView = () => {
           </StyledFilterButton>
           <StyledFilterAmount
             onClick={() => {
-              setShowAmountModal((prev) => !prev);
+              //setShowAmountModal((prev) => !prev);
             }}
           >
             <span>금액</span>

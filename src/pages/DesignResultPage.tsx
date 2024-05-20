@@ -1,25 +1,33 @@
+import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
 import BackgroundImg from '@/assets/backgrounds/designResultBackground.png';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-
-const Dummy = {
-  name: '민선',
-  brand: '학교 생활 열심히 하며\n수익도 내는 20대 갓생 유튜버',
-};
+import { userService } from '@/services/UserService';
+import { DesignResult } from '@/types/test.type';
 
 export const DesignResultPage = () => {
+  const [result, setResult] = useState<DesignResult | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    personaAPI.getPersonaDesign().then((res) => {
+      setResult(res.payload);
+    });
+  }, []);
 
   return (
     <StyledContainer>
       <StyledInnerContainer>
         <StyledContent>
           <div className="title">
-            <span className="highlight">{Dummy.name}</span>님은 이런 브랜드가 되고 싶군요!
+            <span className="highlight">{userService.getUser().nickname}</span>님은 이런 브랜드가
+            되고 싶군요!
           </div>
-          <div className="brand">“{Dummy.brand}”</div>
+          <div className="brand">“{result?.definition}”</div>
           <PlainButton
             variant="gray"
             width="100%"
@@ -72,8 +80,8 @@ const StyledContent = styled.div`
   .brand {
     ${({ theme }) => theme.font.desktop.h2};
     color: ${({ theme }) => theme.color.primary600};
-    white-space: pre-line;
     text-align: center;
     margin-bottom: 32px;
+    word-break: keep-all;
   }
 `;

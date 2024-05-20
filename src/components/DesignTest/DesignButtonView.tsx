@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { authClient, noAuthClient } from '@/apis/client';
+import { personaAPI } from '@/apis/personaAPI';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { userService } from '@/services/UserService';
+import { loadingHandlerState } from '@/recoil/loadingHandlerState';
+import { loadingState } from '@/recoil/loadingState';
 
 interface Props {
   warning?: boolean;
@@ -241,6 +243,8 @@ export const DesignButtonView4 = ({ warning, warningMessage }: Props) => {
 export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
+  const [loading, setLoading] = useRecoilState(loadingState);
+  const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
     navigate('/test/design/5');
@@ -261,20 +265,31 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       career: selectedChips5[0],
     };
 
-    try {
-      const client = userService.getUserState() === 'MEMBER' ? authClient : noAuthClient;
-      const response = await client.post('/api/personas/design', requestData);
-      const { code, message } = response.data;
+    setLoading({ show: true, speed: 70 });
 
-      if (code === '201') {
-        console.log('페르소나 생성 성공');
-        navigate('/'); // 결과 페이지로 이동
-      } else {
-        console.error('페르소나 생성 실패:', message);
-      }
-    } catch (error) {
-      console.error('페르소나 생성 요청 실패:', error);
-    }
+    personaAPI
+      .registerPersonaDesign(requestData)
+      .then((response) => {
+        const { code, message } = response;
+
+        if (code === '201') {
+          console.log('페르소나 생성 성공');
+          setLoadingHandler({
+            ...loadingHandler,
+            handleCompleted: () => {
+              navigate('/test/design/result');
+            },
+          });
+        } else {
+          console.error('페르소나 생성 실패:', message);
+          setLoading({ ...loading, show: false });
+        }
+      })
+      .catch((error) => {
+        console.error('페르소나 생성 요청 실패:', error);
+        window.alert('페르소나 생성 요청 실패');
+        setLoading({ ...loading, show: false });
+      });
   };
 
   useEffect(() => {

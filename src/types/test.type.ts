@@ -26,3 +26,7 @@ export interface DesignRequest {
   platforms: string[];
   career: string;
 }
+
+export interface DesignResult extends DesignRequest {
+  definition: string;
+}
