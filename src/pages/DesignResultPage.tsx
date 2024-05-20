@@ -80,8 +80,8 @@ const StyledContent = styled.div`
   .brand {
     ${({ theme }) => theme.font.desktop.h2};
     color: ${({ theme }) => theme.color.primary600};
-    white-space: pre-line;
     text-align: center;
     margin-bottom: 32px;
+    word-break: keep-all;
   }
 `;

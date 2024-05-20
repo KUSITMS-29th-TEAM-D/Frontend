@@ -265,7 +265,7 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       career: selectedChips5[0],
     };
 
-    setLoading({ show: true, speed: 100 });
+    setLoading({ show: true, speed: 70 });
 
     personaAPI
       .registerPersonaDesign(requestData)

@@ -55,9 +55,7 @@ export const Router = () => {
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
-      <Route path="/tt" element={<DefineResultPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
-      <Route path="*" element={<Navigate to="/test/define" replace />} />
     </Routes>
   );
 };
