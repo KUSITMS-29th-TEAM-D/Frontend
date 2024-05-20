@@ -19,11 +19,14 @@ export interface DefineResult {
   back_img_url: string;
 }
 
-export interface DesignResult {
-  definition: string;
+export interface DesignRequest {
   fields: string[];
   distinctions: string[];
   abilities: string[];
   platforms: string[];
   career: string;
+}
+
+export interface DesignResult extends DesignRequest {
+  definition: string;
 }
