@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 300px;
+  width: 100%;
   height: auto;
   padding: 20px;
   background: ${({ theme }) => `${theme.color.white}`};

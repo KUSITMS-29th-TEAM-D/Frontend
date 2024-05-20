@@ -1,42 +1,69 @@
+import Slider from 'react-slick';
 import { styled } from 'styled-components';
 
 import DiscoverImage from '@/assets/myPage/MypageDiscover.png';
 import Card from '@/components/MyPage/Card';
 
 export const PersonaView = () => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+
   return (
-    <>
-      <StyledContainer>
-        <StyledInnerContainer>
-          <StyledTopContainer>
-            <TopContainer></TopContainer>
-            <BottomContainer>
-              <BottomTitleContainer>
-                <BottomTitle>
-                  <Highlight>Discover </Highlight>나를 깊게 이해해요
-                </BottomTitle>
-              </BottomTitleContainer>
-              <BottomCardContainer>
-                <Card />
-                <Card />
-                <Card />
-              </BottomCardContainer>
-              <BottomImageContainer>
-                <img
-                  src={DiscoverImage}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              </BottomImageContainer>
-            </BottomContainer>
-          </StyledTopContainer>
-        </StyledInnerContainer>
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      <StyledInnerContainer>
+        <StyledTopContainer>
+          <TopContainer></TopContainer>
+          <BottomContainer>
+            <BottomTitleContainer>
+              <BottomTitle>
+                <Highlight>Discover </Highlight>나를 깊게 이해해요
+              </BottomTitle>
+            </BottomTitleContainer>
+            <BottomCardContainer>
+              <StyledSlider {...settings}>
+                <CardWrapper>
+                  <Card />
+                </CardWrapper>
+                <CardWrapper>
+                  <Card />
+                </CardWrapper>
+                <CardWrapper>
+                  <Card />
+                </CardWrapper>
+                <CardWrapper>
+                  <Card />
+                </CardWrapper>
+                <CardWrapper>
+                  <Card />
+                </CardWrapper>
+                <CardWrapper>
+                  <Card />
+                </CardWrapper>
+              </StyledSlider>
+            </BottomCardContainer>
+            <BottomImageContainer>
+              <img
+                src={DiscoverImage}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </BottomImageContainer>
+          </BottomContainer>
+        </StyledTopContainer>
+      </StyledInnerContainer>
+    </StyledContainer>
   );
 };
+
 const StyledContainer = styled.div`
   padding-top: 81px;
 `;
+
 const StyledInnerContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -97,26 +124,34 @@ const BottomTitleContainer = styled.div`
   gap: 16px;
   display: flex;
 `;
+
 const BottomTitle = styled.div`
   color: ${({ theme }) => `${theme.color.gray700}`};
   ${({ theme }) => theme.font.desktop.body1b};
   word-wrap: break-word;
 `;
+
 const Highlight = styled.span`
   color: ${({ theme }) => `${theme.color.primary600}`};
 `;
 
 const BottomCardContainer = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 12px;
-  padding: 8px;
-  padding-right: 16px;
+  width: 100%;
+`;
 
-  & > * {
-    flex: 0 0 240px;
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    padding: 0 20px;
   }
+  .slick-track {
+    display: flex;
+    gap: 20px;
+  }
+`;
+
+const CardWrapper = styled.div`
+  flex: 0 0 300px;
+  box-sizing: border-box;
 `;
 
 const BottomImageContainer = styled.div`

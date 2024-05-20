@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -6,27 +6,11 @@ import { ExperienceWholeView } from '@/components/MyPage/ExperienceWholeView';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { MyPageTab } from '@/components/common/Tab/MyPageTab';
 
-interface Filter {
-  title: string;
-  contents: string[];
-  selected: string | string[];
-}
-
-const wholeFilter: Filter[] = [
-  {
-    title: '정렬 ',
-    contents: ['1', '2'],
-    selected: ' ',
-  },
-];
-
 export const ExperienceView = () => {
-  const [filters, setFilters] = useState<Filter[]>(wholeFilter);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
-  const handleFilterChange = (index: number, selected: string | string[]) => {
-    const newFilters = [...filters];
-    newFilters[index].selected = selected;
-    setFilters(newFilters);
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
   };
 
   const tabs = [
@@ -37,35 +21,27 @@ export const ExperienceView = () => {
         <div>
           <StyledFilterContainer>
             <StyledDropdownContainer>
-              {filters.map((filter, index) => (
-                <Dropdown
-                  key={filter.title}
-                  title={filter.title}
-                  contents={filter.contents}
-                  selected={filter.selected}
-                  placeholder={''}
-                  clickContentHandler={(content) => handleFilterChange(index, content)}
-                />
-              ))}
+              <Dropdown
+                title="정렬"
+                contents={['1', '2']}
+                selected={selectedCategory}
+                placeholder=""
+                clickContentHandler={(content) => handleCategoryChange(content)}
+              />
             </StyledDropdownContainer>
 
             <button
               className="refresh-button"
               type="button"
               onClick={() => {
-                setFilters(
-                  filters.map((filter) => ({
-                    ...filter,
-                    selected: '',
-                  }))
-                );
+                setSelectedCategory('');
               }}
             >
               초기화
             </button>
           </StyledFilterContainer>
           <CardContainer>
-            <ExperienceWholeView />
+            <ExperienceWholeView selectedCategory={selectedCategory} />
           </CardContainer>
         </div>
       ),
@@ -88,13 +64,14 @@ export const ExperienceView = () => {
     </StyledContainer>
   );
 };
+
 const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 81px;
-
   padding-bottom: 52px;
 `;
+
 const CardContainer = styled.div`
   padding: 24px;
   display: flex;

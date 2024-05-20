@@ -1,13 +1,23 @@
+import React from 'react';
+
 import styled from 'styled-components';
 
 import TestImage from '@/assets/test1.png';
 import { ExperienceCard } from '@/components/MyPage/ExperienceCard';
 
-export const ExperienceWholeView = () => {
+interface ExperienceWholeViewProps {
+  selectedCategory: string;
+}
+
+export const ExperienceWholeView = (props: ExperienceWholeViewProps) => {
+  const { selectedCategory } = props;
+
+  const filteredData = Dummy4.filter((item) => item.filterCategory === selectedCategory);
+
   return (
     <StyledSectionContainer>
       <Container>
-        {Dummy4.map((item) => (
+        {filteredData.map((item) => (
           <ExperienceCard
             key={item.id}
             imageUrl={item.img}
@@ -24,7 +34,6 @@ export const ExperienceWholeView = () => {
 const StyledSectionContainer = styled.div`
   width: 100%;
   height: 100%;
-
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -48,6 +57,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 2,
@@ -56,6 +66,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '2',
   },
   {
     id: 3,
@@ -64,6 +75,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 4,
@@ -72,6 +84,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 5,
@@ -80,6 +93,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 6,
@@ -88,6 +102,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 7,
@@ -96,6 +111,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 8,
@@ -104,6 +120,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 9,
@@ -112,6 +129,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 10,
@@ -120,6 +138,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 11,
@@ -128,6 +147,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
 
   {
@@ -137,6 +157,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 13,
@@ -145,6 +166,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '2',
   },
   {
     id: 14,
@@ -153,6 +175,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 15,
@@ -161,6 +184,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
   {
     id: 16,
@@ -169,6 +193,7 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '2',
   },
   {
     id: 17,
@@ -177,5 +202,6 @@ const Dummy4 = [
     subtitle: '경험 타이틀 경험 타이틀경험 타이틀 경험 타이틀경험 타이틀',
     keywords: ['keyword1', 'keyword2'],
     hot: true,
+    filterCategory: '1',
   },
 ];
