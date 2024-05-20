@@ -1,5 +1,40 @@
 /* import { useNavigate } from 'react-router-dom'; */
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
+const NAVIGATE_TEXT = {
+  discover: 'Discover 이해하기',
+  define: 'Define 정의하기',
+  design: 'Design 설계하기',
+};
+
+export const TestNavigation = () => {
+  //const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleButtonClick = () => {
+    // TODO: 홈페이지로 이동하도록 변경하기
+    window.location.href = 'https://selpiece.framer.website';
+  };
+
+  let titleText = '';
+  if (location.pathname.includes('discover')) {
+    titleText = NAVIGATE_TEXT.discover;
+  } else if (location.pathname.includes('define')) {
+    titleText = NAVIGATE_TEXT.define;
+  } else if (location.pathname.includes('design')) {
+    titleText = NAVIGATE_TEXT.design;
+  }
+
+  return (
+    <StyledContainer>
+      <Container>
+        <Title>{titleText}</Title>
+        <StyledButton onClick={handleButtonClick}>종료하기</StyledButton>
+      </Container>
+    </StyledContainer>
+  );
+};
 
 const StyledContainer = styled.header`
   display: flex;
@@ -69,22 +104,3 @@ const StyledButton = styled.button`
     ${({ theme }) => theme.font.mobile.body1b};
   }
 `;
-
-const DesignHeaderNavigation = () => {
-  //const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    // TODO: 홈페이지로 이동하도록 변경하기
-    window.location.href = 'https://selpiece.framer.website';
-  };
-  return (
-    <StyledContainer>
-      <Container>
-        <Title>Design 설계하기</Title>
-        <StyledButton onClick={handleButtonClick}>종료하기</StyledButton>
-      </Container>
-    </StyledContainer>
-  );
-};
-
-export default DesignHeaderNavigation;
