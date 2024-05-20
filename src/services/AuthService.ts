@@ -26,7 +26,7 @@ class AuthService {
   }
 
   getRegisterToken = () => {
-    window.sessionStorage.getItem('registerToken');
+    return window.sessionStorage.getItem('registerToken');
   };
 
   deleteRegisterToken = () => {
