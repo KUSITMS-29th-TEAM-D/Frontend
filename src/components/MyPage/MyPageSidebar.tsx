@@ -6,8 +6,8 @@ import { theme } from '@/styles';
 
 const SidebarContainer = styled.div`
   width: 196px;
-  height: 100%;
-  padding-top: 76px;
+  height: auto;
+  padding-top: 81px;
   background-color: ${({ theme }) => `${theme.color.white}`};
   border-right: 2px ${({ theme }) => `${theme.color.gray150}`} solid;
   display: flex;

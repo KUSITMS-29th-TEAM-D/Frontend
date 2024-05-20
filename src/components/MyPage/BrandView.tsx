@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
+import ExampleComponent2 from '@/components/MyPage/Card2';
 export const BrandView = () => {
   return (
     <StyledContainer>
@@ -20,6 +21,12 @@ export const BrandView = () => {
           </RightIcon>
         </HeaderRight>
       </BrandHeader>
+      <ContentContainer>
+        <LeftContent></LeftContent>
+        <CenterContent></CenterContent>
+        <RightContent></RightContent>
+      </ContentContainer>
+      <ExampleComponent2 />
     </StyledContainer>
   );
 };
@@ -81,4 +88,43 @@ const RightIcon = styled.div`
   width: 24px;
   height: 24px;
   position: relative;
+`;
+
+const ContentContainer = styled.div`
+  align-self: stretch;
+  height: 996px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+`;
+
+const LeftContent = styled.div`
+  align-self: stretch;
+  justify-content: space-between;
+  align-items: flex-end;
+  display: inline-flex;
+`;
+
+const CenterContent = styled.div`
+  align-self: stretch;
+  height: 208px;
+  padding: 24px;
+  background: #f7f7f7;
+  border-radius: 16px;
+  border: 2px #efefef solid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+`;
+
+const RightContent = styled.div`
+  align-self: stretch;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  display: inline-flex;
 `;
