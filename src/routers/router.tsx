@@ -20,6 +20,7 @@ import { OnboardingPage } from '@/pages/OnboardingPage';
 import { RedirectPage } from '@/pages/RedirectPage';
 import { SelfUnderstandPage } from '@/pages/SelfUnderstandPage';
 import { ExceptPreMemberRoute } from '@/routers/ExceptPreMemberRoute';
+import { MemberPrivateRoute } from '@/routers/MemberPrivateRoute';
 
 export const Router = () => {
   return (
@@ -44,14 +45,16 @@ export const Router = () => {
           <Route path="4" element={<DefineTestPage3 />} />
           <Route path=":defineId" element={<DefineResultPage />} />
         </Route>
-        <Route path="design" element={<DesignLayout />}>
-          <Route index element={<Navigate to="1" replace />}></Route>
-          <Route path="2" element={<DesignTestPage1 />} />
-          <Route path="3" element={<DesignTestPage2 />} />
-          <Route path="4" element={<DesignTestPage3 />} />
-          <Route path="5" element={<DesignTestPage4 />} />
-          <Route path="6" element={<DesignTestPage5 />} />
-          <Route path="result" element={<DesignResultPage />} />
+        <Route element={<MemberPrivateRoute />}>
+          <Route path="design" element={<DesignLayout />}>
+            <Route index element={<Navigate to="1" replace />}></Route>
+            <Route path="2" element={<DesignTestPage1 />} />
+            <Route path="3" element={<DesignTestPage2 />} />
+            <Route path="4" element={<DesignTestPage3 />} />
+            <Route path="5" element={<DesignTestPage4 />} />
+            <Route path="6" element={<DesignTestPage5 />} />
+            <Route path="result" element={<DesignResultPage />} />
+          </Route>
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
