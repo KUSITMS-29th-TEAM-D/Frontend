@@ -285,6 +285,8 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       }, 5000);
 
       return () => clearTimeout(timer);
+    } else {
+      setShowWarn(false);
     }
   }, [warningMessage]);
 

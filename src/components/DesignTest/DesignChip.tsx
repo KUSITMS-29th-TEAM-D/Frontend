@@ -258,7 +258,7 @@ export const DesignChips5 = () => {
 
     const selectedChips5 = newChipStates.reduce((selected, state, i) => {
       if (state === 2) {
-        selected.push(CHIP_DATA5[i]);
+        selected.push(chips[i]);
       }
       return selected;
     }, []);
