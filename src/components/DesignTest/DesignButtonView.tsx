@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { personaAPI } from '@/apis/personaAPI';
+import { authClient, noAuthClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { loadingHandlerState } from '@/recoil/loadingHandlerState';
-import { loadingState } from '@/recoil/loadingState';
 import { userService } from '@/services/UserService';
 
 interface Props {
@@ -244,52 +241,40 @@ export const DesignButtonView4 = ({ warning, warningMessage }: Props) => {
 export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
-  const setLoading = useSetRecoilState(loadingState);
-  const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
     navigate('/test/design/4');
   };
 
-  const handleButton2Click = () => {
+  const handleButton2Click = async () => {
     const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
     const selectedChips4 = JSON.parse(sessionStorage.getItem('selectedChips4') || '[]');
     const selectedChips5 = JSON.parse(sessionStorage.getItem('selectedChips5') || '[]');
-    console.log(selectedChips1, selectedChips2, selectedChips3, selectedChips4, selectedChips5);
 
     const requestData = {
-      stage_one_keywords: selectedChips1,
-      stage_two_keywords: selectedChips2,
-      stage_three_keywords: selectedChips3,
-      stage_four_keywords: selectedChips4,
-      stage_five_keywords: selectedChips5,
+      fields: selectedChips1,
+      distinctions: selectedChips2,
+      abilities: selectedChips3,
+      platforms: selectedChips4,
+      career: selectedChips5[0],
     };
 
-    setLoading(true);
+    try {
+      const client = userService.getUserState() === 'MEMBER' ? authClient : noAuthClient;
+      const response = await client.post('/api/personas/design', requestData);
+      const { code, message } = response.data;
 
-    personaAPI
-      .register(userService.getUserState() === 'MEMBER', requestData)
-      .then((response) => {
-        const { code, message, payload } = response;
-
-        if (code === '201') {
-          console.log('페르소나 생성 성공');
-          setLoadingHandler({
-            ...loadingHandler,
-            handleCompleted: () => {
-              navigate(`/test/design/${payload.Design_persona_id}`);
-            },
-          });
-        } else {
-          console.error('페르소나 생성 실패:', message);
-        }
-      })
-      .catch((error) => {
-        console.error('페르소나 생성 요청 실패:', error);
-        window.alert('페르소나 생성 요청 실패');
-      });
+      if (code === '201') {
+        console.log('페르소나 생성 성공');
+        navigate('/'); // 결과 페이지로 이동
+      } else {
+        console.error('페르소나 생성 실패:', message);
+      }
+    } catch (error) {
+      console.error('페르소나 생성 요청 실패:', error);
+    }
   };
 
   useEffect(() => {
@@ -300,6 +285,8 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       }, 5000);
 
       return () => clearTimeout(timer);
+    } else {
+      setShowWarn(false);
     }
   }, [warningMessage]);
 
