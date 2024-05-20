@@ -11,7 +11,7 @@ import {
   StyledQuestionContainer,
 } from '@/components/OnboardingPage/Setup.style';
 import { KeywordChip } from '@/components/common/Chip/KeywordChip';
-import { KEYWORD_LIST } from '@/constants/onboarding';
+import { IMAGE_KEYWORD_LIST } from '@/constants/onboarding';
 import { onboardingState } from '@/recoil/onboardingState';
 import { authService } from '@/services/AuthService';
 import { userService } from '@/services/UserService';
@@ -24,9 +24,9 @@ export const SetupBranding = () => {
     userAPI
       .register(onboarding)
       .then((res) => {
-        authService.onLoginSuccess(res.payload.access_token);
+        authService.setAuthToken(res.payload.access_token);
         userService.setUser({ nickname: res.payload.nickname });
-        authService.onRemoveRegisterToken();
+        authService.deleteRegisterToken();
         navigate('/');
       })
       .catch(() => {
@@ -57,7 +57,7 @@ export const SetupBranding = () => {
             </StyledDescription>
           </div>
           <StyledChipsContainer>
-            {KEYWORD_LIST.map((keyword) => (
+            {IMAGE_KEYWORD_LIST.map((keyword) => (
               <KeywordChip
                 key={keyword}
                 selected={onboarding.keyword_list.includes(keyword)}

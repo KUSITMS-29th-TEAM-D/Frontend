@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PlainChip } from '@/components/common/Chip/PlainChip';
@@ -7,11 +8,14 @@ interface PreviewCardProps {
   title: string;
   keywords: string[];
   hot?: boolean;
+  path?: string;
 }
 
-export const PreviewCard = ({ imageUrl, title, keywords, hot = false }: PreviewCardProps) => {
+export const PreviewCard = ({ imageUrl, title, keywords, hot = false, path }: PreviewCardProps) => {
+  const navigate = useNavigate();
+
   return (
-    <StyledContainer>
+    <StyledContainer onClick={() => path && navigate(path)}>
       {hot && (
         <div className="hot-item">
           <PlainChip>요즘 핫한</PlainChip>
@@ -42,6 +46,7 @@ const StyledContainer = styled.div`
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
 
   overflow: hidden;
+  cursor: pointer;
 
   .hot-item {
     position: absolute;
@@ -58,7 +63,6 @@ const StyledPreview = styled.div<{ $url: string }>`
 `;
 
 const StyledInformation = styled.div`
-  height: 100%;
   padding: 20px;
 
   background: ${({ theme }) => theme.color.white};
