@@ -12,8 +12,10 @@ interface DetailData {
   participants: number;
   title: string;
   subtitle: string;
-  profileTitle: string;
-  profileSubtitle: string;
+  providerName: string;
+  providerJob: string;
+  providerTitle: string;
+  providerKeyword: string;
   progranURL: string;
 }
 
@@ -52,8 +54,10 @@ const DetailSection = ({ data }: { data: DetailData }) => {
             <img src={data.profileImageURL} alt="profile" />
           </ProfileImageContainer>
           <ProfileTextContainer>
-            <ProfileTitleContainer>{data.profileTitle}</ProfileTitleContainer>
-            <ProfileSubTitleContainer>{data.profileSubtitle}</ProfileSubTitleContainer>
+            <ProfileTitleContainer>{data.providerName}</ProfileTitleContainer>
+            <ProfileSubTitleContainer>
+              {data.providerJob} | {data.providerTitle} | {data.providerKeyword}
+            </ProfileSubTitleContainer>
           </ProfileTextContainer>
         </ProfileContainer>
         <PlainButton
