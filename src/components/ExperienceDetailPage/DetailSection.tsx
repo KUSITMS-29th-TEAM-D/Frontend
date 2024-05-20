@@ -5,11 +5,21 @@ import { styled } from 'styled-components';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { ExperienceDetailModal } from '@/components/common/Modal/ExperienceDetailModal';
-import { Dummy1 } from '@/pages/ExperienceDetailPage';
 
-export const DetailSection = () => {
+interface DetailData {
+  imageURL: string;
+  profileImageURL: string;
+  participants: number;
+  title: string;
+  subtitle: string;
+  profileTitle: string;
+  profileSubtitle: string;
+  progranURL: string;
+}
+
+const DetailSection = ({ data }: { data: DetailData }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [participants, setParticipants] = useState(Dummy1.participants);
+  const [participants, setParticipants] = useState(data.participants);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   const handleOpenModal = () => {
@@ -25,24 +35,25 @@ export const DetailSection = () => {
     setButtonDisabled(true);
     setModalOpen(false);
   };
+
   return (
     <StyledContainer>
       <ImageContainer>
-        <img src={Dummy1.imageURL} alt="Detail" />
+        <img src={data.imageURL} alt="Detail" />
       </ImageContainer>
       <DetailContainer>
         <TextContainer>
           <PlainChip primary={true}>{participants}명 참여 중!</PlainChip>
-          <TitleContainer>{Dummy1.title}</TitleContainer>
-          <SubTitleContainer>{Dummy1.subtitle}</SubTitleContainer>
+          <TitleContainer>{data.title}</TitleContainer>
+          <SubTitleContainer>{data.subtitle}</SubTitleContainer>
         </TextContainer>
         <ProfileContainer>
           <ProfileImageContainer>
-            <img src={Dummy1.profileImageURL} alt="profile" />
+            <img src={data.profileImageURL} alt="profile" />
           </ProfileImageContainer>
           <ProfileTextContainer>
-            <ProfileTitleContainer>{Dummy1.profileTitle}</ProfileTitleContainer>
-            <ProfileSubTitleContainer>{Dummy1.profileSubtitle}</ProfileSubTitleContainer>
+            <ProfileTitleContainer>{data.profileTitle}</ProfileTitleContainer>
+            <ProfileSubTitleContainer>{data.profileSubtitle}</ProfileSubTitleContainer>
           </ProfileTextContainer>
         </ProfileContainer>
         <PlainButton
@@ -63,6 +74,7 @@ export const DetailSection = () => {
   );
 };
 
+export default DetailSection;
 const StyledContainer = styled.div`
   width: 100%;
   height: 100%;

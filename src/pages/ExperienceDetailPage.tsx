@@ -1,14 +1,34 @@
+//import { useEffect, useState } from 'react';
+
+//import axios from 'axios';
+//import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import TestImage from '@/assets/test1.png';
 import { BubbleSection } from '@/components/ExperienceDetailPage/BubbleSection';
-import { DetailSection } from '@/components/ExperienceDetailPage/DetailSection';
+import DetailSection from '@/components/ExperienceDetailPage/DetailSection';
 import { ImageSection } from '@/components/ExperienceDetailPage/ImageSection';
 
 export const ExperienceDetailPage = () => {
+  /*const { id } = useParams();
+  const [data, setData] = useState(Dummy1);
+
+  useEffect(() => {
+    const detailData = async () => {
+      try {
+        const response = await axios.get(`/api/programs/detail/${id}`);
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    detailData();
+  }, [id]);*/
+
   return (
     <StyledContainer>
-      <DetailSection />
+      <DetailSection data={Dummy1} />
       <BubbleSection />
       <ImageSection />
     </StyledContainer>

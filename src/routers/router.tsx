@@ -32,7 +32,7 @@ export const Router = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/auth" element={<LoginPage />} />
             <Route path="/understand" element={<SelfUnderstandPage />} />
-            <Route path="/recommend/detail" element={<ExperienceDetailPage />} />
+            <Route path="/recommend/detail/:id" element={<ExperienceDetailPage />} />
             //
             <Route element={<MemberPrivateRoute />}>
               //
