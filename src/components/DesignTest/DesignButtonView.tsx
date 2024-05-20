@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { noAuthClient } from '@/apis/client';
+import { authClient, noAuthClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
+import { userService } from '@/services/UserService';
 
 interface Props {
   warning?: boolean;
@@ -245,7 +246,7 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
     navigate('/test/design/4');
   };
 
-  const handleButton2Click = () => {
+  const handleButton2Click = async () => {
     const selectedChips1 = JSON.parse(sessionStorage.getItem('selectedChips1') || '[]');
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
@@ -260,20 +261,20 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       career: selectedChips5[0],
     };
 
-    noAuthClient
-      .post('/api/personas/design', requestData)
-      .then((response) => {
-        const { code, message } = response.data;
-        if (code === '201') {
-          console.log('페르소나 생성 성공');
-          navigate('/');
-        } else {
-          console.error('페르소나 생성 실패:', message);
-        }
-      })
-      .catch((error) => {
-        console.error('페르소나 생성 요청 실패:', error);
-      });
+    try {
+      const client = userService.getUserState() === 'MEMBER' ? authClient : noAuthClient;
+      const response = await client.post('/api/personas/design', requestData);
+      const { code, message } = response.data;
+
+      if (code === '201') {
+        console.log('페르소나 생성 성공');
+        navigate('/'); // 결과 페이지로 이동
+      } else {
+        console.error('페르소나 생성 실패:', message);
+      }
+    } catch (error) {
+      console.error('페르소나 생성 요청 실패:', error);
+    }
   };
 
   useEffect(() => {
