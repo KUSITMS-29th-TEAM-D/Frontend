@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { designPersonaAPI } from '@/apis/personaAPI';
+import { noAuthClient } from '@/apis/client';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { userService } from '@/services/UserService';
 
 interface Props {
   warning?: boolean;
@@ -251,31 +250,29 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
     const selectedChips2 = JSON.parse(sessionStorage.getItem('selectedChips2') || '[]');
     const selectedChips3 = JSON.parse(sessionStorage.getItem('selectedChips3') || '[]');
     const selectedChips4 = JSON.parse(sessionStorage.getItem('selectedChips4') || '[]');
-    const selectedChip5 = sessionStorage.getItem('selectedChip5') || '';
+    const selectedChips5 = JSON.parse(sessionStorage.getItem('selectedChips5') || '[]');
 
     const requestData = {
       fields: selectedChips1,
       distinctions: selectedChips2,
       abilities: selectedChips3,
       platforms: selectedChips4,
-      career: 'selectedChip5',
+      career: selectedChips5[0],
     };
-    console.log(selectedChip5);
 
-    designPersonaAPI
-      .register(userService.getUserState() === 'MEMBER', requestData)
+    noAuthClient
+      .post('/api/personas/design', requestData)
       .then((response) => {
-        const { code, message } = response;
-
+        const { code, message } = response.data;
         if (code === '201') {
           console.log('페르소나 생성 성공');
+          navigate('/');
         } else {
           console.error('페르소나 생성 실패:', message);
         }
       })
       .catch((error) => {
         console.error('페르소나 생성 요청 실패:', error);
-        window.alert('페르소나 생성 요청 실패');
       });
   };
 
@@ -287,14 +284,12 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
       }, 5000);
 
       return () => clearTimeout(timer);
-    } else {
-      setShowWarn(false);
     }
   }, [warningMessage]);
 
   return (
     <Container>
-      {showWarn && <ChipContainer>1가지만 선택가능해요</ChipContainer>}
+      {showWarn && <ChipContainer>키워드를 1개만 선택해 주세요!</ChipContainer>}
       <ButtonContainer>
         <PlainButton variant="gray" height="48px" width="100%" onClick={handleButton1Click}>
           이전으로

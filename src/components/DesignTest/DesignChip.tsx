@@ -251,20 +251,33 @@ export const DesignChips5 = () => {
 
   const handleToggle = (index: number) => {
     const newChipStates = [...chipStates];
+
     newChipStates[index] = newChipStates[index] === 2 ? 1 : 2;
+
     setChipStates(newChipStates);
 
-    const selectedChip = newChipStates[index] === 2 ? chips[index] : '';
-    sessionStorage.setItem('selectedChip5', selectedChip);
+    const selectedChips5 = newChipStates.reduce((selected, state, i) => {
+      if (state === 2) {
+        selected.push(CHIP_DATA5[i]);
+      }
+      return selected;
+    }, []);
+
+    sessionStorage.setItem('selectedChips5', JSON.stringify(selectedChips5));
   };
 
   const handleAddChip = (chip: string) => {
-    sessionStorage.setItem('selectedChip5', chip);
-
     const newChips = [...chips, chip];
     const newChipStates = [...chipStates, 2];
     setChips(newChips);
     setChipStates(newChipStates);
+    const selectedChips5 = newChipStates.reduce((selected, state, i) => {
+      if (state === 2) {
+        selected.push(newChips[i]);
+      }
+      return selected;
+    }, []);
+    sessionStorage.setItem('selectedChips5', JSON.stringify(selectedChips5));
   };
 
   return (
