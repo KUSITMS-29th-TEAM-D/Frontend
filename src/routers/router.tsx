@@ -37,8 +37,8 @@ export const Router = () => {
           //</Route> */}
         </Route>
       </Route>
-      <Route path="test">
-        <Route path="define" element={<TestLayout />}>
+      <Route path="test" element={<TestLayout />}>
+        <Route path="define">
           <Route index element={<Navigate to="1" replace />}></Route>
           <Route path="1" element={<DefineStartPage />} />
           <Route path="2" element={<DefineTestPage1 />} />
@@ -47,7 +47,7 @@ export const Router = () => {
           <Route path=":defineId" element={<DefineResultPage />} />
         </Route>
         <Route element={<MemberPrivateRoute />}>
-          <Route path="design" element={<TestLayout />}>
+          <Route path="design">
             <Route index element={<Navigate to="1" replace />}></Route>
             <Route path="1" element={<DesignStartPage />} />
             <Route path="2" element={<DesignTestPage1 />} />

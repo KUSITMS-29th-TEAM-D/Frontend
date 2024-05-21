@@ -25,7 +25,7 @@ export const SelectDiscoverModal = ({ handleStart }: SelectDiscoverModalProps) =
             return (
               <StyledCard
                 key={category}
-                $active={activeCategory === category}
+                $active={activeCategory === CATEGORY_TYPE[category].title}
                 onClick={() => setActiveCategory(CATEGORY_TYPE[category].title)}
               >
                 <Icon />
