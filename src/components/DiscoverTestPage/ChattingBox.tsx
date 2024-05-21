@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { SpeechBox } from '@/components/DiscoverTestPage/SpeechBox';
+import Scrollbar from '@/components/Scrollbar';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultInput } from '@/components/common/Input/DefaultInput';
@@ -82,6 +83,9 @@ const StyledHeader = styled.div`
 const StyledChatting = styled.div`
   flex: 1;
   padding: 20px;
+  padding-right: 4px;
+  overflow-y: scroll;
+  ${Scrollbar}
 `;
 
 const StyledInputField = styled.div`

@@ -1,42 +1,36 @@
+import axios from 'axios';
+
 import { authClient } from '@/apis/client';
 import { tokenAPI } from '@/apis/tokenAPI';
 import { userService } from '@/services/UserService';
 
 class AuthService {
-  onLoginSuccess = (token: string) => {
-    authClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  };
-
-  onSaveRegisterToken = (registerToken: string) => {
-    window.sessionStorage.setItem('registerToken', registerToken);
-  };
-
-  onSetRegisterToken = () => {
-    const registerToken = window.sessionStorage.getItem('registerToken');
-    if (registerToken) {
-      this.onLoginSuccess(registerToken);
-    } else {
-      window.alert('로그인이 필요합니다.');
-      this.onLogout();
+  getRefreshToken = async () => {
+    try {
+      const response = await tokenAPI.refresh();
+      return response.payload.access_token;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
+        window.alert('로그인이 필요합니다.');
+        this.onLogout();
+      }
     }
   };
 
-  onRemoveRegisterToken = () => {
-    window.sessionStorage.removeItem('registerToken');
+  setAuthToken(token: string) {
+    authClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }
+
+  setRegisterToken(registerToken: string) {
+    window.sessionStorage.setItem('registerToken', registerToken);
+  }
+
+  getRegisterToken = () => {
+    return window.sessionStorage.getItem('registerToken');
   };
 
-  onRefreshToken = () => {
-    tokenAPI
-      .refresh()
-      .then((response) => {
-        this.onLoginSuccess(response.payload.access_token);
-      })
-      .catch((error) => {
-        if (error.response.status === 401) {
-          window.alert('로그인이 필요합니다.');
-          this.onLogout();
-        }
-      });
+  deleteRegisterToken = () => {
+    window.sessionStorage.removeItem('registerToken');
   };
 
   onLogout = () => {

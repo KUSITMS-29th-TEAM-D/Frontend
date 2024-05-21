@@ -1,5 +1,4 @@
-/* import { useNavigate } from 'react-router-dom'; */
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NAVIGATE_TEXT = {
@@ -9,12 +8,11 @@ const NAVIGATE_TEXT = {
 };
 
 export const TestNavigation = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const handleButtonClick = () => {
-    // TODO: 홈페이지로 이동하도록 변경하기
-    window.location.href = 'https://selpiece.framer.website';
+    navigate('/');
   };
 
   let titleText = '';

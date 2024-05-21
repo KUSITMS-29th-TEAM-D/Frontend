@@ -18,6 +18,17 @@ export interface DefineResult {
   front_img_url: string;
   back_img_url: string;
 }
+export interface DesignRequest {
+  fields: string[];
+  distinctions: string[];
+  abilities: string[];
+  platforms: string[];
+  career: string;
+}
+
+export interface DesignResult extends DesignRequest {
+  definition: string;
+}
 
 export interface ChattingStage {
   question: string;
