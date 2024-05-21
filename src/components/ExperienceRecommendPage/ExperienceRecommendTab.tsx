@@ -22,6 +22,8 @@ const BackgroundWrapper = styled.div<{ $backgroundColor: string }>`
 
 export const ExperienceRecommendTab = () => {
   const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
+  const [activeTab, setActiveTab] = useState<string>('tab1');
+
   const filters: ExperienceFilterCards[] = [
     { title: '분야', contents: Dummy2, selected: selectedField, setSelected: setSelectedField },
   ];
@@ -44,6 +46,7 @@ export const ExperienceRecommendTab = () => {
                 recommendItems={Dummy5}
                 filters={filters}
                 backgroundColor={''}
+                setActiveTab={setActiveTab}
               />
             </FixedWidthContainer>
           </BackgroundWrapper>
@@ -59,6 +62,7 @@ export const ExperienceRecommendTab = () => {
                 recommendItems={Dummy5}
                 filters={filters}
                 backgroundColor={''}
+                setActiveTab={setActiveTab}
               />
             </FixedWidthContainer>
           </BackgroundWrapper>
@@ -111,7 +115,7 @@ export const ExperienceRecommendTab = () => {
 
   return (
     <div>
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };

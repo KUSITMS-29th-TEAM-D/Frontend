@@ -10,12 +10,14 @@ interface RecommendSectionTemplateProps {
   backgroundColor: string;
   recommendItems: ExperienceRecommendCards[];
   filters: ExperienceFilterCards[];
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const RecommendSectionTemplate3 = ({
   title,
   subTitle,
   backgroundColor,
+  setActiveTab,
 }: RecommendSectionTemplateProps) => {
   return (
     <StyledContainer $backgroundColor={backgroundColor}>
@@ -27,7 +29,7 @@ export const RecommendSectionTemplate3 = ({
             <button
               type="button"
               onClick={() => {
-                //더보기 페이지(?)
+                setActiveTab('tab2');
               }}
             >
               더보기

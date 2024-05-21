@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import styled from 'styled-components';
 
@@ -45,29 +45,29 @@ interface TabItem {
 
 interface TabsProps {
   tabs: TabItem[];
+  activeTab: string;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Tabs = ({ tabs }: TabsProps) => {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (index: number) => {
-    setValue(index);
+const Tabs = ({ tabs, activeTab, setActiveTab }: TabsProps) => {
+  const handleChange = (tabId: string) => {
+    setActiveTab(tabId);
   };
 
   return (
     <>
       <Container>
         <TabContainer>
-          {tabs.map((tab, index) => (
-            <Tab key={tab.id} $isActive={value === index} onClick={() => handleChange(index)}>
+          {tabs.map((tab) => (
+            <Tab key={tab.id} $isActive={activeTab === tab.id} onClick={() => handleChange(tab.id)}>
               <div>{tab.label}</div>
             </Tab>
           ))}
         </TabContainer>
       </Container>
       <div>
-        {tabs.map((tab, index) => (
-          <TabPanel key={tab.id} $hidden={value !== index}>
+        {tabs.map((tab) => (
+          <TabPanel key={tab.id} $hidden={activeTab !== tab.id}>
             {tab.content}
           </TabPanel>
         ))}
@@ -77,7 +77,6 @@ const Tabs = ({ tabs }: TabsProps) => {
 };
 
 export default Tabs;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
