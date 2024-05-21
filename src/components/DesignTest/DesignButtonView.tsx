@@ -268,7 +268,7 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
     setLoading({ show: true, speed: 70 });
 
     personaAPI
-      .registerPersonaDesign(requestData)
+      .registerDesign(requestData)
       .then((response) => {
         const { code, message } = response;
 

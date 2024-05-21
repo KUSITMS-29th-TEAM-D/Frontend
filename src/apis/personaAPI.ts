@@ -2,8 +2,8 @@ import { authClient, noAuthClient } from '@/apis/client';
 import { DefineRequest, DesignRequest } from '@/types/test.type';
 
 export const personaAPI = {
-  // 페르소나 생성
-  register: async (member: boolean, userInfo: DefineRequest) => {
+  // Define 페르소나 생성
+  registerDefine: async (member: boolean, userInfo: DefineRequest) => {
     if (member) {
       const response = await authClient.post('/api/personas/define', userInfo);
       return response.data;
@@ -12,25 +12,26 @@ export const personaAPI = {
     const response = await noAuthClient.post('/api/personas/define/sharing', userInfo);
     return response.data;
   },
-  // 비로그인 유저 페르소나 조회
-  getPersona: async (personaId: string) => {
+  // 비로그인 유저 Define 페르소나 조회
+  getDefine: async (personaId: string) => {
     const response = await noAuthClient.get(
       `/api/personas/define/sharing?define_persona_id=${personaId}`
     );
     return response.data;
   },
-  // 로그인 유저 페르소나 조회
-  getPersonaMember: async () => {
+  // 로그인 유저 Define 페르소나 조회
+  getDefineMember: async () => {
     const response = await authClient.get('/api/personas/define');
     return response.data;
   },
-  // 설계하기 페르소나 등록
-  registerPersonaDesign: async (userInfo: DesignRequest) => {
+
+  // Design 설계하기 페르소나 등록
+  registerDesign: async (userInfo: DesignRequest) => {
     const response = await authClient.post('/api/personas/design', userInfo);
     return response.data;
   },
-  // 설계하기 페르소나 조회
-  getPersonaDesign: async () => {
+  // Design 설계하기 페르소나 조회
+  getDesignMember: async () => {
     const response = await authClient.get('/api/personas/design');
     return response.data;
   },
