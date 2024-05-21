@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowRight.svg';
@@ -14,6 +14,7 @@ interface SideNavigationProps {
 }
 
 export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => {
+  const navigate = useNavigate();
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     setScreenSize();
@@ -36,7 +37,12 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
             <CloseIcon className="icon" />
           </button>
           {NAVIGATION_MENU.map((item) => (
-            <Link to={item.path} className="menu-button" key={item.menu}>
+            <Link
+              to={item.path}
+              className="menu-button"
+              key={item.menu}
+              onClick={() => setOpen(false)}
+            >
               <span>{item.menu}</span>
               <ArrowIcon />
             </Link>
@@ -54,7 +60,14 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
               </PlainButton>
             </>
           ) : (
-            <PlainButton variant="gray" height="48px">
+            <PlainButton
+              variant="gray"
+              height="48px"
+              onClick={() => {
+                navigate('/auth');
+                setOpen(false);
+              }}
+            >
               로그인
             </PlainButton>
           )}

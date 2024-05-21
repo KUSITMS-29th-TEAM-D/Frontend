@@ -70,7 +70,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const DefineHeaderNavigation = () => {
+const TestNavigation = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -86,4 +86,4 @@ const DefineHeaderNavigation = () => {
   );
 };
 
-export default DefineHeaderNavigation;
+export default TestNavigation;
