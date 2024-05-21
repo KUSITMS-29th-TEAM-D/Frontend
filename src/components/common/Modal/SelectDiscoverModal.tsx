@@ -8,12 +8,12 @@ import { CATEGORY_TYPE } from '@/constants/discover';
 
 const CATEGORY_LIST = ['health', 'career', 'love', 'leisure'];
 
-export const SelectDiscoverModal = () => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+interface SelectDiscoverModalProps {
+  handleStart: (category: string) => void;
+}
 
-  const handleStart = () => {
-    // TODO: 탐색 시작하기 버튼 클릭 로직 구현
-  };
+export const SelectDiscoverModal = ({ handleStart }: SelectDiscoverModalProps) => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
     <DefaultModal>
@@ -26,7 +26,7 @@ export const SelectDiscoverModal = () => {
               <StyledCard
                 key={category}
                 $active={activeCategory === category}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => setActiveCategory(CATEGORY_TYPE[category].title)}
               >
                 <Icon />
                 <span>{CATEGORY_TYPE[category].title}</span>
@@ -34,7 +34,13 @@ export const SelectDiscoverModal = () => {
             );
           })}
         </div>
-        <PlainButton height="48px" onClick={handleStart}>
+        <PlainButton
+          height="48px"
+          onClick={() => {
+            activeCategory && handleStart(activeCategory);
+          }}
+          disabled={!activeCategory}
+        >
           탐색 시작하기
         </PlainButton>
       </StyledContentContainer>

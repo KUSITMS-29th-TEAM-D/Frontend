@@ -7,6 +7,7 @@ import Scrollbar from '@/components/Scrollbar';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultInput } from '@/components/common/Input/DefaultInput';
+import { CATEGORY_LIST } from '@/constants/discover';
 import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
 
 const Dummy = {
@@ -24,17 +25,19 @@ const Dummy = {
   },
 };
 
-const CATEGORY = ['건강', '커리어', '사랑', '여가'];
+interface ChattingBoxProps {
+  currentCategory: string | null;
+  setCurrentCategory: (category: string) => void;
+}
 
-export const ChattingBox = () => {
+export const ChattingBox = ({ currentCategory, setCurrentCategory }: ChattingBoxProps) => {
   const [chatList, setChat] = useState<ChattingList[]>(transformDataToMessages(Dummy));
-  const [currentCategory, setCurrentCategory] = useState(CATEGORY[0]);
 
   return (
     <>
       <StyledContainer>
         <StyledHeader>
-          {CATEGORY.map((category) => (
+          {CATEGORY_LIST.map((category) => (
             <CategoryButton
               key={category}
               active={category === currentCategory}

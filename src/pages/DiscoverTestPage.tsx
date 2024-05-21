@@ -1,14 +1,28 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 
 import { ChattingBox } from '@/components/DiscoverTestPage/ChattingBox';
 import { RightSidebar } from '@/components/DiscoverTestPage/RightSidebar';
+import { SelectDiscoverModal } from '@/components/common/Modal/SelectDiscoverModal';
 
 export const DiscoverTestPage = () => {
+  const [activeSelectModal, setActiveSelectModal] = useState(true);
+  const [currentCategory, setCurrentCategory] = useState<string | null>(null);
+
   return (
     <>
+      {activeSelectModal && (
+        <SelectDiscoverModal
+          handleStart={(category: string) => {
+            setCurrentCategory(category);
+            setActiveSelectModal(false);
+          }}
+        />
+      )}
       <StyledContainer>
         <StyledInnerContainer>
-          <ChattingBox />
+          <ChattingBox currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
           <RightSidebar />
         </StyledInnerContainer>
       </StyledContainer>

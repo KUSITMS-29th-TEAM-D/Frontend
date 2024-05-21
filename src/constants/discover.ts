@@ -10,21 +10,23 @@ export interface DiscoverCategoryType {
   };
 }
 
+export const CATEGORY_LIST = ['건강', '커리어', '사랑', '여가'];
+
 export const CATEGORY_TYPE: DiscoverCategoryType = {
   health: {
-    title: '건강',
+    title: CATEGORY_LIST[0],
     icon: HealthIcon,
   },
   career: {
-    title: '커리어',
+    title: CATEGORY_LIST[1],
     icon: CareerIcon,
   },
   love: {
-    title: '사랑',
+    title: CATEGORY_LIST[2],
     icon: LoveIcon,
   },
   leisure: {
-    title: '여가',
+    title: CATEGORY_LIST[3],
     icon: LeisureIcon,
   },
 };
