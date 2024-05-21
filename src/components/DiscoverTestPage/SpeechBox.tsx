@@ -7,9 +7,10 @@ interface SpeechBoxProps {
   children: string;
   isUser?: boolean;
   isContinuous: boolean;
+  isEnd: boolean;
 }
 
-export const SpeechBox = ({ children, isUser = false, isContinuous }: SpeechBoxProps) => {
+export const SpeechBox = ({ children, isUser = false, isContinuous, isEnd }: SpeechBoxProps) => {
   const userNickname = '유저이름';
 
   return (
@@ -25,7 +26,7 @@ export const SpeechBox = ({ children, isUser = false, isContinuous }: SpeechBoxP
       )}
       <div className="text-container">
         {!isContinuous && <span>{isUser ? userNickname : '셀퍼'}</span>}
-        <StyledTextBox $isUser={isUser} $continuous={isContinuous}>
+        <StyledTextBox $isUser={isUser} $end={isEnd}>
           {children}
         </StyledTextBox>
       </div>
@@ -39,11 +40,15 @@ const StyledContainer = styled.div<{ $isUser: boolean }>`
   gap: 12px;
 
   .text-container {
+    display: flex;
+    flex-direction: column;
+
     text-align: ${({ $isUser }) => ($isUser ? 'right' : 'left')};
 
     span {
       ${({ theme }) => theme.font.desktop.label1m};
       color: ${({ theme }) => theme.color.gray800};
+      margin-bottom: 8px;
     }
   }
 `;
@@ -61,7 +66,7 @@ const UserProfile = styled.div`
   }
 `;
 
-const StyledTextBox = styled.div<{ $isUser: boolean; $continuous: boolean }>`
+const StyledTextBox = styled.div<{ $isUser: boolean; $end: boolean }>`
   width: fit-content;
   max-width: 550px;
   padding: 10px;
@@ -85,5 +90,5 @@ const StyledTextBox = styled.div<{ $isUser: boolean; $continuous: boolean }>`
           background: ${({ theme }) => theme.color.white};
         `}
 
-  margin-bottom: ${({ $continuous }) => ($continuous ? '24px' : '8px')};
+  margin-bottom: ${({ $end }) => ($end ? '24px' : '8px')};
 `;

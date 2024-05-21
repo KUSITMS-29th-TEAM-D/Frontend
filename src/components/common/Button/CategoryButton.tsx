@@ -5,9 +5,14 @@ interface CategoryButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   active?: boolean;
 }
 
-export const CategoryButton = ({ done = false, active = false, children }: CategoryButtonProps) => {
+export const CategoryButton = ({
+  done = false,
+  active = false,
+  children,
+  ...props
+}: CategoryButtonProps) => {
   return (
-    <StyledButton $done={done} $active={active}>
+    <StyledButton $done={done} $active={active} {...props}>
       {children}
     </StyledButton>
   );

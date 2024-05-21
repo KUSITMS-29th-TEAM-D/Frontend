@@ -24,17 +24,25 @@ const Dummy = {
   },
 };
 
+const CATEGORY = ['건강', '커리어', '사랑', '여가'];
+
 export const ChattingBox = () => {
   const [chatList, setChat] = useState<ChattingList[]>(transformDataToMessages(Dummy));
+  const [currentCategory, setCurrentCategory] = useState(CATEGORY[0]);
 
   return (
     <>
       <StyledContainer>
         <StyledHeader>
-          <CategoryButton>건강</CategoryButton>
-          <CategoryButton done>커리어</CategoryButton>
-          <CategoryButton active>사랑</CategoryButton>
-          <CategoryButton>여가</CategoryButton>
+          {CATEGORY.map((category) => (
+            <CategoryButton
+              key={category}
+              active={category === currentCategory}
+              onClick={() => setCurrentCategory(category)}
+            >
+              {category}
+            </CategoryButton>
+          ))}
         </StyledHeader>
         <StyledChatting>
           {chatList.map((chat, index) => (
@@ -42,6 +50,7 @@ export const ChattingBox = () => {
               key={chat.text}
               isUser={chat.user === 'user'}
               isContinuous={index > 0 && chatList[index - 1].user === chat.user}
+              isEnd={index + 1 < chatList.length && chatList[index + 1].user !== chat.user}
             >
               {chat.text}
             </SpeechBox>
