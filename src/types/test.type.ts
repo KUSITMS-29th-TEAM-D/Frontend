@@ -35,3 +35,7 @@ export interface ChattingStage {
   answer: string;
   reaction: string;
 }
+
+export interface DiscoverSummaryResponse {
+  [key: string]: string[];
+}

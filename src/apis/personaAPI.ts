@@ -35,4 +35,17 @@ export const personaAPI = {
     const response = await authClient.get('/api/personas/design');
     return response.data;
   },
+
+  // Discover 임시저장 채팅 완료 여부 조회
+
+  // Discover 임시저장 채팅 조회
+  getDefaultChatting: async (category: string) => {
+    const response = await authClient.get(`/api/personas/discover/chattings?category=${category}`);
+    return response.data;
+  },
+  // Discover 임시저장 요약 조회
+  getDefaultSummary: async () => {
+    const response = await authClient.get('/api/personas/discover/summaries');
+    return response.data;
+  },
 };

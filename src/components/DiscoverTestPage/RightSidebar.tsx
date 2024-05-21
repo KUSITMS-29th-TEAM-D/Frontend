@@ -1,44 +1,72 @@
+import { useEffect } from 'react';
+
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
 import { SummaryCard } from '@/components/DiscoverTestPage/SummaryCard';
 import Scrollbar from '@/components/Scrollbar';
 import { PlainButton } from '@/components/common/Button/PlainButton';
+import { discoverSummaryState } from '@/recoil/discoverSummaryState';
+import { userService } from '@/services/UserService';
 
 export const RightSidebar = () => {
   const handleResultButton = () => {};
+  const [summary, setSummary] = useRecoilState(discoverSummaryState);
+
+  useEffect(() => {
+    personaAPI.getDefaultSummary().then((res) => {
+      console.log(res.payload);
+      setSummary(res.payload);
+    });
+  }, []);
 
   return (
     <StyledContainer>
       <StyledSummaryContainer>
+        <div className="title">{userService.getUserNickname()}님의 답변을 요약중이에요!</div>
+        {summary &&
+          Object.keys(summary).map(
+            (key) =>
+              summary[key].length > 0 && (
+                <SummaryCard category={key} title="질문" descriptions={summary[key]} />
+              )
+          )}
         <SummaryCard
           category="health"
           title="질문 내용 질문 내용 질문 내용"
-          description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
-        />
-        <SummaryCard
-          category="career"
-          title="질문 내용 질문 내용 질문 내용"
-          description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
-        />
-        <SummaryCard
-          category="love"
-          title="질문 내용 질문 내용 질문 내용"
-          description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
-        />
-        <SummaryCard
-          category="leisure"
-          title="질문 내용 질문 내용 질문 내용"
-          description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
+          descriptions={[
+            '요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 ',
+          ]}
         />
         <SummaryCard
           category="health"
           title="질문 내용 질문 내용 질문 내용"
-          description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
+          descriptions={[
+            '요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 ',
+          ]}
         />
         <SummaryCard
           category="health"
           title="질문 내용 질문 내용 질문 내용"
-          description="요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 "
+          descriptions={[
+            '요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 ',
+          ]}
+        />
+        <SummaryCard
+          category="health"
+          title="질문 내용 질문 내용 질문 내용"
+          descriptions={[
+            '요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대',
+            '^^^^요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 ',
+          ]}
+        />
+        <SummaryCard
+          category="health"
+          title="질문 내용 질문 내용 질문 내용"
+          descriptions={[
+            '요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 요약은 한두줄 정도된다는데 유저가 쓴 내용을 요약했대 ',
+          ]}
         />
       </StyledSummaryContainer>
       <StyledButtonContainer>
@@ -80,6 +108,12 @@ const StyledSummaryContainer = styled.div`
   ${Scrollbar}
 
   flex: 1;
+
+  .title {
+    ${({ theme }) => theme.font.desktop.body2m};
+    color: ${({ theme }) => theme.color.gray800};
+    margin-bottom: 4px;
+  }
 `;
 
 const StyledButtonContainer = styled.div`

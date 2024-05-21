@@ -5,10 +5,10 @@ import { CATEGORY_TYPE } from '@/constants/discover';
 interface SummaryCardProps {
   category: keyof typeof CATEGORY_TYPE;
   title: string;
-  description: string;
+  descriptions: string[];
 }
 
-export const SummaryCard = ({ category, title, description }: SummaryCardProps) => {
+export const SummaryCard = ({ category, title, descriptions }: SummaryCardProps) => {
   const Icon = CATEGORY_TYPE[category].icon;
 
   return (
@@ -19,7 +19,11 @@ export const SummaryCard = ({ category, title, description }: SummaryCardProps) 
       </StyledHeader>
       <StyledContent>
         <div className="title">{title}</div>
-        <div className="description">{description}</div>
+        {descriptions.map((description) => (
+          <div key={description} className="description">
+            {description}
+          </div>
+        ))}
       </StyledContent>
     </StyledContainer>
   );
