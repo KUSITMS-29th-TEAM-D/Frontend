@@ -18,3 +18,9 @@ export interface DefineResult {
   front_img_url: string;
   back_img_url: string;
 }
+
+export interface ChattingStage {
+  question: string;
+  answer: string;
+  reaction: string;
+}
