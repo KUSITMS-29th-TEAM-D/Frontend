@@ -13,7 +13,7 @@ const settings = {
   prevArrow: <CarouselButton2 direction="prev" />,
   variableWidth: true,
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 5000,
 };
 
 interface CarouselProps {
