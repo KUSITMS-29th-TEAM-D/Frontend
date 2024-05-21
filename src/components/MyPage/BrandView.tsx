@@ -1,14 +1,29 @@
+import { useState } from 'react';
+
 import { styled } from 'styled-components';
 
+import { ReactComponent as PlusIcon } from '@/assets/icons/add.svg';
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
+import { BrandModal } from '@/components/MyPage/BrandModal';
 import Card from '@/components/MyPage/Card';
+import Test from '@/components/MyPage/test';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 
 export const BrandView = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <StyledContainer>
       <BrandHeader>
+        <Test />
         <HeaderLeft>
           <BrandLogo>
             <BrandLogoImage />
@@ -45,6 +60,7 @@ export const BrandView = () => {
           <BottomContainer>
             <CardHeader>
               <PlainChip>준비</PlainChip>
+              <PlusIcons onClick={openModal} />
             </CardHeader>
             <Card />
           </BottomContainer>
@@ -65,6 +81,7 @@ export const BrandView = () => {
           </BottomContainer>
         </BottomContent>
       </ContentContainer>
+      <BrandModal isOpen={isModalOpen} onClose={closeModal} />
     </StyledContainer>
   );
 };
@@ -126,6 +143,11 @@ const RightIcon = styled.div`
   width: 24px;
   height: 24px;
   position: relative;
+`;
+const PlusIcons = styled(PlusIcon)`
+  path {
+    fill: ${({ theme }) => theme.color.primary500};
+  }
 `;
 
 const ContentContainer = styled.div`
