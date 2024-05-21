@@ -5,9 +5,10 @@ import styled, { css } from 'styled-components';
 interface DefaultInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   warning?: boolean;
   children?: React.ReactNode;
+  width?: string;
 }
 
-export const DefaultInput = ({ warning = false, children, ...props }: DefaultInputProps) => {
+export const DefaultInput = ({ warning = false, width, children, ...props }: DefaultInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => {
@@ -19,18 +20,23 @@ export const DefaultInput = ({ warning = false, children, ...props }: DefaultInp
   };
 
   return (
-    <StyledContainer $warning={warning} $focused={isFocused}>
+    <StyledContainer $warning={warning} $focused={isFocused} $width={width}>
       <input type="text" onFocus={handleFocus} onBlur={handleBlur} {...props} />
       {children}
     </StyledContainer>
   );
 };
 
-const StyledContainer = styled.div<{ $warning: boolean; $focused: boolean }>`
+const StyledContainer = styled.div<{
+  $warning: boolean;
+  $focused: boolean;
+  $width: string | undefined;
+}>`
   display: flex;
   align-items: center;
   gap: 12px;
 
+  ${({ $width }) => $width && `width: ${$width};`}
   padding: 8px 12px;
 
   border: 1px solid transparent;
