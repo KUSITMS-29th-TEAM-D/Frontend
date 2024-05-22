@@ -74,7 +74,7 @@ const TestNavigation = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/');
+    navigate('/understand');
   };
   return (
     <StyledContainer>

@@ -28,10 +28,13 @@ export const CardCarousel = ({ gap = '24px', children }: CardCarouselProps) => {
 };
 
 const SliderWrapper = styled.div<{ $gap: string }>`
+  width: 100%;
+
   .slick-list {
     padding: 5px;
 
     .slick-track {
+      width: 100% !important;
       display: flex;
       gap: ${({ $gap }) => $gap};
     }

@@ -17,7 +17,7 @@ export const ResultView = ({ children, definition, ...props }: ResultViewProps) 
             <span className="highlight">{userService.getUserNickname()}</span>님은 이런 브랜드가
             되고 싶군요!
           </div>
-          <div className="brand">“{definition}”</div>
+          <div className="brand">{definition}</div>
           {children}
         </StyledContent>
       </StyledInnerContainer>
@@ -47,7 +47,7 @@ const StyledContent = styled.div`
   align-items: center;
   gap: 24px;
 
-  width: 830px;
+  width: 930px;
 
   .title {
     ${({ theme }) => theme.font.desktop.title2};
@@ -59,8 +59,13 @@ const StyledContent = styled.div`
   }
 
   .brand {
-    ${({ theme }) => theme.font.desktop.h2};
-    color: ${({ theme }) => theme.color.primary600};
+    // 디자인 시스템에 없는 폰트 스타일
+    font-family: 'Spoqa Han Sans Neo';
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 48px;
+
+    color: ${({ theme }) => theme.color.gray900};
     text-align: center;
     margin-bottom: 32px;
     word-break: keep-all;
