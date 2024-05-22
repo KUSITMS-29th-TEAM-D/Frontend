@@ -9,7 +9,7 @@ interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: RecommendProgramItem[];
+  recommendItems: RecommendProgramItem[] | undefined;
   refreshHandler?: () => void;
   children?: React.ReactNode;
 }
@@ -22,7 +22,7 @@ export const RecommendSectionTemplate = ({
   refreshHandler,
   children,
 }: RecommendSectionTemplateProps) => {
-  if (recommendItems.length > 0)
+  if (recommendItems && recommendItems.length > 0)
     return (
       <StyledContainer $backgroundColor={backgroundColor}>
         <StyledSectionContainer>
