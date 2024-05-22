@@ -6,8 +6,6 @@ import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultModal } from '@/components/common/Modal/DefaultModal';
 import { CATEGORY_TYPE } from '@/constants/discover';
 
-const CATEGORY_LIST = ['health', 'career', 'love', 'leisure'];
-
 interface SelectDiscoverModalProps {
   handleStart: (category: string) => void;
 }
@@ -20,13 +18,13 @@ export const SelectDiscoverModal = ({ handleStart }: SelectDiscoverModalProps) =
       <StyledContentContainer>
         <div className="title">가장 끌리는 주제를 선택해주세요.</div>
         <div className="card-container">
-          {CATEGORY_LIST.map((category) => {
+          {Object.keys(CATEGORY_TYPE).map((category) => {
             const Icon = CATEGORY_TYPE[category].icon;
             return (
               <StyledCard
                 key={category}
-                $active={activeCategory === CATEGORY_TYPE[category].title}
-                onClick={() => setActiveCategory(CATEGORY_TYPE[category].title)}
+                $active={activeCategory === category}
+                onClick={() => setActiveCategory(category)}
               >
                 <Icon />
                 <span>{CATEGORY_TYPE[category].title}</span>

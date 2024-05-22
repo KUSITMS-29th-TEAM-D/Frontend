@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
 import { SpeechBox } from '@/components/DiscoverTestPage/SpeechBox';
 import Scrollbar from '@/components/Scrollbar';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultInput } from '@/components/common/Input/DefaultInput';
-import { CATEGORY_LIST } from '@/constants/discover';
-import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
+import { CATEGORY_TYPE } from '@/constants/discover';
+import { useGetChatting } from '@/hooks/useGetChatting';
+/* import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
 
 const Dummy = {
   stage_one: {
@@ -23,27 +26,37 @@ const Dummy = {
     reaction:
       '상대방에게 집중하려고 노력하시는군요! 같이 있는 시간을 소중히 여기고 그 순간을 온전히 함께 하고 싶은 마음에서 그런 행동이 나오는 것 같네요. 이런 태도는 상대방에게 큰 호감으로 느껴질 수 있어요.',
   },
-};
+}; */
 
-interface ChattingBoxProps {
-  currentCategory: string | null;
-  setCurrentCategory: (category: string) => void;
-}
+export const ChattingBox = () => {
+  const [endCategory, setEndCategory] = useState<string[]>([]);
+  const [categoryParams] = useSearchParams();
+  const currentCategory = categoryParams.get('category') ?? '';
+  const { chatList } = useGetChatting(currentCategory);
 
-export const ChattingBox = ({ currentCategory, setCurrentCategory }: ChattingBoxProps) => {
-  const [chatList, setChat] = useState<ChattingList[]>(transformDataToMessages(Dummy));
+  useEffect(() => {
+    personaAPI.getChattingComplete().then((res) => {
+      const result = Object.keys(res)
+        .filter((category) => res[category])
+        .map((category) => CATEGORY_TYPE[category.replace('_complete', '')]?.title)
+        .filter(Boolean);
+
+      setEndCategory(result);
+    });
+  }, []);
 
   return (
     <>
       <StyledContainer>
         <StyledHeader>
-          {CATEGORY_LIST.map((category) => (
+          {Object.keys(CATEGORY_TYPE).map((category) => (
             <CategoryButton
               key={category}
               active={category === currentCategory}
-              onClick={() => setCurrentCategory(category)}
+              done={endCategory.includes(category)}
+              path={category}
             >
-              {category}
+              {CATEGORY_TYPE[category].title}
             </CategoryButton>
           ))}
         </StyledHeader>
@@ -60,7 +73,7 @@ export const ChattingBox = ({ currentCategory, setCurrentCategory }: ChattingBox
           ))}
         </StyledChatting>
         <StyledInputField>
-          <DefaultInput width="100%" placeholder="답변을 입력해주세요" />
+          <DefaultInput width="100%" placeholder="답변을 입력해주세요" disabled />
           <PlainButton variant="primary2" width="102px" height="48px">
             전송
           </PlainButton>
@@ -74,7 +87,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 781px;
+  flex-grow: 1;
   overflow: hidden;
 
   border-radius: 8px;

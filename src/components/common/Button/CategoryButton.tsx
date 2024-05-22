@@ -1,18 +1,30 @@
+import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 interface CategoryButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   done?: boolean;
   active?: boolean;
+  path: string;
 }
 
 export const CategoryButton = ({
   done = false,
   active = false,
+  path,
   children,
   ...props
 }: CategoryButtonProps) => {
+  const navigate = useNavigate();
+
   return (
-    <StyledButton $done={done} $active={active} {...props}>
+    <StyledButton
+      $done={done}
+      $active={active}
+      onClick={() => {
+        navigate(`/test/discover?category=${path}`);
+      }}
+      {...props}
+    >
       {children}
     </StyledButton>
   );
