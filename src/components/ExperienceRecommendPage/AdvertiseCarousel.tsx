@@ -47,15 +47,40 @@ const SliderWrapper = styled.div<{ $gap: string }>`
 
   .slick-dots {
     bottom: 24px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: ${({ $gap }) => $gap};
     li {
-      margin: 0 5px;
-      button:before {
-        font-size: 12px;
-        color: ${({ theme }) => theme.color.gray500};
+      margin: 0;
+      width: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      button {
+        &:before {
+          font-size: 0;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-color: ${({ theme }) => theme.color.gray500};
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
-    .slick-active button:before {
-      color: ${({ theme }) => theme.color.white};
+    .slick-active {
+      button:before {
+        width: 32px;
+        height: 16px;
+        background-color: ${({ theme }) => theme.color.white};
+        border-radius: 8px;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 `;
