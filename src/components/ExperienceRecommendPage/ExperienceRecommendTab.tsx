@@ -76,7 +76,8 @@ export const ExperienceRecommendTab = () => {
             <RecommendSectionTemplate2
               title={
                 <div>
-                  내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
+                  아직 나를 잘 모르겠다고요? <br />
+                  자기이해를 위한 교육을 추천해요.
                 </div>
               }
               subTitle=""

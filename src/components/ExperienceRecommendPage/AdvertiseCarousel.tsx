@@ -1,6 +1,7 @@
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import { CarouselButton2 } from '@/components/common/Button/CarouselButton2';
 
@@ -14,6 +15,7 @@ const settings = {
   variableWidth: true,
   autoplay: true,
   autoplaySpeed: 5000,
+  dots: true,
 };
 
 interface CarouselProps {
@@ -40,6 +42,20 @@ const SliderWrapper = styled.div<{ $gap: string }>`
     .slick-track:before,
     .slick-track:after {
       content: none;
+    }
+  }
+
+  .slick-dots {
+    bottom: 24px;
+    li {
+      margin: 0 5px;
+      button:before {
+        font-size: 12px;
+        color: ${({ theme }) => theme.color.gray500};
+      }
+    }
+    .slick-active button:before {
+      color: ${({ theme }) => theme.color.white};
     }
   }
 `;
