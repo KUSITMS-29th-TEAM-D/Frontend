@@ -82,6 +82,7 @@ const ImageContainer = styled.div`
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  flex-shrink: 0;
 
   img {
     width: 100%;
@@ -134,6 +135,7 @@ const ProfileContainer = styled.div`
   align-items: center;
   gap: 16px;
   display: inline-flex;
+  flex-shrink: 0;
 `;
 
 const ProfileImageContainer = styled.div`
