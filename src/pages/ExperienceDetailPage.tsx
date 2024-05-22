@@ -3,55 +3,34 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { authClient } from '@/apis/client';
+import { programAPI } from '@/apis/programAPI';
 import { BubbleSection } from '@/components/ExperienceDetailPage/BubbleSection';
 import DetailSection from '@/components/ExperienceDetailPage/DetailSection';
 import { ImageSection } from '@/components/ExperienceDetailPage/ImageSection';
-
-export interface DetailData {
-  imageURL: string;
-  profileImageURL: string;
-  participants: number;
-  title: string;
-  subtitle: string;
-  providerName: string;
-  providerJob: string;
-  providerTitle: string;
-  providerKeyword: string;
-  programURL: string;
-}
+import { ProgramDetailResult } from '@/types/program.type';
 
 export const ExperienceDetailPage = () => {
-  const { id } = useParams<{ id: string }>();
-  const [data, setData] = useState<DetailData | undefined>(undefined);
+  const { type, id } = useParams();
+  const [data, setData] = useState<ProgramDetailResult | undefined>(undefined);
   const [keywords, setKeywords] = useState([]);
+  const [description, setDescription] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const detailData = async () => {
       try {
-        const response = await authClient.get(`/api/programs/branding/${id}`);
-        const apiData = response.data.payload;
-        const formattedData: DetailData = {
-          imageURL: apiData.imageUrl,
-          profileImageURL: apiData.providerImage,
-          participants: apiData.participants,
-          title: apiData.name,
-          subtitle: apiData.oneLineDescription,
-          providerName: apiData.providerName,
-          providerJob: apiData.providerJob,
-          providerTitle: apiData.name,
-          providerKeyword: apiData.keywords.join(', '),
-          programURL: apiData.link,
-        };
-        setData(formattedData);
-        setKeywords(apiData.keywords);
+        if (type && id) {
+          const response = await programAPI.getProgramDetail(type, id);
+          setData(response.payload);
+          setKeywords(response.payload.keywords);
+          setDescription(response.payload.descriptionUrl);
+        }
       } catch (error) {
         console.error(error);
       }
     };
 
     detailData();
-  }, [id]);
+  }, [type, id]);
 
   if (!data)
     return (
@@ -64,7 +43,7 @@ export const ExperienceDetailPage = () => {
       <StyledInnerContainer>
         <DetailSection data={data} />
         <BubbleSection keywords={keywords} />
-        <ImageSection />
+        <ImageSection description={description} />
       </StyledInnerContainer>
     </StyledContainer>
   );

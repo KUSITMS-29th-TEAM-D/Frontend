@@ -5,11 +5,11 @@ import { styled } from 'styled-components';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { ExperienceDetailModal } from '@/components/common/Modal/ExperienceDetailModal';
-import { DetailData } from '@/pages/ExperienceDetailPage';
+import { ProgramDetailResult } from '@/types/program.type';
 
-const DetailSection = ({ data }: { data: DetailData | undefined }) => {
+const DetailSection = ({ data }: { data: ProgramDetailResult | undefined }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [participants, setParticipants] = useState(data ? data.participants : 0);
+  const [participants, setParticipants] = useState<number>(data ? data.participants : 0);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const DetailSection = ({ data }: { data: DetailData | undefined }) => {
   };
 
   const handleIncreaseParticipants = () => {
-    setParticipants((prevParticipants) => prevParticipants + 1);
+    setParticipants((prev) => prev + 1);
     setButtonDisabled(true);
     setModalOpen(false);
   };
@@ -34,24 +34,24 @@ const DetailSection = ({ data }: { data: DetailData | undefined }) => {
     return (
       <StyledContainer>
         <ProgramImageContainer>
-          <img src={data.imageURL} alt="Detail" />
+          <img src={data.imageUrl} alt="Detail" />
         </ProgramImageContainer>
         <DetailContainer>
           <TextContainer>
             <PlainChip primary={true} width="max-content">
               {participants}명 참여 중!
             </PlainChip>
-            <TitleContainer>{data.title}</TitleContainer>
-            <SubTitleContainer>{data.subtitle}</SubTitleContainer>
+            <TitleContainer>{data.name}</TitleContainer>
+            <SubTitleContainer>{data.oneLineDescription}</SubTitleContainer>
           </TextContainer>
           <ProfileContainer>
             <ProfileImageContainer>
-              <img src={data.profileImageURL} alt="profile" />
+              <img src={data.providerImage} alt="profile" />
             </ProfileImageContainer>
             <ProfileTextContainer>
               <ProfileTitleContainer>{data.providerName}</ProfileTitleContainer>
               <ProfileSubTitleContainer>
-                {data.providerJob} | {data.providerTitle} | {data.providerKeyword}
+                {data.providerJob} | {data.providerKeyword}
               </ProfileSubTitleContainer>
             </ProfileTextContainer>
           </ProfileContainer>

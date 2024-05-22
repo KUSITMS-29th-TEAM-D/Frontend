@@ -32,7 +32,8 @@ export const Router = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<LoginPage />} />
           <Route path="/understand" element={<SelfUnderstandPage />} />
-          <Route path="/recommend/:id" element={<ExperienceDetailPage />} />
+          {/* <Route path="/recommend/:id" element={<ExperienceDetailPage />} /> */}
+          <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
           {/* <Route element={<MemberPrivateRoute />}>
             <Route path="/mypage" element={<MyPage />} />
           </Route> */}

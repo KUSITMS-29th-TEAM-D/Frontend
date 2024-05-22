@@ -48,4 +48,9 @@ export const programAPI = {
     );
     return response.data;
   },
+  // 프로그램 상세페이지 조회
+  getProgramDetail: async (type: string, id: string) => {
+    const response = await authClient.get(`/api/programs/${type}/${id}`);
+    return response.data;
+  },
 };
