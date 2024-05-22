@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import TestImage from '@/assets/test2.png';
 import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate2';
-import { RecommendSectionTemplate3 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate3';
+import { WholeUnderstandSection } from '@/components/ExperienceRecommendPage/WholeUnderstandSection';
 import Tabs from '@/components/common/Tab/Tab';
 import { theme } from '@/styles';
 
@@ -36,7 +36,7 @@ export const ExperienceRecommendTab = () => {
         <>
           <BackgroundWrapper $backgroundColor={theme.color.white}>
             <FixedWidthContainer>
-              <RecommendSectionTemplate3
+              <WholeUnderstandSection
                 title={
                   <div>
                     내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
@@ -52,7 +52,7 @@ export const ExperienceRecommendTab = () => {
           </BackgroundWrapper>
           <BackgroundWrapper $backgroundColor={theme.color.gray100}>
             <FixedWidthContainer>
-              <RecommendSectionTemplate3
+              <WholeUnderstandSection
                 title={
                   <div>
                     내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?

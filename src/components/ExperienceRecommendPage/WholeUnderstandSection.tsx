@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { WholeRecommendView2 } from '@/components/ExperienceRecommendPage/WholeRecommenView2';
+import { WholeUnderstandView } from '@/components/ExperienceRecommendPage/WholeUnderstandView';
 import { SectionContainer } from '@/styles';
 import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
 
@@ -13,7 +13,7 @@ interface RecommendSectionTemplateProps {
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const RecommendSectionTemplate3 = ({
+export const WholeUnderstandSection = ({
   title,
   subTitle,
   backgroundColor,
@@ -37,7 +37,7 @@ export const RecommendSectionTemplate3 = ({
           </StyledFilterContainer>
         </StyledTitle>
 
-        <WholeRecommendView2 />
+        <WholeUnderstandView />
       </StyledSectionContainer>
     </StyledContainer>
   );
