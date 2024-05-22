@@ -38,7 +38,6 @@ const ViewContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  min-height: 700px;
   background-image: url(${backgroundImg});
   background-size: cover;
   background-position: calc(50% + 70px) center;
@@ -52,7 +51,7 @@ const MainContainer = styled.div`
   align-items: center;
   gap: 20px;
   display: flex;
-  margin-top: 45px;
+  margin-top: 100px;
   margin-bottom: 45px;
 `;
 

@@ -1,102 +1,76 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useTheme } from 'styled-components';
+import styled, { useTheme, css } from 'styled-components';
 
-import TestImage from '@/assets/test1.png';
+import { personaAPI } from '@/apis/personaAPI';
 import { PieceSection } from '@/components/HomePage/PieceSection';
 import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSectionTemplate';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
+import { SelectAmountModal } from '@/components/common/Modal/SelectAmountModal';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
-import { UserInformation } from '@/types/user.type';
-
-const Dummy1: UserInformation = {
-  piece: '크리에이터',
-  name: '민선',
-  brand: 'creator',
-  chips: [
-    { content: '감성적인', weight: 1.0 },
-    { content: '도전적인', weight: 0.9 },
-    { content: '탐색적인', weight: 0.8 },
-    { content: '활동적인', weight: 0.7 },
-    { content: '열정적인', weight: 0.6 },
-    { content: '현실적인', weight: 0.5 },
-    { content: '관습적인', weight: 0.45 },
-  ],
-};
-
-const Dummy = [
-  {
-    id: 1,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 2,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 3,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 4,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 5,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-];
+import { PERSONA } from '@/constants/persona';
+import { useGetBrandingPrograms } from '@/hooks/useGetBrandingPrograms';
+import { useGetUnderstandingPrograms } from '@/hooks/useGetUnderstandingProgram';
+import { userService } from '@/services/UserService';
+import { DefineResult } from '@/types/test.type';
 
 export const TesterMemberView = () => {
-  const [brandingInterest, setBrandingInterest] = useState<string[]>([]);
-  const [brandingKeywords, setBrandingKeywords] = useState<string[]>([]);
-  const [understandInterest, setUnderstandInterest] = useState<string[]>([]);
-  const [understandKeywords, setUnderstandKeywords] = useState<string[]>([]);
   const theme = useTheme();
+  const [defineResult, setDefineResult] = useState<DefineResult | undefined>(undefined);
+  const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [showAmountModal, setShowAmountModal] = useState<boolean>(false);
+  const [selectedProgramForm, setSelectedProgramForm] = useState('온·오프라인');
+  const [selectedAmount, setSelectedAmount] = useState<{ min: number; max: number }>({
+    min: 0,
+    max: 0,
+  });
+
+  const { data: brandingPrograms } = useGetBrandingPrograms(selectedInterest, selectedKeywords);
+  const { data: understandingPrograms } = useGetUnderstandingPrograms(
+    selectedAmount.min,
+    selectedAmount.max,
+    selectedProgramForm
+  );
+
+  useEffect(() => {
+    personaAPI.getPersonaMember().then((res) => {
+      setDefineResult(res.payload);
+    });
+  }, []);
 
   return (
     <>
-      <PieceSection userInformation={Dummy1} />
+      {showAmountModal && (
+        <SelectAmountModal
+          selectedAmount={selectedAmount}
+          handleCancel={() => {
+            setShowAmountModal(false);
+          }}
+          handleConfirm={(newSelected) => {
+            setSelectedAmount(newSelected);
+            setShowAmountModal(false);
+          }}
+        />
+      )}
+      <PieceSection defineInformation={defineResult} />
       <RecommendSectionTemplate
         title={
-          <>
-            <span className="highlight">
-              {Dummy1.piece} {Dummy1.name}
-            </span>
-            님을 위해,
-          </>
+          defineResult && (
+            <>
+              <span className="highlight">
+                {PERSONA[defineResult.name]} {userService.getUserNickname()}
+              </span>
+              님을 위해,
+            </>
+          )
         }
         subTitle="나를 브랜딩할 수 있는 경험을 추천해드릴게요."
         backgroundColor={theme.color.primary50}
-        recommendItems={Dummy}
+        recommendItems={brandingPrograms}
         refreshHandler={() => {
-          setBrandingInterest([]);
-          setBrandingKeywords([]);
+          setSelectedInterest([]);
+          setSelectedKeywords([]);
         }}
       >
         <>
@@ -104,12 +78,12 @@ export const TesterMemberView = () => {
             title="분야"
             placeholder="키워드 추가"
             contents={INTEREST_LIST}
-            selected={brandingInterest}
+            selected={selectedInterest}
             clickContentHandler={(newSelected: string) => {
-              if (brandingInterest.includes(newSelected)) {
-                setBrandingInterest(brandingInterest.filter((keyword) => keyword !== newSelected));
+              if (selectedInterest.includes(newSelected)) {
+                setSelectedInterest(selectedInterest.filter((keyword) => keyword !== newSelected));
               } else {
-                setBrandingInterest([...brandingInterest, newSelected]);
+                setSelectedInterest([...selectedInterest, newSelected]);
               }
             }}
             width="312px"
@@ -120,12 +94,12 @@ export const TesterMemberView = () => {
             title="이미지 키워드"
             placeholder="키워드 추가"
             contents={IMAGE_KEYWORD_LIST}
-            selected={brandingKeywords}
+            selected={selectedKeywords}
             clickContentHandler={(newSelected: string) => {
-              if (brandingKeywords.includes(newSelected)) {
-                setBrandingKeywords(brandingKeywords.filter((keyword) => keyword !== newSelected));
+              if (selectedKeywords.includes(newSelected)) {
+                setSelectedKeywords(selectedKeywords.filter((keyword) => keyword !== newSelected));
               } else {
-                setBrandingKeywords([...brandingKeywords, newSelected]);
+                setSelectedKeywords([...selectedKeywords, newSelected]);
               }
             }}
             width="312px"
@@ -138,51 +112,92 @@ export const TesterMemberView = () => {
         title="아직 나를 더 알아가고 싶다면?"
         subTitle="자기이해를 도와주는 프로그램을 추천해드릴게요."
         backgroundColor={theme.color.gray50}
-        recommendItems={Dummy}
+        recommendItems={understandingPrograms}
         refreshHandler={() => {
-          setUnderstandInterest([]);
-          setUnderstandKeywords([]);
+          setSelectedProgramForm('온·오프라인');
+          setSelectedAmount({ min: 0, max: 0 });
         }}
       >
         <>
+          <StyledFilterAmount
+            onClick={() => {
+              setShowAmountModal((prev) => !prev);
+            }}
+          >
+            <span>금액</span>
+            <div>
+              <span className="amount">{selectedAmount.min}</span>
+              <span className="range">~</span>
+              <span className="amount">{selectedAmount.max}</span>
+              <span className="unit">원</span>
+            </div>
+          </StyledFilterAmount>
           <Dropdown
-            title="분야"
-            placeholder="키워드 추가"
-            contents={INTEREST_LIST}
-            selected={understandInterest}
+            placeholder=""
+            contents={['온·오프라인', '온라인', '오프라인']}
+            selected={selectedProgramForm}
             clickContentHandler={(newSelected: string) => {
-              if (understandInterest.includes(newSelected)) {
-                setUnderstandInterest(
-                  understandInterest.filter((keyword) => keyword !== newSelected)
-                );
-              } else {
-                setUnderstandInterest([...understandInterest, newSelected]);
-              }
+              setSelectedProgramForm(newSelected);
             }}
             width="312px"
-            contentMaxHeight="172px"
-            multiple
-          />
-          <Dropdown
-            title="이미지 키워드"
-            placeholder="키워드 추가"
-            contents={IMAGE_KEYWORD_LIST}
-            selected={understandKeywords}
-            clickContentHandler={(newSelected: string) => {
-              if (understandKeywords.includes(newSelected)) {
-                setUnderstandKeywords(
-                  understandKeywords.filter((keyword) => keyword !== newSelected)
-                );
-              } else {
-                setUnderstandKeywords([...understandKeywords, newSelected]);
-              }
-            }}
-            width="312px"
-            contentMaxHeight="172px"
-            multiple
           />
         </>
       </RecommendSectionTemplate>
     </>
   );
 };
+
+const StyledFilterButton = styled.li<{ $active?: boolean }>`
+  display: flex;
+  gap: 8px;
+
+  padding: 12px 16px;
+  background: ${({ theme }) => theme.color.white};
+  ${({ theme }) => theme.font.desktop.body2r};
+
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ theme }) => theme.color.gray100};
+  }
+
+  ${({ $active, theme }) =>
+    $active &&
+    css`
+      color: ${theme.color.primary500};
+
+      svg path {
+        fill: ${theme.color.primary500};
+      }
+    `}
+`;
+
+const StyledFilterAmount = styled(StyledFilterButton)`
+  width: 312px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .amount {
+      ${({ theme }) => theme.font.desktop.body1m};
+      color: ${({ theme }) => theme.color.gray300};
+    }
+
+    .range {
+      ${({ theme }) => theme.font.desktop.body1b};
+      color: ${({ theme }) => theme.color.gray700};
+    }
+
+    .unit {
+      ${({ theme }) => theme.font.desktop.body2r};
+      color: ${({ theme }) => theme.color.gray700};
+    }
+  }
+`;

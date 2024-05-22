@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { userAPI } from '@/apis/userAPI';
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { NAVIGATION_MENU } from '@/constants/navigation';
+import { authService } from '@/services/AuthService';
 
 interface SideNavigationProps {
   isLoggedIn: boolean;
@@ -14,6 +16,7 @@ interface SideNavigationProps {
 }
 
 export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => {
+  const navigate = useNavigate();
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     setScreenSize();
@@ -28,6 +31,16 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
 
+  const handleLogout = async () => {
+    try {
+      await userAPI.logout();
+      window.alert('로그아웃 되었습니다.');
+      authService.onLogout();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <StyledContainer>
       <StyledContent>
@@ -36,7 +49,12 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
             <CloseIcon className="icon" />
           </button>
           {NAVIGATION_MENU.map((item) => (
-            <Link to={item.path} className="menu-button" key={item.menu}>
+            <Link
+              to={item.path}
+              className="menu-button"
+              key={item.menu}
+              onClick={() => setOpen(false)}
+            >
               <span>{item.menu}</span>
               <ArrowIcon />
             </Link>
@@ -49,12 +67,19 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
               <PlainButton variant="primary" height="48px">
                 마이페이지
               </PlainButton>
-              <PlainButton variant="gray" height="48px">
+              <PlainButton variant="gray" height="48px" onClick={handleLogout}>
                 로그아웃
               </PlainButton>
             </>
           ) : (
-            <PlainButton variant="gray" height="48px">
+            <PlainButton
+              variant="gray"
+              height="48px"
+              onClick={() => {
+                navigate('/auth');
+                setOpen(false);
+              }}
+            >
               로그인
             </PlainButton>
           )}

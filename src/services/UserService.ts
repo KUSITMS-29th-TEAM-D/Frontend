@@ -17,6 +17,14 @@ class UserService {
     this.cookies.remove('user');
   }
 
+  getUserNickname() {
+    const user = this.getUser();
+    if (!user) {
+      return '';
+    }
+    return user.nickname;
+  }
+
   getUserState() {
     const user = this.getUser();
     if (!user) {
@@ -25,6 +33,17 @@ class UserService {
       return 'PRE_MEMBER';
     } else {
       return 'MEMBER';
+    }
+  }
+
+  getTestState() {
+    const user = this.getUser();
+    if (!user) {
+      return 'NON_MEMBER';
+    } else if (user.is_test) {
+      return 'TESTER_MEMBER';
+    } else {
+      return 'NON_TESTER_MEMBER';
     }
   }
 }
