@@ -36,6 +36,14 @@ class UserService {
     }
   }
 
+  updateUserNickname(nickname: string) {
+    const user = this.getUser();
+    if (!user) {
+      return;
+    }
+    this.setUser({ ...user, nickname });
+  }
+
   getTestState() {
     const user = this.getUser();
     if (!user) {
