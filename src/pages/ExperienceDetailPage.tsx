@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { programAPI } from '@/apis/programAPI';
@@ -14,6 +14,7 @@ export const ExperienceDetailPage = () => {
   const [data, setData] = useState<ProgramDetailResult | undefined>(undefined);
   const [keywords, setKeywords] = useState([]);
   const [description, setDescription] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const detailData = async () => {
@@ -26,6 +27,9 @@ export const ExperienceDetailPage = () => {
         }
       } catch (error) {
         console.error(error);
+        window.alert('프로그램 정보를 불러오는데 실패했습니다.');
+        // 프로그램 페이지로 이동
+        navigate('/program');
       }
     };
 
