@@ -40,7 +40,8 @@ export const ExperienceRecommendTab = () => {
               <WholeUnderstandSection
                 title={
                   <div>
-                    내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
+                    아직 내가 누군지 잘 모르겠다면 <br />
+                    이런 콘텐츠들은 어때요?
                   </div>
                 }
                 subTitle=""
@@ -54,11 +55,7 @@ export const ExperienceRecommendTab = () => {
           <BackgroundWrapper $backgroundColor={theme.color.gray100}>
             <FixedWidthContainer>
               <WholeBrandSection
-                title={
-                  <div>
-                    내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
-                  </div>
-                }
+                title={<div>이런 활동을 추천해요!</div>}
                 subTitle=""
                 recommendItems={Dummy5}
                 filters={filters}

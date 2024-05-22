@@ -25,7 +25,7 @@ export const WholeUnderstandSection = ({
         <StyledTitle>
           <div className="user-info">{title}</div>
           <div className="intro">{subTitle}</div>
-          <StyledFilterContainer>
+          <ButtonContainer>
             <button
               type="button"
               onClick={() => {
@@ -34,7 +34,7 @@ export const WholeUnderstandSection = ({
             >
               더보기
             </button>
-          </StyledFilterContainer>
+          </ButtonContainer>
         </StyledTitle>
 
         <WholeUnderstandView />
@@ -53,6 +53,11 @@ const StyledSectionContainer = styled(SectionContainer)`
 
 const StyledTitle = styled.div`
   margin-bottom: 48px;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  display: inline-flex;
   .user-info {
     margin-bottom: 10px;
 
@@ -70,8 +75,12 @@ const StyledTitle = styled.div`
   }
 `;
 
-const StyledFilterContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
+  text-align: center;
+  color: ${({ theme }) => theme.color.gray700};
+  ${({ theme }) => theme.font.desktop.body1m};
+
   justify-content: flex-end;
 
   margin-bottom: 27px;
