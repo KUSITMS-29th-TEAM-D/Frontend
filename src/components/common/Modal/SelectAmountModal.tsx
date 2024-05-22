@@ -47,6 +47,7 @@ export const SelectAmountModal = ({
             onClick={() => {
               handleConfirm(price);
             }}
+            disabled={price.min > price.max}
           >
             적용하기
           </PlainButton>
