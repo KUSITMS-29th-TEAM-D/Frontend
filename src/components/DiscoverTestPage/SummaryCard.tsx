@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 import { CATEGORY_TYPE } from '@/constants/discover';
+import { ChatSummary } from '@/hooks/useGetDefaultChatSummary';
 
 interface SummaryCardProps {
-  category: keyof typeof CATEGORY_TYPE;
-  title: string;
+  category: keyof ChatSummary;
+  title?: string;
   descriptions: string[];
 }
 
@@ -18,7 +19,7 @@ export const SummaryCard = ({ category, title, descriptions }: SummaryCardProps)
         <span>{CATEGORY_TYPE[category].title}</span>
       </StyledHeader>
       <StyledContent>
-        <div className="title">{title}</div>
+        {title && <div className="title">{title}</div>}
         {descriptions.map((description) => (
           <div key={description} className="description">
             {description}
