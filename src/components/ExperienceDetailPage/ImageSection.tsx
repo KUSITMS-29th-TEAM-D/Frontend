@@ -8,7 +8,7 @@ export const ImageSection = () => {
       <TitleContainer>프로그램 소개</TitleContainer>
       <ImageBorderContainer>
         <ImageContainer>
-          <img src={Dummy1.imageURL} alt="Detail" />
+          <StyledImage src={Dummy1.imageURL} alt="Detail" />
         </ImageContainer>
       </ImageBorderContainer>
     </StyledContainer>
@@ -46,5 +46,11 @@ const ImageBorderContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  //연동하면서 수정 예정
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledImage = styled.img`
+  max-width: 100%;
 `;

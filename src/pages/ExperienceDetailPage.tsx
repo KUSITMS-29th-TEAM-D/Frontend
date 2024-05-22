@@ -4,7 +4,7 @@
 //import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import TestImage from '@/assets/test1.png';
+import TestImage from '@/assets/detailImage/detailImage1.png';
 import { BubbleSection } from '@/components/ExperienceDetailPage/BubbleSection';
 import DetailSection from '@/components/ExperienceDetailPage/DetailSection';
 import { ImageSection } from '@/components/ExperienceDetailPage/ImageSection';
