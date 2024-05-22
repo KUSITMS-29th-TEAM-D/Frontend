@@ -32,8 +32,8 @@ const StyledButton = styled.button<{ $done: boolean; $active: boolean }>`
   ${({ $done }) =>
     $done &&
     css`
-      color: ${({ theme }) => theme.color.white};
-      background: ${({ theme }) => theme.color.gray250};
+      color: ${({ theme }) => theme.color.gray250};
+      background: ${({ theme }) => theme.color.gray150};
       border-color: ${({ theme }) => theme.color.gray250};
     `}
 
