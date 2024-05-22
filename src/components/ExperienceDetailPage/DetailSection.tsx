@@ -5,19 +5,7 @@ import { styled } from 'styled-components';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { ExperienceDetailModal } from '@/components/common/Modal/ExperienceDetailModal';
-
-interface DetailData {
-  imageURL: string;
-  profileImageURL: string;
-  participants: number;
-  title: string;
-  subtitle: string;
-  providerName: string;
-  providerJob: string;
-  providerTitle: string;
-  providerKeyword: string;
-  programURL: string;
-}
+import { DetailData } from '@/pages/ExperienceDetailPage';
 
 const DetailSection = ({ data }: { data: DetailData }) => {
   const [isModalOpen, setModalOpen] = useState(false);

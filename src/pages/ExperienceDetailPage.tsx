@@ -9,7 +9,7 @@ import { BubbleSection } from '@/components/ExperienceDetailPage/BubbleSection';
 import DetailSection from '@/components/ExperienceDetailPage/DetailSection';
 import { ImageSection } from '@/components/ExperienceDetailPage/ImageSection';
 
-interface DetailData {
+export interface DetailData {
   imageURL: string;
   profileImageURL: string;
   participants: number;
@@ -74,12 +74,12 @@ const StyledContainer = styled.div`
 `;
 
 export const Dummy1: DetailData = {
-  imageURL: TestImage,
-  profileImageURL: TestImage,
+  imageURL: TestImage, //imageUrl
+  profileImageURL: TestImage, //providerUrl
   participants: 28,
-  title: '퍼스널 브랜딩, ‘나’를 기획, 디자인하기',
+  title: '퍼스널 브랜딩, ‘나’를 기획, 디자인하기', //name
   subtitle:
-    '대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다. 국민의 모든 자유와 권리는 국가안전보장·질서유지 또는 공공복리를 위하여 필요한 경우에 한하여 법률로써 제한할 수 있으며.대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다.',
+    '대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다. 국민의 모든 자유와 권리는 국가안전보장·질서유지 또는 공공복리를 위하여 필요한 경우에 한하여 법률로써 제한할 수 있으며.대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다.', //on
   providerName: '신민선',
   providerJob: '콘텐츠 마케터',
   providerTitle: '퍼스널브랜딩',
