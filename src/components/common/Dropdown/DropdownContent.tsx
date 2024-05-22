@@ -50,6 +50,6 @@ const StyledContainer = styled.ul<{ $maxHeight?: string }>`
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
 
-  overflow-y: scroll;
+  overflow-y: auto;
   ${Scrollbar}
 `;

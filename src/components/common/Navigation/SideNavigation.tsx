@@ -3,10 +3,12 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { userAPI } from '@/apis/userAPI';
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { NAVIGATION_MENU } from '@/constants/navigation';
+import { authService } from '@/services/AuthService';
 
 interface SideNavigationProps {
   isLoggedIn: boolean;
@@ -27,6 +29,16 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
   const setScreenSize = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await userAPI.logout();
+      window.alert('로그아웃 되었습니다.');
+      authService.onLogout();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -55,7 +67,7 @@ export const SideNavigation = ({ isLoggedIn, setOpen }: SideNavigationProps) => 
               <PlainButton variant="primary" height="48px">
                 마이페이지
               </PlainButton>
-              <PlainButton variant="gray" height="48px">
+              <PlainButton variant="gray" height="48px" onClick={handleLogout}>
                 로그아웃
               </PlainButton>
             </>

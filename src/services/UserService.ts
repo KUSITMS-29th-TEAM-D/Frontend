@@ -35,6 +35,17 @@ class UserService {
       return 'MEMBER';
     }
   }
+
+  getTestState() {
+    const user = this.getUser();
+    if (!user) {
+      return 'NON_MEMBER';
+    } else if (user.is_test) {
+      return 'TESTER_MEMBER';
+    } else {
+      return 'NON_TESTER_MEMBER';
+    }
+  }
 }
 
 export const userService = new UserService();
