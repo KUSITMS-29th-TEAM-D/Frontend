@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled, { css, useTheme } from 'styled-components';
 
+import { programAPI } from '@/apis/programAPI';
 import { ReactComponent as CheckIcon } from '@/assets/icons/check.svg';
 import TestImage from '@/assets/test1.png';
 import { BrandingSection } from '@/components/HomePage/BrandingSection';
 import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSectionTemplate';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
+import { SelectAmountModal } from '@/components/common/Modal/SelectAmountModal';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
+import { ProgramItem } from '@/types/recommend.type';
 
 const Dummy = [
   {
@@ -61,18 +64,50 @@ const Dummy = [
 export const NonTesterMemberView = () => {
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const [selectedFree, setSelectedFree] = useState<boolean>(false);
-  /* const [showAmountModal, setShowAmountModal] = useState<boolean>(false); */
+  //const [selectedFree, setSelectedFree] = useState<boolean>(false);
+  const [showAmountModal, setShowAmountModal] = useState<boolean>(false);
   const [selectedAmount, setSelectedAmount] = useState<{ min: number; max: number }>({
     min: 0,
     max: 0,
   });
+  const [selectedProgramForm, setSelectedProgramForm] = useState('온·오프라인');
   const theme = useTheme();
+  const [selfUnderstandProgram, setSelfUnderstandProgram] = useState<[] | undefined>(undefined);
+
+  const getUnderstandProgram = async () => {
+    // 이거 로직 문제 있음. min보다 max가 작은 케이스.
+    try {
+      const response = await programAPI.getUnderstanding(
+        selectedAmount.min,
+        selectedAmount.max,
+        selectedProgramForm
+      );
+      setSelfUnderstandProgram(response.payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUnderstandProgram();
+  }, [selectedAmount, selectedProgramForm]);
 
   return (
     <>
+      {showAmountModal && (
+        <SelectAmountModal
+          selectedAmount={selectedAmount}
+          handleCancel={() => {
+            setShowAmountModal(false);
+          }}
+          handleConfirm={(newSelected) => {
+            setSelectedAmount(newSelected);
+            setShowAmountModal(false);
+          }}
+        />
+      )}
       <BrandingSection isLoggedIn />
-      <RecommendSectionTemplate
+      {/* <RecommendSectionTemplate
         title="나를 더 잘 이해하기 위해"
         subTitle="나를 브랜딩할 수 있는 경험을 추천해드릴게요."
         backgroundColor={theme.color.primary50}
@@ -116,19 +151,19 @@ export const NonTesterMemberView = () => {
             multiple
           />
         </>
-      </RecommendSectionTemplate>
+      </RecommendSectionTemplate> */}
       <RecommendSectionTemplate
         title="퍼스널브랜딩을 더 잘하고싶다면?"
         subTitle="셀피스는 나를 더 잘 알기위한 프로그램을 추천해요."
         backgroundColor={theme.color.white}
-        recommendItems={Dummy}
+        recommendItems={selfUnderstandProgram || []}
         refreshHandler={() => {
-          setSelectedFree(false);
+          setSelectedProgramForm('온·오프라인');
           setSelectedAmount({ min: 0, max: 0 });
         }}
       >
         <>
-          <StyledFilterButton
+          {/* <StyledFilterButton
             onClick={() => {
               setSelectedFree((prev) => !prev);
             }}
@@ -136,10 +171,10 @@ export const NonTesterMemberView = () => {
           >
             <CheckIcon />
             <span>무료</span>
-          </StyledFilterButton>
+          </StyledFilterButton> */}
           <StyledFilterAmount
             onClick={() => {
-              //setShowAmountModal((prev) => !prev);
+              setShowAmountModal((prev) => !prev);
             }}
           >
             <span>금액</span>
@@ -150,6 +185,15 @@ export const NonTesterMemberView = () => {
               <span className="unit">원</span>
             </div>
           </StyledFilterAmount>
+          <Dropdown
+            placeholder=""
+            contents={['온·오프라인', '온라인', '오프라인']}
+            selected={selectedProgramForm}
+            clickContentHandler={(newSelected: string) => {
+              setSelectedProgramForm(newSelected);
+            }}
+            width="312px"
+          />
         </>
       </RecommendSectionTemplate>
     </>
