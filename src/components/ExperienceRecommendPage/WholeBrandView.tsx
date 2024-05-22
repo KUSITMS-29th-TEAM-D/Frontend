@@ -64,7 +64,7 @@ export const WholeBrandView = () => {
           <ExperienceCard
             key={item.programsId}
             imageUrl={item.selfUnderstandingUrl}
-            title={item.link}
+            title={item.link ? '셀피스 프로그램' : '외부 프로그램'}
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
           />
