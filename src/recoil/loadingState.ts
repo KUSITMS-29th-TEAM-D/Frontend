@@ -2,5 +2,5 @@ import { atom } from 'recoil';
 
 export const loadingState = atom({
   key: 'loadingState',
-  default: false,
+  default: { show: false, speed: 50 },
 });

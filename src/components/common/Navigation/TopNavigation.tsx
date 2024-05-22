@@ -26,6 +26,7 @@ export const TopNavigation = () => {
           {NAVIGATION_MENU.map((item) => (
             <StyledMenuButton
               key={item.menu}
+              $active={location.pathname.includes(item.path)}
               onClick={() => {
                 navigate(item.path);
               }}
@@ -41,6 +42,7 @@ export const TopNavigation = () => {
             <StyledMenuButton
               $filled
               $width="100px"
+              $active={false}
               onClick={() => {
                 navigate('auth');
               }}
@@ -116,7 +118,7 @@ const StyledUserButton = styled.button`
   }
 `;
 
-const StyledMenuButton = styled.button<{ $filled?: boolean; $width?: string }>`
+const StyledMenuButton = styled.button<{ $filled?: boolean; $width?: string; $active: boolean }>`
   ${({ theme }) => theme.font.desktop.body2m};
 
   width: ${({ $width }) => $width};
@@ -141,4 +143,10 @@ const StyledMenuButton = styled.button<{ $filled?: boolean; $width?: string }>`
             color: ${props.theme.color.primary600};
           }
         `}
+
+  ${({ $active, theme }) =>
+    $active &&
+    css`
+      color: ${theme.color.primary600};
+    `}
 `;

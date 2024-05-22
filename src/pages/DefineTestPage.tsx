@@ -27,7 +27,7 @@ export const DefineTestPage2 = () => {
 export const DefineTestPage3 = () => {
   const loading = useRecoilValue(loadingState);
 
-  if (loading) {
+  if (loading.show) {
     return <LoadingPage />;
   }
 

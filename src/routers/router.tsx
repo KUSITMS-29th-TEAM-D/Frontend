@@ -1,11 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { DefineLayout } from '@/components/common/Layout/DefineLayout';
-import { DesignLayout } from '@/components/common/Layout/DesignLayout';
 import { MainLayout } from '@/components/common/Layout/MainLayout';
+import { TestLayout } from '@/components/common/Layout/TestLayout';
 import { DefineResultPage } from '@/pages/DefineResultPage';
 import { DefineStartPage } from '@/pages/DefineStartPage';
 import { DefineTestPage1, DefineTestPage2, DefineTestPage3 } from '@/pages/DefineTestPage';
+import { DesignResultPage } from '@/pages/DesignResultPage';
+import { DesignStartPage } from '@/pages/DesignStartPage';
 import {
   DesignTestPage1,
   DesignTestPage2,
@@ -42,8 +43,8 @@ export const Router = () => {
           </Route>
         </Route>
       }
-      <Route path="test">
-        <Route path="define" element={<DefineLayout />}>
+      <Route path="test" element={<TestLayout />}>
+        <Route path="define">
           <Route index element={<Navigate to="1" replace />}></Route>
           <Route path="1" element={<DefineStartPage />} />
           <Route path="2" element={<DefineTestPage1 />} />
@@ -51,13 +52,17 @@ export const Router = () => {
           <Route path="4" element={<DefineTestPage3 />} />
           <Route path=":defineId" element={<DefineResultPage />} />
         </Route>
-        <Route path="design" element={<DesignLayout />}>
-          <Route index element={<Navigate to="1" replace />}></Route>
-          <Route path="1" element={<DesignTestPage1 />} />
-          <Route path="2" element={<DesignTestPage2 />} />
-          <Route path="3" element={<DesignTestPage3 />} />
-          <Route path="4" element={<DesignTestPage4 />} />
-          <Route path="5" element={<DesignTestPage5 />} />
+        <Route element={<MemberPrivateRoute />}>
+          <Route path="design" element={<TestLayout />}>
+            <Route index element={<Navigate to="1" replace />}></Route>
+            <Route path="1" element={<DesignStartPage />} />
+            <Route path="2" element={<DesignTestPage1 />} />
+            <Route path="3" element={<DesignTestPage2 />} />
+            <Route path="4" element={<DesignTestPage3 />} />
+            <Route path="5" element={<DesignTestPage4 />} />
+            <Route path="6" element={<DesignTestPage5 />} />
+            <Route path="result" element={<DesignResultPage />} />
+          </Route>
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
