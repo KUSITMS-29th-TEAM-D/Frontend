@@ -1,5 +1,32 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+const NAVIGATION_LIST: { [key: string]: string } = {
+  define: 'Define 정의하기',
+  design: 'Design 설계하기',
+  discover: 'Discover 이해하기',
+};
+
+export const TestNavigation = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleButtonClick = () => {
+    navigate('/understand');
+  };
+
+  const currentKey = Object.keys(NAVIGATION_LIST).find((key) => location.pathname.includes(key));
+  const currentTitle = currentKey ? NAVIGATION_LIST[currentKey] : '';
+
+  return (
+    <StyledContainer>
+      <Container>
+        <Title>{currentTitle}</Title>
+        <StyledButton onClick={handleButtonClick}>종료하기</StyledButton>
+      </Container>
+    </StyledContainer>
+  );
+};
 
 const StyledContainer = styled.header`
   display: flex;
@@ -69,21 +96,3 @@ const StyledButton = styled.button`
     ${({ theme }) => theme.font.mobile.body1b};
   }
 `;
-
-const TestNavigation = () => {
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate('/understand');
-  };
-  return (
-    <StyledContainer>
-      <Container>
-        <Title>Define 정의하기</Title>
-        <StyledButton onClick={handleButtonClick}>종료하기</StyledButton>
-      </Container>
-    </StyledContainer>
-  );
-};
-
-export default TestNavigation;
