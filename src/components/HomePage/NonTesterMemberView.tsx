@@ -1,96 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styled, { css, useTheme } from 'styled-components';
 
-import { programAPI } from '@/apis/programAPI';
-import { ReactComponent as CheckIcon } from '@/assets/icons/check.svg';
-import TestImage from '@/assets/test1.png';
 import { BrandingSection } from '@/components/HomePage/BrandingSection';
 import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSectionTemplate';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { SelectAmountModal } from '@/components/common/Modal/SelectAmountModal';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
-import { ProgramItem } from '@/types/recommend.type';
+import { useGetBrandingPrograms } from '@/hooks/useGetBrandingPrograms';
+import { useGetUnderstandingPrograms } from '@/hooks/useGetUnderstandingProgram';
 
-const Dummy = [
-  {
-    id: 1,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 2,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 3,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 4,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 5,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-];
-
-// TODO: 금액 모달 구현
 export const NonTesterMemberView = () => {
+  const theme = useTheme();
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  //const [selectedFree, setSelectedFree] = useState<boolean>(false);
   const [showAmountModal, setShowAmountModal] = useState<boolean>(false);
+  const [selectedProgramForm, setSelectedProgramForm] = useState('온·오프라인');
   const [selectedAmount, setSelectedAmount] = useState<{ min: number; max: number }>({
     min: 0,
     max: 0,
   });
-  const [selectedProgramForm, setSelectedProgramForm] = useState('온·오프라인');
-  const theme = useTheme();
-  const [selfUnderstandProgram, setSelfUnderstandProgram] = useState<[] | undefined>(undefined);
 
-  const getUnderstandProgram = async () => {
-    // 이거 로직 문제 있음. min보다 max가 작은 케이스.
-    try {
-      const response = await programAPI.getUnderstanding(
-        selectedAmount.min,
-        selectedAmount.max,
-        selectedProgramForm
-      );
-      setSelfUnderstandProgram(response.payload);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUnderstandProgram();
-  }, [selectedAmount, selectedProgramForm]);
+  const { data: brandingPrograms } = useGetBrandingPrograms(selectedInterest, selectedKeywords);
+  const { data: understandingPrograms } = useGetUnderstandingPrograms(
+    selectedAmount.min,
+    selectedAmount.max,
+    selectedProgramForm
+  );
 
   return (
     <>
@@ -107,11 +43,11 @@ export const NonTesterMemberView = () => {
         />
       )}
       <BrandingSection isLoggedIn />
-      {/* <RecommendSectionTemplate
+      <RecommendSectionTemplate
         title="나를 더 잘 이해하기 위해"
         subTitle="나를 브랜딩할 수 있는 경험을 추천해드릴게요."
         backgroundColor={theme.color.primary50}
-        recommendItems={Dummy}
+        recommendItems={brandingPrograms}
         refreshHandler={() => {
           setSelectedInterest([]);
           setSelectedKeywords([]);
@@ -151,27 +87,18 @@ export const NonTesterMemberView = () => {
             multiple
           />
         </>
-      </RecommendSectionTemplate> */}
+      </RecommendSectionTemplate>
       <RecommendSectionTemplate
         title="퍼스널브랜딩을 더 잘하고싶다면?"
         subTitle="셀피스는 나를 더 잘 알기위한 프로그램을 추천해요."
         backgroundColor={theme.color.white}
-        recommendItems={selfUnderstandProgram || []}
+        recommendItems={understandingPrograms}
         refreshHandler={() => {
           setSelectedProgramForm('온·오프라인');
           setSelectedAmount({ min: 0, max: 0 });
         }}
       >
         <>
-          {/* <StyledFilterButton
-            onClick={() => {
-              setSelectedFree((prev) => !prev);
-            }}
-            $active={selectedFree}
-          >
-            <CheckIcon />
-            <span>무료</span>
-          </StyledFilterButton> */}
           <StyledFilterAmount
             onClick={() => {
               setShowAmountModal((prev) => !prev);
