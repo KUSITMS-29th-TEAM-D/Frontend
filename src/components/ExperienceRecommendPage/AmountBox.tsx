@@ -1,38 +1,27 @@
 import { useState } from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import { ReactComponent as CheckIcon } from '@/assets/icons/check.svg';
 import { AmountModal } from '@/components/ExperienceRecommendPage/AmountModal';
-import { theme } from '@/styles';
 
-export const AmountBox = () => {
+interface AmountBoxProps {
+  onApply: (min: number, max: number) => void;
+}
+
+export const AmountBox = ({ onApply }: AmountBoxProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [minAmount, setMinAmount] = useState(0);
   const [maxAmount, setMaxAmount] = useState(20000);
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleApply = (min: number, max: number) => {
     setMinAmount(min);
     setMaxAmount(max);
     setIsModalOpen(false);
-  };
-
-  const handleFree = () => {
-    setMinAmount(0);
-    setMaxAmount(0);
-    setIsChecked(!isChecked);
+    onApply(min, max);
   };
 
   return (
     <>
-      <FreeButtonWrapper onClick={handleFree} checked={isChecked}>
-        <FreeButtonInner>
-          <CheckIcon />
-        </FreeButtonInner>
-        <FreeButtonText checked={isChecked}>무료</FreeButtonText>
-      </FreeButtonWrapper>
-
       <Container>
         <Content>
           <Label>금액</Label>
@@ -57,7 +46,6 @@ export const AmountBox = () => {
     </>
   );
 };
-
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -126,36 +114,4 @@ const ApplyButton = styled.div`
 const ApplyText = styled.div`
   color: ${({ theme }) => theme.color.white};
   ${({ theme }) => theme.font.desktop.label2};
-`;
-
-const FreeButtonWrapper = styled.div<{ checked: boolean }>`
-  width: 94px;
-  height: 48px;
-  padding: 16px;
-  background: ${({ theme }) => theme.color.white};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.13);
-  border-radius: 8px;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-
-  ${({ checked }) =>
-    checked &&
-    css`
-      svg path {
-        fill: ${theme.color.primary500};
-      }
-    `}
-`;
-
-const FreeButtonInner = styled.div`
-  width: 24px;
-  height: 24px;
-  position: relative;
-`;
-
-const FreeButtonText = styled.div<{ checked: boolean }>`
-  color: ${({ checked }) => (checked ? theme.color.primary500 : '#242424')};
-  ${({ theme }) => theme.font.desktop.body2r};
 `;

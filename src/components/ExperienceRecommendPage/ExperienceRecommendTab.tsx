@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import TestImage from '@/assets/test2.png';
 import { RecommendBrandView } from '@/components/ExperienceRecommendPage/RecommendBrandView';
-import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate2';
+import { RecommendUnderstandView } from '@/components/ExperienceRecommendPage/RecommendUnderstandView';
 import { WholeBrandSection } from '@/components/ExperienceRecommendPage/WholeBrandSection';
 import { WholeUnderstandSection } from '@/components/ExperienceRecommendPage/WholeUnderstandSection';
 import Tabs from '@/components/common/Tab/Tab';
@@ -73,7 +73,7 @@ export const ExperienceRecommendTab = () => {
       content: (
         <BackgroundWrapper $backgroundColor={theme.color.white}>
           <FixedWidthContainer>
-            <RecommendSectionTemplate2
+            <RecommendUnderstandView
               title={
                 <div>
                   아직 나를 잘 모르겠다고요? <br />
@@ -81,7 +81,6 @@ export const ExperienceRecommendTab = () => {
                 </div>
               }
               subTitle=""
-              recommendItems={Dummy6}
               filters={filters}
               backgroundColor={''}
             />
@@ -123,154 +122,6 @@ export default ExperienceRecommendTab;
 const Dummy2 = ['1', '2', '3', '4'];
 
 const Dummy5 = [
-  {
-    id: 1,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 2,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 3,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 4,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 5,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 6,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 7,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 8,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 9,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 10,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 11,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-
-  {
-    id: 12,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 13,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 14,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 15,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 16,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 17,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-  {
-    id: 18,
-    img: TestImage,
-    title: '셀피스 프로그램',
-    subtitle: '프로그램이름이름이름',
-    keywords: ['keyword1', 'keyword2'],
-    hot: true,
-  },
-];
-
-const Dummy6 = [
   {
     id: 1,
     img: TestImage,
