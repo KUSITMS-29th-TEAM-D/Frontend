@@ -22,7 +22,7 @@ export const RecommendSectionTemplate = ({
   refreshHandler,
   children,
 }: RecommendSectionTemplateProps) => {
-  if (recommendItems && recommendItems.length > 0)
+  if (recommendItems)
     return (
       <StyledContainer $backgroundColor={backgroundColor}>
         <StyledSectionContainer>
@@ -38,17 +38,19 @@ export const RecommendSectionTemplate = ({
               </button>
             </StyledFilterContainer>
           )}
-          <CardCarousel>
-            {recommendItems.map((item) => (
-              <PreviewCard
-                key={item.programsId}
-                imageUrl={item.selfUnderstandingUrl}
-                title={item.name}
-                keywords={item.keywords}
-                path={item.link}
-              />
-            ))}
-          </CardCarousel>
+          <StyledCarouselContainer>
+            <CardCarousel>
+              {recommendItems.map((item) => (
+                <PreviewCard
+                  key={item.programsId}
+                  imageUrl={item.selfUnderstandingUrl}
+                  title={item.name}
+                  keywords={item.keywords}
+                  path={item.link}
+                />
+              ))}
+            </CardCarousel>
+          </StyledCarouselContainer>
         </StyledSectionContainer>
       </StyledContainer>
     );
@@ -97,5 +99,12 @@ const StyledFilterContainer = styled.div`
 const StyledChildrenContainer = styled.div`
   display: flex;
   gap: 12px;
+  align-items: center;
+`;
+
+const StyledCarouselContainer = styled.div`
+  height: 357px;
+  width: 100%;
+  display: flex;
   align-items: center;
 `;

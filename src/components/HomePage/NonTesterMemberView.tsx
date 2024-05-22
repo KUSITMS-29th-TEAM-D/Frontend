@@ -7,7 +7,7 @@ import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSection
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { SelectAmountModal } from '@/components/common/Modal/SelectAmountModal';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
-import { useGetBrandingPrograms } from '@/hooks/useGetBrandingPrograms';
+import { useGetBrandingProgramsNonLogin } from '@/hooks/useGetBrandingProgramsNonLogin';
 import { useGetUnderstandingPrograms } from '@/hooks/useGetUnderstandingProgram';
 
 export const NonTesterMemberView = () => {
@@ -21,7 +21,10 @@ export const NonTesterMemberView = () => {
     max: 0,
   });
 
-  const { data: brandingPrograms } = useGetBrandingPrograms(selectedInterest, selectedKeywords);
+  const { data: brandingPrograms } = useGetBrandingProgramsNonLogin(
+    selectedInterest,
+    selectedKeywords
+  );
   const { data: understandingPrograms } = useGetUnderstandingPrograms(
     selectedAmount.min,
     selectedAmount.max,

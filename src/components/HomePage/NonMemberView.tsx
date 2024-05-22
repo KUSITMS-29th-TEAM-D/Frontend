@@ -1,30 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useTheme } from 'styled-components';
 
-import { programAPI } from '@/apis/programAPI';
 import { BrandingSection } from '@/components/HomePage/BrandingSection';
 import { DiagnoseSection } from '@/components/HomePage/DiagnoseSection';
 import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSectionTemplate';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
-import { RecommendProgramItem } from '@/types/program.type';
+import { useGetBrandingProgramsNonLogin } from '@/hooks/useGetBrandingProgramsNonLogin';
 
 export const NonMemberView = () => {
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const [brandingPrograms, setBrandingPrograms] = useState<RecommendProgramItem[]>([]);
   const theme = useTheme();
 
-  const getBrandingPrograms = () => {
-    programAPI.getBranding(selectedInterest, selectedKeywords).then((response) => {
-      setBrandingPrograms(response);
-    });
-  };
-
-  useEffect(() => {
-    getBrandingPrograms();
-  }, [selectedInterest, selectedKeywords]);
+  const { data: brandingPrograms } = useGetBrandingProgramsNonLogin(
+    selectedInterest,
+    selectedKeywords
+  );
 
   return (
     <>
