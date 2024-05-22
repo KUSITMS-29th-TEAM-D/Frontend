@@ -16,7 +16,7 @@ interface DetailData {
   providerJob: string;
   providerTitle: string;
   providerKeyword: string;
-  progranURL: string;
+  programURL: string;
 }
 
 const DetailSection = ({ data }: { data: DetailData }) => {
@@ -35,7 +35,7 @@ const DetailSection = ({ data }: { data: DetailData }) => {
   const handleIncreaseParticipants = () => {
     setParticipants((prevParticipants) => prevParticipants + 1);
     setButtonDisabled(true);
-    setModalOpen(false); //API 연동 후 성공하면 실행되는 것으로 수정 예정
+    setModalOpen(false);
   };
 
   return (
