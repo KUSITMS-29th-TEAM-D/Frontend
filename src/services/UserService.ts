@@ -17,6 +17,14 @@ class UserService {
     this.cookies.remove('user');
   }
 
+  getUserNickname() {
+    const user = this.getUser();
+    if (!user) {
+      return '';
+    }
+    return user.nickname;
+  }
+
   getUserState() {
     const user = this.getUser();
     if (!user) {

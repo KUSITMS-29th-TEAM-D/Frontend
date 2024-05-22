@@ -1,4 +1,4 @@
-/* import { useNavigate } from 'react-router-dom'; */
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledContainer = styled.header`
@@ -71,11 +71,10 @@ const StyledButton = styled.button`
 `;
 
 const TestNavigation = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    // TODO: 홈페이지로 이동하도록 변경하기
-    window.location.href = 'https://selpiece.framer.website';
+    navigate('/');
   };
   return (
     <StyledContainer>

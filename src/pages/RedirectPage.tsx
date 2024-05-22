@@ -18,14 +18,14 @@ export const RedirectPage = () => {
     const registerToken = params.get('register_token');
 
     if (registerToken) {
-      authService.onLoginSuccess(registerToken);
-      authService.onSaveRegisterToken(registerToken);
+      authService.setAuthToken(registerToken);
+      authService.setRegisterToken(registerToken);
       userService.setUser({ nickname: '', is_test: false });
       navigate('/onboarding');
     }
 
     if (accessToken) {
-      authService.onLoginSuccess(accessToken);
+      authService.setAuthToken(accessToken);
       nickname && userService.setUser({ nickname, is_test: isTest === 'T' ? true : false });
       navigate('/');
     }
