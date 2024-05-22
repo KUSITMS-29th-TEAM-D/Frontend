@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -28,11 +28,16 @@ const Dummy = {
   },
 }; */
 
+const NOTICE =
+  '화면을 탭하거나 스페이스바를 눌러 대화를 진행할 수 있습니다.\n스토리 진행 중 화면을 위로 스크롤하면, 이전에 나눴던 대화를 읽어볼 수 있습니다.';
+
 export const ChattingBox = () => {
   const [endCategory, setEndCategory] = useState<string[]>([]);
   const [categoryParams] = useSearchParams();
   const currentCategory = categoryParams.get('category') ?? '';
   const { chatList } = useGetChatting(currentCategory);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     personaAPI.getChattingComplete().then((res) => {
@@ -45,41 +50,62 @@ export const ChattingBox = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+        containerRef.current?.focus(); // 스페이스바 누를 때 컨테이너 포커스
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
-    <>
-      <StyledContainer>
-        <StyledHeader>
-          {Object.keys(CATEGORY_TYPE).map((category) => (
-            <CategoryButton
-              key={category}
-              active={category === currentCategory}
-              done={endCategory.includes(category)}
-              path={category}
-            >
-              {CATEGORY_TYPE[category].title}
-            </CategoryButton>
-          ))}
-        </StyledHeader>
-        <StyledChatting>
-          {chatList.map((chat, index) => (
-            <SpeechBox
-              key={chat.text}
-              isUser={chat.user === 'user'}
-              isContinuous={index > 0 && chatList[index - 1].user === chat.user}
-              isEnd={index + 1 < chatList.length && chatList[index + 1].user !== chat.user}
-            >
-              {chat.text}
-            </SpeechBox>
-          ))}
-        </StyledChatting>
-        <StyledInputField>
-          <DefaultInput width="100%" placeholder="답변을 입력해주세요" disabled />
-          <PlainButton variant="primary2" width="102px" height="48px">
-            전송
-          </PlainButton>
-        </StyledInputField>
-      </StyledContainer>
-    </>
+    <StyledContainer
+      tabIndex={0}
+      ref={containerRef}
+      onFocus={() => {
+        inputRef.current && inputRef.current.focus();
+      }}
+    >
+      <StyledHeader>
+        {Object.keys(CATEGORY_TYPE).map((category) => (
+          <CategoryButton
+            key={category}
+            active={category === currentCategory}
+            done={endCategory.includes(category)}
+            path={category}
+          >
+            {CATEGORY_TYPE[category].title}
+          </CategoryButton>
+        ))}
+      </StyledHeader>
+      <StyledChatting>
+        <StyledNotice>{NOTICE}</StyledNotice>
+        {chatList.map((chat, index) => (
+          <SpeechBox
+            key={chat.text}
+            isUser={chat.user === 'user'}
+            isContinuous={index > 0 && chatList[index - 1].user === chat.user}
+            isEnd={index + 1 < chatList.length && chatList[index + 1].user !== chat.user}
+          >
+            {chat.text}
+          </SpeechBox>
+        ))}
+      </StyledChatting>
+      <StyledInputField>
+        {/* <StyledInput tabIndex={1} ref={inputRef}>
+          <input type="text" placeholder="답변을 입력해주세요" />
+        </StyledInput> */}
+        <DefaultInput width="100%" placeholder="답변을 입력해주세요" ref={inputRef} />
+        <PlainButton variant="primary2" width="102px" height="48px">
+          전송
+        </PlainButton>
+      </StyledInputField>
+    </StyledContainer>
   );
 };
 
@@ -122,4 +148,16 @@ const StyledInputField = styled.div`
 
   background: ${({ theme }) => theme.color.gray50};
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
+`;
+
+const StyledNotice = styled.div`
+  padding: 12px 24px;
+  text-align: center;
+
+  border-radius: 8px;
+  background: ${({ theme }) => theme.color.bgModal};
+
+  ${({ theme }) => theme.font.desktop.label2};
+  color: ${({ theme }) => theme.color.white};
+  white-space: pre-wrap;
 `;

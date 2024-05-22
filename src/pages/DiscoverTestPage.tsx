@@ -50,15 +50,13 @@ export const DiscoverTestPage = () => {
 };
 
 const StyledContainer = styled.div`
-  min-width: max-content;
   height: 100vh;
-  padding: 76px 64px 24px 64px;
-  overflow: hidden;
 `;
 
 const StyledInnerContainer = styled.div`
-  //width: fit-content;
+  width: 1280px;
   height: 100%;
+  padding: 76px 64px 24px 64px;
 
   margin: 0 auto;
   overflow: hidden;
