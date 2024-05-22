@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { noAuthClient } from '@/apis/client';
+import { authClient } from '@/apis/client';
 import { ExperienceCard } from '@/components/common/Card/ExperienceCard';
 
 const StyledSectionContainer = styled.div`
@@ -26,33 +26,45 @@ const Container = styled.div`
 interface ApiResponseItem {
   selfUnderstandingUrl: string;
   name: string;
-  link: string | null;
+  link: string;
+  programsId: number;
 }
 
-export const WholeUnderstandView = () => {
+export const WholeBrandView = () => {
   const [data, setData] = useState<ApiResponseItem[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await noAuthClient.get('/api/programs/main/self-understanding');
-        setData(response.data.payload);
+        const response = await authClient.get('/api/programs/main/branding');
+        if (response.data.is_success) {
+          setData(response.data.payload);
+        } else {
+          console.error('Failed to fetch data', response.data.message);
+          setError(response.data.message);
+        }
       } catch (error) {
-        console.error('오류1', error);
+        console.error('Error', error);
+        setError('Failed to fetch data');
       }
     };
 
     fetchData();
   }, []);
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <StyledSectionContainer>
       <Container>
-        {data.map((item, index) => (
+        {data.map((item) => (
           <ExperienceCard
-            key={index}
+            key={item.programsId}
             imageUrl={item.selfUnderstandingUrl}
-            title={item.link ? '셀피스 프로그램' : '외부 프로그램'}
+            title={item.link}
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
           />
