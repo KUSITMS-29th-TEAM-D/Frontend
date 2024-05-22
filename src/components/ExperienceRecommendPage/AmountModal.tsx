@@ -60,10 +60,14 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 100;
+
+  width: 100vw;
+  height: 100vh;
   //padding: 24px;
-  background: ${({ isOpen }) => (isOpen ? 'rgba(0, 0, 0, 0.5)' : 'transparent')};
+  background: ${({ theme }) => theme.color.bgModal};
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,10 +78,10 @@ const ModalContent = styled.div`
   height: 338px;
   padding: 24px;
   background: ${({ theme }) => theme.color.white};
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
   border-radius: 16px;
   overflow: hidden;
-  backdrop-filter: blur(8px);
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -89,6 +93,7 @@ const ModalTitle = styled.div`
   color: ${({ theme }) => theme.color.gray800};
   ${({ theme }) => theme.font.desktop.body1b};
   word-wrap: break-word;
+  padding-bottom: 24px;
 `;
 const InputContainer = styled.div`
   align-self: stretch;
@@ -128,6 +133,7 @@ const ButtonContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
   display: inline-flex;
+  margin-top: 24px;
 `;
 
 const StyledButton = styled(PlainButton)`

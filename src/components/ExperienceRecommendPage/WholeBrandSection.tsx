@@ -53,6 +53,11 @@ const StyledSectionContainer = styled(SectionContainer)`
 
 const StyledTitle = styled.div`
   margin-bottom: 48px;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  display: inline-flex;
   .user-info {
     margin-bottom: 10px;
 
