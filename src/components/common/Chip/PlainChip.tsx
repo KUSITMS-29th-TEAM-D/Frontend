@@ -2,16 +2,22 @@ import styled, { css } from 'styled-components';
 
 interface PlainChipProps {
   primary?: boolean;
+  width?: string;
   children: React.ReactNode;
 }
 
-export const PlainChip = ({ primary = false, children }: PlainChipProps) => {
-  return <StyledContainer $primary={primary}>{children}</StyledContainer>;
+export const PlainChip = ({ primary = false, width, children }: PlainChipProps) => {
+  return (
+    <StyledContainer $primary={primary} $width={width}>
+      {children}
+    </StyledContainer>
+  );
 };
 
-const StyledContainer = styled.div<{ $primary: boolean }>`
+const StyledContainer = styled.div<{ $primary: boolean; $width?: string }>`
   ${({ theme }) => theme.font.desktop.body1m};
 
+  width: ${(props) => props.$width || 'auto'};
   height: 42px;
   padding: 0 16px;
   border-radius: 8px;

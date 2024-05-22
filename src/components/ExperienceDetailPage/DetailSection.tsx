@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { styled } from 'styled-components';
 
@@ -7,10 +7,14 @@ import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { ExperienceDetailModal } from '@/components/common/Modal/ExperienceDetailModal';
 import { DetailData } from '@/pages/ExperienceDetailPage';
 
-const DetailSection = ({ data }: { data: DetailData }) => {
+const DetailSection = ({ data }: { data: DetailData | undefined }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [participants, setParticipants] = useState(data.participants);
+  const [participants, setParticipants] = useState(data ? data.participants : 0);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+
+  useEffect(() => {
+    if (data) setParticipants(data.participants);
+  }, [data]);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -26,60 +30,59 @@ const DetailSection = ({ data }: { data: DetailData }) => {
     setModalOpen(false);
   };
 
-  return (
-    <StyledContainer>
-      <ImageContainer>
-        <img src={data.imageURL} alt="Detail" />
-      </ImageContainer>
-      <DetailContainer>
-        <TextContainer>
-          <PlainChip primary={true}>{participants}명 참여 중!</PlainChip>
-          <TitleContainer>{data.title}</TitleContainer>
-          <SubTitleContainer>{data.subtitle}</SubTitleContainer>
-        </TextContainer>
-        <ProfileContainer>
-          <ProfileImageContainer>
-            <img src={data.profileImageURL} alt="profile" />
-          </ProfileImageContainer>
-          <ProfileTextContainer>
-            <ProfileTitleContainer>{data.providerName}</ProfileTitleContainer>
-            <ProfileSubTitleContainer>
-              {data.providerJob} | {data.providerTitle} | {data.providerKeyword}
-            </ProfileSubTitleContainer>
-          </ProfileTextContainer>
-        </ProfileContainer>
-        <PlainButton
-          variant="gray"
-          height="48px"
-          onClick={handleOpenModal}
-          disabled={isButtonDisabled}
-        >
-          신청하기
-        </PlainButton>
-      </DetailContainer>
-      <ExperienceDetailModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onConfirm={handleIncreaseParticipants}
-      />
-    </StyledContainer>
-  );
+  if (data)
+    return (
+      <StyledContainer>
+        <ProgramImageContainer>
+          <img src={data.imageURL} alt="Detail" />
+        </ProgramImageContainer>
+        <DetailContainer>
+          <TextContainer>
+            <PlainChip primary={true} width="max-content">
+              {participants}명 참여 중!
+            </PlainChip>
+            <TitleContainer>{data.title}</TitleContainer>
+            <SubTitleContainer>{data.subtitle}</SubTitleContainer>
+          </TextContainer>
+          <ProfileContainer>
+            <ProfileImageContainer>
+              <img src={data.profileImageURL} alt="profile" />
+            </ProfileImageContainer>
+            <ProfileTextContainer>
+              <ProfileTitleContainer>{data.providerName}</ProfileTitleContainer>
+              <ProfileSubTitleContainer>
+                {data.providerJob} | {data.providerTitle} | {data.providerKeyword}
+              </ProfileSubTitleContainer>
+            </ProfileTextContainer>
+          </ProfileContainer>
+          <PlainButton
+            variant="gray"
+            width="100%"
+            height="48px"
+            onClick={handleOpenModal}
+            disabled={isButtonDisabled}
+          >
+            신청하기
+          </PlainButton>
+        </DetailContainer>
+        <ExperienceDetailModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onConfirm={handleIncreaseParticipants}
+        />
+      </StyledContainer>
+    );
 };
 
 export default DetailSection;
 const StyledContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: flex;
   gap: 32px;
-  display: inline-flex;
 `;
 
-const ImageContainer = styled.div`
+const ProgramImageContainer = styled.div`
   width: 597px;
   height: 373px;
-  position: relative;
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
@@ -88,62 +91,56 @@ const ImageContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
   }
 `;
 
 const DetailContainer = styled.div`
-  flex: 1 1 0;
-  align-self: stretch;
+  flex: 1;
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 16px;
-  display: inline-flex;
 `;
 
 const TextContainer = styled.div`
-  align-self: stretch;
   flex: 1 1 0;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
+
   display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const TitleContainer = styled.div`
-  align-self: stretch;
   color: ${({ theme }) => `${theme.color.gray700}`};
   ${({ theme }) => theme.font.desktop.title1};
+  word-break: break-word;
+  overflow-wrap: break-word;
 `;
 
 const SubTitleContainer = styled.div`
-  align-self: stretch;
   color: ${({ theme }) => `${theme.color.gray500}`};
   ${({ theme }) => theme.font.desktop.body2m};
+  word-break: break-word;
+  overflow-wrap: break-word;
 `;
 
 const ProfileContainer = styled.div`
-  align-self: stretch;
   padding: 16px;
   background-color: ${({ theme }) => `${theme.color.white}`};
   border-radius: 8px;
-  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
   border: 2px solid ${({ theme }) => `${theme.color.gray150}`};
-  justify-content: flex-start;
-  align-items: center;
+
+  display: flex;
   gap: 16px;
-  display: inline-flex;
-  flex-shrink: 0;
 `;
 
 const ProfileImageContainer = styled.div`
   width: 56px;
   height: 56px;
-  background: linear-gradient(0deg, #f4efff 0%, #f4efff 100%);
   border-radius: 8px;
   overflow: hidden;
+  flex-shrink: 0;
 
   img {
     width: 100%;
@@ -153,11 +150,12 @@ const ProfileImageContainer = styled.div`
 `;
 
 const ProfileTextContainer = styled.div`
+  word-wrap: break-all;
+  overflow-wrap: break-word;
+
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   gap: 4px;
-  display: inline-flex;
 `;
 
 const ProfileTitleContainer = styled.div`
@@ -166,6 +164,10 @@ const ProfileTitleContainer = styled.div`
 `;
 
 const ProfileSubTitleContainer = styled.div`
+  width: 100%;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
   color: ${({ theme }) => `${theme.color.gray700}`};
   ${({ theme }) => theme.font.desktop.body2m};
 `;
