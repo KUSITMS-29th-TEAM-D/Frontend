@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { keyframes } from 'styled-components';
 
 import { ReactComponent as Logo } from '@/assets/logos/logo3d.svg';
+import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
 
 export const LoadingPage = () => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useRecoilState(loadingState);
-  const interval = 50;
+  const loadingHandler = useRecoilValue(loadingHandlerState);
+  const interval = loading.speed;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,10 +32,10 @@ export const LoadingPage = () => {
 
   useEffect(() => {
     if (progress >= 100) {
-      loading.handleCompleted();
-      setLoading({ ...loading, showLoading: false });
+      loadingHandler.handleCompleted();
+      setLoading({ ...loading, show: false });
     }
-  }, [progress, loading, setLoading]);
+  }, [progress]);
 
   return (
     <StyledContainer>
@@ -41,7 +43,7 @@ export const LoadingPage = () => {
       <StyledContent>
         <Logo className="logo" />
         <ProgressBarContainer>
-          <ProgressBar $progress={progress} />
+          <ProgressBar $progress={progress} $speed={loading.speed} />
         </ProgressBarContainer>
         <p>나의 경험을 분석중이에요!</p>
       </StyledContent>
@@ -165,13 +167,13 @@ const ProgressBarContainer = styled.div`
   margin-bottom: 31px;
 `;
 
-const ProgressBar = styled.div<{ $progress: number }>`
+const ProgressBar = styled.div<{ $progress: number; $speed: number }>`
   height: 100%;
   width: ${(props) => props.$progress}%;
   background: ${({ theme }) => theme.color.primary500};
   border-radius: inherit;
   text-align: right;
-  transition: width 50ms ease-in-out;
+  transition: width ${({ $speed }) => $speed}ms ease-in-out;
 
   position: absolute;
   top: 0;

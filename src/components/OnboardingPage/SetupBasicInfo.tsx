@@ -87,7 +87,7 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
             placeholder="직업을 선택해주세요"
             contents={JOB_LIST}
             selected={onboarding.job}
-            contentMaxHeight={172}
+            contentMaxHeight="172px"
             clickContentHandler={(newSelected: string) =>
               setOnboarding({ ...onboarding, job: newSelected })
             }
@@ -102,7 +102,7 @@ export const SetupBasicInfo = ({ onNext }: SetupBasicInfoProps) => {
             placeholder="관심분야"
             contents={INTEREST_LIST}
             selected={onboarding.interest_list}
-            contentMaxHeight={172}
+            contentMaxHeight="172px"
             multiple
             clickContentHandler={(newSelected: string) => {
               if (onboarding.interest_list.includes(newSelected))

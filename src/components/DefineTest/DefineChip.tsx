@@ -23,11 +23,10 @@ export const DefineChips1 = () => {
 
   const handleToggle = (index: number) => {
     const newChipStates = [...chipStates];
-    const currentCount = newChipStates.filter((state) => state === 2).length;
 
     if (newChipStates[index] === 2) {
       newChipStates[index] = 1;
-    } else if (currentCount < 6) {
+    } else {
       newChipStates[index] = 2;
     }
 
@@ -72,11 +71,10 @@ export const DefineChips2 = () => {
 
   const handleToggle = (index: number) => {
     const newChipStates = [...chipStates];
-    const currentCount = newChipStates.filter((state) => state === 2).length;
 
     if (newChipStates[index] === 2) {
       newChipStates[index] = 1;
-    } else if (currentCount < 6) {
+    } else {
       newChipStates[index] = 2;
     }
 
@@ -123,11 +121,10 @@ export const DefineChips3 = () => {
 
   const handleToggle = (index: number) => {
     const newChipStates = [...chipStates];
-    const currentCount = newChipStates.filter((state) => state === 2).length;
 
     if (newChipStates[index] === 2) {
       newChipStates[index] = 1;
-    } else if (currentCount < 6) {
+    } else {
       newChipStates[index] = 2;
     }
 

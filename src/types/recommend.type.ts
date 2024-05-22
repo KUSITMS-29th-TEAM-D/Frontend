@@ -4,6 +4,7 @@ export interface RecommendItems {
   title: string;
   keywords: string[];
   hot: boolean;
+  path: string;
 }
 
 export interface FilterItems {

@@ -14,12 +14,12 @@ const settings = {
   variableWidth: true,
 };
 
-interface CarouselProps {
+interface CardCarouselProps {
   gap?: string;
   children: React.ReactNode;
 }
 
-export const Carousel = ({ gap = '24px', children }: CarouselProps) => {
+export const CardCarousel = ({ gap = '24px', children }: CardCarouselProps) => {
   return (
     <SliderWrapper $gap={gap}>
       <Slider {...settings}>{children}</Slider>
