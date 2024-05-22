@@ -3,13 +3,13 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import TestImage from '@/assets/test2.png';
+import { RecommendBrandView } from '@/components/ExperienceRecommendPage/RecommendBrandView';
 import { RecommendSectionTemplate2 } from '@/components/ExperienceRecommendPage/RecommendSectionTemplate2';
 import { WholeBrandSection } from '@/components/ExperienceRecommendPage/WholeBrandSection';
 import { WholeUnderstandSection } from '@/components/ExperienceRecommendPage/WholeUnderstandSection';
 import Tabs from '@/components/common/Tab/Tab';
 import { theme } from '@/styles';
-
-import { ExperienceFilterCards } from './../../types/recommend.type';
+import { RecommendFilterCards } from '@/types/recommend.type';
 
 const FixedWidthContainer = styled.div`
   width: 1280px;
@@ -25,7 +25,7 @@ export const ExperienceRecommendTab = () => {
   const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
   const [activeTab, setActiveTab] = useState<string>('tab1');
 
-  const filters: ExperienceFilterCards[] = [
+  const filters: RecommendFilterCards[] = [
     { title: '분야', contents: Dummy2, selected: selectedField, setSelected: setSelectedField },
   ];
 
@@ -95,14 +95,13 @@ export const ExperienceRecommendTab = () => {
       content: (
         <BackgroundWrapper $backgroundColor={theme.color.white}>
           <FixedWidthContainer>
-            <RecommendSectionTemplate2
+            <RecommendBrandView
               title={
                 <div>
                   내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
                 </div>
               }
               subTitle=""
-              recommendItems={Dummy6}
               filters={filters}
               backgroundColor={''}
             />

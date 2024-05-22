@@ -36,3 +36,10 @@ export interface ExperienceFilterCards {
   selected: string[];
   setSelected: (newSelected: string[]) => void;
 }
+
+export interface RecommendFilterCards {
+  title: string;
+  contents: string[];
+  selected: string[];
+  setSelected: (newSelected: string[]) => void;
+}
