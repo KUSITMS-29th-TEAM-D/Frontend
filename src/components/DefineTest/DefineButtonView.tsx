@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { personaAPI } from '@/apis/personaAPI';
@@ -151,7 +151,7 @@ export const DefineButtonView2 = ({ warning, warningMessage }: Props) => {
 export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
   const navigate = useNavigate();
   const [showWarn, setShowWarn] = useState(false);
-  const setLoading = useSetRecoilState(loadingState);
+  const [loading, setLoading] = useRecoilState(loadingState);
   const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
 
   const handleButton1Click = () => {
@@ -169,7 +169,7 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
       stage_three_keywords: selectedChips3,
     };
 
-    setLoading(true);
+    setLoading({ show: true, speed: 50 });
 
     personaAPI
       .register(userService.getUserState() === 'MEMBER', requestData)
@@ -186,12 +186,13 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
           });
         } else {
           console.error('페르소나 생성 실패:', message);
-          setLoading(false);
+          setLoading({ ...loading, show: false });
         }
       })
       .catch((error) => {
         console.error('페르소나 생성 요청 실패:', error);
         window.alert('페르소나 생성 요청 실패');
+        setLoading({ ...loading, show: false });
       });
   };
 

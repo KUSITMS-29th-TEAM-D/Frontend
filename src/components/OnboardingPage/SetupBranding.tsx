@@ -24,9 +24,9 @@ export const SetupBranding = () => {
     userAPI
       .register(onboarding)
       .then((res) => {
-        authService.onLoginSuccess(res.payload.access_token);
-        userService.setUser({ nickname: res.payload.nickname });
-        authService.onRemoveRegisterToken();
+        authService.setAuthToken(res.payload.access_token);
+        userService.updateUserNickname(res.payload.nickname);
+        authService.deleteRegisterToken();
         navigate('/');
       })
       .catch(() => {

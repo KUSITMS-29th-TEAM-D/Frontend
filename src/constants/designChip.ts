@@ -39,7 +39,7 @@ export const CHIP_DATA2 = [
 ];
 
 export const CHIP_DATA3 = [
-  '목표달성',
+  '시간관리',
   '의사소통',
   '문서화',
   '문제해결',

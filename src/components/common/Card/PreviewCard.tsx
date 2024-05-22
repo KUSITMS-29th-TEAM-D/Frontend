@@ -7,20 +7,14 @@ interface PreviewCardProps {
   imageUrl: string;
   title: string;
   keywords: string[];
-  hot?: boolean;
   path?: string;
 }
 
-export const PreviewCard = ({ imageUrl, title, keywords, hot = false, path }: PreviewCardProps) => {
+export const PreviewCard = ({ imageUrl, title, keywords, path }: PreviewCardProps) => {
   const navigate = useNavigate();
 
   return (
     <StyledContainer onClick={() => path && navigate(path)}>
-      {hot && (
-        <div className="hot-item">
-          <PlainChip>요즘 핫한</PlainChip>
-        </div>
-      )}
       <StyledPreview $url={imageUrl} />
       <StyledInformation>
         <p className="title">{title}</p>

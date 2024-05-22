@@ -2,65 +2,22 @@ import { useState } from 'react';
 
 import { useTheme } from 'styled-components';
 
-import TestImage from '@/assets/test1.png';
 import { BrandingSection } from '@/components/HomePage/BrandingSection';
 import { DiagnoseSection } from '@/components/HomePage/DiagnoseSection';
 import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSectionTemplate';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
-
-const Dummy = [
-  {
-    id: 1,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 2,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 3,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 4,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 5,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-];
+import { useGetBrandingProgramsNonLogin } from '@/hooks/useGetBrandingProgramsNonLogin';
 
 export const NonMemberView = () => {
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const theme = useTheme();
+
+  const { data: brandingPrograms } = useGetBrandingProgramsNonLogin(
+    selectedInterest,
+    selectedKeywords
+  );
 
   return (
     <>
@@ -70,7 +27,7 @@ export const NonMemberView = () => {
         title="나의 브랜딩을 위해"
         subTitle="셀피스는 나를 더 잘 알기위한 프로그램을 추천해요."
         backgroundColor={theme.color.white}
-        recommendItems={Dummy}
+        recommendItems={brandingPrograms}
         refreshHandler={() => {
           setSelectedInterest([]);
           setSelectedKeywords([]);

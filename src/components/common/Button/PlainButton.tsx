@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-type PlainButtonVariant = 'primary' | 'primary2' | 'gray';
+type PlainButtonVariant = 'primary' | 'primary2' | 'gray' | 'disabled';
 
 interface PlainButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -60,6 +60,12 @@ const getVariantStyle = ($variant: PlainButtonVariant) => {
           background: ${(props) => props.theme.color.primary700};
         }
       `;
+
+    case 'disabled':
+      return css`
+        color: ${(props) => props.theme.color.gray700};
+        background: ${(props) => props.theme.color.gray200};
+      `;
   }
 };
 
@@ -76,5 +82,6 @@ const StyledButton = styled.button<StyledButtonProps>`
   &:disabled {
     color: ${(props) => props.theme.color.gray700};
     background: ${(props) => props.theme.color.gray200};
+    cursor: default;
   }
 `;

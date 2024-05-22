@@ -1,9 +1,35 @@
-export const HomePage = () => {
-  /* const isLoggedIn = true; // 로그인 여부를 확인하기 위한 임시 로직
-  const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
-  const [selectedImage, setSelectedImage] = useState<string[]>([]);
-  const theme = useTheme(); */
+import { useEffect, useState } from 'react';
 
-  // TODO: 연동 과정에서 구현할 예정
-  return <div>홈</div>;
+import { NonMemberView } from '@/components/HomePage/NonMemberView';
+import { NonTesterMemberView } from '@/components/HomePage/NonTesterMemberView';
+import { TesterMemberView } from '@/components/HomePage/TesterMemberView';
+import { userService } from '@/services/UserService';
+
+export const HomePage = () => {
+  const [testState, setTestState] = useState('NON_MEMBER');
+
+  useEffect(() => {
+    setTestState(userService.getTestState());
+  }, []);
+
+  if (testState === 'NON_MEMBER') {
+    return (
+      <div style={{ minWidth: '1280px' }}>
+        <NonMemberView />
+      </div>
+    );
+  }
+
+  if (testState === 'TESTER_MEMBER')
+    return (
+      <div style={{ minWidth: '1280px' }}>
+        <TesterMemberView />
+      </div>
+    );
+
+  return (
+    <div style={{ minWidth: '1280px' }}>
+      <NonTesterMemberView />
+    </div>
+  );
 };

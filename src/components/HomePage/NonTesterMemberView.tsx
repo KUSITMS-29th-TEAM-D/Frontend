@@ -2,81 +2,55 @@ import { useState } from 'react';
 
 import styled, { css, useTheme } from 'styled-components';
 
-import { ReactComponent as CheckIcon } from '@/assets/icons/check.svg';
-import TestImage from '@/assets/test1.png';
 import { BrandingSection } from '@/components/HomePage/BrandingSection';
 import { RecommendSectionTemplate } from '@/components/HomePage/RecommendSectionTemplate';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
+import { SelectAmountModal } from '@/components/common/Modal/SelectAmountModal';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
+import { useGetBrandingProgramsNonLogin } from '@/hooks/useGetBrandingProgramsNonLogin';
+import { useGetUnderstandingPrograms } from '@/hooks/useGetUnderstandingProgram';
 
-const Dummy = [
-  {
-    id: 1,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 2,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: true,
-    path: '',
-  },
-  {
-    id: 3,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 4,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-  {
-    id: 5,
-    img: TestImage,
-    title:
-      '감성있는 이탈리안 파스타 만들기 감성있는 이탈리안 파스타 만들기ㄴㅇㄹㄴㅇㄹㄴㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇ',
-    keywords: ['소통하는', '감성있는', '평화로운'],
-    hot: false,
-    path: '',
-  },
-];
-
-// TODO: 금액 모달 구현
 export const NonTesterMemberView = () => {
+  const theme = useTheme();
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const [selectedFree, setSelectedFree] = useState<boolean>(false);
   const [showAmountModal, setShowAmountModal] = useState<boolean>(false);
+  const [selectedProgramForm, setSelectedProgramForm] = useState('온·오프라인');
   const [selectedAmount, setSelectedAmount] = useState<{ min: number; max: number }>({
     min: 0,
     max: 0,
   });
-  const theme = useTheme();
+
+  const { data: brandingPrograms } = useGetBrandingProgramsNonLogin(
+    selectedInterest,
+    selectedKeywords
+  );
+  const { data: understandingPrograms } = useGetUnderstandingPrograms(
+    selectedAmount.min,
+    selectedAmount.max,
+    selectedProgramForm
+  );
 
   return (
     <>
+      {showAmountModal && (
+        <SelectAmountModal
+          selectedAmount={selectedAmount}
+          handleCancel={() => {
+            setShowAmountModal(false);
+          }}
+          handleConfirm={(newSelected) => {
+            setSelectedAmount(newSelected);
+            setShowAmountModal(false);
+          }}
+        />
+      )}
       <BrandingSection isLoggedIn />
       <RecommendSectionTemplate
         title="나를 더 잘 이해하기 위해"
         subTitle="나를 브랜딩할 수 있는 경험을 추천해드릴게요."
         backgroundColor={theme.color.primary50}
-        recommendItems={Dummy}
+        recommendItems={brandingPrograms}
         refreshHandler={() => {
           setSelectedInterest([]);
           setSelectedKeywords([]);
@@ -121,22 +95,13 @@ export const NonTesterMemberView = () => {
         title="퍼스널브랜딩을 더 잘하고싶다면?"
         subTitle="셀피스는 나를 더 잘 알기위한 프로그램을 추천해요."
         backgroundColor={theme.color.white}
-        recommendItems={Dummy}
+        recommendItems={understandingPrograms}
         refreshHandler={() => {
-          setSelectedFree(false);
+          setSelectedProgramForm('온·오프라인');
           setSelectedAmount({ min: 0, max: 0 });
         }}
       >
         <>
-          <StyledFilterButton
-            onClick={() => {
-              setSelectedFree((prev) => !prev);
-            }}
-            $active={selectedFree}
-          >
-            <CheckIcon />
-            <span>무료</span>
-          </StyledFilterButton>
           <StyledFilterAmount
             onClick={() => {
               setShowAmountModal((prev) => !prev);
@@ -150,6 +115,15 @@ export const NonTesterMemberView = () => {
               <span className="unit">원</span>
             </div>
           </StyledFilterAmount>
+          <Dropdown
+            placeholder=""
+            contents={['온·오프라인', '온라인', '오프라인']}
+            selected={selectedProgramForm}
+            clickContentHandler={(newSelected: string) => {
+              setSelectedProgramForm(newSelected);
+            }}
+            width="312px"
+          />
         </>
       </RecommendSectionTemplate>
     </>
@@ -191,6 +165,7 @@ const StyledFilterAmount = styled(StyledFilterButton)`
 
   div {
     display: flex;
+    align-items: center;
     gap: 4px;
 
     .amount {
