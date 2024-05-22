@@ -53,4 +53,12 @@ export const programAPI = {
     const response = await authClient.get(`/api/programs/${type}/${id}`);
     return response.data;
   },
+  // 프로그램 신청
+  applyProgram: async (type: string, programId: string) => {
+    const response = await authClient.post(`/api/programs/apply`, {
+      type,
+      programId,
+    });
+    return response.data;
+  },
 };

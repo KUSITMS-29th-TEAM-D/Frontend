@@ -82,5 +82,6 @@ const StyledButton = styled.button<StyledButtonProps>`
   &:disabled {
     color: ${(props) => props.theme.color.gray700};
     background: ${(props) => props.theme.color.gray200};
+    cursor: default;
   }
 `;

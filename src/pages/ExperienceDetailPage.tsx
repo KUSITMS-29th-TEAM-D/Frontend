@@ -36,19 +36,20 @@ export const ExperienceDetailPage = () => {
     detailData();
   }, [type, id]);
 
-  if (!data)
+  if (data && id)
     return (
       <StyledContainer>
-        <StyledInnerContainer>Loading...</StyledInnerContainer>
+        <StyledInnerContainer>
+          <DetailSection data={data} programId={id} />
+          <BubbleSection keywords={keywords} />
+          <ImageSection description={description} />
+        </StyledInnerContainer>
       </StyledContainer>
     );
+
   return (
     <StyledContainer>
-      <StyledInnerContainer>
-        <DetailSection data={data} />
-        <BubbleSection keywords={keywords} />
-        <ImageSection description={description} />
-      </StyledInnerContainer>
+      <StyledInnerContainer>Loading...</StyledInnerContainer>
     </StyledContainer>
   );
 };

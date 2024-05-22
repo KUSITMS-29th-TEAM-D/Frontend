@@ -24,4 +24,6 @@ export interface ProgramDetailResult {
   providerName: string;
   providerJob: string;
   providerKeyword: string;
+  type: string;
+  apply: boolean;
 }

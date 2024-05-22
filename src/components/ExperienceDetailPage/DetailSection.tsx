@@ -2,15 +2,21 @@ import { useEffect, useState } from 'react';
 
 import { styled } from 'styled-components';
 
+import { programAPI } from '@/apis/programAPI';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { ExperienceDetailModal } from '@/components/common/Modal/ExperienceDetailModal';
 import { ProgramDetailResult } from '@/types/program.type';
 
-const DetailSection = ({ data }: { data: ProgramDetailResult | undefined }) => {
+interface DetailSectionProps {
+  data: ProgramDetailResult | undefined;
+  programId: string;
+}
+
+const DetailSection = ({ data, programId }: DetailSectionProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [participants, setParticipants] = useState<number>(data ? data.participants : 0);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [isButtonDisabled, setButtonDisabled] = useState(data ? data.apply : false);
 
   useEffect(() => {
     if (data) setParticipants(data.participants);
@@ -25,9 +31,13 @@ const DetailSection = ({ data }: { data: ProgramDetailResult | undefined }) => {
   };
 
   const handleIncreaseParticipants = () => {
-    setParticipants((prev) => prev + 1);
-    setButtonDisabled(true);
-    setModalOpen(false);
+    if (data) {
+      programAPI.applyProgram(data.type, programId).then(() => {
+        setParticipants((prev) => prev + 1);
+        setButtonDisabled(true);
+        setModalOpen(false);
+      });
+    }
   };
 
   if (data)
