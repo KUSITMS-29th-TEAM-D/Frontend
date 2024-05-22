@@ -14,6 +14,7 @@ import {
   DesignTestPage4,
   DesignTestPage5,
 } from '@/pages/DesignTestPage';
+import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { OnboardingPage } from '@/pages/OnboardingPage';
@@ -25,17 +26,23 @@ import { MemberPrivateRoute } from '@/routers/MemberPrivateRoute';
 export const Router = () => {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route element={<ExceptPreMemberRoute />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/auth" element={<LoginPage />} />
-          <Route path="/understand" element={<SelfUnderstandPage />} />
-          {/* // <Route element={<MemberPrivateRoute />}>
-            //<Route path="/mypage" element={<MyPage />} />
-          //</Route> */}
+      {
+        <Route element={<MainLayout />}>
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route element={<ExceptPreMemberRoute />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/auth" element={<LoginPage />} />
+            <Route path="/understand" element={<SelfUnderstandPage />} />
+            <Route path="/recommend/:id" element={<ExperienceDetailPage />} />
+            //
+            <Route element={<MemberPrivateRoute />}>
+              //
+              {/*<Route path="/mypage" element={<MyPage />} /> */}
+              //
+            </Route>
+          </Route>
         </Route>
-      </Route>
+      }
       <Route path="test" element={<TestLayout />}>
         <Route path="define">
           <Route index element={<Navigate to="1" replace />}></Route>
@@ -59,7 +66,9 @@ export const Router = () => {
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
+      <Route path="/tt" element={<DefineResultPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/test/define" replace />} />
     </Routes>
   );
 };
