@@ -10,6 +10,7 @@ export const JOB_LIST = [
   '교수',
   '유튜버',
   '인플루언서',
+  '기타',
 ];
 
 export const INTEREST_LIST = [

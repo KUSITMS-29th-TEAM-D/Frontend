@@ -32,7 +32,7 @@ export const BrandingSection = ({ isLoggedIn }: BrandingSectionProps) => {
               height="48px"
               style={{ marginTop: '24px' }}
               onClick={() => {
-                navigate('test/design');
+                navigate('/understand');
               }}
             >
               자기이해 바로가기

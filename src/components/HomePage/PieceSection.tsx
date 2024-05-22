@@ -3,53 +3,60 @@ import styled, { keyframes } from 'styled-components';
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { CARD_IMAGE } from '@/constants/card';
+import { PERSONA } from '@/constants/persona';
+import { userService } from '@/services/UserService';
 import { SectionContainer } from '@/styles';
-import { UserInformation } from '@/types/user.type';
+import { DefineResult } from '@/types/test.type';
 
 interface PieceSectionProps {
-  userInformation: UserInformation;
+  defineInformation: DefineResult | undefined;
 }
 
-export const PieceSection = ({ userInformation }: PieceSectionProps) => {
-  return (
-    <StyledContainer>
-      <StyledSectionContainer>
-        <StyledTitle>
-          <div className="title">
-            <span className="highlight">{userInformation.piece} 조각</span>을 가진{' '}
-            <span className="highlight">{userInformation.name}</span>님,
-          </div>
-          <div className="subtitle">셀피스와 함께 나를 브랜딩해봐요.</div>
-        </StyledTitle>
-        <StyledCardContainer>
-          <img
-            src={CARD_IMAGE.find((card) => card.name === userInformation.brand)?.['front'] || ''}
-            alt="card"
-          />
-          {userInformation.chips.map((chip, index) => (
-            <StyledBubble key={chip.content} className={`b${index}`} $weight={chip.weight}>
-              <span>{chip.content}</span>
-            </StyledBubble>
-          ))}
-        </StyledCardContainer>
-        <StyledContents>
-          <div className="chips">
-            {userInformation.chips.map((chip) => (
-              <PlainChip key={chip.content} primary>
-                {chip.content}
-              </PlainChip>
+export const PieceSection = ({ defineInformation }: PieceSectionProps) => {
+  if (defineInformation)
+    return (
+      <StyledContainer>
+        <StyledSectionContainer>
+          <StyledTitle>
+            <div className="title">
+              <span className="highlight">{PERSONA[defineInformation.name] || ''} 조각</span>을 가진{' '}
+              <span className="highlight">{userService.getUserNickname()}</span>님,
+            </div>
+            <div className="subtitle">셀피스와 함께 나를 브랜딩해봐요.</div>
+          </StyledTitle>
+          <StyledCardContainer>
+            <img
+              src={
+                CARD_IMAGE.find((card) => card.name === defineInformation.name.toLowerCase())?.[
+                  'front'
+                ] || ''
+              }
+              alt="card"
+            />
+            {defineInformation.define_persona_keywords.map((keyword, index) => (
+              <StyledBubble key={keyword} className={`b${index}`} $weight={1 - 0.1 * index}>
+                <span>{keyword}</span>
+              </StyledBubble>
             ))}
-          </div>
-          <div>
-            키워드를 가진 <span className="highlight">{userInformation.name}</span>님께
-            <br />
-            이런 경험을 추천드리고 싶어요.
-          </div>
-          <ArrowIcon width="48px" />
-        </StyledContents>
-      </StyledSectionContainer>
-    </StyledContainer>
-  );
+          </StyledCardContainer>
+          <StyledContents>
+            <div className="chips">
+              {defineInformation.define_persona_keywords.map((keyword) => (
+                <PlainChip key={keyword} primary>
+                  {keyword}
+                </PlainChip>
+              ))}
+            </div>
+            <div>
+              키워드를 가진 <span className="highlight">{userService.getUserNickname()}</span>님께
+              <br />
+              이런 경험을 추천드리고 싶어요.
+            </div>
+            <ArrowIcon width="48px" />
+          </StyledContents>
+        </StyledSectionContainer>
+      </StyledContainer>
+    );
 };
 
 const StyledContainer = styled.section`
