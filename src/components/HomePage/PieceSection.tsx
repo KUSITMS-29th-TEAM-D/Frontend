@@ -1,11 +1,11 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrowDown.svg';
 import { PlainChip } from '@/components/common/Chip/PlainChip';
 import { CARD_IMAGE } from '@/constants/card';
 import { PERSONA } from '@/constants/persona';
 import { userService } from '@/services/UserService';
-import { SectionContainer } from '@/styles';
+import { SectionContainer, moveDown, moveLeft, moveRight, moveUp } from '@/styles';
 import { DefineResult } from '@/types/test.type';
 
 interface PieceSectionProps {
@@ -106,26 +106,6 @@ const StyledCardContainer = styled.div`
     border-radius: 13px;
   }
 `;
-
-const moveDown = keyframes`
-  50% {
-    transform: translateY(-20px);
-  }`;
-
-const moveUp = keyframes`
-  50% {
-    transform: translateY(20px);
-  }`;
-
-const moveRight = keyframes`
-  50% {
-    transform: translateX(20px);
-  }`;
-
-const moveLeft = keyframes`
-  50% {
-    transform: translateX(-20px);
-  }`;
 
 const StyledBubble = styled.div<{ $weight: number }>`
   width: ${({ $weight }) => $weight * 360}px;

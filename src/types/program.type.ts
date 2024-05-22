@@ -9,3 +9,21 @@ export interface RecommendProgramItem {
   price: number;
   keywords: string[];
 }
+
+export interface ProgramDetailResult {
+  imageUrl: string;
+  name: string;
+  oneLineDescription: string;
+  price: number;
+  form: string | null;
+  descriptionUrl: string;
+  link: string;
+  keywords: string[];
+  participants: number;
+  providerImage: string;
+  providerName: string;
+  providerJob: string;
+  providerKeyword: string;
+  type: string;
+  apply: boolean;
+}
