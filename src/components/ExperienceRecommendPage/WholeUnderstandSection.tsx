@@ -78,9 +78,6 @@ const StyledTitle = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   text-align: center;
-  color: ${({ theme }) => theme.color.gray700};
-  ${({ theme }) => theme.font.desktop.body1m};
-
   justify-content: flex-end;
 
   margin-bottom: 27px;
@@ -88,5 +85,9 @@ const ButtonContainer = styled.div`
   .refresh-button {
     ${({ theme }) => theme.font.desktop.body1m};
     color: ${({ theme }) => theme.color.primary700};
+  }
+  button {
+    color: ${({ theme }) => theme.color.gray700};
+    ${({ theme }) => theme.font.desktop.body1m};
   }
 `;

@@ -25,7 +25,7 @@ export const WholeBrandSection = ({
         <StyledTitle>
           <div className="user-info">{title}</div>
           <div className="intro">{subTitle}</div>
-          <StyledFilterContainer>
+          <ButtonContainer>
             <button
               type="button"
               onClick={() => {
@@ -34,7 +34,7 @@ export const WholeBrandSection = ({
             >
               더보기
             </button>
-          </StyledFilterContainer>
+          </ButtonContainer>
         </StyledTitle>
 
         <WholeBrandView />
@@ -70,8 +70,9 @@ const StyledTitle = styled.div`
   }
 `;
 
-const StyledFilterContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
+  text-align: center;
   justify-content: flex-end;
 
   margin-bottom: 27px;
@@ -79,5 +80,9 @@ const StyledFilterContainer = styled.div`
   .refresh-button {
     ${({ theme }) => theme.font.desktop.body1m};
     color: ${({ theme }) => theme.color.primary700};
+  }
+  button {
+    color: ${({ theme }) => theme.color.gray700};
+    ${({ theme }) => theme.font.desktop.body1m};
   }
 `;
