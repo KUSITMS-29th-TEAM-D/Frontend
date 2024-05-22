@@ -56,4 +56,6 @@ const StyledModalContainer = styled.div<{ $width: string; $height: string }>`
 
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
 `;
