@@ -25,7 +25,7 @@ export const SetupBranding = () => {
       .register(onboarding)
       .then((res) => {
         authService.setAuthToken(res.payload.access_token);
-        userService.setUser({ nickname: res.payload.nickname });
+        userService.updateUserNickname(res.payload.nickname);
         authService.deleteRegisterToken();
         navigate('/');
       })
