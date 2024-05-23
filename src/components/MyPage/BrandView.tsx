@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
+import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
+import { ReactComponent as InfoIcon } from '@/assets/icons/info.svg';
 import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
 import Card from '@/components/MyPage/Card';
 import DateCard from '@/components/MyPage/DateCard';
@@ -11,16 +13,37 @@ import { BrandChip } from '@/components/common/Chip/BrandChip';
 import { BrandCardModal } from '@/components/common/Modal/BrandCardModal';
 import { userService } from '@/services/UserService';
 
+interface DateCardProps {
+  title: string;
+  description: string;
+  date: string;
+}
+
 export const BrandView = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [readyCards, setReadyCards] = useState<DateCardProps[]>([]);
+  const [progressCards, setProgressCards] = useState<DateCardProps[]>([]);
+  const [completeCards, setCompleteCards] = useState<DateCardProps[]>([]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const addDateCard = (
+    title: string,
+    description: string,
+    date: string,
+    status: '준비' | '진행중' | '완료'
+  ) => {
+    const newCard = { title, description, date };
+    if (status === '준비') {
+      setReadyCards((prev) => [...prev, newCard]);
+    } else if (status === '진행중') {
+      setProgressCards((prev) => [...prev, newCard]);
+    } else if (status === '완료') {
+      setCompleteCards((prev) => [...prev, newCard]);
+    }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   return (
     <StyledContainer>
       <BrandHeader>
@@ -40,10 +63,18 @@ export const BrandView = () => {
       </BrandHeader>
       <ContentContainer>
         <TopContent>
-          <BrandTextContainer>
-            <BrandText>브랜드 관리</BrandText>
-          </BrandTextContainer>
-          <BrandMenuContainer></BrandMenuContainer>
+          <BrandContainer>
+            <BrandTextContainer>
+              <BrandText>브랜드 관리</BrandText>
+              <RightIcon>
+                <InfoIcon />
+              </RightIcon>
+            </BrandTextContainer>
+          </BrandContainer>
+
+          <BrandMenuContainer>
+            <CalendarIcon />
+          </BrandMenuContainer>
         </TopContent>
         <CenterContent>
           <RecommendContainer>
@@ -66,9 +97,17 @@ export const BrandView = () => {
                 <AddIcon width="42px" height="42px" />
               </StyledAdd>
             </CardHeader>
-            {Dummy3.map((item) => (
+            {Dummy3.map((item, index) => (
               <DateCard
-                key={item.id}
+                key={index}
+                title={item.title}
+                description={item.description}
+                date={item.date}
+              />
+            ))}
+            {readyCards.map((item, index) => (
+              <DateCard
+                key={index}
                 title={item.title}
                 description={item.description}
                 date={item.date}
@@ -82,9 +121,17 @@ export const BrandView = () => {
                 <AddIcon width="42px" height="42px" />
               </StyledAdd>
             </CardHeader>
-            {Dummy4.map((item) => (
+            {Dummy4.map((item, index) => (
               <DateCard
-                key={item.id}
+                key={index}
+                title={item.title}
+                description={item.description}
+                date={item.date}
+              />
+            ))}
+            {progressCards.map((item, index) => (
+              <DateCard
+                key={index}
                 title={item.title}
                 description={item.description}
                 date={item.date}
@@ -98,9 +145,17 @@ export const BrandView = () => {
                 <AddIcon width="42px" height="42px" />
               </StyledAdd>
             </CardHeader>
-            {Dummy5.map((item) => (
+            {Dummy5.map((item, index) => (
               <DateCard
-                key={item.id}
+                key={index}
+                title={item.title}
+                description={item.description}
+                date={item.date}
+              />
+            ))}
+            {completeCards.map((item, index) => (
+              <DateCard
+                key={index}
                 title={item.title}
                 description={item.description}
                 date={item.date}
@@ -109,7 +164,7 @@ export const BrandView = () => {
           </BottomContainer>
         </BottomContent>
       </ContentContainer>
-      <BrandCardModal isOpen={isModalOpen} onClose={closeModal} />
+      <BrandCardModal isOpen={isModalOpen} onClose={closeModal} onAdd={addDateCard} />
     </StyledContainer>
   );
 };
@@ -203,6 +258,14 @@ const BrandTextContainer = styled.div`
   gap: 12px;
   display: flex;
 `;
+const BrandContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  display: flex;
+`;
 const BrandText = styled.div`
   text-align: center;
   color: ${({ theme }) => `${theme.color.gray800}`};
@@ -210,9 +273,6 @@ const BrandText = styled.div`
   word-wrap: break-word;
 `;
 const BrandMenuContainer = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
-  border: 2px #efefef solid;
   justify-content: flex-start;
   align-items: center;
   display: flex;

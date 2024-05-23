@@ -6,9 +6,9 @@ import { authClient } from '@/apis/client';
 import { ExperienceCard } from '@/components/MyPage/ExperienceCard';
 
 interface ApiResponseItem {
-  selfUnderstandingUrl: string;
-  name: string;
-  link: string;
+  imageUrl: string;
+  programsTitle: string;
+  type: string;
   programsId: number;
 }
 
@@ -51,10 +51,10 @@ export const MyUnderstandingView = ({ programData, sortOrder }: MyExperienceProp
         {data.map((item) => (
           <ExperienceCard
             key={item.programsId}
-            imageUrl={item.selfUnderstandingUrl}
-            title={item.link ? '셀피스 프로그램' : '외부 프로그램'}
-            subtitle={item.name}
-            $variant={item.link ? 'type1' : 'type2'}
+            imageUrl={item.imageUrl}
+            title={item.programsTitle ? '신청 완료' : '외부 프로그램'}
+            $variant={item.programsTitle ? 'type1' : 'type2'}
+            subtitle={item.programsTitle}
           />
         ))}
       </Container>
