@@ -1,14 +1,19 @@
 //import { useState } from 'react';
 
+import { useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import AdvertiseCard from '@/components/ExperienceRecommendPage/AdevertieseCard';
 //import { AmountBox } from '@/components/ExperienceRecommendPage/AmountBox';
 import { ExperienceRecommendTab } from '@/components/ExperienceRecommendPage/ExperienceRecommendTab';
 //import { Dropdowntest } from '@/components/ExperienceRecommendPage/testdropdown';
+import { userService } from '@/services/UserService';
 import { SectionContainer } from '@/styles';
 
 export const ExperienceRecommendPage = () => {
+  const navigate = useNavigate();
   /*const [selected, setSelected] = useState<string[]>([]);
   const handleContentClick = (content: string) => {
     setSelected((prevSelected) =>
@@ -17,6 +22,13 @@ export const ExperienceRecommendPage = () => {
         : [...prevSelected, content]
     );
   };*/
+
+  useEffect(() => {
+    if (userService.getUserState() !== 'MEMBER') {
+      window.alert('로그인이 필요한 서비스입니다.');
+      navigate('/auth');
+    }
+  }, []);
 
   return (
     <div>

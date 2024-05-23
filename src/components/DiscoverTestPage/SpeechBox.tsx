@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import ChatBotProfile from '@/assets/icons/chatbot.png';
 import { ReactComponent as User } from '@/assets/icons/user.svg';
+import { userService } from '@/services/UserService';
 
 interface SpeechBoxProps {
   children: string;
@@ -11,7 +12,7 @@ interface SpeechBoxProps {
 }
 
 export const SpeechBox = ({ children, isUser = false, isContinuous, isEnd }: SpeechBoxProps) => {
-  const userNickname = '유저이름';
+  const userNickname = userService.getUserNickname();
 
   return (
     <StyledContainer $isUser={isUser}>
