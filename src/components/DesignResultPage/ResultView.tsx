@@ -62,7 +62,7 @@ const StyledContent = styled.div`
     // 디자인 시스템에 없는 폰트 스타일
     font-family: 'Spoqa Han Sans Neo';
     font-weight: 500;
-    font-size: 48px;
+    font-size: 36px;
     line-height: 48px;
 
     color: ${({ theme }) => theme.color.gray900};

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
 import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import { styled } from 'styled-components';
 
 import { personaAPI } from '@/apis/personaAPI';
+import LockImage from '@/assets/icons/lock.svg';
 import DiscoverImage from '@/assets/myPage/MypageDiscover.png';
 import { DownloadButton } from '@/components/DefineResultPage/Button';
 import Card from '@/components/MyPage/Card';
@@ -17,6 +19,7 @@ export const PersonaView = () => {
   const [defineResult, setDefineResult] = useState<DefineResult | null>(null);
   const [isFront, setIsFront] = useState(true);
   const captureRef = useRef<HTMLImageElement>(null);
+  const navigate = useNavigate();
   const settings = {
     dots: false,
     infinite: true,
@@ -27,7 +30,7 @@ export const PersonaView = () => {
   };
 
   useEffect(() => {
-    personaAPI.getPersonaMember().then((res) => {
+    personaAPI.getDefineMember().then((res) => {
       setDefineResult(res.payload);
     });
   }, []);
@@ -65,7 +68,14 @@ export const PersonaView = () => {
                   onClick={() => setIsFront((prev) => !prev)}
                 />
                 <div className="button-container">
-                  <PlainButton width="376px" height="48px" variant="primary2">
+                  <PlainButton
+                    width="376px"
+                    height="48px"
+                    variant="primary2"
+                    onClick={() => {
+                      navigate('/understand');
+                    }}
+                  >
                     자세히보기
                   </PlainButton>
                   <DownloadButton onClick={handleDownloadImage} />
@@ -89,6 +99,16 @@ export const PersonaView = () => {
               </StyledSlider>
             </BottomCardContainer>
             <BottomImageContainer>
+              <div className="blur">
+                <img src={LockImage} alt="lock" className="lock" />
+                <div className="text-container">
+                  <div>정의하기 테스트의 추가 분석 결과를 확인하고 싶다면</div>
+                  <div>셀피스 프리미엄에서 만나보세요.</div>
+                </div>
+                <PlainButton variant="primary" height="48px" width="252px">
+                  셀피스 프리미엄 구독하러 가기
+                </PlainButton>
+              </div>
               <img src={DiscoverImage} />
             </BottomImageContainer>
           </BottomContainer>
@@ -227,9 +247,42 @@ const BottomImageContainer = styled.div`
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
 
+  position: relative;
+  overflow: hidden;
+
   img {
     height: 390px;
     object-fit: cover;
+  }
+
+  .blur {
+    width: 100%;
+    height: 100%;
+    background: var(--modal-bg, rgba(18, 18, 18, 0.36));
+    /* blur */
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    ${({ theme }) => theme.font.desktop.label1m};
+    color: ${({ theme }) => theme.color.white};
+
+    .lock {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 20px;
+    }
+
+    .text-container {
+      margin-bottom: 20px;
+    }
   }
 `;
 
