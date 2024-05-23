@@ -2,16 +2,15 @@ import { useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { ReactComponent as PlusIcon } from '@/assets/icons/add.svg';
+import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
-import { BrandModal } from '@/components/MyPage/BrandModal';
 import Card from '@/components/MyPage/Card';
-import Test from '@/components/MyPage/test';
-import { PlainChip } from '@/components/common/Chip/PlainChip';
+import { BrandChip } from '@/components/common/Chip/BrandChip';
+import { BrandCardModal } from '@/components/common/Modal/BrandCardModal';
 
 export const BrandView = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -23,7 +22,6 @@ export const BrandView = () => {
   return (
     <StyledContainer>
       <BrandHeader>
-        <Test />
         <HeaderLeft>
           <BrandLogo>
             <BrandLogoImage />
@@ -59,14 +57,19 @@ export const BrandView = () => {
         <BottomContent>
           <BottomContainer>
             <CardHeader>
-              <PlainChip>준비</PlainChip>
-              <PlusIcons onClick={openModal} />
+              <BrandChip>준비</BrandChip>
+              <StyledAdd onClick={openModal}>
+                <AddIcon width="42px" height="42px" />
+              </StyledAdd>
             </CardHeader>
             <Card />
           </BottomContainer>
           <BottomContainer>
             <CardHeader>
-              <PlainChip>진행</PlainChip>
+              <BrandChip>진행</BrandChip>
+              <StyledAdd onClick={openModal}>
+                <AddIcon width="42px" height="42px" />
+              </StyledAdd>
             </CardHeader>
             <Card />
             <Card />
@@ -75,13 +78,16 @@ export const BrandView = () => {
           </BottomContainer>
           <BottomContainer>
             <CardHeader>
-              <PlainChip>완료</PlainChip>
+              <BrandChip>완료</BrandChip>
+              <StyledAdd onClick={openModal}>
+                <AddIcon width="42px" height="42px" />
+              </StyledAdd>
             </CardHeader>
             <Card /> <Card /> <Card /> <Card />
           </BottomContainer>
         </BottomContent>
       </ContentContainer>
-      <BrandModal isOpen={isModalOpen} onClose={closeModal} />
+      <BrandCardModal isOpen={isModalOpen} onClose={closeModal} />
     </StyledContainer>
   );
 };
@@ -144,12 +150,15 @@ const RightIcon = styled.div`
   height: 24px;
   position: relative;
 `;
-const PlusIcons = styled(PlusIcon)`
+const StyledAdd = styled.div`
+  width: 24px;
+  height: 24px;
+  position: relative;
+
   path {
     fill: ${({ theme }) => theme.color.primary500};
   }
 `;
-
 const ContentContainer = styled.div`
   align-self: stretch;
   //height: 996px;
