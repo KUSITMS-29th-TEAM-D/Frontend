@@ -11,10 +11,13 @@ export const noAuthClient: AxiosInstance = axios.create({
 export const authClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
+  headers: {
+    Authorization: `Bearer eyJhbGciOiJIUzM4NCJ9.eyJ1c2VySWQiOiIxNTlmNDU0Mi1lYmZmLTRhY2QtYTYwMy1hNGZhNGY5NDUxN2YiLCJpYXQiOjE3MTYzMDk2NTAsImV4cCI6MTcxNjU2ODg1MH0.Ror8pzHZ1eaUWgWsBJoihEp7xeBgw1H19ctzH1AwFntUrbU3NjrkSdBvXI9ZZy9C`,
+  },
 });
 
-authClient.interceptors.request.use((config) => {
-  if (userService.getUser().nickname === '') {
+/* authClient.interceptors.request.use((config) => {
+  if (userService.getUserNickname() === '') {
     const registerToken = authService.getRegisterToken();
     if (registerToken !== null && registerToken !== undefined) {
       config.headers['Authorization'] = `Bearer ${registerToken}`;
@@ -25,9 +28,9 @@ authClient.interceptors.request.use((config) => {
   }
 
   return config;
-});
+}); */
 
-authClient.interceptors.response.use(
+/* authClient.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -41,4 +44,4 @@ authClient.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-);
+); */
