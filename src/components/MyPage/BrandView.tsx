@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
+import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
+import { ReactComponent as InfoIcon } from '@/assets/icons/info.svg';
 import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
 import Card from '@/components/MyPage/Card';
 import DateCard from '@/components/MyPage/DateCard';
@@ -61,10 +63,18 @@ export const BrandView = () => {
       </BrandHeader>
       <ContentContainer>
         <TopContent>
-          <BrandTextContainer>
-            <BrandText>브랜드 관리</BrandText>
-          </BrandTextContainer>
-          <BrandMenuContainer></BrandMenuContainer>
+          <BrandContainer>
+            <BrandTextContainer>
+              <BrandText>브랜드 관리</BrandText>
+              <RightIcon>
+                <InfoIcon />
+              </RightIcon>
+            </BrandTextContainer>
+          </BrandContainer>
+
+          <BrandMenuContainer>
+            <CalendarIcon />
+          </BrandMenuContainer>
         </TopContent>
         <CenterContent>
           <RecommendContainer>
@@ -248,6 +258,14 @@ const BrandTextContainer = styled.div`
   gap: 12px;
   display: flex;
 `;
+const BrandContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  display: flex;
+`;
 const BrandText = styled.div`
   text-align: center;
   color: ${({ theme }) => `${theme.color.gray800}`};
@@ -255,9 +273,6 @@ const BrandText = styled.div`
   word-wrap: break-word;
 `;
 const BrandMenuContainer = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
-  border: 2px #efefef solid;
   justify-content: flex-start;
   align-items: center;
   display: flex;
