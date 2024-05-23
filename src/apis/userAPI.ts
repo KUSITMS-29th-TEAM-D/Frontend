@@ -12,4 +12,9 @@ export const userAPI = {
     const response = await noAuthClient.get(`/api/users/check-nickname/${nickname}`);
     return response.data;
   },
+  // 로그아웃
+  logout: async () => {
+    const response = await noAuthClient.post('/api/users/logout');
+    return response.data;
+  },
 };

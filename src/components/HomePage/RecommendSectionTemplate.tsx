@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { CardCarousel } from '@/components/HomePage/CardCarousel';
 import { PreviewCard } from '@/components/common/Card/PreviewCard';
 import { SectionContainer } from '@/styles';
-import { RecommendItems } from '@/types/recommend.type';
+import { RecommendProgramItem } from '@/types/program.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: RecommendItems[];
+  recommendItems: RecommendProgramItem[] | undefined;
   refreshHandler?: () => void;
   children?: React.ReactNode;
 }
@@ -22,36 +22,38 @@ export const RecommendSectionTemplate = ({
   refreshHandler,
   children,
 }: RecommendSectionTemplateProps) => {
-  return (
-    <StyledContainer $backgroundColor={backgroundColor}>
-      <StyledSectionContainer>
-        <StyledTitle>
-          <div className="title">{title}</div>
-          <div className="subtitle">{subTitle}</div>
-        </StyledTitle>
-        {children && (
-          <StyledFilterContainer>
-            <StyledChildrenContainer>{children}</StyledChildrenContainer>
-            <button className="refresh-button" type="button" onClick={refreshHandler}>
-              새로고침
-            </button>
-          </StyledFilterContainer>
-        )}
-        <CardCarousel>
-          {recommendItems.map((item) => (
-            <PreviewCard
-              key={item.id}
-              imageUrl={item.img}
-              title={item.title}
-              keywords={item.keywords}
-              hot={item.hot}
-              path={item.path}
-            />
-          ))}
-        </CardCarousel>
-      </StyledSectionContainer>
-    </StyledContainer>
-  );
+  if (recommendItems)
+    return (
+      <StyledContainer $backgroundColor={backgroundColor}>
+        <StyledSectionContainer>
+          <StyledTitle>
+            <div className="title">{title}</div>
+            <div className="subtitle">{subTitle}</div>
+          </StyledTitle>
+          {children && (
+            <StyledFilterContainer>
+              <StyledChildrenContainer>{children}</StyledChildrenContainer>
+              <button className="refresh-button" type="button" onClick={refreshHandler}>
+                새로고침
+              </button>
+            </StyledFilterContainer>
+          )}
+          <StyledCarouselContainer>
+            <CardCarousel>
+              {recommendItems.map((item) => (
+                <PreviewCard
+                  key={item.programsId}
+                  imageUrl={item.selfUnderstandingUrl}
+                  title={item.name}
+                  keywords={item.keywords}
+                  path={item.link}
+                />
+              ))}
+            </CardCarousel>
+          </StyledCarouselContainer>
+        </StyledSectionContainer>
+      </StyledContainer>
+    );
 };
 
 const StyledContainer = styled.div<{ $backgroundColor: string }>`
@@ -97,5 +99,12 @@ const StyledFilterContainer = styled.div`
 const StyledChildrenContainer = styled.div`
   display: flex;
   gap: 12px;
+  align-items: center;
+`;
+
+const StyledCarouselContainer = styled.div`
+  height: 357px;
+  width: 100%;
+  display: flex;
   align-items: center;
 `;

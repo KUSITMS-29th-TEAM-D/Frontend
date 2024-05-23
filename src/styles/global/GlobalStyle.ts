@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
@@ -74,3 +74,23 @@ export const SectionContainer = styled.div`
   width: 1280px;
   margin: 0 auto;
 `;
+
+export const moveDown = keyframes`
+  50% {
+    transform: translateY(-20px);
+  }`;
+
+export const moveUp = keyframes`
+  50% {
+    transform: translateY(20px);
+  }`;
+
+export const moveRight = keyframes`
+  50% {
+    transform: translateX(20px);
+  }`;
+
+export const moveLeft = keyframes`
+  50% {
+    transform: translateX(-20px);
+  }`;

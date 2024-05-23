@@ -9,9 +9,14 @@ import { SectionContainer } from '@/styles';
 
 // TODO: 추후 페이지 경로 수정
 const DIAGNOSE_CARD = [
-  { title: 'Discover 이해', subtitle: '과거의 나와 대화하기', img: DiscoverImg, path: '/' },
-  { title: 'Define 정의', subtitle: '성격/진단 테스트', img: DefineImg, path: '/' },
-  { title: 'Design 설계', subtitle: '차별점 도출하기', img: DesignImg, path: '/' },
+  {
+    title: 'Discover 이해',
+    subtitle: '과거의 나와 대화하기',
+    img: DiscoverImg,
+    path: '/test/discover',
+  },
+  { title: 'Define 정의', subtitle: '성격/진단 테스트', img: DefineImg, path: '/test/define' },
+  { title: 'Design 설계', subtitle: '차별점 도출하기', img: DesignImg, path: '/test/design' },
 ];
 
 export const DiagnoseSection = () => {

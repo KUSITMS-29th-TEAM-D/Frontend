@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import TestNavigation from '@/components/common/Navigation/TestNavigation';
+import { TestNavigation } from '@/components/common/Navigation/TestNavigation';
 
 export const TestLayout = () => {
   return (
