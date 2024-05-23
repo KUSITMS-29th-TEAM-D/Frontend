@@ -44,7 +44,7 @@ export const MyExperienceView = ({
                 clickContentHandler={(newSelected: string) => {
                   setSortOrder(newSelected === '최신순' ? 'desc' : 'asc');
                 }}
-                width="312px"
+                width="201px"
                 contentMaxHeight="172px"
                 multiple={false}
               />
@@ -75,7 +75,7 @@ export const MyExperienceView = ({
                 clickContentHandler={(newSelected: string) => {
                   setSortOrder(newSelected === '최신순' ? 'desc' : 'asc');
                 }}
-                width="312px"
+                width="201px"
                 contentMaxHeight="172px"
                 multiple={false}
               />
@@ -106,7 +106,7 @@ export const MyExperienceView = ({
                 clickContentHandler={(newSelected: string) => {
                   setSortOrder(newSelected === '최신순' ? 'desc' : 'asc');
                 }}
-                width="312px"
+                width="201px"
                 contentMaxHeight="172px"
                 multiple={false}
               />

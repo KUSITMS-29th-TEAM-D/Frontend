@@ -15,6 +15,7 @@ export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
   const [startDate, setStartDate] = useState('2024.05.15');
   const [endDate, setEndDate] = useState('');
   const [description, setDescription] = useState('');
+  const [status, setStatus] = useState<'진행전' | '진행중' | '완료'>('진행전');
   if (!isOpen) return null;
 
   return (
@@ -38,13 +39,28 @@ export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
           </FrameRow>
           <FrameRow>
             <Label>진행상태</Label>
-            <PlainButton variant="disabled" height="48px" width="87px">
+            <PlainButton
+              variant={status === '진행전' ? 'disabled' : 'gray'}
+              height="48px"
+              width="87px"
+              onClick={() => setStatus('진행전')}
+            >
               진행전
             </PlainButton>
-            <PlainButton variant="gray" height="48px" width="87px">
+            <PlainButton
+              variant={status === '진행중' ? 'disabled' : 'gray'}
+              height="48px"
+              width="87px"
+              onClick={() => setStatus('진행중')}
+            >
               진행중
             </PlainButton>
-            <PlainButton variant="gray" height="48px" width="74px">
+            <PlainButton
+              variant={status === '완료' ? 'disabled' : 'gray'}
+              height="48px"
+              width="74px"
+              onClick={() => setStatus('완료')}
+            >
               완료
             </PlainButton>
           </FrameRow>
