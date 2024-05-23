@@ -61,10 +61,10 @@ export const Router = () => {
             <Route path="6" element={<DesignTestPage5 />} />
             <Route path="result" element={<DesignResultPage />} />
           </Route>
-        </Route>
-        <Route path="discover" element={<TestLayout />}>
-          <Route path="" element={<DiscoverStartPage />} />
-          <Route path="start" element={<DiscoverTestPage />} />
+          <Route path="discover">
+            <Route path="" element={<DiscoverStartPage />} />
+            <Route path="start" element={<DiscoverTestPage />} />
+          </Route>
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
