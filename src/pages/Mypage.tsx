@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { BrandView } from '@/components/MyPage/BrandView';
-import { ExperienceView } from '@/components/MyPage/ExperienceView';
+import { MyExperienceView } from '@/components/MyPage/MyExperienceView';
 import MyPageSidebar from '@/components/MyPage/MyPageSidebar';
 import { PersonaView } from '@/components/MyPage/PersonaView';
 import { SettingView } from '@/components/MyPage/SettingView';
@@ -16,7 +16,7 @@ export const MyPage1 = () => {
       case '내 페르소나':
         return <PersonaView />;
       case '신청한 경험':
-        return <ExperienceView />;
+        return <MyExperienceView filters={[]} />;
       case '환경설정':
         return <SettingView />;
       default:
