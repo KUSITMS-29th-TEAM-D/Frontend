@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { authClient } from '@/apis/client';
@@ -28,6 +29,7 @@ interface ApiResponseItem {
   name: string;
   link: string;
   programsId: number;
+  type: string;
 }
 
 interface RecommendBrandProps {
@@ -38,7 +40,7 @@ interface RecommendBrandProps {
 export const RecommendBrand = ({ brandingInterest, brandingKeywords }: RecommendBrandProps) => {
   const [data, setData] = useState<ApiResponseItem[]>([]);
   const [error, setError] = useState<string | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,7 +63,9 @@ export const RecommendBrand = ({ brandingInterest, brandingKeywords }: Recommend
 
     fetchData();
   }, [brandingInterest, brandingKeywords]);
-
+  const handleClick = (type: string, programsId: number) => {
+    navigate(`/program/${type}/${programsId}`);
+  };
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -77,6 +81,7 @@ export const RecommendBrand = ({ brandingInterest, brandingKeywords }: Recommend
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
             programsId={item.programsId}
+            onClick={() => handleClick(item.type, item.programsId)}
           />
         ))}
       </Container>

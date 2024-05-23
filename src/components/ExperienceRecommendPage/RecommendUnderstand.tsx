@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { noAuthClient } from '@/apis/client';
@@ -28,6 +29,7 @@ interface ApiResponseItem {
   name: string;
   link: string;
   programsId: number;
+  type: string;
 }
 
 interface RecommendUnderstandProps {
@@ -50,7 +52,7 @@ export const RecommendUnderstand = ({
 }: RecommendUnderstandProps) => {
   const [data, setData] = useState<ApiResponseItem[]>([]);
   const [error, setError] = useState<string | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,6 +83,9 @@ export const RecommendUnderstand = ({
   if (error) {
     return <div>Error: {error}</div>;
   }
+  const handleClick = (type: string, programsId: number) => {
+    navigate(`/program/${type}/${programsId}`);
+  };
 
   return (
     <StyledSectionContainer>
@@ -93,6 +98,7 @@ export const RecommendUnderstand = ({
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
             programsId={item.programsId}
+            onClick={() => handleClick(item.type, item.programsId)}
           />
         ))}
       </Container>

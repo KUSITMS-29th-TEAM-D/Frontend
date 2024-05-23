@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { noAuthClient } from '@/apis/client';
@@ -24,6 +25,7 @@ const Container = styled.div`
 `;
 
 interface ApiResponseItem {
+  type: string;
   programsId: number;
   selfUnderstandingUrl: string;
   name: string;
@@ -32,7 +34,7 @@ interface ApiResponseItem {
 
 export const WholeUnderstandView = () => {
   const [data, setData] = useState<ApiResponseItem[]>([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +47,9 @@ export const WholeUnderstandView = () => {
 
     fetchData();
   }, []);
-
+  const handleClick = (type: string, programsId: number) => {
+    navigate(`/program/${type}/${programsId}`);
+  };
   return (
     <StyledSectionContainer>
       <Container>
@@ -57,6 +61,7 @@ export const WholeUnderstandView = () => {
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
             programsId={item.programsId}
+            onClick={() => handleClick(item.type, item.programsId)}
           />
         ))}
       </Container>

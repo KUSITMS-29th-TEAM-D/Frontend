@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { authClient } from '@/apis/client';
@@ -24,6 +25,7 @@ const Container = styled.div`
 `;
 
 interface ApiResponseItem {
+  type: string;
   selfUnderstandingUrl: string;
   name: string;
   link: string;
@@ -33,6 +35,7 @@ interface ApiResponseItem {
 export const WholeBrandView = () => {
   const [data, setData] = useState<ApiResponseItem[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +56,10 @@ export const WholeBrandView = () => {
     fetchData();
   }, []);
 
+  const handleClick = (type: string, programsId: number) => {
+    navigate(`/program/${type}/${programsId}`);
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -68,6 +75,7 @@ export const WholeBrandView = () => {
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
             programsId={item.programsId}
+            onClick={() => handleClick(item.type, item.programsId)}
           />
         ))}
       </Container>

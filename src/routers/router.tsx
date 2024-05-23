@@ -33,10 +33,10 @@ export const Router = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<LoginPage />} />
           <Route path="/understand" element={<SelfUnderstandPage />} />
-          <Route element={<MemberPrivateRoute />}>
-            <Route path="/program" element={<ExperienceRecommendPage />} />
-            <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
-          </Route>
+
+          <Route element={<MemberPrivateRoute />}></Route>
+          <Route path="/program" element={<ExperienceRecommendPage />} />
+          <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
         </Route>
       </Route>
       <Route path="test" element={<TestLayout />}>
