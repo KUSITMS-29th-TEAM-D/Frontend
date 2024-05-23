@@ -7,9 +7,8 @@ export const ImageSection = ({ description }: { description: string | undefined 
 const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 24px;
-  display: inline-flex;
+
+  img {
+    width: 100%;
+  }
 `;

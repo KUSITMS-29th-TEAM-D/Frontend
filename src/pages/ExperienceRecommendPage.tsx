@@ -23,13 +23,6 @@ export const ExperienceRecommendPage = () => {
     );
   };*/
 
-  useEffect(() => {
-    if (userService.getUserState() !== 'MEMBER') {
-      window.alert('로그인이 필요한 서비스입니다.');
-      navigate('/auth');
-    }
-  }, []);
-
   return (
     <div>
       <StyledSectionContainer>
