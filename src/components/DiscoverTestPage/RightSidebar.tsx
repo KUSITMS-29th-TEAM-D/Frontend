@@ -3,19 +3,21 @@ import styled from 'styled-components';
 import { SummaryCard } from '@/components/DiscoverTestPage/SummaryCard';
 import Scrollbar from '@/components/Scrollbar';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { useGetDefaultChatSummary } from '@/hooks/useGetDefaultChatSummary';
 import { userService } from '@/services/UserService';
 
-export const RightSidebar = () => {
+interface RightSicdebarProps {
+  summaryValue: { [key: string]: string[] };
+}
+
+export const RightSidebar = ({ summaryValue }: RightSicdebarProps) => {
   const handleResultButton = () => {};
-  const { data: chatSummary } = useGetDefaultChatSummary();
 
   return (
     <StyledContainer>
       <StyledSummaryContainer>
         <div className="title">{userService.getUserNickname()}님의 답변을 요약중이에요!</div>
-        {Object.keys(chatSummary).map((key) => (
-          <SummaryCard key={key} category={key} descriptions={chatSummary[key]} />
+        {Object.keys(summaryValue).map((key) => (
+          <SummaryCard key={key} category={key} descriptions={summaryValue[key]} />
         ))}
       </StyledSummaryContainer>
       <StyledButtonContainer>

@@ -7,27 +7,44 @@ import { personaAPI } from '@/apis/personaAPI';
 import { ChattingBox } from '@/components/DiscoverTestPage/ChattingBox';
 import { RightSidebar } from '@/components/DiscoverTestPage/RightSidebar';
 import { SelectDiscoverModal } from '@/components/common/Modal/SelectDiscoverModal';
+import { CATEGORY_TYPE } from '@/constants/discover';
+import { useSummarySessionStorage } from '@/hooks/useSummarySessionStorage';
 
 export const DiscoverTestPage = () => {
+  const [categoryParams] = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [activeSelectModal, setActiveSelectModal] = useState(false);
   const [endCategory, setEndCategory] = useState<string[]>([]);
-  const [categoryParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const { summaryValue, resetSummary, updateSummary } = useSummarySessionStorage();
+
   useEffect(() => {
-    if (categoryParams.get('category') === null) {
+    const category = categoryParams.get('category');
+    if (category === null) {
       setActiveSelectModal(true);
+    } else if (Object.keys(CATEGORY_TYPE).includes(category)) {
+      setSelectedCategory(category);
+    } else {
+      navigate('/test/discover');
     }
-  }, [categoryParams]);
+  }, [categoryParams, navigate]);
 
   useEffect(() => {
-    personaAPI.getChattingComplete().then((response) => {
-      const trueKeys = Object.keys(response.payload)
-        .filter((key) => response.payload[key] === true)
-        .map((key) => key.replace('_complete', ''));
+    let isMounted = true;
 
-      setEndCategory(trueKeys);
+    personaAPI.getChattingComplete().then((response) => {
+      if (isMounted) {
+        const trueKeys = Object.keys(response.payload)
+          .filter((key) => response.payload[key] === true)
+          .map((key) => key.replace('_complete', ''));
+        setEndCategory(trueKeys);
+      }
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -42,8 +59,14 @@ export const DiscoverTestPage = () => {
       )}
       <StyledContainer>
         <StyledInnerContainer>
-          <ChattingBox endCategory={endCategory} setEndCategory={setEndCategory} />
-          <RightSidebar />
+          <ChattingBox
+            selectedCategory={selectedCategory}
+            endCategory={endCategory}
+            setEndCategory={setEndCategory}
+            resetSummary={resetSummary}
+            updateSummary={updateSummary}
+          />
+          <RightSidebar summaryValue={summaryValue} />
         </StyledInnerContainer>
       </StyledContainer>
     </>

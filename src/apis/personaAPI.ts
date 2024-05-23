@@ -70,7 +70,7 @@ export const personaAPI = {
     return response.data;
   },
   // Discover 초기화
-  resetDiscover: async (category: string) => {
+  resetChatting: async (category: string) => {
     const response = await authClient.post('/api/personas/discover/reset', {
       category: CATEGORY_TYPE[category].title,
     });

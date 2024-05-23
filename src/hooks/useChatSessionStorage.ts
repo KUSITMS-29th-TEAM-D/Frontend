@@ -8,13 +8,19 @@ export interface ChattingSessionStorage {
   chattingList: ChattingList[];
 }
 
-export const useChatSessionStorage = (category: string, initialValue: ChattingSessionStorage) => {
+const initialValue: ChattingSessionStorage = {
+  questionCount: 0,
+  chattingId: '',
+  chattingList: [],
+};
+
+export const useChatSessionStorage = (category: string) => {
   const [categoryValue, setCategoryValue] = useState<ChattingSessionStorage>(() => {
-    if (category === '') {
+    if (!category) {
       return initialValue;
     }
     try {
-      const item = window.sessionStorage.getItem(`selpiece-${category}`);
+      const item = window.sessionStorage.getItem(`selpiece-chat-${category}`);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.error(error);
@@ -23,9 +29,9 @@ export const useChatSessionStorage = (category: string, initialValue: ChattingSe
   });
 
   useEffect(() => {
-    if (category !== '') {
+    if (category) {
       try {
-        window.sessionStorage.setItem(`selpiece-${category}`, JSON.stringify(categoryValue));
+        window.sessionStorage.setItem(`selpiece-chat-${category}`, JSON.stringify(categoryValue));
       } catch (error) {
         console.error(error);
       }

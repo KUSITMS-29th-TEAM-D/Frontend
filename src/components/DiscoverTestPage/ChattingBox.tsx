@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Lottie from 'lottie-react';
-import { useSearchParams } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { personaAPI } from '@/apis/personaAPI';
@@ -12,24 +11,20 @@ import Scrollbar from '@/components/Scrollbar';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultInput } from '@/components/common/Input/DefaultInput';
+import { ResetChatModal } from '@/components/common/Modal/ResetChatModal';
 import { CATEGORY_TYPE } from '@/constants/discover';
 import { useChatSessionStorage } from '@/hooks/useChatSessionStorage';
-import { discoverSummaryState } from '@/recoil/discoverSummaryState';
 import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
 
 const NOTICE =
   '화면을 탭하거나 스페이스바를 눌러 대화를 진행할 수 있습니다.\n스토리 진행 중 화면을 위로 스크롤하면, 이전에 나눴던 대화를 읽어볼 수 있습니다.';
 
-const initialValue = {
-  questionCount: 0,
-  chattingId: '',
-  chattingList: [],
-  summaryList: [],
-};
-
 interface ChattingBoxProps {
+  selectedCategory: string;
   endCategory: string[];
   setEndCategory: (endCategory: string[]) => void;
+  resetSummary: (category: string) => void;
+  updateSummary: (category: string, updateFunction: (prevSummary: string[]) => string[]) => void;
 }
 
 const defaultOptions = {
@@ -41,30 +36,61 @@ const defaultOptions = {
   },
 };
 
-export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) => {
+export const ChattingBox = ({
+  selectedCategory,
+  endCategory,
+  setEndCategory,
+  resetSummary,
+  updateSummary,
+}: ChattingBoxProps) => {
+  const [activeResetModal, setActiveResetModal] = useState(false);
+  const [resetCategory, setResetCategory] = useState<string | null>(null); // 추가된 상태
+  const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [input, setInput] = useState('');
-  const [categoryParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
-  const selectedCategory = categoryParams.get('category') ?? '';
-  const setChatSummary = useSetRecoilState(discoverSummaryState);
+  const chatEndRef = useRef<HTMLDivElement | null>(null); // 추가된 상태
+  const navigate = useNavigate();
 
   const { categoryValue, setQuestionCount, setChattingId, setChattingList, updateChattingList } =
-    useChatSessionStorage(selectedCategory, initialValue);
+    useChatSessionStorage(selectedCategory);
+
+  const scrollToBottom = () => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const getNewQuestion = async () => {
+    if (selectedCategory !== '' && categoryValue.questionCount < 3) {
+      try {
+        setLoading(true);
+        const res = await personaAPI.getQuestion(selectedCategory);
+        setChattingId(res.payload.chatting_id);
+        updateChattingList((prev) => [
+          ...prev,
+          { type: 'question', text: res.payload.question, user: 'chatbot' },
+        ]);
+      } catch (error) {
+        window.alert('채팅을 불러오는데 실패했습니다.');
+      } finally {
+        setLoading(false);
+        scrollToBottom();
+      }
+    }
+  };
 
   const getHistory = async () => {
     try {
       const res = await personaAPI.getDefaultChatting(selectedCategory);
       const transformedMessages = transformDataToMessages(res.payload);
       setChattingList(transformedMessages);
-      const messageCount = Object.keys(transformedMessages).length;
+      const messageCount = Object.keys(res.payload).length;
       setQuestionCount(messageCount);
-      console.log(messageCount);
       return messageCount;
     } catch (error) {
       console.log(error);
-      return 0; // Ensure the function always returns a number
+      return 0;
     }
   };
 
@@ -76,10 +102,7 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
         ...prev,
         { type: 'reaction', text: response.payload.reaction, user: 'chatbot' },
       ]);
-      setChatSummary((prev) => ({
-        ...prev,
-        selectedCategory: [...prev[selectedCategory], response.payload.reaction],
-      }));
+      updateSummary(selectedCategory, (prev) => [...prev, response.payload.summary]);
       const newQuestionCount = categoryValue.questionCount + 1;
       setQuestionCount(newQuestionCount);
 
@@ -90,41 +113,23 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
       window.alert('답변을 전송하는데 실패했습니다.');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const getNewQuestion = async () => {
-    console.log('getNewQuestion');
-    if (selectedCategory !== '' && categoryValue.questionCount < 3) {
-      try {
-        setLoading(true);
-        const res = await personaAPI.getQuestion(selectedCategory);
-        console.log(res);
-        setChattingId(`${res.payload.chatting_id}`);
-        console.log(`${res.payload.chatting_id}`);
-        updateChattingList((prev) => [
-          ...prev,
-          { type: 'question', text: res.payload.question, user: 'chatbot' },
-        ]);
-        console.log('getNewQuestion11111');
-      } catch (error) {
-        window.alert('채팅을 불러오는데 실패했습니다.');
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      setLoading(false);
+      scrollToBottom();
     }
   };
 
   const handleAnswerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateChattingList((prev: ChattingList[]) => [
-      ...prev,
-      { type: 'answer', text: input, user: 'user' },
-    ]);
-    setInput('');
-    postNewAnswer();
+    if (input.trim()) {
+      updateChattingList((prev: ChattingList[]) => [
+        ...prev,
+        { type: 'answer', text: input, user: 'user' },
+      ]);
+      postNewAnswer();
+      setInput('');
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+    }
   };
 
   useEffect(() => {
@@ -138,7 +143,6 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
   }, [selectedCategory]);
 
   useEffect(() => {
-    console.log('새로운 질문 불러오기');
     if (
       selectedCategory !== '' &&
       categoryValue.questionCount < 3 &&
@@ -146,73 +150,108 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
     ) {
       getNewQuestion();
     }
-  }, [selectedCategory, categoryValue.questionCount]);
+  }, [categoryValue.questionCount, selectedCategory]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [categoryValue.chattingList]);
 
   return (
-    <StyledContainer
-      tabIndex={0}
-      ref={containerRef}
-      onFocus={() => {
-        inputRef.current && inputRef.current.focus();
-      }}
-    >
-      <StyledHeader>
-        {Object.keys(CATEGORY_TYPE).map((category) => (
-          <CategoryButton
-            key={category}
-            active={selectedCategory === category}
-            done={endCategory.includes(category)}
-            path={category}
-          >
-            {CATEGORY_TYPE[category].title}
-          </CategoryButton>
-        ))}
-      </StyledHeader>
-      <StyledChatting>
-        <StyledNotice>{NOTICE}</StyledNotice>
-        {categoryValue.chattingList.map((chat, index) => (
-          <SpeechBox
-            key={chat.text}
-            isUser={chat.user === 'user'}
-            isContinuous={index > 0 && categoryValue.chattingList[index - 1].user === chat.user}
-            isEnd={
-              index + 1 < categoryValue.chattingList.length &&
-              categoryValue.chattingList[index + 1].user !== chat.user
-            }
-          >
-            {chat.text}
-          </SpeechBox>
-        ))}
-        {loading && (
-          <StyledLoading>
-            <Lottie animationData={defaultOptions.animationData} />
-          </StyledLoading>
-        )}
-      </StyledChatting>
-      <StyledInputField onSubmit={handleAnswerSubmit}>
-        <DefaultInput
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          width="100%"
-          placeholder={
-            categoryValue.questionCount >= 3
-              ? '3번의 질문을 모두 완료했습니다.'
-              : '답변을 입력해주세요'
-          }
-          ref={inputRef}
-          disabled={categoryValue.questionCount >= 3}
+    <>
+      {activeResetModal && resetCategory && (
+        <ResetChatModal
+          onClose={() => {
+            setActiveResetModal(false);
+            setResetCategory(null);
+          }}
+          onReset={() => {
+            personaAPI.resetChatting(resetCategory).then(() => {
+              setEndCategory(endCategory.filter((category) => category !== resetCategory));
+              resetSummary(resetCategory);
+              setQuestionCount(0);
+              setChattingId('');
+              setChattingList([]);
+              setActiveResetModal(false);
+              navigate(`/test/discover?category=${resetCategory}`);
+              getNewQuestion(); // 초기화 후 새 질문 가져오기
+            });
+          }}
+          category={resetCategory}
         />
-        <PlainButton
-          type="submit"
-          variant="primary2"
-          width="102px"
-          height="48px"
-          disabled={categoryValue.questionCount >= 3}
-        >
-          전송
-        </PlainButton>
-      </StyledInputField>
-    </StyledContainer>
+      )}
+      <StyledContainer
+        tabIndex={0}
+        ref={containerRef}
+        onFocus={() => {
+          inputRef.current && inputRef.current.focus();
+        }}
+      >
+        <StyledHeader>
+          {Object.keys(CATEGORY_TYPE).map((category) => (
+            <CategoryButton
+              key={category}
+              active={selectedCategory === category}
+              done={endCategory.includes(category)}
+              onClick={() => {
+                if (!endCategory.includes(category)) {
+                  navigate(`/test/discover?category=${category}`);
+                } else {
+                  setResetCategory(category); // 리셋할 카테고리 설정
+                  setActiveResetModal(true);
+                }
+              }}
+            >
+              {CATEGORY_TYPE[category].title}
+            </CategoryButton>
+          ))}
+        </StyledHeader>
+        <StyledChatting>
+          <StyledNotice>{NOTICE}</StyledNotice>
+          {categoryValue.chattingList.map((chat, index) => (
+            <SpeechBox
+              key={chat.text}
+              isUser={chat.user === 'user'}
+              isContinuous={index > 0 && categoryValue.chattingList[index - 1].user === chat.user}
+              isEnd={
+                index + 1 < categoryValue.chattingList.length &&
+                categoryValue.chattingList[index + 1].user !== chat.user
+              }
+            >
+              {chat.text}
+            </SpeechBox>
+          ))}
+          {loading && (
+            <StyledLoading>
+              <Lottie animationData={defaultOptions.animationData} />
+            </StyledLoading>
+          )}
+          <div ref={chatEndRef} /> {/* 스크롤 위치 조정을 위한 요소 */}
+        </StyledChatting>
+        <StyledInputField onSubmit={handleAnswerSubmit}>
+          <DefaultInput
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            width="100%"
+            placeholder={
+              categoryValue.questionCount >= 3
+                ? '3번의 질문을 모두 완료했습니다.'
+                : '답변을 입력해주세요'
+            }
+            ref={inputRef}
+            disabled={categoryValue.questionCount >= 3}
+          />
+          <PlainButton
+            type="submit"
+            variant="primary2"
+            width="102px"
+            height="48px"
+            disabled={categoryValue.questionCount >= 3}
+          >
+            전송
+          </PlainButton>
+        </StyledInputField>
+      </StyledContainer>
+    </>
   );
 };
 

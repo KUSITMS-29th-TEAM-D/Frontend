@@ -12,6 +12,8 @@ export interface DiscoverCategoryType {
 
 /* export const CATEGORY_LIST = ['건강', '커리어', '사랑', '여가']; */
 
+export type CategoryTypeKey = keyof typeof CATEGORY_TYPE;
+
 export const CATEGORY_TYPE: DiscoverCategoryType = {
   health: {
     title: '건강',
