@@ -21,7 +21,7 @@ export const DesignStartView = () => {
                 어떤 브랜더가 되고 싶나요?
               </TitleContainer>
               <SubTitleContainer>
-                문항은 <span className="highlight">총 3문항</span>으로, 앞으로 만들어 갈 나의 브랜드
+                문항은 <span className="highlight">총 5문항</span>으로, 앞으로 만들어 갈 나의 브랜드
                 방향성을 설정하는 첫 걸음이에요.
                 <br />
                 설계하기 테스트를 통해 나의 브랜드 컨셉을 정해보고,{' '}
