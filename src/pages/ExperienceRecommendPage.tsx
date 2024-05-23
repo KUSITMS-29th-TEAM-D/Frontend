@@ -1,28 +1,10 @@
-//import { useState } from 'react';
-
-import { useEffect } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 import AdvertiseCard from '@/components/ExperienceRecommendPage/AdevertieseCard';
-//import { AmountBox } from '@/components/ExperienceRecommendPage/AmountBox';
-import { ExperienceRecommendTab } from '@/components/ExperienceRecommendPage/ExperienceRecommendTab';
-//import { Dropdowntest } from '@/components/ExperienceRecommendPage/testdropdown';
-import { userService } from '@/services/UserService';
+import ExperienceRecommendTab from '@/components/ExperienceRecommendPage/ExperienceRecommendTab';
 import { SectionContainer } from '@/styles';
 
 export const ExperienceRecommendPage = () => {
-  const navigate = useNavigate();
-  /*const [selected, setSelected] = useState<string[]>([]);
-  const handleContentClick = (content: string) => {
-    setSelected((prevSelected) =>
-      prevSelected.includes(content)
-        ? prevSelected.filter((item) => item !== content)
-        : [...prevSelected, content]
-    );
-  };*/
-
   return (
     <div>
       <StyledSectionContainer>
@@ -33,19 +15,6 @@ export const ExperienceRecommendPage = () => {
         </PageContainer>
       </StyledSectionContainer>
       <ExperienceRecommendTab />
-      {/*
-      <TestContainer>
-        <AmountBox />
-        <Dropdowntest
-          title="온·오프라인"
-          placeholder=" "
-          contents={['온·오프라인', '온라인', '오프라인']}
-          selected={selected}
-          multiple
-          clickContentHandler={handleContentClick}
-          contentMaxHeight={200}
-        />
-  </TestContainer>*/}
     </div>
   );
 };
