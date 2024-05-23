@@ -11,7 +11,7 @@ export const DesignResultView = () => {
 
   useEffect(() => {
     if (userService.getUserState() === 'MEMBER') {
-      personaAPI.getPersonaDesign().then((res) => {
+      personaAPI.getDesignMember().then((res) => {
         setDesignResult(res.payload);
       });
     }

@@ -165,10 +165,10 @@ const DefineComponent = () => {
   );
 };
 const DiscoverComponent = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    //navigate('/'); //TODO: 나중에 올바른 위치로 수정해야 함
+    navigate('/test/discover');
   };
 
   return (

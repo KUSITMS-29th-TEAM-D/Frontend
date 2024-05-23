@@ -268,12 +268,11 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
     setLoading({ show: true, speed: 70 });
 
     personaAPI
-      .registerPersonaDesign(requestData)
+      .registerDesign(requestData)
       .then((response) => {
         const { code, message } = response;
 
         if (code === '201') {
-          console.log('페르소나 생성 성공');
           setLoadingHandler({
             ...loadingHandler,
             handleCompleted: () => {

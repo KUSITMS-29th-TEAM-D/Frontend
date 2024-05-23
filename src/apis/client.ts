@@ -14,7 +14,7 @@ export const authClient: AxiosInstance = axios.create({
 });
 
 authClient.interceptors.request.use((config) => {
-  if (userService.getUser().nickname === '') {
+  if (userService.getUserNickname() === '') {
     const registerToken = authService.getRegisterToken();
     if (registerToken !== null && registerToken !== undefined) {
       config.headers['Authorization'] = `Bearer ${registerToken}`;

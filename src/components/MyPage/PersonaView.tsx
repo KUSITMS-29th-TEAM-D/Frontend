@@ -1,10 +1,25 @@
+import { useEffect, useRef, useState } from 'react';
+
+import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import { styled } from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
+import LockImage from '@/assets/icons/lock.svg';
 import DiscoverImage from '@/assets/myPage/MypageDiscover.png';
+import { DownloadButton } from '@/components/DefineResultPage/Button';
 import Card from '@/components/MyPage/Card';
+import { PlainButton } from '@/components/common/Button/PlainButton';
+import { PERSONA } from '@/constants/persona';
+import { userService } from '@/services/UserService';
+import { DefineResult } from '@/types/test.type';
 
 export const PersonaView = () => {
+  const [defineResult, setDefineResult] = useState<DefineResult | null>(null);
+  const [isFront, setIsFront] = useState(true);
+  const captureRef = useRef<HTMLImageElement>(null);
+  const navigate = useNavigate();
   const settings = {
     dots: false,
     infinite: true,
@@ -14,11 +29,60 @@ export const PersonaView = () => {
     arrows: false,
   };
 
+  useEffect(() => {
+    personaAPI.getDefineMember().then((res) => {
+      setDefineResult(res.payload);
+    });
+  }, []);
+
+  const handleDownloadImage = () => {
+    if (!captureRef.current || !defineResult) return;
+
+    const capture = captureRef.current;
+
+    html2canvas(capture, { scrollY: -window.scrollY }).then((canvas) => {
+      const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = `${defineResult.name}-${isFront ? 'front' : 'back'}.png`;
+      link.click();
+    });
+  };
+
   return (
     <StyledContainer>
       <StyledInnerContainer>
         <StyledTopContainer>
-          <TopContainer></TopContainer>
+          <TopContainer>
+            {defineResult && (
+              <>
+                <div className="title">
+                  <span className="highlight">{PERSONA[defineResult.name]}</span> 조각을 가진,{' '}
+                  <span className="highlight">{userService.getUserNickname()}</span>님의 페르소나
+                </div>
+                <img
+                  src={isFront ? defineResult.front_img_url : defineResult.back_img_url}
+                  alt="card"
+                  className="image-container"
+                  ref={captureRef}
+                  onClick={() => setIsFront((prev) => !prev)}
+                />
+                <div className="button-container">
+                  <PlainButton
+                    width="376px"
+                    height="48px"
+                    variant="primary2"
+                    onClick={() => {
+                      navigate('/understand');
+                    }}
+                  >
+                    자세히보기
+                  </PlainButton>
+                  <DownloadButton onClick={handleDownloadImage} />
+                </div>
+              </>
+            )}
+          </TopContainer>
           <BottomContainer>
             <BottomTitleContainer>
               <BottomTitle>
@@ -26,21 +90,26 @@ export const PersonaView = () => {
               </BottomTitle>
             </BottomTitleContainer>
             <BottomCardContainer>
-              <StyledSlider {...settings}>
-                {Dummy1.map((item) => (
-                  <div key={item.id}>
-                    <CardWrapper>
-                      <Card title={item.title} description={item.description} />
-                    </CardWrapper>
-                  </div>
-                ))}
+              <StyledSlider>
+                <Slider {...settings}>
+                  {Dummy1.map((item) => (
+                    <Card key={item.id} title={item.title} description={item.description} />
+                  ))}
+                </Slider>
               </StyledSlider>
             </BottomCardContainer>
             <BottomImageContainer>
-              <img
-                src={DiscoverImage}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+              <div className="blur">
+                <img src={LockImage} alt="lock" className="lock" />
+                <div className="text-container">
+                  <div>정의하기 테스트의 추가 분석 결과를 확인하고 싶다면</div>
+                  <div>셀피스 프리미엄에서 만나보세요.</div>
+                </div>
+                <PlainButton variant="primary" height="48px" width="252px">
+                  셀피스 프리미엄 구독하러 가기
+                </PlainButton>
+              </div>
+              <img src={DiscoverImage} />
             </BottomImageContainer>
           </BottomContainer>
         </StyledTopContainer>
@@ -66,7 +135,6 @@ const StyledInnerContainer = styled.div`
 
 const StyledTopContainer = styled.div`
   align-self: stretch;
-  height: 1381px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -76,7 +144,7 @@ const StyledTopContainer = styled.div`
 
 const TopContainer = styled.div`
   align-self: stretch;
-  height: 706px;
+  height: fit-content;
   padding: 24px;
   background-color: ${({ theme }) => `${theme.color.primary50}`};
   border-radius: 16px;
@@ -87,19 +155,44 @@ const TopContainer = styled.div`
   align-items: center;
   gap: 24px;
   display: flex;
+
+  .title {
+    ${({ theme }) => theme.font.desktop.body1b};
+    color: ${({ theme }) => `${theme.color.gray700}`};
+    .highlight {
+      color: ${({ theme }) => `${theme.color.primary500}`};
+    }
+  }
+
+  .image-container {
+    width: 210px;
+    height: 340px;
+    border-radius: 21px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
+    cursor: pointer;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    svg path {
+      fill: ${({ theme }) => theme.color.white};
+    }
+  }
 `;
 
 const BottomContainer = styled.div`
   align-self: stretch;
   height: 627px;
+  //flex-grow: 1;
   padding: 24px;
   background-color: ${({ theme }) => `${theme.color.gray150}`};
   border-radius: 16px;
   overflow: hidden;
   border: 2px #dfdfdf solid;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 24px;
   display: flex;
 `;
@@ -128,30 +221,69 @@ const BottomCardContainer = styled.div`
   width: 100%;
 `;
 
-const StyledSlider = styled(Slider)`
-  .slick-list {
-    overflow: visible;
-  }
-  .slick-slide > div {
-    margin: 0 10px;
-  }
-  .slick-track {
-    display: flex;
-    align-items: center;
-  }
-`;
+const StyledSlider = styled.div`
+  width: 100%;
 
-const CardWrapper = styled.div`
-  flex: 0 0 300px;
-  box-sizing: border-box;
-  padding: 12px;
+  .slick-list {
+    padding: 5px;
+
+    .slick-track {
+      width: 100% !important;
+      display: flex;
+      gap: 12px;
+    }
+    .slick-track:before,
+    .slick-track:after {
+      content: none;
+    }
+  }
 `;
 
 const BottomImageContainer = styled.div`
-  width: 988px;
-  height: 393px;
-  position: relative;
   display: flex;
+  justify-content: center;
+
+  border-radius: 16px;
+  background: ${({ theme }) => theme.color.white};
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
+
+  position: relative;
+  overflow: hidden;
+
+  img {
+    height: 390px;
+    object-fit: cover;
+  }
+
+  .blur {
+    width: 100%;
+    height: 100%;
+    background: var(--modal-bg, rgba(18, 18, 18, 0.36));
+    /* blur */
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    ${({ theme }) => theme.font.desktop.label1m};
+    color: ${({ theme }) => theme.color.white};
+
+    .lock {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 20px;
+    }
+
+    .text-container {
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 const Dummy1 = [

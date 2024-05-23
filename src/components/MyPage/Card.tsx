@@ -27,7 +27,7 @@ const InnerContainer = styled.div`
 const Title = styled.div`
   align-self: stretch;
   color: ${({ theme }) => `${theme.color.gray800}`};
-  ${({ theme }) => theme.font.desktop.body1r};
+  ${({ theme }) => theme.font.desktop.body1m};
   word-wrap: break-word;
 `;
 

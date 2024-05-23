@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const NAVIGATION_LIST: { [key: string]: string } = {
+const NAVIGATE_TEXT = {
+  discover: 'Discover 이해하기',
   define: 'Define 정의하기',
   design: 'Design 설계하기',
-  discover: 'Discover 이해하기',
 };
 
 export const TestNavigation = () => {
@@ -15,13 +15,19 @@ export const TestNavigation = () => {
     navigate('/understand');
   };
 
-  const currentKey = Object.keys(NAVIGATION_LIST).find((key) => location.pathname.includes(key));
-  const currentTitle = currentKey ? NAVIGATION_LIST[currentKey] : '';
+  let titleText = '';
+  if (location.pathname.includes('discover')) {
+    titleText = NAVIGATE_TEXT.discover;
+  } else if (location.pathname.includes('define')) {
+    titleText = NAVIGATE_TEXT.define;
+  } else if (location.pathname.includes('design')) {
+    titleText = NAVIGATE_TEXT.design;
+  }
 
   return (
     <StyledContainer>
       <Container>
-        <Title>{currentTitle}</Title>
+        <Title>{titleText}</Title>
         <StyledButton onClick={handleButtonClick}>종료하기</StyledButton>
       </Container>
     </StyledContainer>
