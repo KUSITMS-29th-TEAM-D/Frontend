@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '@/assets/logos/mainLogo.svg';
-import { SectionContainer } from '@/styles';
 
 const MENU_LIST = [
   { title: '새로운 경험 키워드 추천하기', path: '' },
@@ -15,26 +14,24 @@ const MENU_LIST = [
 export const Footer = () => {
   return (
     <StyledContainer>
-      <StyledSectionContainer>
-        <StyledMenuContainer>
-          <Logo className="logo" />
-          <ul>
-            {MENU_LIST.map((menu) => (
-              <Link to={menu.path} key={menu.title} className="menu">
-                <li>{menu.title}</li>
-              </Link>
-            ))}
-          </ul>
-        </StyledMenuContainer>
-        <StyledDescription>
-          <p className="service-description">
-            셀피스는 이전의 경험을 통해
-            <br />
-            새로운 나를 발견하고 정의하며 자기 행복을 위해 새로운 경험을 추천합니다.
-          </p>
-          <p className="copyright">Copyright © 2024 셀피스, All Rights Reserved.</p>
-        </StyledDescription>
-      </StyledSectionContainer>
+      <StyledMenuContainer>
+        <Logo className="logo" />
+        <ul>
+          {MENU_LIST.map((menu) => (
+            <Link to={menu.path} key={menu.title} className="menu">
+              <li>{menu.title}</li>
+            </Link>
+          ))}
+        </ul>
+      </StyledMenuContainer>
+      <StyledDescription>
+        <p className="service-description">
+          셀피스는 이전의 경험을 통해
+          <br />
+          새로운 나를 발견하고 정의하며 자기 행복을 위해 새로운 경험을 추천합니다.
+        </p>
+        <p className="copyright">Copyright © 2024 셀피스, All Rights Reserved.</p>
+      </StyledDescription>
     </StyledContainer>
   );
 };
@@ -44,16 +41,13 @@ const StyledContainer = styled.footer`
   flex-direction: column;
   gap: 24px;
 
+  padding: 50px 64px;
   border-top: 2px solid ${({ theme }) => theme.color.gray150};
   background: ${({ theme }) => theme.color.gray100};
 
   .logo {
     width: 135px;
   }
-`;
-
-const StyledSectionContainer = styled(SectionContainer)`
-  padding: 50px 64px;
 `;
 
 const StyledMenuContainer = styled.div`

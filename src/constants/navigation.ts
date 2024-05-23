@@ -8,7 +8,7 @@ export const NAVIGATION_MENU = [
 ];
 
 export const MY_UNDERSTAND_TAB = [
-  { tab: 'Discover', icon: DiscoverIcon, path: '/' },
+  { tab: 'Discover', icon: DiscoverIcon, path: '/test/discover' },
   { tab: 'Define', icon: DefineIcon, path: '/test/define' },
   { tab: 'Design', icon: DesignIcon, path: '/test/design' },
 ];

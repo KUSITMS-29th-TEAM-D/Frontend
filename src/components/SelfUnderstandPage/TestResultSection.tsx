@@ -10,7 +10,7 @@ import { DesignResultView } from '@/components/SelfUnderstandPage/DesignResultVi
 import { DiscoverResultView } from '@/components/SelfUnderstandPage/DiscoverResultView';
 
 const TAB_LIST = [
-  { tab: 'Discover', icon: DiscoverIcon, path: '/' },
+  { tab: 'Discover', icon: DiscoverIcon, path: '/test/discover' },
   { tab: 'Define', icon: DefineIcon, path: '/test/define' },
   { tab: 'Design', icon: DesignIcon, path: '/test/design' },
 ];

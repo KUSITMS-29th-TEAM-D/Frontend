@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 const Scrollbar = css`
   &::-webkit-scrollbar {
-    width: 24px;
+    width: 16px;
   }
 
   &::-webkit-scrollbar-track {
@@ -13,7 +13,7 @@ const Scrollbar = css`
     background: ${({ theme }) => theme.color.bgModal};
     border-radius: 50px;
     background-clip: padding-box;
-    border: 8px solid transparent;
+    border: 4px solid transparent;
   }
 `;
 

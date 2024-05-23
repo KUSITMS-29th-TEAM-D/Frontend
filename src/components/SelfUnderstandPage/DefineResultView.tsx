@@ -13,7 +13,7 @@ export const DefineResultView = () => {
 
   useEffect(() => {
     if (userService.getUserState() === 'MEMBER') {
-      personaAPI.getPersonaMember().then((res) => {
+      personaAPI.getDefineMember().then((res) => {
         setDefineResult(res.payload);
       });
     }

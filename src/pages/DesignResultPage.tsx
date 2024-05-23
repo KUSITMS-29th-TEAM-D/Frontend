@@ -13,7 +13,7 @@ export const DesignResultPage = () => {
 
   // API 호출
   useEffect(() => {
-    personaAPI.getPersonaDesign().then((res) => {
+    personaAPI.getDesignMember().then((res) => {
       setPersona(res.payload);
     });
   }, []);
