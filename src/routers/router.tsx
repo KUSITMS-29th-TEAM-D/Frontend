@@ -14,6 +14,7 @@ import {
   DesignTestPage4,
   DesignTestPage5,
 } from '@/pages/DesignTestPage';
+import { DiscoverStartPage } from '@/pages/DiscoverStartPage';
 import { DiscoverTestPage } from '@/pages/DiscoverTestPage';
 import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
 import { ExperienceRecommendPage } from '@/pages/ExperienceRecommendPage';
@@ -62,7 +63,8 @@ export const Router = () => {
           </Route>
         </Route>
         <Route path="discover" element={<TestLayout />}>
-          <Route path="" element={<DiscoverTestPage />} />
+          <Route path="" element={<DiscoverStartPage />} />
+          <Route path="start" element={<DiscoverTestPage />} />
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
