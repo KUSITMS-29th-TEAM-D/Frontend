@@ -48,7 +48,7 @@ export const BrandView = () => {
             <RecommendText>Ai 추천</RecommendText>
           </RecommendContainer>
           <RecommendCardContainer>
-            {Dummy1.map((item) => (
+            {Dummy2.map((item) => (
               <Card key={item.id} title={item.title} description={item.description} />
             ))}
           </RecommendCardContainer>
@@ -61,7 +61,7 @@ export const BrandView = () => {
                 <AddIcon width="42px" height="42px" />
               </StyledAdd>
             </CardHeader>
-            {Dummy1.map((item) => (
+            {Dummy3.map((item) => (
               <Card key={item.id} title={item.title} description={item.description} />
             ))}
           </BottomContainer>
@@ -72,7 +72,7 @@ export const BrandView = () => {
                 <AddIcon width="42px" height="42px" />
               </StyledAdd>
             </CardHeader>
-            {Dummy1.map((item) => (
+            {Dummy4.map((item) => (
               <Card key={item.id} title={item.title} description={item.description} />
             ))}
           </BottomContainer>
@@ -83,7 +83,7 @@ export const BrandView = () => {
                 <AddIcon width="42px" height="42px" />
               </StyledAdd>
             </CardHeader>
-            {Dummy1.map((item) => (
+            {Dummy5.map((item) => (
               <Card key={item.id} title={item.title} description={item.description} />
             ))}
           </BottomContainer>
@@ -146,7 +146,16 @@ const RightText = styled.div`
   color: ${({ theme }) => `${theme.color.gray700}`};
   ${({ theme }) => theme.font.desktop.body1m};
 `;
-
+/*
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    padding: 0 20px;
+  }
+  .slick-track {
+    display: flex;
+    gap: 20px;
+  }
+`;*/
 const RightIcon = styled.div`
   width: 24px;
   height: 24px;
@@ -257,7 +266,7 @@ const CardHeader = styled.div`
   align-items: center;
   display: inline-flex;
 `;
-
+/*
 const Dummy1 = [
   {
     id: 1,
@@ -335,5 +344,99 @@ const Dummy1 = [
     title: 'AI와 머신러닝: 미래를 이끌 기술 소개',
     description:
       'AI와 머신러닝 관련하여 미래에서 어떤 방향으로 활용될 것인가에 대한 내용을 다룬 콘텐츠',
+  },
+];*/
+
+const Dummy2 = [
+  {
+    id: 1,
+    title: '생성형 AI란 무엇인가?',
+    description: '생성형 AI의 기본 개념, 역사, 및 발전 과정을 설명하는 콘텐츠',
+  },
+  {
+    id: 2,
+    title: '생성형 AI의 실제 응용 사례',
+    description:
+      '예술, 음악, 글쓰기, 게임 개발 등 다양한 분야에서의 생성형 AI 활용 사례를 소개하는 콘텐츠',
+  },
+  {
+    id: 3,
+    title: '생성형 AI 툴 및 플랫폼 리뷰',
+    description: '생성형 AI 툴 및 플랫폼 리뷰',
+  },
+  {
+    id: 4,
+    title: '생성형 AI와 윤리적 문제',
+    description:
+      '생성형 AI 사용 시 발생할 수 있는 윤리적 문제와 해결 방안에 대한 논의를 다룬 콘텐츠',
+  },
+];
+
+const Dummy3 = [
+  {
+    id: 1,
+    title: '생성형 AI란 무엇인가?',
+    description: '생성형 AI의 기본 개념, 역사, 및 발전 과정을 설명하는 콘텐츠',
+  },
+  {
+    id: 2,
+    title: '생성형 AI의 실제 응용 사례',
+    description:
+      '예술, 음악, 글쓰기, 게임 개발 등 다양한 분야에서의 생성형 AI 활용 사례를 소개하는 콘텐츠',
+  },
+];
+
+const Dummy4 = [
+  {
+    id: 3,
+    title: '생성형 AI 툴 및 플랫폼 리뷰',
+    description: '생성형 AI 툴 및 플랫폼 리뷰',
+  },
+  {
+    id: 4,
+    title: '생성형 AI와 윤리적 문제',
+    description:
+      '생성형 AI 사용 시 발생할 수 있는 윤리적 문제와 해결 방안에 대한 논의를 다룬 콘텐츠',
+  },
+  {
+    id: 5,
+    title: '생성형 AI를 활용한 프로젝트 튜토리얼',
+    description:
+      '텍스트 생성, 이미지 생성, 음악 생성 등 구체적인 프로젝트를 통해 생성형 AI 사용법을 단계별로 설명하는 콘텐츠',
+  },
+  {
+    id: 6,
+    title: '생성형 AI를 이용한 생산성 향상',
+    description:
+      '생성형 AI를 활용하여 개인 및 조직의 생산성을 향상시키는 방법에 대한 팁과 전략을 담은 콘텐츠',
+  },
+];
+
+const Dummy5 = [
+  {
+    id: 7,
+    title: '생성형 AI 관련 인터뷰 및 전문가 의견',
+    description: '생성형 AI 분야의 전문가와의 인터뷰를 통해 얻은 인사이트 공유',
+  },
+  {
+    id: 8,
+    title: '생성형 AI 트렌드 및 최신 뉴스',
+    description: '생성형 AI 분야의 최신 트렌드와 뉴스 업데이트',
+  },
+  {
+    id: 9,
+    title: '온라인 프로필 최적화',
+    description:
+      'LinkedIn, Twitter, Instagram 등 주요 소셜 미디어에서 프로필을 최적화하는 팁을 담은 콘텐츠',
+  },
+  {
+    id: 10,
+    title: '브랜딩을 위한 비디오 콘텐츠 제작',
+    description: '유튜브 등 비디오 플랫폼에서 자신을 브랜딩한 방법과 소감을 담은 콘텐츠',
+  },
+  {
+    id: 11,
+    title: '퍼스널 브랜딩과 SEO 전략',
+    description: '검색 엔진 최적화를 통해 자신의 온라인 가시성을 높이는 방법을 설명하는 콘텐츠',
   },
 ];

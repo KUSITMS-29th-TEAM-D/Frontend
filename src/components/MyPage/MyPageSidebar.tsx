@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 import { theme } from '@/styles';
@@ -46,7 +44,7 @@ interface SidebarProps {
   setActiveMenu: (menu: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeMenu, setActiveMenu }) => {
+const Sidebar = ({ activeMenu, setActiveMenu }: SidebarProps) => {
   const menuItems = [
     { label: '브랜드 관리', key: '브랜드 관리' },
     { label: '내 페르소나', key: '내 페르소나' },
