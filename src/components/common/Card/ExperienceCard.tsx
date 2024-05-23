@@ -1,5 +1,5 @@
+import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-
 interface StyledImageProps {
   $variant: 'type1' | 'type2';
 }
@@ -130,12 +130,24 @@ interface ExperienceCardProps extends StyledImageProps {
   imageUrl: string;
   title: string;
   subtitle: string;
+  programsId: number;
   linkUrl?: string;
 }
 
-export const ExperienceCard = ({ imageUrl, title, subtitle, $variant }: ExperienceCardProps) => {
+export const ExperienceCard = ({
+  imageUrl,
+  title,
+  subtitle,
+  $variant,
+  programsId,
+}: ExperienceCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/program/${$variant}/${programsId}`);
+  };
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <ImageContainer $variant={$variant}>
         <StyledImage src={imageUrl} alt="Card" $variant={$variant} />
         {$variant === 'type2' && (

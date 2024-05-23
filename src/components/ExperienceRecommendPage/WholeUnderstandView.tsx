@@ -24,6 +24,7 @@ const Container = styled.div`
 `;
 
 interface ApiResponseItem {
+  programsId: number;
   selfUnderstandingUrl: string;
   name: string;
   link: string | null;
@@ -55,6 +56,7 @@ export const WholeUnderstandView = () => {
             title={item.link ? '셀피스 프로그램' : '외부 프로그램'}
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
+            programsId={item.programsId}
           />
         ))}
       </Container>

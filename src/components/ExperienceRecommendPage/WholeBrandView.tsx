@@ -67,6 +67,7 @@ export const WholeBrandView = () => {
             title={item.link ? '셀피스 프로그램' : '외부 프로그램'}
             subtitle={item.name}
             $variant={item.link ? 'type1' : 'type2'}
+            programsId={item.programsId}
           />
         ))}
       </Container>
