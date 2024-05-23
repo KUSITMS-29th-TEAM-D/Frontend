@@ -76,6 +76,7 @@ const StyledTextBox = styled.div<{ $isUser: boolean; $end: boolean }>`
   color: ${({ theme }) => theme.color.gray800};
   word-wrap: break-word;
   white-space: pre-wrap;
+  text-align: left;
 
   ${({ $isUser }) =>
     $isUser

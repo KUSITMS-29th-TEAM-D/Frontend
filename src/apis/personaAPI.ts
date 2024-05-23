@@ -1,4 +1,5 @@
 import { authClient, noAuthClient } from '@/apis/client';
+import { CATEGORY_TYPE } from '@/constants/discover';
 import { DefineRequest, DesignRequest } from '@/types/test.type';
 
 export const personaAPI = {
@@ -43,12 +44,36 @@ export const personaAPI = {
   },
   // Discover 임시저장 채팅 조회
   getDefaultChatting: async (category: string) => {
-    const response = await authClient.get(`/api/personas/discover/chattings?category=${category}`);
+    const response = await authClient.get(
+      `/api/personas/discover/chattings?category=${CATEGORY_TYPE[category].title}`
+    );
     return response.data;
   },
   // Discover 임시저장 요약 조회
   getDefaultSummary: async () => {
     const response = await authClient.get('/api/personas/discover/summaries');
+    return response.data;
+  },
+  // Discover 질문 받기
+  getQuestion: async (category: string) => {
+    const response = await authClient.get(
+      `/api/personas/discover/question?category=${CATEGORY_TYPE[category].title}`
+    );
+    return response.data;
+  },
+  // Discover 질문 답변하기
+  postAnswer: async (chattingId: string, answer: string) => {
+    const response = await authClient.post('/api/personas/discover/answer', {
+      chatting_id: chattingId,
+      answer,
+    });
+    return response.data;
+  },
+  // Discover 초기화
+  resetDiscover: async (category: string) => {
+    const response = await authClient.post('/api/personas/discover/reset', {
+      category: CATEGORY_TYPE[category].title,
+    });
     return response.data;
   },
 };

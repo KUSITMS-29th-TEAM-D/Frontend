@@ -1,29 +1,64 @@
 import { useState, useEffect } from 'react';
 
-import { ChattingData } from '@/types/test.type';
+import { ChattingList } from '@/utils/transformDataToMessages';
 
-export const useChatSessionStorage = (category: string, initialValue: ChattingData | null) => {
-  const [storedValue, setStoredValue] = useState<ChattingData>(() => {
-    if (category !== '') {
-      try {
-        const item = window.sessionStorage.getItem(`selpiece-${category}`);
-        return item ? JSON.parse(item) : initialValue;
-      } catch (error) {
-        console.error(error);
-        return initialValue;
-      }
+export interface ChattingSessionStorage {
+  questionCount: number;
+  chattingId: string;
+  chattingList: ChattingList[];
+  summaryList: string[];
+}
+
+export const useChatSessionStorage = (category: string, initialValue: ChattingSessionStorage) => {
+  const [categoryValue, setCategoryValue] = useState<ChattingSessionStorage>(() => {
+    if (category === '') {
+      return initialValue;
+    }
+    try {
+      const item = window.sessionStorage.getItem(`selpiece-${category}`);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
     }
   });
 
   useEffect(() => {
     if (category !== '') {
       try {
-        window.sessionStorage.setItem(`selpiece-${category}`, JSON.stringify(storedValue));
+        window.sessionStorage.setItem(`selpiece-${category}`, JSON.stringify(categoryValue));
       } catch (error) {
         console.error(error);
       }
     }
-  }, [category, storedValue]);
+  }, [category, categoryValue]);
 
-  return [storedValue, setStoredValue] as const;
+  const setQuestionCount = (count: number) => {
+    setCategoryValue((prev) => ({ ...prev, questionCount: count }));
+  };
+
+  const setChattingId = (chatId: string) => {
+    setCategoryValue((prev) => ({ ...prev, chattingId: chatId }));
+  };
+
+  const setChattingList = (chatting: ChattingList[]) => {
+    setCategoryValue((prev) => ({ ...prev, chattingList: chatting }));
+  };
+
+  const updateChattingList = (updateFunction: (prevChatting: ChattingList[]) => ChattingList[]) => {
+    setCategoryValue((prev) => ({ ...prev, chattingList: updateFunction(prev.chattingList) }));
+  };
+
+  const updateSummaryList = (updateFunction: (summary: string[]) => string[]) => {
+    setCategoryValue((prev) => ({ ...prev, summaryList: updateFunction(prev.summaryList) }));
+  };
+
+  return {
+    categoryValue,
+    setQuestionCount,
+    setChattingId,
+    setChattingList,
+    updateChattingList,
+    updateSummaryList,
+  } as const;
 };

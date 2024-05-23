@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
 import { ChattingBox } from '@/components/DiscoverTestPage/ChattingBox';
 import { RightSidebar } from '@/components/DiscoverTestPage/RightSidebar';
 import { SelectDiscoverModal } from '@/components/common/Modal/SelectDiscoverModal';
 
 export const DiscoverTestPage = () => {
   const [activeSelectModal, setActiveSelectModal] = useState(false);
+  const [endCategory, setEndCategory] = useState<string[]>([]);
   const [categoryParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -17,17 +19,16 @@ export const DiscoverTestPage = () => {
       setActiveSelectModal(true);
     }
   }, [categoryParams]);
-  /* 
 
   useEffect(() => {
-    console.log('일단 전부 가져와');
-    // personaAPI.getDefaultChatting('health').then((res) => {
-    console.log(res);
-    setDiscoverChatting((prev) => ({ ...prev, health: res.payload }));
-  }); //
-    // 완료된 채팅 GET
-    // .then((res) => setDiscoverChatting((prev) => ({res.payload})));
-  }, []); */
+    personaAPI.getChattingComplete().then((response) => {
+      const trueKeys = Object.keys(response.payload)
+        .filter((key) => response.payload[key] === true)
+        .map((key) => key.replace('_complete', ''));
+
+      setEndCategory(trueKeys);
+    });
+  }, []);
 
   return (
     <>
@@ -41,7 +42,7 @@ export const DiscoverTestPage = () => {
       )}
       <StyledContainer>
         <StyledInnerContainer>
-          <ChattingBox />
+          <ChattingBox endCategory={endCategory} setEndCategory={setEndCategory} />
           <RightSidebar />
         </StyledInnerContainer>
       </StyledContainer>

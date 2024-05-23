@@ -10,58 +10,132 @@ import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultInput } from '@/components/common/Input/DefaultInput';
 import { CATEGORY_TYPE } from '@/constants/discover';
-import { useGetChatting } from '@/hooks/useGetChatting';
-/* import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
-
-const Dummy = {
-  stage_one: {
-    question: '사랑하는 사람과 함께 시간을 보낼 때 가장 행복한 순간은 언제인가요?',
-    answer: '날씨 좋은 날에 산책하고 맛있는 거 먹는 게 가장 큰 행복이지.',
-    reaction:
-      '날씨 좋은 날에 산책하고 맛있는 음식을 먹는 게 가장 큰 행복이라고 느끼시네요! 그런 일상 속 작은 여유들이 정말 소중한 시간들이죠. 날씨도 좋고 바람도 선선히 불어오면 기분까지 좋아지잖아요.',
-  },
-  stage_two: {
-    question: '사랑하는 사람과 함께하는 시간을 더욱 특별하게 만들기 위해 노력하고 있나요?',
-    answer: '같이 있을 때는 상대방에게 집중하려고 노력하는 것 같아.',
-    reaction:
-      '상대방에게 집중하려고 노력하시는군요! 같이 있는 시간을 소중히 여기고 그 순간을 온전히 함께 하고 싶은 마음에서 그런 행동이 나오는 것 같네요. 이런 태도는 상대방에게 큰 호감으로 느껴질 수 있어요.',
-  },
-}; */
+import { useChatSessionStorage } from '@/hooks/useChatSessionStorage';
+import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
 
 const NOTICE =
   '화면을 탭하거나 스페이스바를 눌러 대화를 진행할 수 있습니다.\n스토리 진행 중 화면을 위로 스크롤하면, 이전에 나눴던 대화를 읽어볼 수 있습니다.';
 
-export const ChattingBox = () => {
-  const [endCategory, setEndCategory] = useState<string[]>([]);
-  const [categoryParams] = useSearchParams();
-  const currentCategory = categoryParams.get('category') ?? '';
-  const { chatList } = useGetChatting(currentCategory);
+const initialValue = {
+  questionCount: 0,
+  chattingId: '',
+  chattingList: [],
+  summaryList: [],
+};
+
+interface ChattingBoxProps {
+  endCategory: string[];
+  setEndCategory: (endCategory: string[]) => void;
+}
+
+export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [input, setInput] = useState('');
+  const [categoryParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
+  const selectedCategory = categoryParams.get('category') ?? '';
 
-  useEffect(() => {
-    personaAPI.getChattingComplete().then((res) => {
-      const result = Object.keys(res)
-        .filter((category) => res[category])
-        .map((category) => CATEGORY_TYPE[category.replace('_complete', '')]?.title)
-        .filter(Boolean);
+  const {
+    categoryValue,
+    setQuestionCount,
+    setChattingId,
+    setChattingList,
+    updateChattingList,
+    updateSummaryList,
+  } = useChatSessionStorage(selectedCategory, initialValue);
 
-      setEndCategory(result);
-    });
-  }, []);
+  const getHistory = async () => {
+    try {
+      const res = await personaAPI.getDefaultChatting(selectedCategory);
+      const transformedMessages = transformDataToMessages(res.payload);
+      setChattingList(transformedMessages);
+      const messageCount = Object.keys(transformedMessages).length;
+      setQuestionCount(messageCount);
+      console.log(messageCount);
+      return messageCount;
+    } catch (error) {
+      console.log(error);
+      return 0; // Ensure the function always returns a number
+    }
+  };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.code === 'Space') {
-        containerRef.current?.focus(); // 스페이스바 누를 때 컨테이너 포커스
+  const postNewAnswer = async () => {
+    try {
+      setLoading(true);
+      const response = await personaAPI.postAnswer(categoryValue.chattingId, input);
+      updateChattingList((prev: ChattingList[]) => [
+        ...prev,
+        { type: 'reaction', text: response.payload.reaction, user: 'chatbot' },
+      ]);
+      updateSummaryList((prev) => [...prev, response.payload.reaction]);
+      const newQuestionCount = categoryValue.questionCount + 1;
+      setQuestionCount(newQuestionCount);
+
+      if (newQuestionCount >= 3) {
+        setEndCategory([...endCategory, selectedCategory]);
       }
-    };
+    } catch (error) {
+      window.alert('답변을 전송하는데 실패했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+  const getNewQuestion = async () => {
+    console.log('getNewQuestion');
+    if (selectedCategory !== '' && categoryValue.questionCount < 3) {
+      try {
+        setLoading(true);
+        const res = await personaAPI.getQuestion(selectedCategory);
+        console.log(res);
+        setChattingId(`${res.payload.chatting_id}`);
+        console.log(`${res.payload.chatting_id}`);
+        updateChattingList((prev) => [
+          ...prev,
+          { type: 'question', text: res.payload.question, user: 'chatbot' },
+        ]);
+        console.log('getNewQuestion11111');
+      } catch (error) {
+        window.alert('채팅을 불러오는데 실패했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+  };
+
+  const handleAnswerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateChattingList((prev: ChattingList[]) => [
+      ...prev,
+      { type: 'answer', text: input, user: 'user' },
+    ]);
+    setInput('');
+    postNewAnswer();
+  };
+
+  useEffect(() => {
+    if (selectedCategory !== '') {
+      getHistory().then((res) => {
+        if (res !== undefined && res < 3) {
+          getNewQuestion();
+        }
+      });
+    }
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    console.log('새로운 질문 불러오기');
+    if (
+      selectedCategory !== '' &&
+      categoryValue.questionCount < 3 &&
+      categoryValue.questionCount > 0
+    ) {
+      getNewQuestion();
+    }
+  }, [selectedCategory, categoryValue.questionCount]);
 
   return (
     <StyledContainer
@@ -75,7 +149,7 @@ export const ChattingBox = () => {
         {Object.keys(CATEGORY_TYPE).map((category) => (
           <CategoryButton
             key={category}
-            active={category === currentCategory}
+            active={selectedCategory === category}
             done={endCategory.includes(category)}
             path={category}
           >
@@ -85,23 +159,41 @@ export const ChattingBox = () => {
       </StyledHeader>
       <StyledChatting>
         <StyledNotice>{NOTICE}</StyledNotice>
-        {chatList.map((chat, index) => (
+        {categoryValue.chattingList.map((chat, index) => (
           <SpeechBox
             key={chat.text}
             isUser={chat.user === 'user'}
-            isContinuous={index > 0 && chatList[index - 1].user === chat.user}
-            isEnd={index + 1 < chatList.length && chatList[index + 1].user !== chat.user}
+            isContinuous={index > 0 && categoryValue.chattingList[index - 1].user === chat.user}
+            isEnd={
+              index + 1 < categoryValue.chattingList.length &&
+              categoryValue.chattingList[index + 1].user !== chat.user
+            }
           >
             {chat.text}
           </SpeechBox>
         ))}
+        {loading && <StyledLoading>로딩 중</StyledLoading>}
       </StyledChatting>
-      <StyledInputField>
-        {/* <StyledInput tabIndex={1} ref={inputRef}>
-          <input type="text" placeholder="답변을 입력해주세요" />
-        </StyledInput> */}
-        <DefaultInput width="100%" placeholder="답변을 입력해주세요" ref={inputRef} />
-        <PlainButton variant="primary2" width="102px" height="48px">
+      <StyledInputField onSubmit={handleAnswerSubmit}>
+        <DefaultInput
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          width="100%"
+          placeholder={
+            categoryValue.questionCount >= 3
+              ? '3번의 질문을 모두 완료했습니다.'
+              : '답변을 입력해주세요'
+          }
+          ref={inputRef}
+          disabled={categoryValue.questionCount >= 3}
+        />
+        <PlainButton
+          type="submit"
+          variant="primary2"
+          width="102px"
+          height="48px"
+          disabled={categoryValue.questionCount >= 3}
+        >
           전송
         </PlainButton>
       </StyledInputField>
@@ -139,7 +231,7 @@ const StyledChatting = styled.div`
   ${Scrollbar}
 `;
 
-const StyledInputField = styled.div`
+const StyledInputField = styled.form`
   display: flex;
   gap: 16px;
 
@@ -156,8 +248,15 @@ const StyledNotice = styled.div`
 
   border-radius: 8px;
   background: ${({ theme }) => theme.color.bgModal};
+  margin-bottom: 24px;
 
   ${({ theme }) => theme.font.desktop.label2};
   color: ${({ theme }) => theme.color.white};
   white-space: pre-wrap;
+`;
+
+const StyledLoading = styled.div`
+  padding: 10px;
+  border-radius: 0 8px 8px 8px;
+  background: ${({ theme }) => theme.color.white};
 `;

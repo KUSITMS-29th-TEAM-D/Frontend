@@ -1,9 +1,12 @@
 import { ChattingStage } from '@/types/test.type';
 
+export type ChattingListType = 'question' | 'answer' | 'reaction';
+export type ChattingListUser = 'chatbot' | 'user';
+
 export interface ChattingList {
-  type: 'question' | 'answer' | 'reaction';
+  type: string;
   text: string;
-  user: 'chatbot' | 'user';
+  user: string;
 }
 
 export const transformDataToMessages = (data: { [key: string]: ChattingStage }) => {

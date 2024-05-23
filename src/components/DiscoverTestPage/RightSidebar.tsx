@@ -14,16 +14,13 @@ export const RightSidebar = () => {
     <StyledContainer>
       <StyledSummaryContainer>
         <div className="title">{userService.getUserNickname()}님의 답변을 요약중이에요!</div>
-        {chatSummary &&
-          Object.keys(chatSummary).map(
-            (key) =>
-              chatSummary[key as keyof ChatSummary].length > 0 && (
-                <SummaryCard
-                  category={key as keyof ChatSummary}
-                  descriptions={chatSummary[key as keyof ChatSummary]}
-                />
-              )
-          )}
+        {Object.keys(chatSummary).map((key) => (
+          <SummaryCard
+            key={key}
+            category={key as keyof ChatSummary}
+            descriptions={chatSummary[key as keyof ChatSummary]}
+          />
+        ))}
       </StyledSummaryContainer>
       <StyledButtonContainer>
         <p>
