@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PlainChip } from '@/components/common/Chip/PlainChip';
@@ -11,22 +11,22 @@ interface PreviewCardProps {
 }
 
 export const PreviewCard = ({ imageUrl, title, keywords, path }: PreviewCardProps) => {
-  const navigate = useNavigate();
-
   return (
-    <StyledContainer onClick={() => path && navigate(path)}>
-      <StyledPreview $url={imageUrl} />
-      <StyledInformation>
-        <p className="title">{title}</p>
-        <div className="keywords">
-          {keywords.map((keyword) => (
-            <PlainChip key={keyword} primary>
-              {keyword}
-            </PlainChip>
-          ))}
-        </div>
-      </StyledInformation>
-    </StyledContainer>
+    <Link to={path ? path : ''}>
+      <StyledContainer>
+        <StyledPreview $url={imageUrl} />
+        <StyledInformation>
+          <p className="title">{title}</p>
+          <div className="keywords">
+            {keywords.map((keyword) => (
+              <PlainChip key={keyword} primary>
+                {keyword}
+              </PlainChip>
+            ))}
+          </div>
+        </StyledInformation>
+      </StyledContainer>
+    </Link>
   );
 };
 
