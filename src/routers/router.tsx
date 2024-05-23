@@ -14,7 +14,9 @@ import {
   DesignTestPage4,
   DesignTestPage5,
 } from '@/pages/DesignTestPage';
+import { DiscoverTestPage } from '@/pages/DiscoverTestPage';
 import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
+import { ExperienceRecommendPage } from '@/pages/ExperienceRecommendPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { MyPage1 } from '@/pages/Mypage';
@@ -32,9 +34,11 @@ export const Router = () => {
         <Route element={<ExceptPreMemberRoute />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<LoginPage />} />
-          <Route path="/program" element={<SelfUnderstandPage />} />
           <Route path="/mypage" element={<MyPage1 />} />
+          <Route path="/understand" element={<SelfUnderstandPage />} />
+
           <Route element={<MemberPrivateRoute />}>
+            <Route path="/program" element={<ExperienceRecommendPage />} />
             <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
           </Route>
         </Route>
@@ -49,7 +53,7 @@ export const Router = () => {
           <Route path=":defineId" element={<DefineResultPage />} />
         </Route>
         <Route element={<MemberPrivateRoute />}>
-          <Route path="design" element={<TestLayout />}>
+          <Route path="design">
             <Route index element={<Navigate to="1" replace />}></Route>
             <Route path="1" element={<DesignStartPage />} />
             <Route path="2" element={<DesignTestPage1 />} />
@@ -59,6 +63,9 @@ export const Router = () => {
             <Route path="6" element={<DesignTestPage5 />} />
             <Route path="result" element={<DesignResultPage />} />
           </Route>
+        </Route>
+        <Route path="discover" element={<TestLayout />}>
+          <Route path="" element={<DiscoverTestPage />} />
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />

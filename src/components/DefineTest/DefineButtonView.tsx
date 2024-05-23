@@ -172,12 +172,11 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
     setLoading({ show: true, speed: 50 });
 
     personaAPI
-      .register(userService.getUserState() === 'MEMBER', requestData)
+      .registerDefine(userService.getUserState() === 'MEMBER', requestData)
       .then((response) => {
         const { code, message, payload } = response;
 
         if (code === '201') {
-          console.log('페르소나 생성 성공');
           setLoadingHandler({
             ...loadingHandler,
             handleCompleted: () => {

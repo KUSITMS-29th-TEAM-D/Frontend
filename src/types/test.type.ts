@@ -28,7 +28,6 @@ export interface DefineResult {
   front_img_url: string;
   back_img_url: string;
 }
-
 export interface DesignRequest {
   fields: string[];
   distinctions: string[];
@@ -39,4 +38,14 @@ export interface DesignRequest {
 
 export interface DesignResult extends DesignRequest {
   definition: string;
+}
+
+export interface ChattingStage {
+  question: string;
+  answer: string;
+  reaction: string;
+}
+
+export interface ChattingData {
+  [key: string]: ChattingStage;
 }
