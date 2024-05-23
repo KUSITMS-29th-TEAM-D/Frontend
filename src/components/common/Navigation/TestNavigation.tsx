@@ -12,7 +12,7 @@ export const TestNavigation = () => {
   const location = useLocation();
 
   const handleButtonClick = () => {
-    navigate('/');
+    navigate('/understand');
   };
 
   let titleText = '';
