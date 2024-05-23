@@ -4,11 +4,17 @@ import styled from 'styled-components';
 import { ReactComponent as Logo } from '@/assets/logos/mainLogo.svg';
 
 const MENU_LIST = [
-  { title: '새로운 경험 키워드 추천하기', path: '' },
-  { title: '팀 쿨피스 테크블로그', path: '' },
-  { title: '경험 콘텐츠 등록 문의하기', path: '' },
-  { title: '서비스 문의하기', path: '' },
-  { title: '개인정보 처리방침', path: '' },
+  {
+    title: '새로운 경험 키워드 추천하기',
+    path: 'https://docs.google.com/forms/d/e/1FAIpQLSfAjfBz-HBTPFobfKdilHI2j9ZQIiLg8g9bTHLx28ajjNsGcg/viewform?usp=send_form',
+  },
+  { title: '팀 쿨피스 테크블로그', path: 'https://velog.io/@kusitms-29th-d/posts' },
+  { title: '프로그램 등록 문의하기', path: '' },
+  { title: '서비스 문의하기', path: 'https://pf.kakao.com/_xjMdLG' },
+  {
+    title: '개인정보 처리방침',
+    path: 'https://docs.google.com/document/d/1lnzEB1apJ0X6Vxpse3O-kP9-DD3eImJZx9FEkM6uXgg/edit',
+  },
 ];
 
 export const Footer = () => {
