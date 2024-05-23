@@ -54,7 +54,7 @@ export const MyExperienceWholeView = ({ programData, sortOrder }: MyExperiencePr
             imageUrl={item.imageUrl}
             title={item.programsTitle ? '신청 완료' : '외부 프로그램'}
             $variant={item.programsTitle ? 'type1' : 'type2'}
-            subtitle={''}
+            subtitle={item.programsTitle}
           />
         ))}
       </Container>
