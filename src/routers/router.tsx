@@ -21,6 +21,7 @@ import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
 import { ExperienceRecommendPage } from '@/pages/ExperienceRecommendPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
+import { MyPage1 } from '@/pages/Mypage';
 import { OnboardingPage } from '@/pages/OnboardingPage';
 import { RedirectPage } from '@/pages/RedirectPage';
 import { SelfUnderstandPage } from '@/pages/SelfUnderstandPage';
@@ -35,6 +36,7 @@ export const Router = () => {
         <Route path="/understand" element={<SelfUnderstandPage />} />
         <Route path="/program" element={<ExperienceRecommendPage />} />
         <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
+        <Route path="/mypage" element={<MyPage1 />} />
       </Route>
       <Route path="test" element={<TestLayout />}>
         <Route path="define">

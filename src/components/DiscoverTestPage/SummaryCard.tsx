@@ -22,7 +22,7 @@ export const SummaryCard = ({ category, title, descriptions }: SummaryCardProps)
         {descriptions.length > 0 &&
           descriptions.map((description) => (
             <div key={description} className="description">
-              {description}
+              • {description}
             </div>
           ))}
       </StyledContent>
