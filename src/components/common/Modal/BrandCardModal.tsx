@@ -7,15 +7,27 @@ import { PlainButton } from '@/components/common/Button/PlainButton';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onAdd: (
+    title: string,
+    description: string,
+    date: string,
+    status: '준비' | '진행중' | '완료'
+  ) => void;
 }
 
-export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
+export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
   const [startDate, setStartDate] = useState('2024.05.15');
-  const [endDate, setEndDate] = useState('');
+  const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState<'진행전' | '진행중' | '완료'>('진행전');
+  const [status, setStatus] = useState<'준비' | '진행중' | '완료'>('준비');
+
+  const handleAdd = () => {
+    onAdd(title, description, date, status);
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -40,12 +52,12 @@ export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
           <FrameRow>
             <Label>진행상태</Label>
             <PlainButton
-              variant={status === '진행전' ? 'disabled' : 'gray'}
+              variant={status === '준비' ? 'disabled' : 'gray'}
               height="48px"
               width="87px"
-              onClick={() => setStatus('진행전')}
+              onClick={() => setStatus('준비')}
             >
-              진행전
+              준비
             </PlainButton>
             <PlainButton
               variant={status === '진행중' ? 'disabled' : 'gray'}
@@ -53,7 +65,7 @@ export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
               width="87px"
               onClick={() => setStatus('진행중')}
             >
-              진행중
+              진행
             </PlainButton>
             <PlainButton
               variant={status === '완료' ? 'disabled' : 'gray'}
@@ -72,8 +84,8 @@ export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
             <Label>마감일</Label>
             <Input
               type="text"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
               placeholder="20XX.XX.XX"
             />
           </FrameRow>
@@ -89,7 +101,7 @@ export const BrandCardModal = ({ isOpen, onClose }: ModalProps) => {
           <PlainButton variant="disabled" height="48px" onClick={onClose}>
             취소하기
           </PlainButton>
-          <PlainButton variant="gray" height="48px">
+          <PlainButton variant="gray" height="48px" onClick={handleAdd}>
             추가하기
           </PlainButton>
         </FrameRow>
