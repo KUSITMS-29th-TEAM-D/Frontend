@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   padding: 20px;
   background: ${({ theme }) => `${theme.color.white}`};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.13);
@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const InnerContainer = styled.div`
   align-self: stretch;
-  height: 72px;
+  height: 100px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -33,13 +33,13 @@ const Title = styled.div`
 
 const Description = styled.div`
   align-self: stretch;
+  flex: 1;
   color: ${({ theme }) => `${theme.color.gray500}`};
   ${({ theme }) => theme.font.desktop.label2};
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-wrap;
-  max-height: 100px;
 `;
 
 const Card = ({ title, description }: { title: string; description: string }) => {
