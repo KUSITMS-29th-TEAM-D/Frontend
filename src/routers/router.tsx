@@ -14,6 +14,7 @@ import {
   DesignTestPage4,
   DesignTestPage5,
 } from '@/pages/DesignTestPage';
+import { DiscoverResultPage } from '@/pages/DiscoverResultPage';
 import { DiscoverStartPage } from '@/pages/DiscoverStartPage';
 import { DiscoverTestPage } from '@/pages/DiscoverTestPage';
 import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
@@ -57,6 +58,7 @@ export const Router = () => {
         <Route path="discover">
           <Route path="" element={<DiscoverStartPage />} />
           <Route path="start" element={<DiscoverTestPage />} />
+          <Route path="result" element={<DiscoverResultPage />} />
         </Route>
       </Route>
       <Route path="/login" element={<RedirectPage />} />
