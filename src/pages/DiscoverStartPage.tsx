@@ -8,7 +8,7 @@ export const DiscoverStartPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/test/discover');
+    navigate('/test/discover/start');
   };
   return (
     <div>

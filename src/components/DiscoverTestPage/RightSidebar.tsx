@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -7,7 +8,7 @@ import { SummaryCard } from '@/components/DiscoverTestPage/SummaryCard';
 import Scrollbar from '@/components/Scrollbar';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { NotFinishChatModal } from '@/components/common/Modal/NotFinishChatModal';
-import { LoadingPage } from '@/pages/LoadingPage';
+import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
 import { userService } from '@/services/UserService';
 
@@ -18,7 +19,9 @@ interface RightSidebarProps {
 
 export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) => {
   const [activeNotFinishModal, setActiveNotFinishModal] = useState(false);
-  const [loading, setLoading] = useRecoilState(loadingState);
+  const [, setLoading] = useRecoilState(loadingState);
+  const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
+  const navigate = useNavigate();
 
   const handleResultButton = () => {
     if (endCategory.length < 4) {
@@ -27,10 +30,6 @@ export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) =
       setLoading({ show: true, speed: 50 });
     }
   };
-
-  if (loading.show) {
-    return <LoadingPage />;
-  }
 
   return (
     <>
@@ -42,6 +41,12 @@ export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) =
           onConfirm={() => {
             setActiveNotFinishModal(false);
             setLoading({ show: true, speed: 50 });
+            setLoadingHandler({
+              ...loadingHandler,
+              handleCompleted: () => {
+                navigate(`/test/discover/result`);
+              },
+            });
           }}
           endCategory={endCategory}
         />
@@ -50,9 +55,13 @@ export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) =
         <StyledSummaryContainer>
           <div className="title">{userService.getUserNickname()}님의 답변을 요약중이에요!</div>
           {Object.keys(summaryValue).map(
-            (key) =>
+            (key, index) =>
               summaryValue[key].length > 0 && (
-                <SummaryCard key={key} category={key} descriptions={summaryValue[key]} />
+                <SummaryCard
+                  key={`${key}-${index}`}
+                  category={key}
+                  descriptions={summaryValue[key]}
+                />
               )
           )}
         </StyledSummaryContainer>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { personaAPI } from '@/apis/personaAPI';
@@ -9,6 +10,8 @@ import { RightSidebar } from '@/components/DiscoverTestPage/RightSidebar';
 import { SelectDiscoverModal } from '@/components/common/Modal/SelectDiscoverModal';
 import { CATEGORY_TYPE } from '@/constants/discover';
 import { useSummarySessionStorage } from '@/hooks/useSummarySessionStorage';
+import { LoadingPage } from '@/pages/LoadingPage';
+import { loadingState } from '@/recoil/loadingState';
 
 export const DiscoverTestPage = () => {
   const [categoryParams] = useSearchParams();
@@ -16,6 +19,7 @@ export const DiscoverTestPage = () => {
   const [activeSelectModal, setActiveSelectModal] = useState(false);
   const [endCategory, setEndCategory] = useState<string[]>([]);
   const navigate = useNavigate();
+  const [loading] = useRecoilState(loadingState);
 
   const { summaryValue, resetSummary, updateSummary } = useSummarySessionStorage();
 
@@ -47,13 +51,17 @@ export const DiscoverTestPage = () => {
     };
   }, []);
 
+  if (loading.show) {
+    return <LoadingPage />;
+  }
+
   return (
     <>
       {activeSelectModal && (
         <SelectDiscoverModal
           handleStart={(category: string) => {
             setActiveSelectModal(false);
-            navigate(`/test/discover?category=${category}`);
+            navigate(`/test/discover/start?category=${category}`);
           }}
         />
       )}

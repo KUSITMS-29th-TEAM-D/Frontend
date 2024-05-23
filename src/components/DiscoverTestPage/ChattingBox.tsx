@@ -172,7 +172,7 @@ export const ChattingBox = ({
               setChattingId('');
               setChattingList([]);
               setActiveResetModal(false);
-              navigate(`/test/discover?category=${resetCategory}`);
+              navigate(`/test/discover/start?category=${resetCategory}`);
               getNewQuestion(); // 초기화 후 새 질문 가져오기
             });
           }}
@@ -194,7 +194,7 @@ export const ChattingBox = ({
               done={endCategory.includes(category)}
               onClick={() => {
                 if (!endCategory.includes(category)) {
-                  navigate(`/test/discover?category=${category}`);
+                  navigate(`/test/discover/start?category=${category}`);
                 } else {
                   setResetCategory(category); // 리셋할 카테고리 설정
                   setActiveResetModal(true);

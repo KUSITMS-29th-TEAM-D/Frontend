@@ -130,7 +130,8 @@ export const DiscoverResultPage = () => {
                       .map((arr) => (arr.length > 0 ? arr[0] : ''))
                       .map(
                         (item, index) =>
-                          item !== null && (
+                          item !== null &&
+                          item !== '' && (
                             <SummaryCard
                               category={Object.keys(CATEGORY_LIST)[index + 1]}
                               descriptions={[item]}
