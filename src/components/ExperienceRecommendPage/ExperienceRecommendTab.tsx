@@ -44,8 +44,12 @@ export const ExperienceRecommendTab = () => {
               <WholeUnderstandSection
                 title={
                   <div>
-                    <span className="highlight">{userService.getUserNickname()}</span>님, 아직 내가
-                    누군지 잘 모르겠다면 <br />
+                    {userService.getUserNickname() !== '' && (
+                      <span>
+                        <span className="highlight">{userService.getUserNickname()}</span>님,{' '}
+                      </span>
+                    )}
+                    아직 내가 누군지 잘 모르겠다면 <br />
                     이런 콘텐츠들은 어때요?
                   </div>
                 }

@@ -34,7 +34,7 @@ export const RecommendSectionTemplate = ({
             <StyledFilterContainer>
               <StyledChildrenContainer>{children}</StyledChildrenContainer>
               <button className="refresh-button" type="button" onClick={refreshHandler}>
-                새로고침
+                초기화
               </button>
             </StyledFilterContainer>
           )}
