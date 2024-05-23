@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { AmountBox } from '@/components/ExperienceRecommendPage/AmountBox';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { SectionContainer } from '@/styles';
-import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
+import { ExperienceFilterCards, ExperienceCards } from '@/types/experience.type';
 
 import { RecommendUnderstand } from './RecommendUnderstand';
 
@@ -13,7 +13,7 @@ interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: ExperienceRecommendCards[];
+  recommendItems: ExperienceCards[];
   filters: ExperienceFilterCards[];
 }
 

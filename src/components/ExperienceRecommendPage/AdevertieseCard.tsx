@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-// import Card1 from '@/assets/advertise/advertise1.png';
 import Card2 from '@/assets/advertise/advertise2.png';
 import Card3 from '@/assets/advertise/advertise3.png';
 import Video1 from '@/assets/banner.mp4';

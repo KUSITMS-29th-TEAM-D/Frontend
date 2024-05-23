@@ -6,14 +6,14 @@ import { RecommendBrand } from '@/components/ExperienceRecommendPage/RecommendBr
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { IMAGE_KEYWORD_LIST, INTEREST_LIST } from '@/constants/onboarding';
 import { SectionContainer } from '@/styles';
-import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
+import { BrandFilterCards, ExperienceBrandCards } from '@/types/experience.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: ExperienceRecommendCards[];
-  filters: ExperienceFilterCards[];
+  recommendItems: ExperienceBrandCards[];
+  filters: BrandFilterCards[];
 }
 
 export const RecommendBrandView = ({

@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 import { WholeUnderstandView } from '@/components/ExperienceRecommendPage/WholeUnderstandView';
 import { SectionContainer } from '@/styles';
-import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
+import { ExperienceFilterCards, ExperienceCards } from '@/types/experience.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: ExperienceRecommendCards[];
+  recommendItems: ExperienceCards[];
   filters: ExperienceFilterCards[];
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -10,7 +10,7 @@ import { WholeUnderstandSection } from '@/components/ExperienceRecommendPage/Who
 import Tabs from '@/components/common/Tab/Tab';
 import { userService } from '@/services/UserService';
 import { theme } from '@/styles';
-import { RecommendFilterCards } from '@/types/recommend.type';
+import { ExperienceFilterCards } from '@/types/experience.type';
 
 const FixedWidthContainer = styled.div`
   width: 1280px;
@@ -29,7 +29,7 @@ export const ExperienceRecommendTab = () => {
   const [selectedField, setSelectedField] = useState<string[]>(['text1', 'text2']);
   const [activeTab, setActiveTab] = useState<string>('tab1');
 
-  const filters: RecommendFilterCards[] = [
+  const filters: ExperienceFilterCards[] = [
     { title: '분야', contents: Dummy2, selected: selectedField, setSelected: setSelectedField },
   ];
 

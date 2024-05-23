@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 import { WholeBrandView } from '@/components/ExperienceRecommendPage/WholeBrandView';
 import { SectionContainer } from '@/styles';
-import { ExperienceFilterCards, ExperienceRecommendCards } from '@/types/recommend.type';
+import { BrandFilterCards, ExperienceBrandCards } from '@/types/experience.type';
 
 interface RecommendSectionTemplateProps {
   title: string | React.ReactNode;
   subTitle: string;
   backgroundColor: string;
-  recommendItems: ExperienceRecommendCards[];
-  filters: ExperienceFilterCards[];
+  recommendItems: ExperienceBrandCards[];
+  filters: BrandFilterCards[];
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
