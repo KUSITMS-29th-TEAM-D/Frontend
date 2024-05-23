@@ -76,4 +76,18 @@ export const personaAPI = {
     });
     return response.data;
   },
+
+  // Discover 페르소나 키워드 전체 조회
+  getDiscoverAllKeyword: async () => {
+    const response = await authClient.get('/api/personas/discover/all-keywords');
+    return response.data;
+  },
+
+  // Discover 페르소나 키워드 카테고리별 조회
+  getDiscoverCategoryKeyword: async (category: string) => {
+    const response = await authClient.get(
+      `/api/personas/discover/keywords?category=${CATEGORY_TYPE[category].title}`
+    );
+    return response.data;
+  },
 };

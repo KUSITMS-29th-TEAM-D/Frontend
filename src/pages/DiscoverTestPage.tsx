@@ -66,7 +66,7 @@ export const DiscoverTestPage = () => {
             resetSummary={resetSummary}
             updateSummary={updateSummary}
           />
-          <RightSidebar summaryValue={summaryValue} />
+          <RightSidebar summaryValue={summaryValue} endCategory={endCategory} />
         </StyledInnerContainer>
       </StyledContainer>
     </>

@@ -71,5 +71,6 @@ const StyledContent = styled.div`
   .description {
     ${({ theme }) => theme.font.desktop.label2};
     color: ${({ theme }) => theme.color.gray500};
+    text-align: left;
   }
 `;
