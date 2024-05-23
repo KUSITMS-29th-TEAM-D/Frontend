@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
-import { authService } from '@/services/AuthService';
-import { userService } from '@/services/UserService';
+//import { authService } from '@/services/AuthService';
+//import { userService } from '@/services/UserService';
 
 export const noAuthClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -11,8 +11,12 @@ export const noAuthClient: AxiosInstance = axios.create({
 export const authClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
+  headers: {
+    Authorization:
+      'Bearer eyJhbGciOiJIUzM4NCJ9.eyJ1c2VySWQiOiI2MjdiNzFkYy1iZTQ3LTQ0OGMtOGUzZi1jY2QwOWU5ZmVmOTMiLCJpYXQiOjE3MTYzMDk3NzQsImV4cCI6MTcxNjU2ODk3NH0.6MmpL9e9QAFW25Bn7S-N0xDiy0oDvLt6kZgSXGk2H8ZHW84vMg7NacfVj-qNt4PY',
+  },
 });
-
+/*
 authClient.interceptors.request.use((config) => {
   if (userService.getUser().nickname === '') {
     const registerToken = authService.getRegisterToken();
@@ -42,3 +46,4 @@ authClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+*/

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -22,6 +22,17 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState<'준비' | '진행중' | '완료'>('준비');
+
+  useEffect(() => {
+    if (isOpen) {
+      setTitle('');
+      setType('');
+      setStartDate('2024.05.15');
+      setDate('');
+      setDescription('');
+      setStatus('준비');
+    }
+  }, [isOpen]);
 
   const handleAdd = () => {
     onAdd(title, description, date, status);
