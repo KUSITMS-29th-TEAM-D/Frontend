@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 100%;
+  width: 300px;
   height: auto;
   padding: 20px;
   background: ${({ theme }) => `${theme.color.white}`};
@@ -27,7 +27,7 @@ const InnerContainer = styled.div`
 const Title = styled.div`
   align-self: stretch;
   color: ${({ theme }) => `${theme.color.gray800}`};
-  ${({ theme }) => theme.font.desktop.body1r};
+  ${({ theme }) => theme.font.desktop.body1m};
   word-wrap: break-word;
 `;
 
