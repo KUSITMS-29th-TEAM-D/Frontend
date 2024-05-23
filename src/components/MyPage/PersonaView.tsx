@@ -10,7 +10,7 @@ export const PersonaView = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     arrows: false,
   };
 
@@ -27,11 +27,13 @@ export const PersonaView = () => {
             </BottomTitleContainer>
             <BottomCardContainer>
               <StyledSlider {...settings}>
-                <CardWrapper>
-                  {Dummy1.map((item) => (
-                    <Card key={item.id} title={item.title} description={item.description} />
-                  ))}
-                </CardWrapper>
+                {Dummy1.map((item) => (
+                  <div key={item.id}>
+                    <CardWrapper>
+                      <Card title={item.title} description={item.description} />
+                    </CardWrapper>
+                  </div>
+                ))}
               </StyledSlider>
             </BottomCardContainer>
             <BottomImageContainer>
@@ -128,17 +130,21 @@ const BottomCardContainer = styled.div`
 
 const StyledSlider = styled(Slider)`
   .slick-list {
-    padding: 0 20px;
+    overflow: visible;
+  }
+  .slick-slide > div {
+    margin: 0 10px;
   }
   .slick-track {
     display: flex;
-    gap: 20px;
+    align-items: center;
   }
 `;
 
 const CardWrapper = styled.div`
   flex: 0 0 300px;
   box-sizing: border-box;
+  padding: 12px;
 `;
 
 const BottomImageContainer = styled.div`
