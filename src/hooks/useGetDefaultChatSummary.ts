@@ -1,21 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { personaAPI } from '@/apis/personaAPI';
+import { useRecoilState } from 'recoil';
 
-export interface ChatSummary {
-  health: string[];
-  career: string[];
-  love: string[];
-  leisure: string[];
-}
+import { personaAPI } from '@/apis/personaAPI';
+import { discoverSummaryState } from '@/recoil/discoverSummaryState';
 
 export const useGetDefaultChatSummary = () => {
-  const [data, setData] = useState<ChatSummary>({
-    health: [],
-    career: [],
-    love: [],
-    leisure: [],
-  });
+  const [data, setData] = useRecoilState<{ [key: string]: string[] }>(discoverSummaryState);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

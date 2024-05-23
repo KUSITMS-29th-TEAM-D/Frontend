@@ -1,8 +1,11 @@
 import { atom } from 'recoil';
 
-import { DiscoverSummaryResponse } from '@/types/test.type';
-
-export const discoverSummaryState = atom<DiscoverSummaryResponse | null>({
+export const discoverSummaryState = atom<{ [key: string]: string[] }>({
   key: 'discoverSummaryState',
-  default: null,
+  default: {
+    health: [],
+    career: [],
+    love: [],
+    leisure: [],
+  },
 });

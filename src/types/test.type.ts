@@ -49,7 +49,3 @@ export interface ChattingStage {
 export interface ChattingData {
   [key: string]: ChattingStage;
 }
-
-export interface DiscoverSummaryResponse {
-  [key: string]: string[];
-}

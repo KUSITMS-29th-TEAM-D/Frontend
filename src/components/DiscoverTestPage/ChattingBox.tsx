@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Lottie from 'lottie-react';
 import { useSearchParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { personaAPI } from '@/apis/personaAPI';
+import loading from '@/assets/lottie/loading.json';
 import { SpeechBox } from '@/components/DiscoverTestPage/SpeechBox';
 import Scrollbar from '@/components/Scrollbar';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
@@ -11,6 +14,7 @@ import { PlainButton } from '@/components/common/Button/PlainButton';
 import { DefaultInput } from '@/components/common/Input/DefaultInput';
 import { CATEGORY_TYPE } from '@/constants/discover';
 import { useChatSessionStorage } from '@/hooks/useChatSessionStorage';
+import { discoverSummaryState } from '@/recoil/discoverSummaryState';
 import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
 
 const NOTICE =
@@ -28,6 +32,15 @@ interface ChattingBoxProps {
   setEndCategory: (endCategory: string[]) => void;
 }
 
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: loading,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
 export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -35,15 +48,10 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
   const [categoryParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const selectedCategory = categoryParams.get('category') ?? '';
+  const setChatSummary = useSetRecoilState(discoverSummaryState);
 
-  const {
-    categoryValue,
-    setQuestionCount,
-    setChattingId,
-    setChattingList,
-    updateChattingList,
-    updateSummaryList,
-  } = useChatSessionStorage(selectedCategory, initialValue);
+  const { categoryValue, setQuestionCount, setChattingId, setChattingList, updateChattingList } =
+    useChatSessionStorage(selectedCategory, initialValue);
 
   const getHistory = async () => {
     try {
@@ -68,7 +76,10 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
         ...prev,
         { type: 'reaction', text: response.payload.reaction, user: 'chatbot' },
       ]);
-      updateSummaryList((prev) => [...prev, response.payload.reaction]);
+      setChatSummary((prev) => ({
+        ...prev,
+        selectedCategory: [...prev[selectedCategory], response.payload.reaction],
+      }));
       const newQuestionCount = categoryValue.questionCount + 1;
       setQuestionCount(newQuestionCount);
 
@@ -172,7 +183,11 @@ export const ChattingBox = ({ endCategory, setEndCategory }: ChattingBoxProps) =
             {chat.text}
           </SpeechBox>
         ))}
-        {loading && <StyledLoading>로딩 중</StyledLoading>}
+        {loading && (
+          <StyledLoading>
+            <Lottie animationData={defaultOptions.animationData} />
+          </StyledLoading>
+        )}
       </StyledChatting>
       <StyledInputField onSubmit={handleAnswerSubmit}>
         <DefaultInput
@@ -256,7 +271,9 @@ const StyledNotice = styled.div`
 `;
 
 const StyledLoading = styled.div`
+  width: 60px;
   padding: 10px;
+  margin-left: 52px;
   border-radius: 0 8px 8px 8px;
   background: ${({ theme }) => theme.color.white};
 `;

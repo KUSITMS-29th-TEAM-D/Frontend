@@ -6,7 +6,6 @@ export interface ChattingSessionStorage {
   questionCount: number;
   chattingId: string;
   chattingList: ChattingList[];
-  summaryList: string[];
 }
 
 export const useChatSessionStorage = (category: string, initialValue: ChattingSessionStorage) => {
@@ -49,16 +48,11 @@ export const useChatSessionStorage = (category: string, initialValue: ChattingSe
     setCategoryValue((prev) => ({ ...prev, chattingList: updateFunction(prev.chattingList) }));
   };
 
-  const updateSummaryList = (updateFunction: (summary: string[]) => string[]) => {
-    setCategoryValue((prev) => ({ ...prev, summaryList: updateFunction(prev.summaryList) }));
-  };
-
   return {
     categoryValue,
     setQuestionCount,
     setChattingId,
     setChattingList,
     updateChattingList,
-    updateSummaryList,
   } as const;
 };
