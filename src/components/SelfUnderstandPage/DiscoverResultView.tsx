@@ -5,6 +5,7 @@ import axios from 'axios';
 import { personaAPI } from '@/apis/personaAPI';
 import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplate';
 import { DiscoverResultPage } from '@/pages/DiscoverResultPage';
+import { userService } from '@/services/UserService';
 
 export const DiscoverResultView = () => {
   const [isTest, setIsTest] = useState(false);
@@ -21,7 +22,9 @@ export const DiscoverResultView = () => {
       }
     };
 
-    fetchAllKeywords();
+    if (userService.getUserState() === 'MEMBER') {
+      fetchAllKeywords();
+    }
   }, []);
 
   if (isTest) {
