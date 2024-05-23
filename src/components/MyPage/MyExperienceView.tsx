@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
+import { MyBrandingView } from '@/components/MyPage/MyBrandingView';
 import { MyExperienceWholeView } from '@/components/MyPage/MyExperienceWholeView';
+import { MyUnderstandingView } from '@/components/MyPage/MyUnderstandingView';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { MyPageTab } from '@/components/common/Tab/MyPageTab';
 import { MyPageFilter } from '@/types/myPage.type';
@@ -84,7 +86,7 @@ export const MyExperienceView = ({
             </button>
           </StyledFilterContainer>
           <CardContainer>
-            <MyExperienceWholeView programData={programDate} sortOrder={sortOrder} />{' '}
+            <MyUnderstandingView programData={programDate} sortOrder={sortOrder} />{' '}
           </CardContainer>
         </div>
       ),
@@ -115,7 +117,7 @@ export const MyExperienceView = ({
             </button>
           </StyledFilterContainer>
           <CardContainer>
-            <MyExperienceWholeView programData={programDate} sortOrder={sortOrder} />{' '}
+            <MyBrandingView programData={programDate} sortOrder={sortOrder} />{' '}
           </CardContainer>
         </div>
       ),
