@@ -273,7 +273,6 @@ export const DesignButtonView5 = ({ warning, warningMessage }: Props) => {
         const { code, message } = response;
 
         if (code === '201') {
-          console.log('페르소나 생성 성공');
           setLoadingHandler({
             ...loadingHandler,
             handleCompleted: () => {

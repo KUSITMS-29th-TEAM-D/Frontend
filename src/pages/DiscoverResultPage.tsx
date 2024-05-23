@@ -35,7 +35,6 @@ export const DiscoverResultPage = () => {
       try {
         const response = await personaAPI.getDiscoverAllKeyword();
         setCategoryKeywords({ ...categoryKeywords, all: response.payload.keywords });
-        console.log('All keywords:', response.payload.keywords);
       } catch (error) {
         console.error('Failed to fetch all keywords:', error);
       }

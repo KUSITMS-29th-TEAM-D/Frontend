@@ -15,7 +15,6 @@ export const useGetChatting = (category: string, endCategory: string[]) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log('하나');
     const fetchData = async () => {
       if (data === null && category !== '') {
         try {

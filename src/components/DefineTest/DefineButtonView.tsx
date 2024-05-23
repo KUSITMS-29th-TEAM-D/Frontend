@@ -177,7 +177,6 @@ export const DefineButtonView3 = ({ warning, warningMessage }: Props) => {
         const { code, message, payload } = response;
 
         if (code === '201') {
-          console.log('페르소나 생성 성공');
           setLoadingHandler({
             ...loadingHandler,
             handleCompleted: () => {
