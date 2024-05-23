@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Footer } from '@/components/common/Footer';
 import { TopNavigation } from '@/components/common/Navigation/TopNavigation';
 
-const FOOTER_VISIBLE_PATHS = ['/', '/understand', '/recommend'];
+const FOOTER_VISIBLE_PATHS = ['/', '/understand', '/program'];
 
 export const MainLayout = () => {
   const location = useLocation();
