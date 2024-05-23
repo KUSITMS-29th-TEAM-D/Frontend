@@ -15,6 +15,7 @@ import {
   DesignTestPage5,
 } from '@/pages/DesignTestPage';
 import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
+import { ExperienceRecommendPage } from '@/pages/ExperienceRecommendPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { OnboardingPage } from '@/pages/OnboardingPage';
@@ -32,9 +33,10 @@ export const Router = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<LoginPage />} />
           <Route path="/understand" element={<SelfUnderstandPage />} />
-          <Route element={<MemberPrivateRoute />}>
-            <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
-          </Route>
+
+          <Route element={<MemberPrivateRoute />}></Route>
+          <Route path="/program" element={<ExperienceRecommendPage />} />
+          <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
         </Route>
       </Route>
       <Route path="test" element={<TestLayout />}>
