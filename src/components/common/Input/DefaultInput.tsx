@@ -1,36 +1,44 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import styled, { css } from 'styled-components';
 
 interface DefaultInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   warning?: boolean;
   children?: React.ReactNode;
+  width?: string | number; // 타입 수정
 }
 
-export const DefaultInput = ({ warning = false, children, ...props }: DefaultInputProps) => {
-  const [isFocused, setIsFocused] = useState(false);
+export const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(
+  ({ warning = false, width, children, ...props }, ref) => {
+    const [isFocused, setIsFocused] = useState(false);
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
+    const handleFocus = () => {
+      setIsFocused(true);
+    };
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
+    const handleBlur = () => {
+      setIsFocused(false);
+    };
 
-  return (
-    <StyledContainer $warning={warning} $focused={isFocused}>
-      <input type="text" onFocus={handleFocus} onBlur={handleBlur} {...props} />
-      {children}
-    </StyledContainer>
-  );
-};
+    return (
+      <StyledContainer $warning={warning} $focused={isFocused} $width={width}>
+        <input type="text" onFocus={handleFocus} onBlur={handleBlur} ref={ref} {...props} />
+        {children}
+      </StyledContainer>
+    );
+  }
+);
 
-const StyledContainer = styled.div<{ $warning: boolean; $focused: boolean }>`
+const StyledContainer = styled.div<{
+  $warning: boolean;
+  $focused: boolean;
+  $width: string | number | undefined; // 타입 수정
+}>`
   display: flex;
   align-items: center;
   gap: 12px;
 
+  ${({ $width }) => $width && `width: ${$width};`}
   padding: 8px 12px;
 
   border: 1px solid transparent;

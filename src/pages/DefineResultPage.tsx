@@ -14,7 +14,7 @@ export const DefineResultPage = () => {
 
   useEffect(() => {
     personaAPI
-      .getPersona(defineId || '')
+      .getDefine(defineId || '')
       .then((res) => {
         setDefineResult(res.payload);
       })

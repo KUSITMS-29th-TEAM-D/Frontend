@@ -34,7 +34,7 @@ export const TesterMemberView = () => {
   );
 
   useEffect(() => {
-    personaAPI.getPersonaMember().then((res) => {
+    personaAPI.getDefineMember().then((res) => {
       setDefineResult(res.payload);
     });
   }, []);
