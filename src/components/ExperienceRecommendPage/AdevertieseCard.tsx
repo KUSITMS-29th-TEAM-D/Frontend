@@ -9,7 +9,7 @@ import { AdvertiseCarousel } from '@/components/ExperienceRecommendPage/Advertis
 const AdvertiseCard = () => {
   return (
     <AdvertiseCarousel>
-      <StyledLink to="/">
+      <StyledLink to="https://selpiece.framer.ai">
         <CardMedia>
           <video src={Video1} autoPlay muted loop playsInline />
         </CardMedia>
@@ -19,7 +19,7 @@ const AdvertiseCard = () => {
           <img src={Card2} alt="Card 2" />
         </CardMedia>
       </StyledLink>
-      <StyledLink to="/">
+      <StyledLink to="https://selpiece.vercel.app/program/branding/12">
         <CardMedia>
           <img src={Card3} alt="Card 3" />
         </CardMedia>
