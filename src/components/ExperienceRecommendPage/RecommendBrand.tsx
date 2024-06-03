@@ -63,9 +63,15 @@ export const RecommendBrand = ({ brandingInterest, brandingKeywords }: Recommend
 
     fetchData();
   }, [brandingInterest, brandingKeywords]);
-  const handleClick = (type: string, programsId: number) => {
-    navigate(`/program/${type}/${programsId}`);
+
+  const handleClick = (type: string, programsId: number, link: string) => {
+    if (type === 'type1') {
+      navigate(`/program/branding/${programsId}`);
+    } else if (type === 'type2') {
+      window.location.href = link;
+    }
   };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -81,7 +87,7 @@ export const RecommendBrand = ({ brandingInterest, brandingKeywords }: Recommend
             subtitle={item.name}
             $variant={item.link ? 'type2' : 'type1'}
             programsId={item.programsId}
-            onClick={() => handleClick(item.type, item.programsId)}
+            onClick={() => handleClick(item.link ? 'type2' : 'type1', item.programsId, item.link)}
           />
         ))}
       </Container>

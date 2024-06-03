@@ -56,8 +56,12 @@ export const WholeBrandView = () => {
     fetchData();
   }, []);
 
-  const handleClick = (type: string, programsId: number) => {
-    navigate(`/program/${type}/${programsId}`);
+  const handleClick = (type: string, programsId: number, link: string) => {
+    if (type === 'type1') {
+      navigate(`/program/branding/${programsId}`);
+    } else if (type === 'type2') {
+      window.location.href = link;
+    }
   };
 
   if (error) {
@@ -75,7 +79,7 @@ export const WholeBrandView = () => {
             subtitle={item.name}
             $variant={item.link ? 'type2' : 'type1'}
             programsId={item.programsId}
-            onClick={() => handleClick(item.type, item.programsId)}
+            onClick={() => handleClick(item.link ? 'type2' : 'type1', item.programsId, item.link)}
           />
         ))}
       </Container>
