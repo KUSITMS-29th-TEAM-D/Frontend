@@ -58,7 +58,7 @@ const StyledContainer = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 100vh;
+  height: var(--full-height);
   padding: 20px;
   padding-top: 96px;
 

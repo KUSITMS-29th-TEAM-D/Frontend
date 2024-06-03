@@ -111,7 +111,7 @@ const Styled2Container = styled.div`
 `;
 
 export const ViewContainer = styled.div`
-  height: 100vh;
+  height: var(--full-height);
 
   background-image: url(${backgroundImg});
   background-size: cover;

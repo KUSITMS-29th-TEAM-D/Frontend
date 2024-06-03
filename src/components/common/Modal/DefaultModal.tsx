@@ -37,8 +37,8 @@ const StyledOverlay = styled.div`
   left: 0;
   z-index: 100;
 
-  width: 100vw;
-  height: 100vh;
+  width: var(--full-width);
+  height: var(--full-height);
 
   display: flex;
   align-items: center;

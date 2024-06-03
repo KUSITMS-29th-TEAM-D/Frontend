@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -62,8 +62,8 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   left: 0;
   z-index: 100;
 
-  width: 100vw;
-  height: 100vh;
+  width: var(--full-width);
+  height: var(--full-height);
   //padding: 24px;
   background: ${({ theme }) => theme.color.bgModal};
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);

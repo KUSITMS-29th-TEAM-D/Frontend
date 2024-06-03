@@ -54,7 +54,7 @@ export const OnboardingPage = () => {
 };
 
 const StyledContainer = styled.div`
-  min-height: 100vh;
+  min-height: var(--full-height);
   background-image: url(${BackgroundImage});
   background-size: cover;
   display: flex;

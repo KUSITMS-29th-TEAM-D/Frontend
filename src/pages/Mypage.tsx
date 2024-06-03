@@ -25,7 +25,7 @@ export const MyPage1 = () => {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div style={{ display: 'flex', height: 'var(--full-height)' }}>
       <MyPageSidebar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
       <div style={{ flex: 1, overflowY: 'auto' }}>{renderContent()}</div>
     </div>

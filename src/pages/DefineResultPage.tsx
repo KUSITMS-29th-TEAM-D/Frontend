@@ -34,13 +34,13 @@ export const DefineResultPage = () => {
 };
 
 const StyledLoading = styled.div`
-  height: 100vh;
+  height: var(--full-height);
   padding-top: 90px;
   padding-left: 20px;
 `;
 
 const StyledContainer = styled.section`
-  min-height: 100vh;
+  min-height: var(--full-height);
   padding: 76px 64px 40px 64px;
 
   background: ${({ theme }) =>

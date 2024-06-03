@@ -37,7 +37,7 @@ const ViewContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: var(--full-height);
   background-image: url(${backgroundImg});
   background-size: cover;
   background-position: calc(50% + 70px) center;

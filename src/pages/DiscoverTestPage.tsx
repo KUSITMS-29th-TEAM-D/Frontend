@@ -82,7 +82,7 @@ export const DiscoverTestPage = () => {
 };
 
 const StyledContainer = styled.div`
-  height: 100vh;
+  height: var(--full-height);
 `;
 
 const StyledInnerContainer = styled.div`

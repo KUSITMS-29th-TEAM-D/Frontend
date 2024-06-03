@@ -165,7 +165,7 @@ export const DiscoverResultPage = () => {
 
 const StyledContainer = styled.div`
   padding-top: 76px;
-  min-height: 100vh;
+  min-height: var(--full-height);
 
   display: flex;
   justify-content: center;

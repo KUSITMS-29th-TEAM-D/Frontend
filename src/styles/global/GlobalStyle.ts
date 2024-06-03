@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import reset from 'styled-reset';
+import './zoom.css';
 
 export const GlobalStyle = createGlobalStyle`
 ${reset}

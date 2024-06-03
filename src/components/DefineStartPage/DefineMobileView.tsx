@@ -129,7 +129,7 @@ const ViewContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: var(--full-height);
   min-height: 700px;
   background-image: url(${backgroundImg});
   background-size: cover;
