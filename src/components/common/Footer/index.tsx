@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '@/assets/logos/mainLogo.svg';
@@ -24,9 +23,15 @@ export const Footer = () => {
         <Logo className="logo" />
         <ul>
           {MENU_LIST.map((menu) => (
-            <Link to={menu.path} key={menu.title} className="menu">
+            <a
+              href={menu.path}
+              key={menu.title}
+              className="menu"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <li>{menu.title}</li>
-            </Link>
+            </a>
           ))}
         </ul>
       </StyledMenuContainer>
@@ -54,6 +59,8 @@ const StyledContainer = styled.footer`
   .logo {
     width: 135px;
   }
+
+  width: 100%;
 `;
 
 const StyledMenuContainer = styled.div`

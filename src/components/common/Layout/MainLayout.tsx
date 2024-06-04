@@ -8,10 +8,10 @@ const FOOTER_VISIBLE_PATHS = ['/', '/understand', '/program'];
 export const MainLayout = () => {
   const location = useLocation();
   return (
-    <>
+    <div style={{ minWidth: 'max-content' }}>
       <TopNavigation />
       <Outlet />
       {FOOTER_VISIBLE_PATHS.includes(location.pathname) && <Footer />}
-    </>
+    </div>
   );
 };
