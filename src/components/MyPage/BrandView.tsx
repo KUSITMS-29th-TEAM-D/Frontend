@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import { personaAPI } from '@/apis/personaAPI';
 import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { ReactComponent as ArrowRight } from '@/assets/icons/arrowRight.svg';
 import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
 import { ReactComponent as InfoIcon } from '@/assets/icons/info.svg';
-import { ReactComponent as BrandLogoImage } from '@/assets/logos/brandLogo.svg';
 import Card from '@/components/MyPage/Card';
 import DateCard from '@/components/MyPage/DateCard';
 import { BrandChip } from '@/components/common/Chip/BrandChip';
 import { BrandCardModal } from '@/components/common/Modal/BrandCardModal';
+import { PERSONA } from '@/constants/persona';
+import { PIECE_IMAGE } from '@/constants/piece';
 import { userService } from '@/services/UserService';
+import { DefineResult } from '@/types/test.type';
 
 interface DateCardProps {
   title: string;
@@ -24,6 +27,13 @@ export const BrandView = () => {
   const [readyCards, setReadyCards] = useState<DateCardProps[]>([]);
   const [progressCards, setProgressCards] = useState<DateCardProps[]>([]);
   const [completeCards, setCompleteCards] = useState<DateCardProps[]>([]);
+  const [defineResult, setDefineResult] = useState<DefineResult | null>(null);
+
+  useEffect(() => {
+    personaAPI.getDefineMember().then((res) => {
+      setDefineResult(res.payload);
+    });
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -49,9 +59,18 @@ export const BrandView = () => {
       <BrandHeader>
         <HeaderLeft>
           <BrandLogo>
-            <BrandLogoImage />
+            {defineResult && (
+              <img
+                src={
+                  PIECE_IMAGE.find((card) => card.name === defineResult.name.toLowerCase())?.[
+                    'image'
+                  ]
+                }
+                alt={defineResult?.name}
+              />
+            )}
           </BrandLogo>
-          <BrandTitle>브랜드 이름</BrandTitle>
+          <BrandTitle>{defineResult ? PERSONA[defineResult.name] : ''}</BrandTitle>
           <BrandSubtitle>상반기 100만 구독자 확보</BrandSubtitle>
         </HeaderLeft>
         <HeaderRight>
@@ -94,7 +113,7 @@ export const BrandView = () => {
             <CardHeader>
               <BrandChip>준비</BrandChip>
               <StyledAdd onClick={openModal}>
-                <AddIcon width="42px" height="42px" />
+                <AddIcon width="42px" height="42px" cursor="pointer" />
               </StyledAdd>
             </CardHeader>
             {Dummy3.map((item, index) => (
@@ -185,6 +204,7 @@ const BrandHeader = styled.div`
   align-items: center;
   display: inline-flex;
 `;
+
 const HeaderLeft = styled.div`
   justify-content: flex-start;
   align-items: center;

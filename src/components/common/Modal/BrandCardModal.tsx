@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import Scrollbar from '@/components/Scrollbar';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 interface ModalProps {
@@ -63,7 +64,7 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
           <FrameRow>
             <Label>진행상태</Label>
             <PlainButton
-              variant={status === '준비' ? 'disabled' : 'gray'}
+              variant={status === '준비' ? 'gray' : 'disabled'}
               height="48px"
               width="87px"
               onClick={() => setStatus('준비')}
@@ -71,7 +72,7 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
               준비
             </PlainButton>
             <PlainButton
-              variant={status === '진행중' ? 'disabled' : 'gray'}
+              variant={status === '진행중' ? 'gray' : 'disabled'}
               height="48px"
               width="87px"
               onClick={() => setStatus('진행중')}
@@ -79,7 +80,7 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
               진행
             </PlainButton>
             <PlainButton
-              variant={status === '완료' ? 'disabled' : 'gray'}
+              variant={status === '완료' ? 'gray' : 'disabled'}
               height="48px"
               width="74px"
               onClick={() => setStatus('완료')}
@@ -158,6 +159,10 @@ const Title = styled.input`
   color: ${({ theme }) => `${theme.color.gray300}`};
   ${({ theme }) => theme.font.desktop.title2};
   word-wrap: break-word;
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.color.gray300}`};
+  }
 `;
 
 const Frame = styled.div`
@@ -189,20 +194,37 @@ const Input = styled.input`
   align-items: center;
   gap: 12px;
   display: flex;
+
+  ${({ theme }) => theme.font.desktop.body2r};
+  color: ${({ theme }) => `${theme.color.gray700}`};
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.color.gray300}`};
+  }
 `;
 
-const DescriptionInput = styled.input`
-  align-self: stretch;
+const DescriptionInput = styled.textarea`
+  resize: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
   width: 100%;
   height: 116px;
   padding: 16px;
   background: ${({ theme }) => `${theme.color.gray50}`};
   border-radius: 8px;
   border: 2px solid #efefef;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 12px;
-  display: inline-flex;
+
+  ${({ theme }) => theme.font.desktop.body2r};
+  color: ${({ theme }) => `${theme.color.gray700}`};
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.color.gray300}`};
+  }
+
+  overflow-y: auto;
+  ${Scrollbar}
 `;
 
 const Label = styled.div`
