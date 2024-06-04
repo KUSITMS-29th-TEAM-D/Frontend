@@ -20,53 +20,54 @@ export const TopNavigation = () => {
   const location = useLocation();
 
   return (
-    <StyledContainer>
-      <Link to="/">
-        <MainLogo className="logo" />
-      </Link>
-      {!MENU_VISIBLE_PATHS.includes(location.pathname) && (
-        <StyledMenuContainer>
-          {NAVIGATION_MENU.map((item) => (
-            <StyledMenuButton
-              key={item.menu}
-              $active={location.pathname.includes(item.path)}
-              onClick={() => {
-                navigate(item.path);
-              }}
-            >
-              {item.menu}
-            </StyledMenuButton>
-          ))}
-          {loggedIn ? (
-            <StyledUserButton>
-              <UserIcon />
-            </StyledUserButton>
-          ) : (
-            <StyledMenuButton
-              $filled
-              $width="100px"
-              $active={false}
-              onClick={() => {
-                navigate('auth');
-              }}
-            >
-              로그인
-            </StyledMenuButton>
-          )}
-        </StyledMenuContainer>
-      )}
-      {!MENU_VISIBLE_PATHS.includes(location.pathname) && (
-        <StyledSideNavButton
-          onClick={() => {
-            //TODO: 마이페이지로 이동하도록 수정
-            setShowSideNav((prev) => !prev);
-          }}
-        >
-          <MenuIcon />
-        </StyledSideNavButton>
-      )}
+    <>
+      <StyledContainer>
+        <Link to="/">
+          <MainLogo className="logo" />
+        </Link>
+        {!MENU_VISIBLE_PATHS.includes(location.pathname) && (
+          <StyledMenuContainer>
+            {NAVIGATION_MENU.map((item) => (
+              <StyledMenuButton
+                key={item.menu}
+                $active={location.pathname.includes(item.path)}
+                onClick={() => {
+                  navigate(item.path);
+                }}
+              >
+                {item.menu}
+              </StyledMenuButton>
+            ))}
+            {loggedIn ? (
+              <StyledUserButton onClick={() => navigate('/mypage')}>
+                <UserIcon />
+              </StyledUserButton>
+            ) : (
+              <StyledMenuButton
+                $filled
+                $width="100px"
+                $active={false}
+                onClick={() => {
+                  navigate('auth');
+                }}
+              >
+                로그인
+              </StyledMenuButton>
+            )}
+          </StyledMenuContainer>
+        )}
+        {!MENU_VISIBLE_PATHS.includes(location.pathname) && (
+          <StyledSideNavButton
+            onClick={() => {
+              setShowSideNav((prev) => !prev);
+            }}
+          >
+            <MenuIcon />
+          </StyledSideNavButton>
+        )}
+      </StyledContainer>
       {showSideNav && <SideNavigation isLoggedIn={loggedIn} setOpen={setShowSideNav} />}
-    </StyledContainer>
+    </>
   );
 };
 
@@ -81,6 +82,7 @@ const StyledContainer = styled.header`
   z-index: 10;
 
   width: 100%;
+
   padding: 20px 42px;
 
   border-bottom: 1px solid ${({ theme }) => theme.color.primary100};
