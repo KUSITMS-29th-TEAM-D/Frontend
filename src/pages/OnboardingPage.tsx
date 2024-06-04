@@ -25,7 +25,7 @@ export const OnboardingPage = () => {
     if (user !== 'PRE_MEMBER') {
       navigate('/');
     }
-  }, []);
+  }, [user]);
 
   const nextClickHandler = (nextStep: string) => {
     setStep(nextStep);

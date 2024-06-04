@@ -13,7 +13,7 @@ import {
 import { KeywordChip } from '@/components/common/Chip/KeywordChip';
 import { IMAGE_KEYWORD_LIST } from '@/constants/onboarding';
 import { onboardingState } from '@/recoil/onboardingState';
-import { authService } from '@/services/AuthService';
+import { tokenService } from '@/services/TokenService';
 import { userService } from '@/services/UserService';
 
 export const SetupBranding = () => {
@@ -24,9 +24,9 @@ export const SetupBranding = () => {
     userAPI
       .register(onboarding)
       .then((res) => {
-        authService.setAuthToken(res.payload.access_token);
+        tokenService.setAccessToken(res.payload.access_token);
         userService.updateUserNickname(res.payload.nickname);
-        authService.deleteRegisterToken();
+        tokenService.removeRegisterToken();
         navigate('/');
       })
       .catch(() => {
