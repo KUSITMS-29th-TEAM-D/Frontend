@@ -20,12 +20,13 @@ export const PersonaView = () => {
   const [isFront, setIsFront] = useState(true);
   const captureRef = useRef<HTMLImageElement>(null);
   const navigate = useNavigate();
+
   const settings = {
-    dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
+    variableWidth: true,
     arrows: false,
   };
 
@@ -186,7 +187,6 @@ const TopContainer = styled.div`
 const BottomContainer = styled.div`
   align-self: stretch;
   height: 627px;
-  //flex-grow: 1;
   padding: 24px;
   background-color: ${({ theme }) => `${theme.color.gray150}`};
   border-radius: 16px;
@@ -259,7 +259,7 @@ const BottomImageContainer = styled.div`
     width: 100%;
     height: 100%;
     background: var(--modal-bg, rgba(18, 18, 18, 0.36));
-    /* blur */
+
     backdrop-filter: blur(5px);
     position: absolute;
     top: 0;
@@ -282,6 +282,7 @@ const BottomImageContainer = styled.div`
 
     .text-container {
       margin-bottom: 20px;
+      text-align: center;
     }
   }
 `;

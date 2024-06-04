@@ -1,6 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { BrandView } from '@/components/MyPage/BrandView';
+import { MyExperienceView } from '@/components/MyPage/MyExperienceView';
+import { PersonaView } from '@/components/MyPage/PersonaView';
+import { SettingView } from '@/components/MyPage/SettingView';
 import { MainLayout } from '@/components/common/Layout/MainLayout';
+import { MyPageLayout } from '@/components/common/Layout/MyPageLayout';
 import { TestLayout } from '@/components/common/Layout/TestLayout';
 import { DefineResultPage } from '@/pages/DefineResultPage';
 import { DefineStartPage } from '@/pages/DefineStartPage';
@@ -21,7 +26,6 @@ import { ExperienceDetailPage } from '@/pages/ExperienceDetailPage';
 import { ExperienceRecommendPage } from '@/pages/ExperienceRecommendPage';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
-import { MyPage1 } from '@/pages/Mypage';
 import { OnboardingPage } from '@/pages/OnboardingPage';
 import { RedirectPage } from '@/pages/RedirectPage';
 import { SelfUnderstandPage } from '@/pages/SelfUnderstandPage';
@@ -39,7 +43,13 @@ export const Router = () => {
         <Route element={<MemberPrivateRoute />}>
           <Route path="/program" element={<ExperienceRecommendPage />} />
           <Route path="/program/:type/:id" element={<ExperienceDetailPage />} />
-          <Route path="/mypage" element={<MyPage1 />} />
+          <Route path="mypage" element={<MyPageLayout />}>
+            <Route index element={<Navigate to="brand" replace />} />
+            <Route path="brand" element={<BrandView />} />
+            <Route path="persona" element={<PersonaView />} />
+            <Route path="experience" element={<MyExperienceView />} />
+            <Route path="settings" element={<SettingView />} />
+          </Route>
         </Route>
       </Route>
       <Route path="test" element={<TestLayout />}>
@@ -69,7 +79,6 @@ export const Router = () => {
           </Route>
         </Route>
       </Route>
-
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
