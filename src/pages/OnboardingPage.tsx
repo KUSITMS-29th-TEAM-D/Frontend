@@ -58,8 +58,6 @@ const StyledContainer = styled.div`
   background-image: url(${BackgroundImage});
   background-size: cover;
   display: flex;
-
-  overflow-x: auto;
 `;
 
 const StyledStepSection = styled.section`

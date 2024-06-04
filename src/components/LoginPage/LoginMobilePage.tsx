@@ -40,7 +40,12 @@ const ViewContainer = styled.div`
   height: var(--full-height);
   background-image: url(${backgroundImg});
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: calc(50% + 70px) center;
+
+  @media (min-width: 1108px) {
+    background-position: center;
+  }
 `;
 
 const MainContainer = styled.div`
