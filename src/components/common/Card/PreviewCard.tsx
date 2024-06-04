@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PlainChip } from '@/components/common/Chip/PlainChip';
+import { userService } from '@/services/UserService';
 
 interface PreviewCardProps {
   imageUrl: string;
@@ -11,8 +12,47 @@ interface PreviewCardProps {
 }
 
 export const PreviewCard = ({ imageUrl, title, keywords, path }: PreviewCardProps) => {
+  const userState = userService.getUserState();
+  const isExternal = path && (path.startsWith('http://') || path.startsWith('https://'));
+
+  const CardLink = ({ children }: { children: React.ReactNode }) => {
+    if (isExternal) {
+      return (
+        <a href={path} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      );
+    } else {
+      if (userState === 'NON_MEMBER') {
+        return (
+          <div
+            onClick={() => {
+              window.alert('로그인이 필요한 서비스입니다.');
+            }}
+          >
+            {children}
+          </div>
+        );
+      }
+
+      if (userState === 'PRE_MEMBER') {
+        return (
+          <div
+            onClick={() => {
+              window.alert('온보딩 진행 후 이용 가능합니다.');
+            }}
+          >
+            {children}
+          </div>
+        );
+      }
+
+      return <Link to={path || ''}>{children}</Link>;
+    }
+  };
+
   return (
-    <Link to={path ? path : ''}>
+    <CardLink>
       <StyledContainer>
         <StyledPreview $url={imageUrl} />
         <StyledInformation>
@@ -26,7 +66,7 @@ export const PreviewCard = ({ imageUrl, title, keywords, path }: PreviewCardProp
           </div>
         </StyledInformation>
       </StyledContainer>
-    </Link>
+    </CardLink>
   );
 };
 
