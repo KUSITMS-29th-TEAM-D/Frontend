@@ -43,7 +43,7 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <StyledContainer isOpen={isOpen}>
+    <StyledContainer $isOpen={isOpen}>
       <Container>
         <Title
           type="text"
@@ -122,7 +122,7 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
   );
 };
 
-const StyledContainer = styled.div<{ isOpen: boolean }>`
+const StyledContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

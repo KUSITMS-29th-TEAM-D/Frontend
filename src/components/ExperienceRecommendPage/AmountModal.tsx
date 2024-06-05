@@ -23,7 +23,7 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
   };
 
   return (
-    <ModalOverlay isOpen={isOpen}>
+    <ModalOverlay $isOpen={isOpen}>
       <ModalContent>
         <ModalTitle>금액 선택</ModalTitle>
         <InputContainer>
@@ -56,7 +56,7 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
   );
 };
 
-const ModalOverlay = styled.div<{ isOpen: boolean }>`
+const ModalOverlay = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

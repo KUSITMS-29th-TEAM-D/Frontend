@@ -86,6 +86,7 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
           <StyledChipContainer>
             {Object.keys(CATEGORY_LIST).map((category) => (
               <CategoryButton
+                key={category}
                 active={selectedCategory === category}
                 onClick={() => setSelectedCategory(category)}
               >
@@ -135,7 +136,7 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
                     {selectedCategory !== 'all' &&
                       summary &&
                       summary[selectedCategory].map((item) => (
-                        <SummaryCard category={selectedCategory} descriptions={[item]} />
+                        <SummaryCard key={item} category={selectedCategory} descriptions={[item]} />
                       ))}
                   </div>
                 </ResultSection>
