@@ -5,22 +5,22 @@ import styled from 'styled-components';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 interface AmountModalProps {
-  isOpen: boolean;
+  isopen: boolean;
   onApply: (min: number, max: number) => void;
   onClose: () => void;
 }
 
-export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
+export const AmountModal = ({ isopen, onApply, onClose }: AmountModalProps) => {
   const [minAmount, setMinAmount] = useState(0);
   const [maxAmount, setMaxAmount] = useState(20000);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    document.body.style.overflow = isopen ? 'hidden' : 'auto';
 
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isOpen]);
+  }, [isopen]);
 
   const handleApply = () => {
     onApply(minAmount, maxAmount);
@@ -28,7 +28,7 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
   };
 
   return (
-    <ModalOverlay isOpen={isOpen}>
+    <ModalOverlay isopen={isopen}>
       <ModalContent>
         <ModalTitle>금액 선택</ModalTitle>
         <InputContainer>
@@ -61,7 +61,7 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
   );
 };
 
-const ModalOverlay = styled.div<{ isOpen: boolean }>`
+const ModalOverlay = styled.div<{ isopen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

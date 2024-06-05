@@ -12,7 +12,6 @@ export const AmountBox = ({ onApply }: AmountBoxProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [minAmount, setMinAmount] = useState(0);
   const [maxAmount, setMaxAmount] = useState(20000);
-
   const handleApply = (min: number, max: number) => {
     setMinAmount(min);
     setMaxAmount(max);
@@ -27,7 +26,7 @@ export const AmountBox = ({ onApply }: AmountBoxProps) => {
           <Label>금액</Label>
           <AmountRange>
             <Amount>{minAmount}</Amount>
-            <Amount isMain>~</Amount>
+            <Amount className="between">~</Amount>
             <Amount>{maxAmount}</Amount>
             <Currency>원</Currency>
           </AmountRange>
@@ -40,7 +39,7 @@ export const AmountBox = ({ onApply }: AmountBoxProps) => {
         <AmountModal
           onApply={handleApply}
           onClose={() => setIsModalOpen(false)}
-          isOpen={isModalOpen}
+          isopen={isModalOpen}
         />
       )}
     </>
@@ -80,15 +79,13 @@ const AmountRange = styled.div`
   justify-content: flex-end;
 `;
 
-const Amount = styled.div<{ isMain?: boolean }>`
+const Amount = styled.div<{ ismain?: boolean }>`
   color: ${({ theme }) => theme.color.gray300};
   ${({ theme }) => theme.font.desktop.body1m};
 
-  ${({ isMain }) =>
-    isMain &&
-    `
-    color: #333333;
-  `}
+  &.between {
+    color: ${({ theme }) => theme.color.gray700};
+  }
 `;
 
 const Currency = styled.div`
