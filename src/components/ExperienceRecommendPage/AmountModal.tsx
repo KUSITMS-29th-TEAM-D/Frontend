@@ -16,10 +16,15 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [isOpen]);
 
   const handleApply = () => {
     onApply(minAmount, maxAmount);
+    onClose();
   };
 
   return (
