@@ -20,7 +20,7 @@ export const SpeechBox = ({ children, isUser = false, isContinuous, isEnd }: Spe
         <div style={{ width: '40px' }} />
       ) : isUser ? (
         <UserProfile>
-          <User />
+          <User width={24} height={24} />
         </UserProfile>
       ) : (
         <img src={ChatBotProfile} alt="profile" width={40} height={40} />

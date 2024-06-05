@@ -40,7 +40,7 @@ export const TopNavigation = () => {
             ))}
             {loggedIn ? (
               <StyledUserButton onClick={() => navigate('/mypage')}>
-                <UserIcon />
+                <UserIcon width={24} height={24} />
               </StyledUserButton>
             ) : (
               <StyledMenuButton
@@ -83,7 +83,7 @@ const StyledContainer = styled.header`
 
   width: 100%;
 
-  padding: 20px 42px;
+  padding: 18px 42px;
 
   border-bottom: 1px solid ${({ theme }) => theme.color.primary100};
   background: rgba(255, 255, 255, 0.6);

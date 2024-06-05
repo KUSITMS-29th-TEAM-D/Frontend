@@ -120,7 +120,7 @@ export const PersonaView = () => {
 };
 
 const StyledContainer = styled.div`
-  padding-top: 81px;
+  padding-top: var(--top-navigation-height);
 `;
 
 const StyledInnerContainer = styled.div`

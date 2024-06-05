@@ -32,7 +32,7 @@ export const MypageSidebar = () => {
 const SidebarContainer = styled.div`
   width: 196px;
   height: auto;
-  padding-top: 81px;
+  padding-top: var(--top-navigation-height);
 
   background-color: ${({ theme }) => `${theme.color.white}`};
   border-right: 2px ${({ theme }) => `${theme.color.gray150}`} solid;

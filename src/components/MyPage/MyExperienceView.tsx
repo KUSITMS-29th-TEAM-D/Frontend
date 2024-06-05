@@ -122,7 +122,7 @@ export const MyExperienceView = () => {
 const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 81px;
+  padding-top: var(--top-navigation-height);
   padding-bottom: 52px;
 `;
 
