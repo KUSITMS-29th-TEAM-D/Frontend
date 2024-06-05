@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { personaAPI } from '@/apis/personaAPI';
+import { ResultView } from '@/components/DiscoverResultPage/ResultView';
 import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplate';
-import { DiscoverResultPage } from '@/pages/DiscoverResultPage';
 import { userService } from '@/services/UserService';
 
 export const DiscoverResultView = () => {
@@ -28,7 +28,7 @@ export const DiscoverResultView = () => {
   }, []);
 
   if (isTest) {
-    return <DiscoverResultPage />;
+    return <ResultView />;
   }
 
   return <NoResultSection tab="Discover" />;
