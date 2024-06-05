@@ -17,6 +17,8 @@ export const RedirectPage = () => {
     const accessToken = params.get('access_token');
     const registerToken = params.get('register_token');
 
+    sessionStorage.clear();
+
     if (registerToken) {
       tokenService.setRegisterToken(registerToken);
       userService.setUser({ nickname: '', is_test: false });

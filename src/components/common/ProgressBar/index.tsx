@@ -5,6 +5,16 @@ interface ProgressBarProps {
   $totalSteps: number;
 }
 
+const ProgressBar = ({ $currentStep, $totalSteps }: ProgressBarProps) => {
+  return (
+    <ProgressLongBar>
+      <Progress $currentStep={$currentStep} $totalSteps={$totalSteps} />
+    </ProgressLongBar>
+  );
+};
+
+export default ProgressBar;
+
 const ProgressLongBar = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.color.gray50};
@@ -17,14 +27,5 @@ const Progress = styled.div<ProgressBarProps>`
   padding: 0;
   background-color: ${(props) => props.theme.color.primary500};
   border-radius: 12px;
+  transition: width 0.5s ease-out;
 `;
-
-const ProgressBar = ({ $currentStep, $totalSteps }: ProgressBarProps) => {
-  return (
-    <ProgressLongBar>
-      <Progress $currentStep={$currentStep} $totalSteps={$totalSteps} />
-    </ProgressLongBar>
-  );
-};
-
-export default ProgressBar;

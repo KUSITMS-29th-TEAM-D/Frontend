@@ -87,6 +87,7 @@ class TokenService {
 
   onLogout = () => {
     this.removeData();
+    sessionStorage.clear();
     window.location.href = '/';
   };
 }
