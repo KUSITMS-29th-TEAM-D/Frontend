@@ -52,7 +52,7 @@ export const WholeUnderstandView = () => {
     if (type === 'type1') {
       navigate(`/program/self-understanding/${programsId}`);
     } else if (type === 'type2') {
-      window.location.href = link;
+      window.open(link, '_blank');
     }
   };
 

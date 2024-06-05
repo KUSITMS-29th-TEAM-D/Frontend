@@ -60,7 +60,7 @@ export const WholeBrandView = () => {
     if (type === 'type1') {
       navigate(`/program/branding/${programsId}`);
     } else if (type === 'type2') {
-      window.location.href = link;
+      window.open(link, '_blank');
     }
   };
 
