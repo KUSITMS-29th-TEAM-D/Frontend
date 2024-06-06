@@ -53,11 +53,12 @@ const SliderWrapper = styled.div<{ $gap: string }>`
     gap: ${({ $gap }) => $gap};
     li {
       margin: 0;
-      width: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
+      width: 16px;
+      height: 16px;
       button {
         &:before {
           font-size: 0;
@@ -70,10 +71,16 @@ const SliderWrapper = styled.div<{ $gap: string }>`
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
+          transition:
+            width 0.3s,
+            height 0.3s,
+            background-color 0.3s,
+            border-radius 0.3s;
         }
       }
     }
     .slick-active {
+      width: 32px;
       button:before {
         width: 32px;
         height: 16px;
