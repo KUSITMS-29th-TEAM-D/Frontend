@@ -46,7 +46,7 @@ const SliderWrapper = styled.div<{ $gap: string }>`
   }
 
   .slick-dots {
-    bottom: 24px;
+    bottom: 35px;
     display: flex !important;
     justify-content: center;
     align-items: center;
@@ -80,9 +80,9 @@ const SliderWrapper = styled.div<{ $gap: string }>`
       }
     }
     .slick-active {
-      width: 32px;
+      width: 42px;
       button:before {
-        width: 32px;
+        width: 42px;
         height: 16px;
         background-color: ${({ theme }) => theme.color.white};
         border-radius: 8px;
