@@ -8,26 +8,44 @@ import { SummaryCard } from '@/components/DiscoverTestPage/SummaryCard';
 import Scrollbar from '@/components/Scrollbar';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 import { NotFinishChatModal } from '@/components/common/Modal/NotFinishChatModal';
+import { CATEGORY_TYPE } from '@/constants/discover';
 import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
 import { userService } from '@/services/UserService';
+import { DiscoverSummary } from '@/types/test.type';
 
 interface RightSidebarProps {
-  summaryValue: { [key: string]: string[] };
+  summaryValue: { [key: string]: DiscoverSummary[] };
   endCategory: string[];
+  deleteSummary: () => void;
 }
 
-export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) => {
+export const RightSidebar = ({ summaryValue, endCategory, deleteSummary }: RightSidebarProps) => {
   const [activeNotFinishModal, setActiveNotFinishModal] = useState(false);
   const [, setLoading] = useRecoilState(loadingState);
   const [loadingHandler, setLoadingHandler] = useRecoilState(loadingHandlerState);
   const navigate = useNavigate();
 
+  const handleGoToResult = () => {
+    setLoading({ show: true, speed: 50 });
+    setLoadingHandler({
+      ...loadingHandler,
+      handleCompleted: () => {
+        deleteSummary();
+        Object.keys(CATEGORY_TYPE).forEach((category) => {
+          window.sessionStorage.removeItem(`selpiece-discover-${category}`);
+        });
+        window.sessionStorage.removeItem('selpiece-discover-summary');
+        navigate(`/test/discover/result`);
+      },
+    });
+  };
+
   const handleResultButton = () => {
     if (endCategory.length < 4) {
       setActiveNotFinishModal(true);
     } else {
-      setLoading({ show: true, speed: 50 });
+      handleGoToResult();
     }
   };
 
@@ -40,13 +58,7 @@ export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) =
           }}
           onConfirm={() => {
             setActiveNotFinishModal(false);
-            setLoading({ show: true, speed: 50 });
-            setLoadingHandler({
-              ...loadingHandler,
-              handleCompleted: () => {
-                navigate(`/test/discover/result`);
-              },
-            });
+            handleGoToResult();
           }}
           endCategory={endCategory}
         />
@@ -54,15 +66,15 @@ export const RightSidebar = ({ summaryValue, endCategory }: RightSidebarProps) =
       <StyledContainer>
         <StyledSummaryContainer>
           <div className="title">{userService.getUserNickname()}님의 답변을 요약중이에요!</div>
-          {Object.keys(summaryValue).map(
-            (key, index) =>
-              summaryValue[key].length > 0 && (
-                <SummaryCard
-                  key={`${key}-${index}`}
-                  category={key}
-                  descriptions={summaryValue[key]}
-                />
-              )
+          {Object.keys(summaryValue).map((category) =>
+            summaryValue[category].map((summary) => (
+              <SummaryCard
+                key={summary.question}
+                category={category}
+                question={summary.question}
+                answer={summary.answer}
+              />
+            ))
           )}
         </StyledSummaryContainer>
         <StyledButtonContainer>

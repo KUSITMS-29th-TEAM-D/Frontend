@@ -14,6 +14,7 @@ import { DefaultInput } from '@/components/common/Input/DefaultInput';
 import { ResetChatModal } from '@/components/common/Modal/ResetChatModal';
 import { CATEGORY_TYPE } from '@/constants/discover';
 import { useChatSessionStorage } from '@/hooks/useChatSessionStorage';
+import { DiscoverSummary } from '@/types/test.type';
 import { ChattingList, transformDataToMessages } from '@/utils/transformDataToMessages';
 
 const NOTICE =
@@ -24,7 +25,10 @@ interface ChattingBoxProps {
   endCategory: string[];
   setEndCategory: (endCategory: string[]) => void;
   resetSummary: (category: string) => void;
-  updateSummary: (category: string, updateFunction: (prevSummary: string[]) => string[]) => void;
+  updateSummary: (
+    category: string,
+    updateFunction: (prevSummary: DiscoverSummary[]) => DiscoverSummary[]
+  ) => void;
 }
 
 const defaultOptions = {
@@ -43,6 +47,7 @@ export const ChattingBox = ({
   resetSummary,
   updateSummary,
 }: ChattingBoxProps) => {
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   const [activeResetModal, setActiveResetModal] = useState(false);
   const [resetCategory, setResetCategory] = useState<string | null>(null); // 추가된 상태
   const [loading, setLoading] = useState(false);
@@ -65,11 +70,17 @@ export const ChattingBox = ({
     if (selectedCategory !== '' && categoryValue.questionCount < 3) {
       try {
         setLoading(true);
-        const res = await personaAPI.getQuestion(selectedCategory);
-        setChattingId(res.payload.chatting_id);
+        const response = await personaAPI.getQuestion(selectedCategory);
+        setChattingId(response.payload.chatting_id);
+
+        const questionParts = response.payload.question.split('\n');
         updateChattingList((prev) => [
           ...prev,
-          { type: 'question', text: res.payload.question, user: 'chatbot' },
+          ...questionParts.map((part: string) => ({
+            type: 'question',
+            text: part,
+            user: 'chatbot',
+          })),
         ]);
       } catch (error) {
         window.alert('채팅을 불러오는데 실패했습니다.');
@@ -84,13 +95,13 @@ export const ChattingBox = ({
     try {
       const res = await personaAPI.getDefaultChatting(selectedCategory);
       const transformedMessages = transformDataToMessages(res.payload);
+      setInitialDataLoaded(true);
       setChattingList(transformedMessages);
+
       const messageCount = Object.keys(res.payload).length;
       setQuestionCount(messageCount);
-      return messageCount;
     } catch (error) {
-      console.log(error);
-      return 0;
+      null;
     }
   };
 
@@ -98,11 +109,20 @@ export const ChattingBox = ({
     try {
       setLoading(true);
       const response = await personaAPI.postAnswer(categoryValue.chattingId, input);
+
+      const reactionParts = response.payload.reaction.split('\n');
       updateChattingList((prev: ChattingList[]) => [
         ...prev,
-        { type: 'reaction', text: response.payload.reaction, user: 'chatbot' },
+        ...reactionParts.map((part: string) => ({
+          type: 'reaction',
+          text: part,
+          user: 'chatbot',
+        })),
       ]);
-      updateSummary(selectedCategory, (prev) => [...prev, response.payload.summary]);
+      updateSummary(selectedCategory, (prev) => [
+        ...prev,
+        { question: response.payload.question, answer: response.payload.summary },
+      ]);
       const newQuestionCount = categoryValue.questionCount + 1;
       setQuestionCount(newQuestionCount);
 
@@ -133,24 +153,18 @@ export const ChattingBox = ({
   };
 
   useEffect(() => {
+    // 처음 진입 시, 기본 대화 불러오기
+    setInitialDataLoaded(false);
     if (selectedCategory !== '') {
-      getHistory().then((res) => {
-        if (res !== undefined && res < 3) {
-          getNewQuestion();
-        }
-      });
+      getHistory();
     }
   }, [selectedCategory]);
 
   useEffect(() => {
-    if (
-      selectedCategory !== '' &&
-      categoryValue.questionCount < 3 &&
-      categoryValue.questionCount > 0
-    ) {
+    if (initialDataLoaded && selectedCategory !== '' && categoryValue.questionCount < 3) {
       getNewQuestion();
     }
-  }, [categoryValue.questionCount, selectedCategory]);
+  }, [categoryValue.questionCount, initialDataLoaded]);
 
   useEffect(() => {
     scrollToBottom();
@@ -162,6 +176,7 @@ export const ChattingBox = ({
         <ResetChatModal
           onClose={() => {
             setActiveResetModal(false);
+            navigate(`/test/discover/start?category=${resetCategory}`);
             setResetCategory(null);
           }}
           onReset={() => {
@@ -173,7 +188,6 @@ export const ChattingBox = ({
               setChattingList([]);
               setActiveResetModal(false);
               navigate(`/test/discover/start?category=${resetCategory}`);
-              getNewQuestion(); // 초기화 후 새 질문 가져오기
             });
           }}
           category={resetCategory}
@@ -200,6 +214,7 @@ export const ChattingBox = ({
                   setActiveResetModal(true);
                 }
               }}
+              disabled={loading}
             >
               {CATEGORY_TYPE[category].title}
             </CategoryButton>
@@ -221,9 +236,11 @@ export const ChattingBox = ({
             </SpeechBox>
           ))}
           {loading && (
-            <StyledLoading>
-              <Lottie animationData={defaultOptions.animationData} />
-            </StyledLoading>
+            <SpeechBox isContinuous={false} isEnd={true}>
+              <LottieWrapper>
+                <Lottie animationData={defaultOptions.animationData} />
+              </LottieWrapper>
+            </SpeechBox>
           )}
           <div ref={chatEndRef} /> {/* 스크롤 위치 조정을 위한 요소 */}
         </StyledChatting>
@@ -309,10 +326,6 @@ const StyledNotice = styled.div`
   white-space: pre-wrap;
 `;
 
-const StyledLoading = styled.div`
-  width: 60px;
-  padding: 10px;
-  margin-left: 52px;
-  border-radius: 0 8px 8px 8px;
-  background: ${({ theme }) => theme.color.white};
+const LottieWrapper = styled.div`
+  width: 40px;
 `;

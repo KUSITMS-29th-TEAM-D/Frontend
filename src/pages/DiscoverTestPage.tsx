@@ -21,7 +21,7 @@ export const DiscoverTestPage = () => {
   const navigate = useNavigate();
   const [loading] = useRecoilState(loadingState);
 
-  const { summaryValue, resetSummary, updateSummary } = useSummarySessionStorage();
+  const { summaryValue, resetSummary, updateSummary, deleteSummary } = useSummarySessionStorage();
 
   useEffect(() => {
     const category = categoryParams.get('category');
@@ -74,7 +74,11 @@ export const DiscoverTestPage = () => {
             resetSummary={resetSummary}
             updateSummary={updateSummary}
           />
-          <RightSidebar summaryValue={summaryValue} endCategory={endCategory} />
+          <RightSidebar
+            summaryValue={summaryValue}
+            endCategory={endCategory}
+            deleteSummary={deleteSummary}
+          />
         </StyledInnerContainer>
       </StyledContainer>
     </>

@@ -50,7 +50,6 @@ export const DefineTestPage = () => {
 
   const nextClickHandler = (nextStep: string) => {
     setStep(nextStep);
-    console.log(nextStep);
   };
 
   const handleSubmit = () => {

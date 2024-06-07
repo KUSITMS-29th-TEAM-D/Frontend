@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { personaAPI } from '@/apis/personaAPI';
 import { DISCOVER_CATEGORY_LIST } from '@/constants/discover';
 import { userService } from '@/services/UserService';
+import { DiscoverSummary } from '@/types/test.type';
 
 export const useGetDiscoverResult = () => {
   const [loading, setLoading] = useState(false);
@@ -58,7 +59,6 @@ export const useGetDiscoverKeywordResult = () => {
 
         responses.forEach((response, index) => {
           const categoryKey = Object.keys(DISCOVER_CATEGORY_LIST)[index];
-          console.log('Category:', categoryKey, 'Response:', response);
           if (response.status === 'fulfilled' && categoryKey) {
             updatedData[categoryKey] = response.value.payload.keywords;
           }
@@ -82,7 +82,14 @@ export const useGetDiscoverKeywordResult = () => {
 };
 
 export const useGetDiscoverSummary = () => {
-  const [data, setData] = useState<string[]>([]);
+  const [data, setData] = useState<{
+    [key: keyof typeof DISCOVER_CATEGORY_LIST]: DiscoverSummary[];
+  }>({
+    health: [],
+    career: [],
+    love: [],
+    leisure: [],
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -91,7 +98,7 @@ export const useGetDiscoverSummary = () => {
       setLoading(true);
       try {
         const response = await personaAPI.getDefaultSummary();
-        setData(response.payload.summary);
+        setData(response.payload);
       } catch (error) {
         setError(true);
       } finally {

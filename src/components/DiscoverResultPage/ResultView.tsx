@@ -3,73 +3,24 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import { SummaryCard } from '@/components/DiscoverTestPage/SummaryCard';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
-import { useGetDiscoverKeywordResult } from '@/hooks/useGetDiscoverResult';
+import { DISCOVER_CATEGORY_LIST } from '@/constants/discover';
+import { useGetDiscoverKeywordResult, useGetDiscoverSummary } from '@/hooks/useGetDiscoverResult';
 import { userService } from '@/services/UserService';
 import { moveDown, moveLeft, moveRight, moveUp } from '@/styles';
 
-export const DISCOVER_CATEGORY_LIST: { [key: string]: string } = {
-  all: '전체',
-  health: '건강',
-  career: '커리어',
-  love: '사랑',
-  leisure: '여가',
-};
-
 export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [summary, setSummary] = useState<{ [key: string]: string[] } | undefined>(undefined);
   const navigate = useNavigate();
 
   const { data: allKeywords, loading: allKeywordsLoading } = useGetDiscoverKeywordResult();
+  const { data: summary, loading: summaryLoading } = useGetDiscoverSummary();
 
-  if (allKeywordsLoading) {
+  if (allKeywordsLoading || summaryLoading) {
     return <div>Loading...</div>;
   }
-
-  /* useEffect(() => {
-    const fetchAllKeywords = async () => {
-      try {
-        const response = await personaAPI.getDiscoverAllKeyword();
-        setCategoryKeywords({ ...categoryKeywords, all: response.payload.keywords });
-      } catch (error) {
-        console.error('Failed to fetch all keywords:', error);
-      }
-    };
-
-    const fetchSummary = async () => {
-      try {
-        const response = await personaAPI.getDefaultSummary();
-        setSummary(response.payload);
-      } catch (error) {
-        console.error('Failed to fetch summary:', error);
-      }
-    };
-
-    fetchAllKeywords();
-    fetchSummary();
-  }, []); */
-
-  /*useEffect(() => {
-    const fetchCategoryKeywords = async (category: string) => {
-      if (categoryKeywords[category]) {
-        try {
-          const response = await personaAPI.getDiscoverCategoryKeyword(category);
-          setCategoryKeywords((prev) => ({
-            ...prev,
-            [category]: response.payload.keywords, // Assuming the payload has a keywords array
-          }));
-        } catch (error) {
-          console.error(`Failed to fetch keywords for category ${category}:`, error);
-        }
-      }
-    };
-
-    if (selectedCategory !== 'all') {
-      fetchCategoryKeywords(selectedCategory);
-    }
-  }, [selectedCategory, categoryKeywords]); */
 
   return (
     <StyledContainer $showSummary={showSummary}>
@@ -114,32 +65,38 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
                     <span className="highlight">상위 6개</span>만 보여주고 있어요!
                   </div>
                 )}
-                {/* {showSummary && (
-                <ResultSection>
-                  <div className="title">{`${userService.getUserNickname()}님과의 대화한 내용을 요약했어요!`}</div>
-                  <div className="card-container">
-                    {selectedCategory === 'all' &&
-                      summary &&
-                      Object.values(summary)
-                        .map((arr) => (arr.length > 0 ? arr[0] : ''))
-                        .map(
-                          (item, index) =>
-                            item !== null &&
-                            item !== '' && (
-                              <SummaryCard
-                                category={Object.keys(CATEGORY_LIST)[index + 1]}
-                                descriptions={[item]}
-                              />
-                            )
-                        )}
-                    {selectedCategory !== 'all' &&
-                      summary &&
-                      summary[selectedCategory].map((item) => (
-                        <SummaryCard key={item} category={selectedCategory} descriptions={[item]} />
-                      ))}
-                  </div>
-                </ResultSection>
-              )} */}
+                {showSummary && (
+                  <ResultSection>
+                    <div className="title">{`${userService.getUserNickname()}님과의 대화한 내용을 요약했어요!`}</div>
+                    <div className="card-container">
+                      {selectedCategory === 'all' &&
+                        summary &&
+                        Object.values(summary)
+                          .map((arr) => (arr.length > 0 ? arr[0] : ''))
+                          .map(
+                            (item, index) =>
+                              item !== null &&
+                              item !== '' && (
+                                <SummaryCard
+                                  category={Object.keys(DISCOVER_CATEGORY_LIST)[index + 1]}
+                                  question={item.question}
+                                  answer={item.answer}
+                                />
+                              )
+                          )}
+                      {selectedCategory !== 'all' &&
+                        summary &&
+                        summary[selectedCategory].map((item) => (
+                          <SummaryCard
+                            key={item.question}
+                            category={selectedCategory}
+                            question={item.question}
+                            answer={item.answer}
+                          />
+                        ))}
+                    </div>
+                  </ResultSection>
+                )}
               </div>
             ) : (
               <div className="no-result">

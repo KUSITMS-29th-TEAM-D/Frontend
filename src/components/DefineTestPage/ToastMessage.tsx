@@ -11,7 +11,6 @@ export const ToastMessage = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    console.log(toast.show, toast.isShown);
     if (toast.show && !toast.isShown) {
       const setShowTimeout = setTimeout(() => {
         setShow(true);
