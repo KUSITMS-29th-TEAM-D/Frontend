@@ -127,5 +127,5 @@ const ViewContainer = styled.div`
   background-size: cover;
   background-position: center;
 
-  zoom: 1.25;
+  //zoom: 1.25;
 `;

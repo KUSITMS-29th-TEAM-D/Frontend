@@ -20,7 +20,7 @@ export const DesignResultPage = () => {
 
   if (persona)
     return (
-      <ResultView style={{ minHeight: 'var(--full-height)' }} definition={persona.definition}>
+      <ResultView style={{ minHeight: '100vh' }} definition={persona.definition}>
         <PlainButton
           variant="gray"
           width="597px"

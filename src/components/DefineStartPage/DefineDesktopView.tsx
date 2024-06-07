@@ -114,5 +114,5 @@ export const ViewContainer = styled.div`
   display: flex;
   overflow-x: auto;
 
-  zoom: 1.25;
+  //zoom: 1.25;
 `;

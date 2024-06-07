@@ -139,6 +139,12 @@ const StyledContainer = styled.div<{ $showSummary: boolean }>`
   display: flex;
   justify-content: center;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 53.94%, #ccb3fd 100%), #fff;
+
+  ${({ $showSummary }) =>
+    $showSummary &&
+    css`
+      zoom: 1.25;
+    `};
 `;
 
 const StyledInnerContainer = styled.div`

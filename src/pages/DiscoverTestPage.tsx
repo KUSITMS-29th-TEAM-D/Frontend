@@ -86,7 +86,8 @@ export const DiscoverTestPage = () => {
 };
 
 const StyledContainer = styled.div`
-  height: var(--full-height);
+  //height: var(--full-height);
+  height: 100vh;
 `;
 
 const StyledInnerContainer = styled.div`

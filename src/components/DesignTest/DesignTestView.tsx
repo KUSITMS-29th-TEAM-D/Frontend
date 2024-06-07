@@ -20,7 +20,8 @@ const StyledContainer = styled.section`
   flex-direction: column;
 
   background: ${({ theme }) => `${theme.color.primary50}`};
-  min-height: var(--full-height);
+  //min-height: var(--full-height);
+  min-height: 100vh;
 
   padding: 118px 0 48px 0;
 

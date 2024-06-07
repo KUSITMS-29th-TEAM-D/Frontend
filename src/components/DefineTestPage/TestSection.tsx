@@ -113,7 +113,7 @@ const StyledContainer = styled.div`
   padding: 24px;
   padding-top: 100px;
 
-  zoom: 1.25;
+  //zoom: 1.25;
 `;
 
 const StyledContentContainer = styled.div`
