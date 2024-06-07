@@ -81,12 +81,13 @@ export const Router = () => {
 
   return (
     <Routes>
+      <Route path="/" element={<TestLayout />}>
+        <Route path="" element={<DefineTestPage />} />
+      </Route>
       <Route element={<MainLayout />}>
         <Route path="/login" element={<RedirectPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route path="/" element={<TestLayout />}>
-          <Route path="" element={<DefineTestPage />} />
-        </Route>
+
         <Route path="/home" element={<HomePage />} />
         <Route path="/auth" element={<LoginPage />} />
         <Route path="/understand" element={<SelfUnderstandPage />} />
