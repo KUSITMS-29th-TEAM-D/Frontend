@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { AmountBox } from '@/components/ExperienceRecommendPage/AmountBox';
+import { AmountFilterButton } from '@/components/common/Button/AmountFilterButton';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { SectionContainer } from '@/styles';
-import { ExperienceFilterCards, ExperienceCards } from '@/types/experience.type';
+import { ExperienceCards, ExperienceFilterCards } from '@/types/experience.type';
 
 import { RecommendUnderstand } from './RecommendUnderstand';
 
@@ -22,12 +22,12 @@ export const RecommendUnderstandView = ({
   backgroundColor,
 }: Omit<RecommendSectionTemplateProps, 'recommendItems'>) => {
   const [minAmount, setMinAmount] = useState(0);
-  const [maxAmount, setMaxAmount] = useState(20000);
+  const [maxAmount, setMaxAmount] = useState(0);
   const [selectedProgramForm, setSelectedProgramForm] = useState<string>('온·오프라인');
 
   const resetFilters = () => {
     setMinAmount(0);
-    setMaxAmount(20000);
+    setMaxAmount(0);
     setSelectedProgramForm('온·오프라인');
   };
 
@@ -57,7 +57,8 @@ export const RecommendUnderstandView = ({
         </StyledTitle>
         <StyledFilterContainer>
           <DropdownContainer>
-            <AmountBox onApply={handleApply} minAmount={minAmount} maxAmount={maxAmount} />
+            {/* <AmountBox onApply={handleApply} minAmount={minAmount} maxAmount={maxAmount} /> */}
+            <AmountFilterButton minPrice={minAmount} maxPrice={maxAmount} onApply={handleApply} />
             <Dropdown
               placeholder=""
               contents={['온·오프라인', '온라인', '오프라인']}
