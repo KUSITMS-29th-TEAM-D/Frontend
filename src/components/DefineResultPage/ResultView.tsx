@@ -8,9 +8,10 @@ import { DefineResult } from '@/types/test.type';
 
 interface ResultViewProps {
   result: DefineResult;
+  showRetestButton?: boolean;
 }
 
-export const ResultView = ({ result }: ResultViewProps) => {
+export const ResultView = ({ result, showRetestButton = true }: ResultViewProps) => {
   const navigate = useNavigate();
 
   return (
@@ -26,14 +27,16 @@ export const ResultView = ({ result }: ResultViewProps) => {
         <CardSection result={result} />
         <DescriptionSection result={result} />
       </StyledContent>
-      <StyledPlainButton
-        variant="primary2"
-        onClick={() => {
-          navigate('/test/define/1');
-        }}
-      >
-        다시 테스트 하기
-      </StyledPlainButton>
+      {showRetestButton && (
+        <StyledPlainButton
+          variant="primary2"
+          onClick={() => {
+            navigate('/test/define/1');
+          }}
+        >
+          다시 테스트 하기
+        </StyledPlainButton>
+      )}
     </StyledInnerContainer>
   );
 };

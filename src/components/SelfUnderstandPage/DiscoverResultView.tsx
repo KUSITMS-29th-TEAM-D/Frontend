@@ -3,9 +3,9 @@ import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplat
 import { useGetDiscoverResult } from '@/hooks/useGetDiscoverResult';
 
 export const DiscoverResultView = () => {
-  const { loading, error, isTest } = useGetDiscoverResult();
+  const { loading, isTest } = useGetDiscoverResult();
 
-  if (loading || error) return null;
+  if (loading) return null;
 
   if (isTest) return <ResultView />;
 
