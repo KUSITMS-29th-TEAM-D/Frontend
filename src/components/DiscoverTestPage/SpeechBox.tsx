@@ -5,7 +5,7 @@ import { ReactComponent as User } from '@/assets/icons/user.svg';
 import { userService } from '@/services/UserService';
 
 interface SpeechBoxProps {
-  children: string;
+  children: React.ReactNode;
   isUser?: boolean;
   isContinuous: boolean;
   isEnd: boolean;
