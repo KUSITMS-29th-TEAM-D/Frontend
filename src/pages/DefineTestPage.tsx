@@ -23,14 +23,25 @@ export const DefineTestPage = () => {
   const { Funnel, Step, setStep, currentStep } = useFunnel(STEPS[0]);
 
   useEffect(() => {
-    KEY.some((key, index) => {
+    let allEmpty = true;
+
+    const result = KEY.some((key, index) => {
       const chips = JSON.parse(sessionStorage.getItem(key) || '[]');
+
+      if (chips.length > 0) {
+        allEmpty = false;
+      }
+
       if (chips.length !== 5) {
         setStep(STEPS[index + 1]);
         return true;
       }
       return false;
     });
+
+    if (!result || allEmpty) {
+      setStep(STEPS[0]);
+    }
   }, []);
 
   const prevClickHandler = (prevStep: string) => {
