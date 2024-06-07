@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { personaAPI } from '@/apis/personaAPI';
-import { DISCOVER_CATEGORY_LIST } from '@/components/DiscoverResultPage/ResultView';
+import { DISCOVER_CATEGORY_LIST } from '@/constants/discover';
 import { userService } from '@/services/UserService';
 
 export const useGetDiscoverResult = () => {
@@ -82,7 +82,6 @@ export const useGetDiscoverKeywordResult = () => {
 };
 
 export const useGetDiscoverSummary = () => {
-  //
   const [data, setData] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

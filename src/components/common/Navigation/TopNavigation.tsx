@@ -19,10 +19,11 @@ export const TopNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // TODO: /home -> / 로 변경해야함.
   return (
     <>
       <StyledContainer>
-        <Link to="/">
+        <Link to="/home">
           <MainLogo className="logo" />
         </Link>
         {!MENU_VISIBLE_PATHS.includes(location.pathname) && (

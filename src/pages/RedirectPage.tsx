@@ -28,7 +28,8 @@ export const RedirectPage = () => {
     if (accessToken) {
       tokenService.setAccessToken(accessToken);
       nickname && userService.setUser({ nickname, is_test: isTest === 'T' ? true : false });
-      navigate('/');
+      // TODO: /home -> / 로 변경해야함.
+      navigate('/home');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

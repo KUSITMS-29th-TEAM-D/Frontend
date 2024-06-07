@@ -88,7 +88,8 @@ class TokenService {
   onLogout = () => {
     this.removeData();
     sessionStorage.clear();
-    window.location.href = '/';
+    // TODO: /home -> / 로 변경해야함.
+    window.location.href = '/home';
   };
 }
 

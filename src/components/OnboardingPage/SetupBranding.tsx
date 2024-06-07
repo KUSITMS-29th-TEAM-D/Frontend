@@ -27,7 +27,8 @@ export const SetupBranding = () => {
         tokenService.setAccessToken(res.payload.access_token);
         userService.updateUserNickname(res.payload.nickname);
         tokenService.removeRegisterToken();
-        navigate('/');
+        // TODO: /home -> / 로 변경해야함.
+        navigate('/home');
       })
       .catch(() => {
         window.alert('다시 시도해주세요');

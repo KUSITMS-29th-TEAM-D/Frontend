@@ -23,7 +23,8 @@ export const OnboardingPage = () => {
 
   useEffect(() => {
     if (user !== 'PRE_MEMBER') {
-      navigate('/');
+      // TODO: /home -> / 로 변경해야함.
+      navigate('/home');
     }
   }, [user]);
 
