@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import { ReactComponent as Logo } from '@/assets/logos/logo3d.svg';
 import { loadingHandlerState } from '@/recoil/loadingHandlerState';
 import { loadingState } from '@/recoil/loadingState';
+import { setScreenSize } from '@/utils/setScreenSize';
 
 export const LoadingPage = () => {
   const [progress, setProgress] = useState(0);
@@ -14,6 +15,7 @@ export const LoadingPage = () => {
   const interval = loading.speed;
 
   useEffect(() => {
+    setScreenSize();
     const timer = setInterval(() => {
       setProgress((prev) => {
         const next = prev + 1;
