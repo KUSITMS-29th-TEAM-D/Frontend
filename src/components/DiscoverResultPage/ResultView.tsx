@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { personaAPI } from '@/apis/personaAPI';
-import { SummaryCard } from '@/components/DiscoverTestPage/SummaryCard';
 import { CategoryButton } from '@/components/common/Button/CategoryButton';
 import { PlainButton } from '@/components/common/Button/PlainButton';
+import { useGetDiscoverKeywordResult } from '@/hooks/useGetDiscoverResult';
 import { userService } from '@/services/UserService';
 import { moveDown, moveLeft, moveRight, moveUp } from '@/styles';
 
-const CATEGORY_LIST: { [key: string]: string } = {
+export const DISCOVER_CATEGORY_LIST: { [key: string]: string } = {
   all: '전체',
   health: '건강',
   career: '커리어',
@@ -20,17 +19,16 @@ const CATEGORY_LIST: { [key: string]: string } = {
 
 export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [categoryKeywords, setCategoryKeywords] = useState<{ [key: string]: string[] }>({
-    all: [],
-    health: [],
-    career: [],
-    love: [],
-    leisure: [],
-  });
   const [summary, setSummary] = useState<{ [key: string]: string[] } | undefined>(undefined);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const { data: allKeywords, loading: allKeywordsLoading } = useGetDiscoverKeywordResult();
+
+  if (allKeywordsLoading) {
+    return <div>Loading...</div>;
+  }
+
+  /* useEffect(() => {
     const fetchAllKeywords = async () => {
       try {
         const response = await personaAPI.getDiscoverAllKeyword();
@@ -51,9 +49,9 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
 
     fetchAllKeywords();
     fetchSummary();
-  }, []);
+  }, []); */
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchCategoryKeywords = async (category: string) => {
       if (categoryKeywords[category]) {
         try {
@@ -71,7 +69,7 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
     if (selectedCategory !== 'all') {
       fetchCategoryKeywords(selectedCategory);
     }
-  }, [selectedCategory, categoryKeywords]);
+  }, [selectedCategory, categoryKeywords]); */
 
   return (
     <StyledContainer $showSummary={showSummary}>
@@ -84,38 +82,39 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
             은, 이런 사람이에요.
           </div>
           <StyledChipContainer>
-            {Object.keys(CATEGORY_LIST).map((category) => (
+            {Object.keys(DISCOVER_CATEGORY_LIST).map((category) => (
               <CategoryButton
                 key={category}
                 active={selectedCategory === category}
                 onClick={() => setSelectedCategory(category)}
               >
-                {CATEGORY_LIST[category]}
+                {DISCOVER_CATEGORY_LIST[category]}
               </CategoryButton>
             ))}
           </StyledChipContainer>
         </StyledHeader>
-        <StyledContent>
-          {categoryKeywords[selectedCategory].length !== 0 ? (
-            <div className="result">
-              {showSummary && (
-                <div className="description">
-                  <span className="highlight">상위 6개</span>만 보여주고 있어요!
-                </div>
-              )}
-              <BubbleSection $noResult={categoryKeywords[selectedCategory].length === 0}>
-                {categoryKeywords[selectedCategory].map((keyword, index) => (
-                  <StyledBubble key={keyword} className={`b${index}`} $weight={1 - 0.1 * index}>
-                    <span>{keyword}</span>
-                  </StyledBubble>
-                ))}
-              </BubbleSection>
-              {!showSummary && (
-                <div className="description">
-                  <span className="highlight">상위 6개</span>만 보여주고 있어요!
-                </div>
-              )}
-              {showSummary && (
+        {allKeywords && (
+          <StyledContent>
+            {allKeywords[selectedCategory].length !== 0 ? (
+              <div className="result">
+                {showSummary && (
+                  <div className="description">
+                    <span className="highlight">상위 6개</span>만 보여주고 있어요!
+                  </div>
+                )}
+                <BubbleSection $noResult={allKeywords[selectedCategory].length === 0}>
+                  {allKeywords[selectedCategory].map((keyword, index) => (
+                    <StyledBubble key={keyword} className={`b${index}`} $weight={1 - 0.1 * index}>
+                      <span>{keyword}</span>
+                    </StyledBubble>
+                  ))}
+                </BubbleSection>
+                {!showSummary && (
+                  <div className="description">
+                    <span className="highlight">상위 6개</span>만 보여주고 있어요!
+                  </div>
+                )}
+                {/* {showSummary && (
                 <ResultSection>
                   <div className="title">{`${userService.getUserNickname()}님과의 대화한 내용을 요약했어요!`}</div>
                   <div className="card-container">
@@ -140,24 +139,26 @@ export const ResultView = ({ showSummary = false }: { showSummary?: boolean }) =
                       ))}
                   </div>
                 </ResultSection>
-              )}
-            </div>
-          ) : (
-            <div className="no-result">
-              <NoResultText>
-                <div className="title">
-                  아직 <span className="highlight">{CATEGORY_LIST[selectedCategory]}</span> 테스트를
-                  완료하지 않았어요!
-                </div>
-                <div className="subtitle">남은 테스트를 진행해주세요.</div>
-              </NoResultText>
-              <StyledNoBubble>
-                <span>?</span>
-              </StyledNoBubble>
-            </div>
-          )}
-        </StyledContent>
-        {categoryKeywords[selectedCategory].length === 0 && (
+              )} */}
+              </div>
+            ) : (
+              <div className="no-result">
+                <NoResultText>
+                  <div className="title">
+                    아직{' '}
+                    <span className="highlight">{DISCOVER_CATEGORY_LIST[selectedCategory]}</span>{' '}
+                    테스트를 완료하지 않았어요!
+                  </div>
+                  <div className="subtitle">남은 테스트를 진행해주세요.</div>
+                </NoResultText>
+                <StyledNoBubble>
+                  <span>?</span>
+                </StyledNoBubble>
+              </div>
+            )}
+          </StyledContent>
+        )}
+        {allKeywords && allKeywords[selectedCategory].length === 0 && (
           <PlainButton
             width="376px"
             height="48px"
