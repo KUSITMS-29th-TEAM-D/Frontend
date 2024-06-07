@@ -91,7 +91,7 @@ export const TestSection = ({
               )}
             </StyledButtonContainer>
             <StyledExplanation>
-              종료하기를 누르면 해당 단계부터 이어서 검사를 진행할 수 있어요!
+              {'종료하기를 누르면 해당 단계부터\n이어서 검사를 진행할 수 있어요!'}
             </StyledExplanation>
           </div>
           <ToastMessage />
@@ -113,20 +113,35 @@ const StyledContainer = styled.div`
   padding: 24px;
   padding-top: 100px;
 
+  @media ${({ theme }) => theme.device.tablet} {
+    padding: 24px;
+    padding-top: 100px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 20px;
+    padding-top: 96px;
+  }
+
   //zoom: 1.25;
+
+  background:;
 `;
 
 const StyledContentContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 552px;
+  width: 632px;
   height: 100%;
   max-height: 800px;
   flex: 1;
 
-  @media ${({ theme }) => theme.device.desktop} {
-    width: 632px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 552px;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
   }
 `;
 
@@ -135,6 +150,7 @@ const StyledStepContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 70px;
 
   position: relative;
 `;
@@ -176,4 +192,13 @@ const StyledExplanation = styled.div`
 
   margin-top: 15px;
   text-align: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    ${({ theme }) => theme.font.mobile.label1m};
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.font.mobile.label1m};
+    white-space: pre-line;
+  }
 `;

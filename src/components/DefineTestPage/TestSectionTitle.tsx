@@ -14,7 +14,7 @@ export const TestSectionTitle = ({ steps, currentStep }: TestSectionTitleProps) 
         <div className="title">
           <span>{steps.indexOf(currentStep)}</span> / {steps.length - 1}
         </div>
-        <ProgressBar $currentStep={steps.indexOf(currentStep) + 1} $totalSteps={steps.length} />
+        <ProgressBar $currentStep={steps.indexOf(currentStep)} $totalSteps={steps.length - 1} />
       </StyledProgressBar>
       <StyledTitle>
         <div className="title">나에게 해당되는 키워드는 무엇인가요?</div>

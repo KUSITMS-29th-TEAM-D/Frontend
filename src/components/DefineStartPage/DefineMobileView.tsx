@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
+
 import { styled } from 'styled-components';
 
 import backgroundImg from '@/assets/backgrounds/defineBackground.png';
 import { PlainButton } from '@/components/common/Button/PlainButton';
+import { setScreenSize } from '@/utils/setScreenSize';
 
 export const DefineMobileView = ({ onNext }: { onNext: () => void }) => {
+  useEffect(() => {
+    setScreenSize();
+  }, []);
+
   return (
     <ViewContainer>
       <StyledContainer>
@@ -121,7 +128,7 @@ const ViewContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   min-height: 700px;
   background-image: url(${backgroundImg});
   background-size: cover;
