@@ -72,7 +72,7 @@ const DetailSection = ({ data, programId }: DetailSectionProps) => {
             onClick={handleOpenModal}
             disabled={isButtonDisabled}
           >
-            신청하기
+            {isButtonDisabled ? '신청완료' : '신청하기'}
           </PlainButton>
         </DetailContainer>
         <ExperienceDetailModal

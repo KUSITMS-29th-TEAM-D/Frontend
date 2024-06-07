@@ -24,6 +24,7 @@ interface DateCardProps {
 
 export const BrandView = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalStatus, setModalStatus] = useState<'준비' | '진행중' | '완료' | null>(null);
   const [readyCards, setReadyCards] = useState<DateCardProps[]>([]);
   const [progressCards, setProgressCards] = useState<DateCardProps[]>([]);
   const [completeCards, setCompleteCards] = useState<DateCardProps[]>([]);
@@ -35,8 +36,15 @@ export const BrandView = () => {
     });
   }, []);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = (status: '준비' | '진행중' | '완료') => {
+    setIsModalOpen(true);
+    setModalStatus(status);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalStatus(null);
+  };
 
   const addDateCard = (
     title: string,
@@ -112,7 +120,7 @@ export const BrandView = () => {
           <BottomContainer>
             <CardHeader>
               <BrandChip>준비</BrandChip>
-              <StyledAdd onClick={openModal}>
+              <StyledAdd onClick={() => openModal('준비')}>
                 <AddIcon width="42px" height="42px" cursor="pointer" />
               </StyledAdd>
             </CardHeader>
@@ -136,8 +144,8 @@ export const BrandView = () => {
           <BottomContainer>
             <CardHeader>
               <BrandChip>진행</BrandChip>
-              <StyledAdd onClick={openModal}>
-                <AddIcon width="42px" height="42px" />
+              <StyledAdd onClick={() => openModal('진행중')}>
+                <AddIcon width="42px" height="42px" cursor="pointer" />
               </StyledAdd>
             </CardHeader>
             {Dummy4.map((item, index) => (
@@ -160,8 +168,8 @@ export const BrandView = () => {
           <BottomContainer>
             <CardHeader>
               <BrandChip>완료</BrandChip>
-              <StyledAdd onClick={openModal}>
-                <AddIcon width="42px" height="42px" />
+              <StyledAdd onClick={() => openModal('완료')}>
+                <AddIcon width="42px" height="42px" cursor="pointer" />
               </StyledAdd>
             </CardHeader>
             {Dummy5.map((item, index) => (
@@ -183,7 +191,14 @@ export const BrandView = () => {
           </BottomContainer>
         </BottomContent>
       </ContentContainer>
-      <BrandCardModal isOpen={isModalOpen} onClose={closeModal} onAdd={addDateCard} />
+      {modalStatus && (
+        <BrandCardModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onAdd={addDateCard}
+          status={modalStatus}
+        />
+      )}
     </StyledContainer>
   );
 };

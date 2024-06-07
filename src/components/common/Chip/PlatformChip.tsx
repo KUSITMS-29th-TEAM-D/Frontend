@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 interface PlatformProps {
-  state: number;
+  $state: number;
 }
 
 interface PlatformChipProps {
@@ -14,11 +14,11 @@ interface PlatformChipProps {
 
 export const PlatformChip = ({ chipIcon, state, index, onToggle, text }: PlatformChipProps) => {
   return (
-    <StyledContainer state={state} onClick={() => onToggle(index)}>
+    <StyledContainer $state={state} onClick={() => onToggle(index)}>
       <ImageContainer>
         <IconContainer>{chipIcon}</IconContainer>
       </ImageContainer>
-      <TextContainer state={state}>{text}</TextContainer>
+      <TextContainer $state={state}>{text}</TextContainer>
     </StyledContainer>
   );
 };
@@ -35,19 +35,19 @@ const StyledContainer = styled.div<PlatformProps>`
   cursor: pointer;
 
   border: 2px solid
-    ${(props) => (props.state === 1 ? props.theme.color.gray200 : props.theme.color.primary600)};
+    ${(props) => (props.$state === 1 ? props.theme.color.gray200 : props.theme.color.primary600)};
   background-color: ${(props) =>
-    props.state === 1 ? props.theme.color.white : props.theme.color.primary500};
-  color: ${(props) => (props.state === 1 ? props.theme.color.gray400 : props.theme.color.white)};
+    props.$state === 1 ? props.theme.color.white : props.theme.color.primary500};
+  color: ${(props) => (props.$state === 1 ? props.theme.color.gray400 : props.theme.color.white)};
 
   &:hover {
     border: 2px solid
       ${(props) =>
-        props.state === 1 ? props.theme.color.primary200 : props.theme.color.primary600};
+        props.$state === 1 ? props.theme.color.primary200 : props.theme.color.primary600};
     background: ${(props) =>
-      props.state === 1 ? props.theme.color.primary50 : props.theme.color.primary500};
+      props.$state === 1 ? props.theme.color.primary50 : props.theme.color.primary500};
     color: ${(props) =>
-      props.state === 1 ? props.theme.color.primary700 : props.theme.color.primary50};
+      props.$state === 1 ? props.theme.color.primary700 : props.theme.color.primary50};
   }
 `;
 

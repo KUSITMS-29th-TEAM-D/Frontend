@@ -67,9 +67,9 @@ export const ExperienceRecommendTab = () => {
                 title={
                   <div>
                     {' '}
-                    <span className="highlight">{userService.getUserNickname()}</span>님에게 이런
+                    <span className="highlight">{userService.getUserNickname()}</span>님에게
                     <br />
-                    활동을 추천해요!
+                    이런 활동을 추천해요!
                   </div>
                 }
                 subTitle=""
@@ -113,8 +113,7 @@ export const ExperienceRecommendTab = () => {
             <RecommendBrandView
               title={
                 <div>
-                  {userService.getUserNickname()}님, 내가 누구인지 알겠다면, <br />난 앞으로 무엇을
-                  해야할까요?
+                  내가 누구인지 알겠다면, <br />난 앞으로 무엇을 해야할까요?
                 </div>
               }
               subTitle=""

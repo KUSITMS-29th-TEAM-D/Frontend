@@ -2,13 +2,15 @@ import { ReactNode } from 'react';
 
 import styled from 'styled-components';
 
+import { theme } from '@/styles';
+
 const TabContainer = styled.div`
   width: 1280px;
   height: 100%;
   padding-left: 64px;
   padding-right: 64px;
   background-color: ${({ theme }) => theme.color.white};
-  border-bottom: 4px #f7f7f7 solid;
+  border-bottom: 4px solid ${theme.color.gray100};
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
@@ -22,11 +24,13 @@ const Tab = styled.div<{ $isActive: boolean }>`
   align-items: center;
   gap: 8px;
   display: flex;
-  border-bottom: ${({ $isActive }) => ($isActive ? '4px #915AFB solid' : 'none')};
+  border-bottom: ${({ $isActive }) =>
+    $isActive ? `4px solid ${theme.color.primary500}` : ' 4px solid transparent;'};
   cursor: pointer;
 
   & > div {
-    color: ${({ $isActive }) => ($isActive ? '#915AFB' : '#8B8B8B')};
+    color: ${({ $isActive }) =>
+      $isActive ? `${theme.color.primary500}` : `${theme.color.gray400}`};
     ${({ theme }) => theme.font.desktop.body1m};
     word-wrap: break-word;
   }
