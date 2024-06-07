@@ -6,16 +6,13 @@ import { AmountModal } from '@/components/ExperienceRecommendPage/AmountModal';
 
 interface AmountBoxProps {
   onApply: (min: number, max: number) => void;
+  minAmount: number;
+  maxAmount: number;
 }
 
-export const AmountBox = ({ onApply }: AmountBoxProps) => {
+export const AmountBox = ({ onApply, minAmount, maxAmount }: AmountBoxProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [minAmount, setMinAmount] = useState(0);
-  const [maxAmount, setMaxAmount] = useState(20000);
-
   const handleApply = (min: number, max: number) => {
-    setMinAmount(min);
-    setMaxAmount(max);
     setIsModalOpen(false);
     onApply(min, max);
   };
@@ -27,7 +24,7 @@ export const AmountBox = ({ onApply }: AmountBoxProps) => {
           <Label>금액</Label>
           <AmountRange>
             <Amount>{minAmount}</Amount>
-            <Amount isMain>~</Amount>
+            <Amount className="between">~</Amount>
             <Amount>{maxAmount}</Amount>
             <Currency>원</Currency>
           </AmountRange>
@@ -64,7 +61,6 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   display: flex;
-  //gap: 4px;
 `;
 
 const Label = styled.div`
@@ -80,15 +76,13 @@ const AmountRange = styled.div`
   justify-content: flex-end;
 `;
 
-const Amount = styled.div<{ isMain?: boolean }>`
+const Amount = styled.div<{ $isMain?: boolean }>`
   color: ${({ theme }) => theme.color.gray300};
   ${({ theme }) => theme.font.desktop.body1m};
 
-  ${({ isMain }) =>
-    isMain &&
-    `
-    color: #333333;
-  `}
+  &.between {
+    color: ${({ theme }) => theme.color.gray700};
+  }
 `;
 
 const Currency = styled.div`

@@ -29,7 +29,7 @@ interface ApiResponseItem {
   programsId: number;
   selfUnderstandingUrl: string;
   name: string;
-  link: string | null;
+  link: string;
 }
 
 export const WholeUnderstandView = () => {
@@ -47,9 +47,15 @@ export const WholeUnderstandView = () => {
 
     fetchData();
   }, []);
-  const handleClick = (type: string, programsId: number) => {
-    navigate(`/program/${type}/${programsId}`);
+
+  const handleClick = (type: string, programsId: number, link: string) => {
+    if (type === 'type1') {
+      navigate(`/program/self-understanding/${programsId}`);
+    } else if (type === 'type2') {
+      window.open(link, '_blank');
+    }
   };
+
   return (
     <StyledSectionContainer>
       <Container>
@@ -57,11 +63,11 @@ export const WholeUnderstandView = () => {
           <ExperienceCard
             key={index}
             imageUrl={item.selfUnderstandingUrl}
-            title={item.link ? '셀피스 프로그램' : '외부 프로그램'}
+            title={item.link ? '외부 프로그램' : '셀피스 프로그램'}
             subtitle={item.name}
-            $variant={item.link ? 'type1' : 'type2'}
+            $variant={item.link ? 'type2' : 'type1'}
             programsId={item.programsId}
-            onClick={() => handleClick(item.type, item.programsId)}
+            onClick={() => handleClick(item.link ? 'type2' : 'type1', item.programsId, item.link)}
           />
         ))}
       </Container>
