@@ -2,7 +2,8 @@
 
 import React, { useEffect } from 'react';
 
-import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
 interface DefaultModalProps {
   width?: string;
@@ -15,6 +16,8 @@ export const DefaultModal = ({
   height = '312px',
   children,
 }: DefaultModalProps) => {
+  const location = useLocation();
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -23,7 +26,7 @@ export const DefaultModal = ({
   }, []);
 
   return (
-    <StyledOverlay>
+    <StyledOverlay $isTest={location.pathname.includes('test')}>
       <StyledModalContainer $width={width} $height={height}>
         {children}
       </StyledModalContainer>
@@ -31,14 +34,22 @@ export const DefaultModal = ({
   );
 };
 
-const StyledOverlay = styled.div`
+const StyledOverlay = styled.div<{ $isTest: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
 
-  width: 100vw;
-  height: 100vh;
+  ${({ $isTest }) =>
+    $isTest
+      ? css`
+          width: 100vw;
+          height: 100vh;
+        `
+      : css`
+          width: var(--full-width);
+          height: var(--full-height);
+        `};
 
   display: flex;
   align-items: center;

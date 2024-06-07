@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { personaAPI } from '@/apis/personaAPI';
 import { CategoryTypeKey } from '@/constants/discover';
+import { DiscoverSummary } from '@/types/test.type';
 
-const initialValue: { [key: CategoryTypeKey]: string[] } = {
+const initialValue: { [key: CategoryTypeKey]: DiscoverSummary[] } = {
   health: [],
   career: [],
   love: [],
@@ -11,10 +12,9 @@ const initialValue: { [key: CategoryTypeKey]: string[] } = {
 };
 
 export const useSummarySessionStorage = () => {
-  const [summaryValue, setSummaryValue] = useState<{ [key: CategoryTypeKey]: string[] }>(
+  const [summaryValue, setSummaryValue] = useState<{ [key: CategoryTypeKey]: DiscoverSummary[] }>(
     initialValue
   );
-
   useEffect(() => {
     const fetchSummary = async () => {
       try {
@@ -48,18 +48,24 @@ export const useSummarySessionStorage = () => {
 
   const updateSummary = (
     category: CategoryTypeKey,
-    updateFunction: (prevSummary: string[]) => string[]
+    updateFunction: (prevSummary: DiscoverSummary[]) => DiscoverSummary[]
   ) => {
     setSummaryValue((prev) => {
-      const newValue = { ...prev, [category]: updateFunction(prev[category]) };
+      const updatedSummary = updateFunction(prev[category]);
+      const newValue = { ...prev, [category]: updatedSummary };
       window.sessionStorage.setItem('selpiece-discover-summary', JSON.stringify(newValue));
       return newValue;
     });
+  };
+
+  const deleteSummary = () => {
+    window.sessionStorage.removeItem('selpiece-discover-summary');
   };
 
   return {
     summaryValue,
     resetSummary,
     updateSummary,
+    deleteSummary,
   } as const;
 };

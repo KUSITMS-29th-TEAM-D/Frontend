@@ -7,25 +7,14 @@ import { MyExperienceWholeView } from '@/components/MyPage/MyExperienceWholeView
 import { MyUnderstandingView } from '@/components/MyPage/MyUnderstandingView';
 import { Dropdown } from '@/components/common/Dropdown/Dropdown';
 import { MyPageTab } from '@/components/common/Tab/MyPageTab';
-import { MyPageFilter } from '@/types/myPage.type';
 
-interface MyExperienceViewTemplateProps {
-  title: string | React.ReactNode;
-  subTitle: string;
-  backgroundColor: string;
-  filters: MyPageFilter[];
-}
-
-export const MyExperienceView = ({
-  filters,
-}: Omit<MyExperienceViewTemplateProps, 'title' | 'subTitle' | 'backgroundColor'>) => {
+export const MyExperienceView = () => {
   const [programDate, setProgramDate] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<string>('desc');
 
   const resetFilters = () => {
     setProgramDate([]);
     setSortOrder('desc');
-    filters.forEach((filter: MyPageFilter) => filter.setSelected([]));
   };
 
   const tabs = [
@@ -45,7 +34,6 @@ export const MyExperienceView = ({
                   setSortOrder(newSelected === '최신순' ? 'desc' : 'asc');
                 }}
                 width="201px"
-                contentMaxHeight="172px"
                 multiple={false}
               />
             </StyledDropdownContainer>
@@ -134,7 +122,7 @@ export const MyExperienceView = ({
 const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 81px;
+  padding-top: var(--top-navigation-height);
   padding-bottom: 52px;
 `;
 

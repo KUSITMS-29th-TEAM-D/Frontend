@@ -1,17 +1,44 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { theme } from '@/styles';
 
+const menuItems = [
+  { label: '브랜드 관리', key: 'brand' },
+  { label: '내 페르소나', key: 'persona' },
+  { label: '신청한 경험', key: 'experience' },
+  { label: '환경설정', key: 'settings' },
+];
+
+export const MypageSidebar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  return (
+    <SidebarContainer>
+      {menuItems.map((item) => (
+        <MenuItem
+          key={item.key}
+          $active={location.pathname.includes(item.key)}
+          onClick={() => navigate(`/mypage/${item.key}`)}
+        >
+          <div>{item.label}</div>
+        </MenuItem>
+      ))}
+    </SidebarContainer>
+  );
+};
+
 const SidebarContainer = styled.div`
   width: 196px;
   height: auto;
-  padding-top: 81px;
+  padding-top: var(--top-navigation-height);
+
   background-color: ${({ theme }) => `${theme.color.white}`};
   border-right: 2px ${({ theme }) => `${theme.color.gray150}`} solid;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  flex-shrink: 0;
 `;
 
 const MenuItem = styled.div<{ $active: boolean }>`
@@ -21,7 +48,8 @@ const MenuItem = styled.div<{ $active: boolean }>`
   padding-right: 24px;
   background-color: ${({ $active }) =>
     $active ? `${theme.color.primary50}` : `${theme.color.white}`};
-  border-left: ${({ $active }) => ($active ? '4px #915AFB solid' : 'none')};
+  border-left: 4px solid transparent;
+  border-color: ${({ $active }) => $active && '#915AFB'};
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -38,33 +66,3 @@ const MenuItem = styled.div<{ $active: boolean }>`
     background-color: ${(props) => props.theme.color.gray150};
   }
 `;
-
-interface SidebarProps {
-  activeMenu: string;
-  setActiveMenu: (menu: string) => void;
-}
-
-const Sidebar = ({ activeMenu, setActiveMenu }: SidebarProps) => {
-  const menuItems = [
-    { label: '브랜드 관리', key: '브랜드 관리' },
-    { label: '내 페르소나', key: '내 페르소나' },
-    { label: '신청한 경험', key: '신청한 경험' },
-    { label: '환경설정', key: '환경설정' },
-  ];
-
-  return (
-    <SidebarContainer>
-      {menuItems.map((item) => (
-        <MenuItem
-          key={item.key}
-          $active={activeMenu === item.key}
-          onClick={() => setActiveMenu(item.key)}
-        >
-          <div>{item.label}</div>
-        </MenuItem>
-      ))}
-    </SidebarContainer>
-  );
-};
-
-export default Sidebar;

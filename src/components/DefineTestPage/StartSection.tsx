@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DefineDesktopView } from '@/components/DefineStartPage/DefineDesktopView';
 import { DefineMobileView } from '@/components/DefineStartPage/DefineMobileView';
 
-export const DefineStartPage = () => {
+export const StartSection = ({ onNext }: { onNext: () => void }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -20,5 +20,7 @@ export const DefineStartPage = () => {
     };
   }, []);
 
-  return <>{isMobile ? <DefineMobileView /> : <DefineDesktopView />}</>;
+  return (
+    <>{isMobile ? <DefineMobileView onNext={onNext} /> : <DefineDesktopView onNext={onNext} />}</>
+  );
 };

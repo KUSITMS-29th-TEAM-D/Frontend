@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,8 @@ export const LoginPage = () => {
     window.addEventListener('resize', handleResize);
 
     if (user !== 'NON_MEMBER') {
-      navigate('/');
+      // TODO: /home -> / 로 변경해야함.
+      navigate('/home');
     }
 
     return () => {

@@ -32,3 +32,11 @@ export const CATEGORY_TYPE: DiscoverCategoryType = {
     icon: LeisureIcon,
   },
 };
+
+export const DISCOVER_CATEGORY_LIST: { [key: string]: string } = {
+  all: '전체',
+  health: '건강',
+  career: '커리어',
+  love: '사랑',
+  leisure: '여가',
+};

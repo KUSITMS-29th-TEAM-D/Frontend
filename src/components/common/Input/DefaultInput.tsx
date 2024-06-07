@@ -6,10 +6,11 @@ interface DefaultInputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   warning?: boolean;
   children?: React.ReactNode;
   width?: string | number; // 타입 수정
+  disabled?: boolean;
 }
 
 export const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(
-  ({ warning = false, width, children, ...props }, ref) => {
+  ({ warning = false, width, children, disabled = false, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
 
     const handleFocus = () => {
@@ -21,8 +22,15 @@ export const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(
     };
 
     return (
-      <StyledContainer $warning={warning} $focused={isFocused} $width={width}>
-        <input type="text" onFocus={handleFocus} onBlur={handleBlur} ref={ref} {...props} />
+      <StyledContainer $warning={warning} $focused={isFocused} $width={width} $disabled={disabled}>
+        <input
+          type="text"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          ref={ref}
+          {...props}
+          disabled={disabled}
+        />
         {children}
       </StyledContainer>
     );
@@ -33,6 +41,7 @@ const StyledContainer = styled.div<{
   $warning: boolean;
   $focused: boolean;
   $width: string | number | undefined; // 타입 수정
+  $disabled: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -72,6 +81,15 @@ const StyledContainer = styled.div<{
 
       input {
         color: ${({ theme }) => theme.color.secondary500};
+      }
+    `}
+
+  ${({ $disabled, theme }) =>
+    $disabled &&
+    css`
+      background: ${theme.color.gray100};
+      input {
+        color: ${theme.color.gray300};
       }
     `}
 `;

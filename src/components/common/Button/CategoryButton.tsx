@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface CategoryButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface CategoryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   done?: boolean;
   active?: boolean;
 }

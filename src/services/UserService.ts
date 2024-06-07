@@ -29,7 +29,12 @@ class UserService {
     const user = this.getUser();
     if (!user) {
       return 'NON_MEMBER';
-    } else if (user.nickname === '') {
+    }
+    return this.determineUserState(user);
+  }
+
+  determineUserState(user: User) {
+    if (user.nickname === '') {
       return 'PRE_MEMBER';
     } else {
       return 'MEMBER';

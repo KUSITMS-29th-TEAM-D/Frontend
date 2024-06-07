@@ -22,7 +22,7 @@ export const DefineResultView = () => {
   if (defineResult)
     return (
       <StyledContainer>
-        <ResultView result={defineResult} />
+        <ResultView result={defineResult} showRetestButton={false} />
       </StyledContainer>
     );
 

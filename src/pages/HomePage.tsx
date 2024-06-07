@@ -6,11 +6,13 @@ import { TesterMemberView } from '@/components/HomePage/TesterMemberView';
 import { userService } from '@/services/UserService';
 
 export const HomePage = () => {
-  const [testState, setTestState] = useState('NON_MEMBER');
+  const [testState, setTestState] = useState<string>();
 
   useEffect(() => {
     setTestState(userService.getTestState());
   }, []);
+
+  if (!testState) return <div>loading...</div>;
 
   if (testState === 'NON_MEMBER') {
     return (
@@ -27,9 +29,10 @@ export const HomePage = () => {
       </div>
     );
 
-  return (
-    <div style={{ minWidth: '1280px' }}>
-      <NonTesterMemberView />
-    </div>
-  );
+  if (testState === 'NON_TESTER_MEMBER')
+    return (
+      <div style={{ minWidth: '1280px' }}>
+        <NonTesterMemberView />
+      </div>
+    );
 };

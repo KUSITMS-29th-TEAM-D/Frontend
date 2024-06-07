@@ -21,7 +21,10 @@ export const NoResultSection = ({ tab }: NoResultSectionProps) => {
         <PlainButton
           width="352px"
           height="48px"
-          onClick={() => navigate(MY_UNDERSTAND_TAB.find((item) => item.tab === tab)?.path || '/')}
+          // TODO: /home -> / 로 변경해야함.
+          onClick={() =>
+            navigate(MY_UNDERSTAND_TAB.find((item) => item.tab === tab)?.path || '/home')
+          }
         >
           테스트 시작하기
         </PlainButton>

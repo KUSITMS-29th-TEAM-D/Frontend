@@ -46,7 +46,7 @@ export const RecommendSectionTemplate = ({
                   imageUrl={item.selfUnderstandingUrl}
                   title={item.name}
                   keywords={item.keywords}
-                  path={item.link}
+                  path={item.link === '' ? `/program/${item.type}/${item.programsId}` : item.link}
                 />
               ))}
             </CardCarousel>

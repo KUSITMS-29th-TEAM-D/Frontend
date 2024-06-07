@@ -34,7 +34,7 @@ export const ViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: var(--full-height);
   background-image: url(${backgroundImg});
   background-size: cover;
 `;
