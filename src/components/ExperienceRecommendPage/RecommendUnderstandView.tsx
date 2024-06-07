@@ -57,7 +57,7 @@ export const RecommendUnderstandView = ({
         </StyledTitle>
         <StyledFilterContainer>
           <DropdownContainer>
-            <AmountBox onApply={handleApply} />
+            <AmountBox onApply={handleApply} minAmount={minAmount} maxAmount={maxAmount} />
             <Dropdown
               placeholder=""
               contents={['온·오프라인', '온라인', '오프라인']}

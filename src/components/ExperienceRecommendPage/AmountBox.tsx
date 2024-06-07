@@ -6,15 +6,13 @@ import { AmountModal } from '@/components/ExperienceRecommendPage/AmountModal';
 
 interface AmountBoxProps {
   onApply: (min: number, max: number) => void;
+  minAmount: number;
+  maxAmount: number;
 }
 
-export const AmountBox = ({ onApply }: AmountBoxProps) => {
+export const AmountBox = ({ onApply, minAmount, maxAmount }: AmountBoxProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [minAmount, setMinAmount] = useState(0);
-  const [maxAmount, setMaxAmount] = useState(20000);
   const handleApply = (min: number, max: number) => {
-    setMinAmount(min);
-    setMaxAmount(max);
     setIsModalOpen(false);
     onApply(min, max);
   };
@@ -63,7 +61,6 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   display: flex;
-  //gap: 4px;
 `;
 
 const Label = styled.div`
