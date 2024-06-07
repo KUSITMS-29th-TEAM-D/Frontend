@@ -61,6 +61,10 @@ const StyledContainer = styled.div`
   position: absolute;
   left: 0;
   bottom: 100px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    bottom: 120px;
+  }
 `;
 
 const StyledText = styled.div`
