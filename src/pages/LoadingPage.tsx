@@ -60,7 +60,7 @@ const StyledContainer = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   padding: 20px;
   padding-top: 96px;
 

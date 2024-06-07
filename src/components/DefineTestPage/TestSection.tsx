@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -7,6 +9,7 @@ import { PlainButton } from '@/components/common/Button/PlainButton';
 import { KeywordChip } from '@/components/common/Chip/KeywordChip';
 import useSessionStorage from '@/hooks/useSessionStorage';
 import { toastState } from '@/recoil/toastState';
+import { setScreenSize } from '@/utils/setScreenSize';
 
 interface StepProps {
   chipData: string[];
@@ -49,6 +52,10 @@ export const TestSection = ({
       setToast({ isShown: false, show: false });
     }
   };
+
+  useEffect(() => {
+    setScreenSize();
+  }, []);
 
   return (
     <StyledContainer>
@@ -108,7 +115,7 @@ const StyledContainer = styled.div`
 
   background: ${({ theme }) => `${theme.color.primary50}`};
 
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 
   padding: 24px;
   padding-top: 100px;
