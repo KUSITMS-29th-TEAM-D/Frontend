@@ -5,7 +5,7 @@ interface KeywordChipProps {
   children: string;
   selectHandler?: (selectedKeyword: string) => void;
   deleteHandler?: (selectedKeyword: string) => void;
-  toggleHandler?: () => void;
+  toggleHandler?: (selectedKeyword: string) => void;
 }
 
 export const KeywordChip = ({
@@ -19,7 +19,7 @@ export const KeywordChip = ({
     <StyledKeywordChip
       $selected={selected}
       onClick={() => {
-        toggleHandler && toggleHandler();
+        toggleHandler && toggleHandler(children);
         if (!selected) selectHandler && selectHandler(children);
         else deleteHandler && deleteHandler(children);
       }}

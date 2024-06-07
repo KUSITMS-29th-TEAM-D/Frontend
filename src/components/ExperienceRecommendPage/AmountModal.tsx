@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -16,32 +16,39 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [isOpen]);
 
   const handleApply = () => {
     onApply(minAmount, maxAmount);
+    onClose();
   };
 
   return (
-    <ModalOverlay isOpen={isOpen}>
+    <ModalOverlay $isOpen={isOpen}>
       <ModalContent>
         <ModalTitle>금액 선택</ModalTitle>
         <InputContainer>
-          <Input
+          <input
             id="minAmount"
             type="number"
             value={minAmount}
             onChange={(e) => setMinAmount(parseInt(e.target.value))}
           />
+          <span>원</span>
         </InputContainer>
         <MiddleContainer>~</MiddleContainer>
         <InputContainer>
-          <Input
+          <input
             id="maxAmount"
             type="number"
             value={maxAmount}
             onChange={(e) => setMaxAmount(parseInt(e.target.value))}
           />
+          <span>원</span>
         </InputContainer>
         <ButtonContainer>
           <StyledButton height="48px" onClick={onClose}>
@@ -56,15 +63,14 @@ export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
   );
 };
 
-const ModalOverlay = styled.div<{ isOpen: boolean }>`
+const ModalOverlay = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
 
-  width: 100vw;
-  height: 100vh;
-  //padding: 24px;
+  width: var(--full-width);
+  height: var(--full-height);
   background: ${({ theme }) => theme.color.bgModal};
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(4px);
@@ -96,31 +102,34 @@ const ModalTitle = styled.div`
   padding-bottom: 24px;
 `;
 const InputContainer = styled.div`
-  align-self: stretch;
-  height: 152px;
-  flex-direction: column;
-  justify-content: center;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  display: flex;
-`;
-
-const Input = styled.input`
-  align-self: stretch;
+  gap: 4px;
+  width: 100%;
   height: 48px;
-  padding-left: 16px;
-  padding-right: 16px;
-  text-align: right;
-  background: ${({ theme }) => theme.color.white};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.13);
+  padding: 0 16px;
   border-radius: 8px;
-  justify-content: flex-end;
-  align-items: flex-end;
-  gap: 12px;
-  display: flex;
+  background: ${({ theme }) => theme.color.white};
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.13);
 
-  ${({ theme }) => theme.font.desktop.body1b};
-  color: ${({ theme }) => theme.color.gray300};
+  input {
+    width: 100%;
+    ${({ theme }) => theme.font.desktop.body1b};
+    color: ${({ theme }) => theme.color.gray300};
+    background: transparent;
+    text-align: right;
+
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  span {
+    ${({ theme }) => theme.font.desktop.body2r};
+    color: ${({ theme }) => theme.color.gray700};
+  }
 `;
 
 const MiddleContainer = styled.div`

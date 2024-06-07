@@ -1,35 +1,13 @@
-import { useEffect, useState } from 'react';
-
-import axios from 'axios';
-
-import { personaAPI } from '@/apis/personaAPI';
+import { ResultView } from '@/components/DiscoverResultPage/ResultView';
 import { NoResultSection } from '@/components/SelfUnderstandPage/NoResultTemplate';
-import { DiscoverResultPage } from '@/pages/DiscoverResultPage';
-import { userService } from '@/services/UserService';
+import { useGetDiscoverResult } from '@/hooks/useGetDiscoverResult';
 
 export const DiscoverResultView = () => {
-  const [isTest, setIsTest] = useState(false);
+  const { loading, isTest } = useGetDiscoverResult();
 
-  useEffect(() => {
-    const fetchAllKeywords = async () => {
-      try {
-        await personaAPI.getDiscoverAllKeyword();
-        setIsTest(true);
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
-          setIsTest(false);
-        }
-      }
-    };
+  if (loading) return null;
 
-    if (userService.getUserState() === 'MEMBER') {
-      fetchAllKeywords();
-    }
-  }, []);
-
-  if (isTest) {
-    return <DiscoverResultPage />;
-  }
+  if (isTest) return <ResultView />;
 
   return <NoResultSection tab="Discover" />;
 };

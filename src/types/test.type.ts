@@ -49,3 +49,8 @@ export interface ChattingStage {
 export interface ChattingData {
   [key: string]: ChattingStage;
 }
+
+export interface DiscoverSummary {
+  question: string;
+  answer: string;
+}

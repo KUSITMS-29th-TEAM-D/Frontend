@@ -10,3 +10,12 @@ export interface OnboardingRequest {
   interest_list: string[];
   keyword_list: string[];
 }
+
+export interface UserData {
+  name: string;
+  provider: string;
+  nickname: string;
+  job: string;
+  understanding_score: number;
+  profile_img_url: string;
+}

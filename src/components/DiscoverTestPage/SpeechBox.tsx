@@ -5,7 +5,7 @@ import { ReactComponent as User } from '@/assets/icons/user.svg';
 import { userService } from '@/services/UserService';
 
 interface SpeechBoxProps {
-  children: string;
+  children: React.ReactNode;
   isUser?: boolean;
   isContinuous: boolean;
   isEnd: boolean;
@@ -20,7 +20,7 @@ export const SpeechBox = ({ children, isUser = false, isContinuous, isEnd }: Spe
         <div style={{ width: '40px' }} />
       ) : isUser ? (
         <UserProfile>
-          <User />
+          <User width={24} height={24} />
         </UserProfile>
       ) : (
         <img src={ChatBotProfile} alt="profile" width={40} height={40} />

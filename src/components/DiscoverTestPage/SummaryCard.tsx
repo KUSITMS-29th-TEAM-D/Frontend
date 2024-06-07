@@ -4,11 +4,11 @@ import { CATEGORY_TYPE } from '@/constants/discover';
 
 interface SummaryCardProps {
   category: string;
-  title?: string;
-  descriptions: string[];
+  question: string;
+  answer: string;
 }
 
-export const SummaryCard = ({ category, title, descriptions }: SummaryCardProps) => {
+export const SummaryCard = ({ category, question, answer }: SummaryCardProps) => {
   const Icon = CATEGORY_TYPE[category].icon;
 
   return (
@@ -18,13 +18,8 @@ export const SummaryCard = ({ category, title, descriptions }: SummaryCardProps)
         <span>{CATEGORY_TYPE[category].title}</span>
       </StyledHeader>
       <StyledContent>
-        {title && <div className="title">{title}</div>}
-        {descriptions.length > 0 &&
-          descriptions.map((description) => (
-            <div key={description} className="description">
-              • {description}
-            </div>
-          ))}
+        {question && <div className="question">{question}</div>}
+        {answer && <div className="answer">{answer}</div>}
       </StyledContent>
     </StyledContainer>
   );
@@ -62,15 +57,15 @@ const StyledHeader = styled.div`
 `;
 
 const StyledContent = styled.div`
-  .title {
+  text-align: left;
+  .question {
     ${({ theme }) => theme.font.desktop.label1m};
     color: ${({ theme }) => theme.color.gray800};
     margin-bottom: 4px;
   }
 
-  .description {
+  .answer {
     ${({ theme }) => theme.font.desktop.label2};
     color: ${({ theme }) => theme.color.gray500};
-    text-align: left;
   }
 `;

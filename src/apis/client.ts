@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-import { authService } from '@/services/AuthService';
-import { userService } from '@/services/UserService';
+import { tokenService } from '@/services/TokenService';
 
 export const noAuthClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -14,30 +13,23 @@ export const authClient: AxiosInstance = axios.create({
 });
 
 authClient.interceptors.request.use((config) => {
-  if (userService.getUserNickname() === '') {
-    const registerToken = authService.getRegisterToken();
-    if (registerToken !== null && registerToken !== undefined) {
-      config.headers['Authorization'] = `Bearer ${registerToken}`;
-    } else {
-      window.alert('로그인이 필요합니다.');
-      authService.onLogout();
-    }
-  }
-
+  config.headers['Authorization'] = tokenService.getHeader();
   return config;
 });
 
 authClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const access_token = await authService.getRefreshToken();
-      authService.setAuthToken(access_token);
-      return authClient(originalRequest);
+      try {
+        await tokenService.updateAccessToken();
+        originalRequest.headers['Authorization'] = tokenService.getHeader();
+        return axios(originalRequest);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
     return Promise.reject(error);
   }

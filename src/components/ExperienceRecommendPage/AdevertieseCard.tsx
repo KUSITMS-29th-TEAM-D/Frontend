@@ -6,6 +6,7 @@ import Card3 from '@/assets/advertise/advertise3.png';
 import Video1 from '@/assets/banner.mp4';
 import { AdvertiseCarousel } from '@/components/ExperienceRecommendPage/AdvertiseCarousel';
 
+// TODO: /home -> / 로 변경해야함.
 const AdvertiseCard = () => {
   return (
     <AdvertiseCarousel>
@@ -14,7 +15,7 @@ const AdvertiseCard = () => {
           <video src={Video1} autoPlay muted loop playsInline />
         </CardMedia>
       </StyledLink>
-      <StyledLink to="/">
+      <StyledLink to="/home">
         <CardMedia>
           <img src={Card2} alt="Card 2" />
         </CardMedia>

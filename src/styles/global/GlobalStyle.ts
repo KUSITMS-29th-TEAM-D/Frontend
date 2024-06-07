@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import reset from 'styled-reset';
+import './zoom.css';
 
 export const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -52,7 +53,7 @@ input, textarea {
 	-ms-user-select: auto;
 	user-select: auto;
 }
-input:focus {
+input:focus, textarea:focus {
   outline: none;
 }
 button {

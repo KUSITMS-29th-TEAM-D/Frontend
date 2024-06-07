@@ -23,9 +23,10 @@ export const OnboardingPage = () => {
 
   useEffect(() => {
     if (user !== 'PRE_MEMBER') {
-      navigate('/');
+      // TODO: /home -> / 로 변경해야함.
+      navigate('/home');
     }
-  }, []);
+  }, [user]);
 
   const nextClickHandler = (nextStep: string) => {
     setStep(nextStep);
@@ -54,12 +55,10 @@ export const OnboardingPage = () => {
 };
 
 const StyledContainer = styled.div`
-  min-height: 100vh;
+  min-height: var(--full-height);
   background-image: url(${BackgroundImage});
   background-size: cover;
   display: flex;
-
-  overflow-x: auto;
 `;
 
 const StyledStepSection = styled.section`

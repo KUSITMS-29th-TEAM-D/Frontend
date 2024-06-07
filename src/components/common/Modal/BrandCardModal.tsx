@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import Scrollbar from '@/components/Scrollbar';
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 interface ModalProps {
@@ -13,36 +14,38 @@ interface ModalProps {
     date: string,
     status: '준비' | '진행중' | '완료'
   ) => void;
+  status: '준비' | '진행중' | '완료';
 }
 
-export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
+export const BrandCardModal = ({ isOpen, onClose, onAdd, status }: ModalProps) => {
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
-  const [startDate, setStartDate] = useState('2024.05.15');
+  const [startDate, setStartDate] = useState(
+    new Date().toISOString().slice(0, 10).replace(/-/g, '.')
+  );
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState<'준비' | '진행중' | '완료'>('준비');
+  const [currentStatus, setCurrentStatus] = useState<'준비' | '진행중' | '완료'>(status);
 
   useEffect(() => {
     if (isOpen) {
       setTitle('');
       setType('');
-      setStartDate('2024.05.15');
       setDate('');
       setDescription('');
-      setStatus('준비');
+      setCurrentStatus(status);
     }
-  }, [isOpen]);
+  }, [isOpen, status]);
 
   const handleAdd = () => {
-    onAdd(title, description, date, status);
+    onAdd(title, description, date, currentStatus);
     onClose();
   };
 
   if (!isOpen) return null;
 
   return (
-    <StyledContainer isOpen={isOpen}>
+    <StyledContainer $isOpen={isOpen}>
       <Container>
         <Title
           type="text"
@@ -63,26 +66,26 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
           <FrameRow>
             <Label>진행상태</Label>
             <PlainButton
-              variant={status === '준비' ? 'disabled' : 'gray'}
+              variant={currentStatus === '준비' ? 'gray' : 'disabled'}
               height="48px"
               width="87px"
-              onClick={() => setStatus('준비')}
+              onClick={() => setCurrentStatus('준비')}
             >
               준비
             </PlainButton>
             <PlainButton
-              variant={status === '진행중' ? 'disabled' : 'gray'}
+              variant={currentStatus === '진행중' ? 'gray' : 'disabled'}
               height="48px"
               width="87px"
-              onClick={() => setStatus('진행중')}
+              onClick={() => setCurrentStatus('진행중')}
             >
               진행
             </PlainButton>
             <PlainButton
-              variant={status === '완료' ? 'disabled' : 'gray'}
+              variant={currentStatus === '완료' ? 'gray' : 'disabled'}
               height="48px"
               width="74px"
-              onClick={() => setStatus('완료')}
+              onClick={() => setCurrentStatus('완료')}
             >
               완료
             </PlainButton>
@@ -121,14 +124,14 @@ export const BrandCardModal = ({ isOpen, onClose, onAdd }: ModalProps) => {
   );
 };
 
-const StyledContainer = styled.div<{ isOpen: boolean }>`
+const StyledContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
 
-  width: 100vw;
-  height: 100vh;
+  width: var(--full-width);
+  height: var(--full-height);
   //padding: 24px;
   background: ${({ theme }) => theme.color.bgModal};
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
@@ -155,9 +158,13 @@ const Container = styled.div`
 const Title = styled.input`
   width: 570px;
   height: 32px;
-  color: ${({ theme }) => `${theme.color.gray300}`};
+  color: ${({ theme }) => `${theme.color.gray800}`};
   ${({ theme }) => theme.font.desktop.title2};
   word-wrap: break-word;
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.color.gray300}`};
+  }
 `;
 
 const Frame = styled.div`
@@ -189,20 +196,37 @@ const Input = styled.input`
   align-items: center;
   gap: 12px;
   display: flex;
+
+  ${({ theme }) => theme.font.desktop.body2r};
+  color: ${({ theme }) => `${theme.color.gray700}`};
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.color.gray300}`};
+  }
 `;
 
-const DescriptionInput = styled.input`
-  align-self: stretch;
+const DescriptionInput = styled.textarea`
+  resize: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
   width: 100%;
   height: 116px;
   padding: 16px;
   background: ${({ theme }) => `${theme.color.gray50}`};
   border-radius: 8px;
   border: 2px solid #efefef;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 12px;
-  display: inline-flex;
+
+  ${({ theme }) => theme.font.desktop.body2r};
+  color: ${({ theme }) => `${theme.color.gray700}`};
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.color.gray300}`};
+  }
+
+  overflow-y: auto;
+  ${Scrollbar}
 `;
 
 const Label = styled.div`

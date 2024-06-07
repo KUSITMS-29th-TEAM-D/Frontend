@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { authService } from '@/services/AuthService';
+import { tokenService } from '@/services/TokenService';
 import { userService } from '@/services/UserService';
 
 export const RedirectPage = () => {
@@ -17,19 +17,20 @@ export const RedirectPage = () => {
     const accessToken = params.get('access_token');
     const registerToken = params.get('register_token');
 
+    sessionStorage.clear();
+
     if (registerToken) {
-      authService.setAuthToken(registerToken);
-      authService.setRegisterToken(registerToken);
+      tokenService.setRegisterToken(registerToken);
       userService.setUser({ nickname: '', is_test: false });
       navigate('/onboarding');
     }
 
     if (accessToken) {
-      authService.setAuthToken(accessToken);
+      tokenService.setAccessToken(accessToken);
       nickname && userService.setUser({ nickname, is_test: isTest === 'T' ? true : false });
-      navigate('/');
+      // TODO: /home -> / 로 변경해야함.
+      navigate('/home');
     }
-    // TODO: warning 해결
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
