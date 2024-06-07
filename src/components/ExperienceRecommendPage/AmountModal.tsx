@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
 import { PlainButton } from '@/components/common/Button/PlainButton';
 
 interface AmountModalProps {
-  isopen: boolean;
+  isOpen: boolean;
   onApply: (min: number, max: number) => void;
   onClose: () => void;
 }
 
-export const AmountModal = ({ isopen, onApply, onClose }: AmountModalProps) => {
+export const AmountModal = ({ isOpen, onApply, onClose }: AmountModalProps) => {
   const [minAmount, setMinAmount] = useState(0);
   const [maxAmount, setMaxAmount] = useState(20000);
 
   useEffect(() => {
-    document.body.style.overflow = isopen ? 'hidden' : 'auto';
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
 
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isopen]);
+  }, [isOpen]);
 
   const handleApply = () => {
     onApply(minAmount, maxAmount);
@@ -28,7 +28,7 @@ export const AmountModal = ({ isopen, onApply, onClose }: AmountModalProps) => {
   };
 
   return (
-    <ModalOverlay isopen={isopen}>
+    <ModalOverlay $isOpen={isOpen}>
       <ModalContent>
         <ModalTitle>금액 선택</ModalTitle>
         <InputContainer>
@@ -63,7 +63,7 @@ export const AmountModal = ({ isopen, onApply, onClose }: AmountModalProps) => {
   );
 };
 
-const ModalOverlay = styled.div<{ isopen: boolean }>`
+const ModalOverlay = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

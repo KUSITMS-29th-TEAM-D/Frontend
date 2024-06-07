@@ -37,7 +37,7 @@ export const AmountBox = ({ onApply, minAmount, maxAmount }: AmountBoxProps) => 
         <AmountModal
           onApply={handleApply}
           onClose={() => setIsModalOpen(false)}
-          isopen={isModalOpen}
+          isOpen={isModalOpen}
         />
       )}
     </>
@@ -76,7 +76,7 @@ const AmountRange = styled.div`
   justify-content: flex-end;
 `;
 
-const Amount = styled.div<{ ismain?: boolean }>`
+const Amount = styled.div<{ $isMain?: boolean }>`
   color: ${({ theme }) => theme.color.gray300};
   ${({ theme }) => theme.font.desktop.body1m};
 
